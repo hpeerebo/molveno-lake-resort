@@ -1,0 +1,31 @@
+{
+  "name": "molveno-lake-resort",
+  "version": "1.0.0",
+  "description": "Molveno Lake Resort",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fasttrack-software-development/molveno-lake-resort.git"
+  },
+  "keywords": [
+    "Molveno",
+    "Lake",
+    "Resort",
+    "Kamers"
+  ],
+  "author": "KPN FastTrack",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fasttrack-software-development/molveno-lake-resort/issues"
+  },
+  "homepage": "https://github.com/fasttrack-software-development/molveno-lake-resort#readme",
+  "dependencies": {
+    "bootstrap": "^4.2.1",
+    "jquery": "^3.3.1",
+    "node-sass": "^4.11.0",
+    "popper.js": "^1.14.7"
+  }
+}
