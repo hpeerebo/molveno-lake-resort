@@ -31,11 +31,11 @@
                 openhaard in de bar of 1 van de mooie wildgerechten in ons sfeervolle restaurant. Welkom!</p>
         </div>
 
-        <button type="button" class="btn btn-primary mb-4" data-toggle="modal" data-target="#reservationModal">
+        <button type="button" class="btn btn-primary mb-4" data-toggle="modal" data-target="#modalReservation">
             Reserveer
         </button>
 
-        <div class="accordion" id="accordionExample">
+        <div class="accordion" id="accordionMenu">
             <div class="card">
                 <div class="card-header" id="headingOne">
                     <h2 class="mb-0">
@@ -190,17 +190,17 @@
         </div>
 
         <!-- Modal -->
-        <div class="modal fade" id="reservationModal" tabindex="-1" role="dialog"
-            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal fade" id="modalReservation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalCenterTitle">Reservering</h5>
+                    <div class="modal-header text-center">
+                        <h4 class="modal-title w-100 font-weight-bold">Reserveer een tafel</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body mx-3">
                         <form id="reservation">
                             <div class="form-row">
                                 <div class="form-group col-md-6">
@@ -260,14 +260,12 @@
                             </div>
                         </form>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluit</button>
-                        <button type="submit" class="btn btn-primary" form="reservation">Verzenden</button>
+                    <div class="modal-footer d-flex justify-content-center">
+                        <button class="btn btn-primary">Verzenden</button>
                     </div>
                 </div>
             </div>
         </div>
-
 
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
