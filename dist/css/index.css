@@ -6930,3 +6930,7 @@ header {
 .carousel-inner {
   width: 100%;
   margin: 0 auto; }
+
+.important_info {
+  font-size: small;
+  color: grey; }
