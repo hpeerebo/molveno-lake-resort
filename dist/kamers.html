@@ -12,21 +12,6 @@
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
         crossorigin="anonymous"></script>
-
-        <script type="text/javascript">
-            $(function () {
-                $('#datetimepicker6').datetimepicker();
-                $('#datetimepicker7').datetimepicker({
-                    useCurrent: false //Important! See issue #1075
-                });
-                $("#datetimepicker6").on("dp.change", function (e) {
-                    $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
-                });
-                $("#datetimepicker7").on("dp.change", function (e) {
-                    $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
-                });
-            });
-        </script>
 </head>
 
 <body>
@@ -59,7 +44,8 @@
                             <h1>Molveno Lake Resort</h1>
                             <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta
                                 gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                            <p><a class="btn btn-lg btn-primary" href="#" role="button">Informatie</a></p>
+                            <!--p><a class="btn btn-lg btn-primary" href="#" role="button">Informatie</a></p-->
+                            <p><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Boeken</button></p>
                         </div>
                     </div>
                 </div>
@@ -70,7 +56,8 @@
                             <h1>Molveno Lake Resort</h1>
                             <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta
                                 gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                            <p><a class="btn btn-lg btn-primary" href="#" role="button">Boeken</a></p>
+                            <!--p><a class="btn btn-lg btn-primary" href="#" role="button">Boeken</a></p-->
+                            <p><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Boeken</button></p>
                         </div>
                     </div>
                 </div>
@@ -81,7 +68,8 @@
                             <h1>Molveno Lake Resort</h1>
                             <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta
                                 gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                            <p><a class="btn btn-lg btn-primary" href="#" role="button">Informatie</a></p>
+                            <!--p><a class="btn btn-lg btn-primary" href="#" role="button">Informatie</a></p-->
+                            <p><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Boeken</button></p>
                         </div>
                     </div>
                 </div>
@@ -108,30 +96,47 @@
             <!-- Three columns of text below the carousel -->
             <div class="row">
                 <div class="col-lg-4">
-                    <img class="rounded-circle" src="img/kamer_budget.jpg" style="width:100; height:100; background:#777; color:#777;">
+                    <img class="rounded-circle" src="img/thumb_kamer_budget.jpg" style="width:100; height:100; background:#777; color:#777;">
                     <h2 class="text-center">Budget</h2>
-                    <p>Een warme en stijlvolle hotelkamer met eigen balkon. De kamer beschikt over een bureau, 
-                        flatscreen televisie en een radio. De badkamer is ingericht met een douche in bad, toilet en föhn.</p>
-                    <br>    
+                    <p>Een warme en stijlvolle hotelkamer met eigen balkon. De kamer beschikt over een bureau,
+                        flatscreen televisie en een radio. De badkamer is ingericht met een douche in bad, toilet en
+                        föhn.</p>
+                    <br>
                     <!--p><a class="btn btn-secondary" href="#" role="button">Reserveren &raquo;</a></p-->
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Reserveer</button>
+                    <div class="row">
+                        <div class="col-4"></div>
+                        <div class="col-8">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Reserveer</button>
+                        </div>
+                    </div>
                 </div><!-- /.col-lg-4 -->
                 <div class="col-lg-4">
-                    <img class="rounded-circle" src="img/kamer_standaard.jpg" style="width:100; height:100; background:#777; color:#777;">
+                    <img class="rounded-circle" src="img/thumb_kamer_standaard.jpg" style="width:100; height:100; background:#777; color:#777;">
                     <h2 class="text-center">Standaard</h2>
-                    <p>De ruime suite beschikt over een apart zitgedeelte en balkon met uitzicht op het bos. De hotelkamer 
+                    <p>De ruime suite beschikt over een apart zitgedeelte en balkon met uitzicht op het bos. De
+                        hotelkamer
                         beschikt over koffie- en theefaciliteiten, een badkamer met douche in bad en toilet.</p>
                     <!--p><a class="btn btn-secondary" href="#" role="button">Reserveren &raquo;</a></p-->
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Reserveer</button>
+                    <div class="row">
+                        <div class="col-4"></div>
+                        <div class="col-8">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Reserveer</button>
+                        </div>
+                    </div>
                 </div><!-- /.col-lg-4 -->
                 <div class="col-lg-4">
-                    <img class="rounded-circle" src="img/kamer_lux.jpg" style="width:100; height:100; background:#777; color:#777;">
-                    <h2 class="text-center">Lux</h2>
-                    <p>Een ruim ingerichte kamer met terras. Voorzien van een bureau, flatscreen televisie en radio. 
-                        De kamer beschikt over koffie en theefaciliteiten. In de badkamer tref je een douche in bad, 
+                    <img class="rounded-circle" src="img/thumb_kamer_lux.jpg" style="width:100; height:100; background:#777; color:#777;">
+                    <h2 class="text-center">Luxe</h2>
+                    <p>Een ruim ingerichte kamer met terras. Voorzien van een bureau, flatscreen televisie en radio.
+                        De kamer beschikt over koffie en theefaciliteiten. In de badkamer tref je een douche in bad,
                         toilet en föhn.</p>
                     <!--p><a class="btn btn-secondary" href="#" role="button">Reserveren &raquo;</a></p-->
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Reserveer</button>
+                    <div class="row">
+                        <div class="col-4"></div>
+                        <div class="col-8">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Reserveer</button>
+                        </div>
+                    </div>
                 </div><!-- /.col-lg-4 -->
             </div><!-- /.row -->
 
@@ -242,40 +247,43 @@
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputAdress">Adres</label>
-                                    <input type="text" class="form-control" id="inputAdress">
+                                    <input type="text" class="form-control" id="inputAdress" placeholder="Straat en huisnummer">
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="inputZip">Postcode</label>
-                                    <input type="text" class="form-control" id="inputZip">
+                                    <input type="text" class="form-control" id="inputZip" placeholder="Postcode">
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="inputCity">Woonplaats</label>
-                                    <input type="text" class="form-control" id="inputCity">
+                                    <input type="text" class="form-control" id="inputCity" placeholder="Woonplaats">
                                 </div>
                             </div>
 
                             <div class="container, form-row">
-                                    <div class='col-md-6'>
-                                        <div class="form-group">
-                                            <div class='input-group date' id='datetimepicker6'>
-                                                <input type='date' class="form-control" />
-                                                <span class="input-group-addon">
-                                                    <span class="glyphicon glyphicon-calendar"></span>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class='col-md-6'>
-                                        <div class="form-group">
-                                            <div class='input-group date' id='datetimepicker7'>
-                                                <input type='date' class="form-control" />
-                                                <span class="input-group-addon">
-                                                    <span class="glyphicon glyphicon-calendar"></span>
-                                                </span>
-                                            </div>
+                                <div class='col-md-6'>
+                                    <label for="inputDateFrom">Vanaf</label>
+                                    <div class="form-group">
+                                        <div class='input-group date' id='datetimepicker6'>
+                                            
+                                            <input type='date' class="form-control" />
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
+                                <div class='col-md-6'>
+                                    <label for="inputDateTo">Tot</label>
+                                    <div class="form-group">
+                                        <div class='input-group date' id='datetimepicker7'>
+                                            <input type='date' class="form-control" />
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
                             <div class="form-row">
                                 <div class="col-auto my-1">
@@ -329,17 +337,27 @@
                                 </div>
                             </div>
 
+                            
+                            <div>
+                                            <ul style="font-size:small; color: grey">
+                                                <li>Parkeren is gratis</li>
+                                                <li>Gratis wifi in het hotel</li>
+                                                <li>Inchecken vanaf 14:00 uur</li>
+                                                <li>Uitchecken tot 12:00 uur</li>
+                                                <li>Kosteloos annuleren op dag van aankomst tot 12.00 uur. Met uitzondering van non-refundable en earlybird tarieven.</li>
+                                            </ul>
+                            </div>
                             <div class="form-group">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-                                    <label class="form-check-label" for="invalidCheck">
-                                        Agree to terms and conditions
-                                    </label>
-                                    <div class="invalid-feedback">
-                                        You must agree before submitting.
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                                        <label class="form-check-label" for="invalidCheck">
+                                            Akkoord met de algemene voorwaarden
+                                        </label>
+                                        <div class="invalid-feedback">
+                                            You must agree before submitting.
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                         </form>
                     </div>
                     <div class="modal-footer">
