@@ -6940,3 +6940,35 @@ header {
 
 ::-webkit-scrollbar-thumb {
   background-color: #999999; }
+
+.brush {
+  font-family: "Brush Script MT";
+  color: #005693; }
+
+.sliderbrush {
+  font-family: "Brush Script MT";
+  color: whitesmoke;
+  background: rgba(192, 192, 192, 0.4); }
+
+.pSlider {
+  font-size: 15px;
+  text-shadow: 0 0 30px black;
+  background: rgba(192, 192, 192, 0.4); }
+
+.h2-kamer {
+  font-family: "Brush Script MT";
+  font-size: 30px;
+  color: #005693; }
+
+.h2-kamer-lg {
+  font-family: "Brush Script MT";
+  font-size: 40px;
+  color: #005693; }
+
+.carousel-inner {
+  width: 100%;
+  margin: 0 auto; }
+
+.important_info {
+  font-size: small;
+  color: grey; }
