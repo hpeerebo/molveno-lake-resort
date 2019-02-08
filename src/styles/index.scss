@@ -7,6 +7,28 @@ header {
 
 .brush {
   font-family: "Brush Script MT";
+
+}
+
+.card-header:hover {
+  background-color: #0056931e;
+  transition: 0.3s all ease-out;
+}
+
+/*SCROLLBAR*/
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #dddbdb;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #999999;
+}
+
   color: #005693;
   //text-shadow: 0 0 30px white;
  
@@ -43,4 +65,3 @@ header {
   font-size:small; 
   color: grey;
 }
-
