@@ -7,8 +7,8 @@ header {
 
 .brush {
   font-family: "Brush Script MT";
-
 }
+
 .movelake{
   -webkit-animation: move-lake-animation 5s infinite; /* Safari 4.0 - 8.0 */
   animation: move-lake-animation 5s infinite;
@@ -32,9 +32,6 @@ header {
   margin: 0 auto;
 }
 
-
-}
-
 .card-header:hover {
   background-color: #0056931e;
   transition: 0.3s all ease-out;
@@ -54,10 +51,6 @@ header {
   background-color: #999999;
 }
 
-  color: #005693;
-  //text-shadow: 0 0 30px white;
- 
-}
 .sliderbrush{
   font-family: "Brush Script MT";
   color: rgb(245, 245, 245);
@@ -83,10 +76,10 @@ header {
   color: #005693;
 }
 .carousel-inner {
-  width: 100%;
+  width: 100git %;
   margin: 0 auto;
 }
 .important_info {
-  font-size:small; 
+  font-size: small;
   color: grey;
 }
