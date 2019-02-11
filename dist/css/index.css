@@ -6968,8 +6968,8 @@ header {
 ::-webkit-scrollbar-thumb {
   background-color: #999999; }
 
-.sliderbrush {
-  font-family: "Brush Script MT";
+.cslider {
+  font-size: 60px;
   color: whitesmoke;
   background: rgba(192, 192, 192, 0.4); }
 
