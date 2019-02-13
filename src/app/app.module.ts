@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { FormsModule } from "@angular/forms";
 import {FrontendModule} from "./frontend/frontend.module";
 import {BackendModule} from "./backend/backend.module";
+import { HttpClientModule } from '@angular/common/http';
+import { RoomsService } from './services/rooms.service';
 
 @NgModule({
   declarations: [
@@ -16,9 +18,10 @@ import {BackendModule} from "./backend/backend.module";
     AppRoutingModule,
     FormsModule,
     FrontendModule,
-    BackendModule
+    BackendModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [RoomsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
