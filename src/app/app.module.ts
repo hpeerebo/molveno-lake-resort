@@ -4,27 +4,19 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from "@angular/forms";
-import { HomeComponent } from './components/home/home.component';
-import { ActiviteitenComponent } from './components/activiteiten/activiteiten.component';
-import { ContactComponent } from './components/contact/contact.component';
-import { KamersComponent } from './components/kamers/kamers.component';
-import { LoginComponent } from './components/login/login.component';
-import { RestaurantComponent } from './components/restaurant/restaurant.component';
+import {FrontendModule} from "./frontend/frontend.module";
+import {BackendModule} from "./backend/backend.module";
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HomeComponent,
-    ActiviteitenComponent,
-    ContactComponent,
-    KamersComponent,
-    LoginComponent,
-    RestaurantComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    FrontendModule,
+    BackendModule
   ],
   providers: [],
   bootstrap: [AppComponent]
