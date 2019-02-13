@@ -7,8 +7,8 @@ import { BackEndActiviteitenComponent } from './components/activiteiten/activite
 import { BackEndKamersComponent } from './components/kamers/kamers.component';
 import { BackEndLoginComponent } from './components/login/login.component';
 import { BackEndRestaurantComponent } from './components/restaurant/restaurant.component';
-import {BackEndComponent} from "./backend.component";
-import {BackEndRoutingModule} from "./backend-routing.module";
+import {BackEndComponent} from './backend.component';
+import {BackEndRoutingModule} from './backend-routing.module';
 
 @NgModule({
   declarations: [
