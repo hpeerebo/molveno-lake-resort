@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-restaurant',
   templateUrl: './restaurant.component.html',
   styleUrls: ['./restaurant.component.scss']
 })
-export class BackEndRestaurantComponent implements OnInit {
-  tafels: any[] = [
+export class BackEndRestaurantComponent {
+
+  backendData = [
     { tafelNummer: 1, aantalPersonen: 4 },
     { tafelNummer: 2, aantalPersonen: 4 },
     { tafelNummer: 3, aantalPersonen: 2 },
@@ -23,18 +24,10 @@ export class BackEndRestaurantComponent implements OnInit {
     { tafelNummer: 14, aantalPersonen: 2 },
     { tafelNummer: 15, aantalPersonen: 2 }
   ];
-  constructor() { }
 
-  ngOnInit() {
-  }
+  tafels: Tafel[] = this.backendData.map(data => new Tafel(data.tafelNummer, data.aantalPersonen));
 
 }
 class Tafel {
-  public tafelNummer: number;
-  public aantalPersonen: number;
-
-  constructor(tafelNummer: number, aantalPersonen: number) {
-      this.tafelNummer = tafelNummer;
-      this.aantalPersonen = aantalPersonen;
-  }
+  constructor(public nummer: number, public personen: number) { }
 }
