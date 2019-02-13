@@ -8,19 +8,19 @@ import { Component } from '@angular/core';
 export class GerechtenComponent {
 
   backendData = [
-    { naam: "Salade Falafel", type: "Voorgerecht", prijs: 13.50 },
-    { naam: "Salade Falafel", type: "Voorgerecht", prijs: 13.50 },
-    { naam: "Salade Falafel", type: "Voorgerecht", prijs: 13.50 },
-    { naam: "Salade Falafel", type: "Voorgerecht", prijs: 13.50 },
-    { naam: "Salade Falafel", type: "Voorgerecht", prijs: 13.50 },
-    { naam: "Salade Falafel", type: "Voorgerecht", prijs: 13.50 },
-    { naam: "Salade Falafel", type: "Voorgerecht", prijs: 13.50 },
-    { naam: "Salade Falafel", type: "Voorgerecht", prijs: 13.50 },
-    { naam: "Salade Falafel", type: "Voorgerecht", prijs: 13.50 },
-    { naam: "Salade Falafel", type: "Voorgerecht", prijs: 13.50 },
-    { naam: "Salade Falafel", type: "Voorgerecht", prijs: 13.50 },
-    { naam: "Salade Falafel", type: "Voorgerecht", prijs: 13.50 },
-    { naam: "Salade Falafel", type: "Voorgerecht", prijs: 13.50 }
+    { naam: 'Salade Falafel', type: 'Voorgerecht', prijs: 13.50 },
+    { naam: 'Salade Falafel', type: 'Voorgerecht', prijs: 13.50 },
+    { naam: 'Salade Falafel', type: 'Voorgerecht', prijs: 13.50 },
+    { naam: 'Salade Falafel', type: 'Voorgerecht', prijs: 13.50 },
+    { naam: 'Salade Falafel', type: 'Voorgerecht', prijs: 13.50 },
+    { naam: 'Salade Falafel', type: 'Voorgerecht', prijs: 13.50 },
+    { naam: 'Salade Falafel', type: 'Voorgerecht', prijs: 13.50 },
+    { naam: 'Salade Falafel', type: 'Voorgerecht', prijs: 13.50 },
+    { naam: 'Salade Falafel', type: 'Voorgerecht', prijs: 13.50 },
+    { naam: 'Salade Falafel', type: 'Voorgerecht', prijs: 13.50 },
+    { naam: 'Salade Falafel', type: 'Voorgerecht', prijs: 13.50 },
+    { naam: 'Salade Falafel', type: 'Voorgerecht', prijs: 13.50 },
+    { naam: 'Salade Falafel', type: 'Voorgerecht', prijs: 13.50 }
   ];
 
   gerechten: Gerecht[] = this.backendData.map(data => new Gerecht(data.naam, data.type, data.prijs));
