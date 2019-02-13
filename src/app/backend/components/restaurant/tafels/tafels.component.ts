@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-restaurant',
-  templateUrl: './restaurant.component.html',
-  styleUrls: ['./restaurant.component.scss']
+  selector: 'app-tafels',
+  templateUrl: './tafels.component.html',
+  styleUrls: ['./tafels.component.scss']
 })
-export class BackEndRestaurantComponent {
+export class TafelsComponent {
 
   backendData = [
     { tafelNummer: 1, aantalPersonen: 4 },
@@ -28,6 +28,7 @@ export class BackEndRestaurantComponent {
   tafels: Tafel[] = this.backendData.map(data => new Tafel(data.tafelNummer, data.aantalPersonen));
 
 }
+
 class Tafel {
   constructor(public nummer: number, public personen: number) { }
 }
