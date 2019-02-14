@@ -7,6 +7,7 @@ import {FrontendModule} from "./frontend/frontend.module";
 import {BackendModule} from "./backend/backend.module";
 import {HttpClientModule} from '@angular/common/http';
 import {RoomsService} from './services/rooms.service';
+import { KamersPipe } from './shared/pipes/kamers.pipe';
 
 @NgModule({
   declarations: [
