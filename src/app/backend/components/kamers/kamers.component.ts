@@ -11,7 +11,7 @@ export class BackEndKamersComponent implements OnInit {
  // constructor() { }
  constructor(private roomservice: RoomsService){
   
-  roomservice.getTables().subscribe(result => this.kamers = result);
+  roomservice.getRoom().subscribe(result => this.kamers = result);
   //console.log(this.kamers);
 }
 

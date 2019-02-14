@@ -11,7 +11,7 @@ export class RoomsService {
 
   constructor(private http: HttpClient) { }
 
-  getTables():Observable <KamerResponse[]> {
+  getRoom():Observable <KamerResponse[]> {
     const headers = new HttpHeaders({
     });
     return this.http.get<KamerResponse[]>('http://www.mocky.io/v2/5c6516773300005c11b99af4', {headers:headers})
