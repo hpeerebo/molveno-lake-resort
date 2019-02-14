@@ -14,9 +14,9 @@ export class RoomsService {
   getTables():Observable <KamerResponse[]> {
     const headers = new HttpHeaders({
     });
-    return this.http.get<KamerResponse[]>('http://www.mocky.io/v2/5c640a6f320000f01993f786', {headers:headers})
+    return this.http.get<KamerResponse[]>('http://www.mocky.io/v2/5c6516773300005c11b99af4', {headers:headers})
       .pipe(
-        map((res: any) => res.response)
+        map((res: any) => res.response),
         //tap(console.log)
       )
   }
@@ -24,7 +24,8 @@ export class RoomsService {
 export interface KamerResponse{
   kamerNummer:number;
   kamerType: string;
-  grootte: number;
-  persons: number;
+  kamerLigging: string;
+  aantalPersonen: number;
   prijs: number;
+  gereserveerd: boolean;
 }

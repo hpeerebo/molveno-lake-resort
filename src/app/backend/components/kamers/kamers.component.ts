@@ -12,7 +12,7 @@ export class BackEndKamersComponent implements OnInit {
  constructor(private roomservice: RoomsService){
   
   roomservice.getTables().subscribe(result => this.kamers = result);
-  //gitconsole.log(this.kamers);
+  //console.log(this.kamers);
 }
 
   ngOnInit() {
