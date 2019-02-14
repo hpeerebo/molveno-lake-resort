@@ -4,13 +4,13 @@
     <br>
     <div class="row">
         <div class="col-2">
-          <button type="button" class="btn btn-primary btn-lg">All Rooms</button>
+          <button type="button" class="btn btn-info">All Rooms</button>
         </div>
         <div class="col-2">
-            <button type="button" class="btn btn-primary btn-lg" (click)="ShowReservedRooms()">Reserved Rooms</button>
+            <button type="button" class="btn btn-success" onclick="ShowReservedRooms()">Free Rooms</button>
           </div>
           <div class="col-2">
-              <button type="button" class="btn btn-primary btn-lg">Booked Rooms</button>
+              <button type="button" class="btn btn-danger">Booked Rooms</button>
             </div>
       </div>
       <br>
@@ -25,7 +25,7 @@
         </tr>
       </thead>
       <tbody>
-          <tr *ngFor="let kamer of kamers">
+          <tr *ngFor="let kamer of kamers" >
             <td>{{kamer.kamerNummer}}</td>
             <td>{{kamer.kamerType}}</td>
             <td>{{kamer.kamerLigging}}</td>
@@ -36,3 +36,4 @@
       </tbody>
     </table>
   </div>
+ 
