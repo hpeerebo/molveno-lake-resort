@@ -16,7 +16,8 @@ import { BackendModule } from './backend/backend.module';
     AppRoutingModule,
     FormsModule,
     FrontendModule,
-    BackendModule
+    BackendModule,
+    NgModule
   ],
   providers: [],
   bootstrap: [AppComponent]
