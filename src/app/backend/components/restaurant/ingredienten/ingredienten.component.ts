@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Ingredient } from './ingredient';
 
 @Component({
   selector: 'app-ingredienten',
@@ -25,8 +26,4 @@ export class IngredientenComponent {
 
   ingredienten: Ingredient[] = this.backendData.map(data => new Ingredient(data.naam, data.soort, data.prijs));
 
-}
-
-class Ingredient {
-  constructor(public naam: string, public soort: string, public prijs: number) { }
 }

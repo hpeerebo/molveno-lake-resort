@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Tafel } from './tafel';
 
 @Component({
   selector: 'app-tafels',
@@ -27,8 +28,4 @@ export class TafelsComponent {
 
   tafels: Tafel[] = this.backendData.map(data => new Tafel(data.tafelNummer, data.aantalPersonen));
 
-}
-
-class Tafel {
-  constructor(public nummer: number, public personen: number) { }
 }

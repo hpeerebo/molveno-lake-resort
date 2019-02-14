@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Gerecht } from './gerecht';
 
 @Component({
   selector: 'app-gerechten',
@@ -31,8 +32,4 @@ interface GerechtResponse {
   naam: string;
   type: string;
   prijs: number;
-}
-
-class Gerecht {
-  constructor(public naam: string, public type: string, public prijs: number) { }
 }
