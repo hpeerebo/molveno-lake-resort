@@ -11,6 +11,7 @@ import { BackEndRoutingModule } from './backend-routing.module';
 import { IngredientenComponent } from './components/restaurant/ingredienten/ingredienten.component';
 import { GerechtenComponent } from './components/restaurant/gerechten/gerechten.component';
 import { TafelsComponent } from './components/restaurant/tafels/tafels.component';
+import { FilterPipe } from './components/restaurant/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { TafelsComponent } from './components/restaurant/tafels/tafels.component
     BackEndLoginComponent,
     IngredientenComponent,
     GerechtenComponent,
-    TafelsComponent],
+    TafelsComponent,
+    FilterPipe],
   imports: [
     CommonModule,
     BackEndRoutingModule
