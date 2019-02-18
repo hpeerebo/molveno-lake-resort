@@ -10,8 +10,10 @@ import { BackEndLoginComponent } from './components/login/login.component';
 import { BackEndRestaurantComponent } from './components/restaurant/restaurant.component';
 import {BackEndComponent} from './backend.component';
 import {BackEndRoutingModule} from './backend-routing.module';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormsModule } from '@angular/forms';
 import { KamersPipe } from '../shared/pipes/kamers.pipe';
+import { KamersFormComponent } from './components/kamers/kamers-form/kamers-form.component';
+import { KamerDetailsComponent } from './components/kamers/kamer-details/kamer-details.component';
 
 @NgModule({
   declarations: [
@@ -21,11 +23,14 @@ import { KamersPipe } from '../shared/pipes/kamers.pipe';
     BackEndKamersComponent,
     BackEndLoginComponent,
     BackEndRestaurantComponent,
-    KamersPipe],
+    KamersPipe,
+    KamersFormComponent,
+    KamerDetailsComponent,],
   imports: [
     CommonModule,
     BackEndRoutingModule,
-    NgbModule
+    NgbModule,
+    FormsModule
   ]
 })
 export class BackendModule { }

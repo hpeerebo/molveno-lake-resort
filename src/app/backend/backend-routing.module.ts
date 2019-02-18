@@ -6,6 +6,7 @@ import {BackEndKamersComponent} from "./components/kamers/kamers.component";
 import {BackEndRestaurantComponent} from "./components/restaurant/restaurant.component";
 import {BackEndActiviteitenComponent} from "./components/activiteiten/activiteiten.component";
 import {BackEndComponent} from "./backend.component";
+import { KamersFormComponent } from './components/kamers/kamers-form/kamers-form.component';
 
 const routes: Routes = [
   {
@@ -14,6 +15,7 @@ const routes: Routes = [
       { path: 'backend/home', component: BackEndHomeComponent},
       { path: 'backend/login', component: BackEndLoginComponent},
       { path: 'backend/kamers', component: BackEndKamersComponent},
+      { path: 'backend/kamers-form', component: KamersFormComponent},
       { path: 'backend/activiteiten', component: BackEndActiviteitenComponent},
       { path: 'backend/restaurant', component: BackEndRestaurantComponent}
     ]
