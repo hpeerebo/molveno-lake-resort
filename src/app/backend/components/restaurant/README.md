@@ -1,0 +1,16 @@
+- app module
+-- feature backend 1
+    - components
+    - services
+    - pipes
+    - directives
+    - shared
+        - components
+        - services
+-- feature frontend 2
+-- feature core
+    - models
+    - services
+-- feature modules library
+    - pipes
+    - directives

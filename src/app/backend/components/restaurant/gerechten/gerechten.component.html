@@ -1,0 +1,20 @@
+<div class="table-responsive">
+  <table class="table table-striped table-sm">
+    <thead>
+      <tr>
+        <th>Naam</th>
+        <th>Type</th>
+        <th>SubType</th>
+        <th>Prijs</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let gerecht of gerechten">
+        <td>{{gerecht.naam}}</td>
+        <td>{{gerecht.type}}</td>
+        <td>{{gerecht.subtype}}</td>
+        <td>{{gerecht.prijs | currency: 'EUR'}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

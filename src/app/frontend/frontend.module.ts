@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // FrontEnd imports
 import { HomeComponent } from './components/home/home.component';
@@ -22,7 +23,8 @@ import {FrontEndComponent} from "./frontend.component";
     RestaurantComponent,],
   imports: [
     CommonModule,
-    FrontEndAppRoutingModule
+    FrontEndAppRoutingModule,
+    NgbModule
   ]
 })
 export class FrontendModule { }
