@@ -43,7 +43,7 @@ showAllRooms(){
  }
 
  deleteRoom(kamer:Kamer){
-  this.kamers = [...this.kamers].filter(item => item !==kamer);
+  //this.kamers = [...this.kamers].filter(item => item !==kamer);
  }
  addRoom(kamer:Kamer){
    //let lengte = this.kamers.push(kamer);
