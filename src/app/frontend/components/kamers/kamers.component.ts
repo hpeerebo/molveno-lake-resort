@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class KamersComponent implements OnInit {
 
+  images = ['assets/img/room-luxe.jpg', 'assets/img/restaurant.jpg','assets/img/room-budget.jpg' ];
+
   constructor() { }
 
   ngOnInit() {

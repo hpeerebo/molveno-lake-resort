@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  images = ['assets/img/room.jpg', 'assets/img/room-standard.jpg','assets/img/activity.jpg' ];
+
   constructor() { }
 
   ngOnInit() {
