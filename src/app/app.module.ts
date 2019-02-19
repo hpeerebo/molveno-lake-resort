@@ -20,6 +20,7 @@ import { KamersPipe } from './shared/pipes/kamers.pipe';
     FrontendModule,
     BackendModule,
     HttpClientModule
+
   ],
   providers: [RoomsService],
   bootstrap: [AppComponent]

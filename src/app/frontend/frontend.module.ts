@@ -23,8 +23,8 @@ import {FrontEndComponent} from "./frontend.component";
     RestaurantComponent,],
   imports: [
     CommonModule,
-    NgbModule,
-    FrontEndAppRoutingModule
+    FrontEndAppRoutingModule,
+    NgbModule
   ]
 })
 export class FrontendModule { }
