@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 
 // FrontEnd imports
@@ -9,8 +9,8 @@ import { ContactComponent } from './components/contact/contact.component';
 import { KamersComponent } from './components/kamers/kamers.component';
 import { LoginComponent } from './components/login/login.component';
 import { RestaurantComponent } from './components/restaurant/restaurant.component';
-import {FrontEndAppRoutingModule} from "./frontend-routing.module";
-import {FrontEndComponent} from "./frontend.component";
+import { FrontEndAppRoutingModule } from './frontend-routing.module';
+import { FrontEndComponent } from './frontend.component';
 
 @NgModule({
   declarations: [
@@ -20,11 +20,8 @@ import {FrontEndComponent} from "./frontend.component";
     ContactComponent,
     KamersComponent,
     LoginComponent,
-    RestaurantComponent,],
-  imports: [
-    CommonModule,
-    FrontEndAppRoutingModule,
-    NgbModule
-  ]
+    RestaurantComponent
+  ],
+  imports: [CommonModule, FrontEndAppRoutingModule, NgbModule]
 })
-export class FrontendModule { }
+export class FrontendModule {}
