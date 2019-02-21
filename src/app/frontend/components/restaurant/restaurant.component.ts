@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-restaurant',
@@ -7,19 +7,21 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./restaurant.component.scss']
 })
 export class RestaurantComponent implements OnInit {
-
-  images = ['assets/img/dishes/car1.jpg', 'assets/img/dishes/car2.jpg', 'assets/img/dishes/car3.jpg' ];
+  images = ['assets/img/dishes/car1.jpg', 'assets/img/dishes/car2.jpg', 'assets/img/dishes/car3.jpg'];
 
   closeResult = '';
 
   constructor(private modalService: NgbModal) {}
 
-  open(content: any ) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
+  open(content: any) {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
+      result => {
+        this.closeResult = `Closed with: ${result}`;
+      },
+      reason => {
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      }
+    );
   }
 
   private getDismissReason(reason: any): string {
@@ -28,11 +30,9 @@ export class RestaurantComponent implements OnInit {
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
       return 'by clicking on a backdrop';
     } else {
-      return  `with: ${reason}`;
+      return `with: ${reason}`;
     }
   }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 }
