@@ -1,19 +1,15 @@
 <div class="table-responsive">
-<button class="btn-block btn-lg" (click)="show=!show">Klik voor een totaal/vrij overzicht</button>
   <table class="table table-striped table-sm">
     <thead>
       <tr>
         <th>Nummer</th>
         <th>Personen</th>
-        <th>Tafel status</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let tafel of tafels | filter: tableFilterFunction: show">
+      <tr *ngFor="let tafel of tafels">
         <td>{{tafel.nummer}}</td>
         <td>{{tafel.personen}}</td>
-        <td *ngIf="tafel.vrij">Tafel is vrij</td>
-        <td *ngIf="!tafel.vrij">Tafel is bezet</td>
       </tr>
     </tbody>
   </table>
