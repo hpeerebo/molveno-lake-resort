@@ -7,7 +7,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let tafel of tafels">
+      <tr *ngFor="let tafel of (tafels | async)">
         <td>{{tafel.nummer}}</td>
         <td>{{tafel.personen}}</td>
       </tr>
