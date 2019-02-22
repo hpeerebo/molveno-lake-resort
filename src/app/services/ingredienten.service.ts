@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class IngredientenService {
-  public readonly api: string = 'http://www.mocky.io/v2/5c6fd20938000013003fc9e6';
+  public readonly api: string = 'http://www.mocky.io/v2/5c6fe74a38000052003fca7d';
 
   constructor(private http: HttpClient) { }
 
