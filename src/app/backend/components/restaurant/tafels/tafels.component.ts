@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Tafel } from './tafel';
+import { Tafel } from 'src/app/models/tafel';
 
 @Component({
   selector: 'app-tafels',

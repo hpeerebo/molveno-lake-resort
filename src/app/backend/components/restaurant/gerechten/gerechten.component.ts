@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Gerecht } from './gerecht';
+import { Gerecht } from 'src/app/models/gerecht';
 
 @Component({
   selector: 'app-gerechten',
