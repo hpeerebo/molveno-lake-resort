@@ -9,7 +9,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let gerecht of gerechten">
+      <tr *ngFor="let gerecht of (gerechten | async)">
         <td>{{gerecht.naam}}</td>
         <td>{{gerecht.type}}</td>
         <td>{{gerecht.subtype}}</td>

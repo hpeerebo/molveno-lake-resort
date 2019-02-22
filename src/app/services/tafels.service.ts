@@ -13,10 +13,10 @@ export class TafelsService {
   constructor(private http: HttpClient) { }
 
   private static tafelsResponseToTafelMapper(tafelsResponse: ITafelsResponse): Tafel[] {
-    return tafelsResponse.tafels.map(TafelsService.tafeltoTafelMapper);
+    return tafelsResponse.tafels.map(TafelsService.tafelToTafelMapper);
   }
 
-  private static tafeltoTafelMapper(tafel: ITafel): Tafel {
+  private static tafelToTafelMapper(tafel: ITafel): Tafel {
     return new Tafel(tafel.nummer, tafel.personen);
   }
 
