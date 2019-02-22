@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { IngredientenService } from 'src/app/services/ingredienten.service';
+import { Observable } from 'rxjs';
 import { Ingredient } from 'src/app/models/ingredient';
 
 @Component({
@@ -7,23 +9,7 @@ import { Ingredient } from 'src/app/models/ingredient';
   styleUrls: ['./ingredienten.component.scss']
 })
 export class IngredientenComponent {
+  public ingredienten: Observable<Ingredient[]> = this.ingredientenService.getAllIngredienten();
 
-  backendData = [
-    { naam: 'Aardappelen', soort: 'nog te bepalen', prijs: 13.50 },
-    { naam: 'Bleekselderij', soort: 'nog te bepalen', prijs: 13.50 },
-    { naam: 'Broccoli', soort: 'nog te bepalen', prijs: 13.50 },
-    { naam: 'Courgette', soort: 'nog te bepalen', prijs: 13.50 },
-    { naam: 'Fazant', soort: 'nog te bepalen', prijs: 13.50 },
-    { naam: 'Forel', soort: 'nog te bepalen', prijs: 13.50 },
-    { naam: 'Kaas', soort: 'nog te bepalen', prijs: 13.50 },
-    { naam: 'Knoflook', soort: 'nog te bepalen', prijs: 13.50 },
-    { naam: 'Krab', soort: 'nog te bepalen', prijs: 13.50 },
-    { naam: 'Linzen', soort: 'nog te bepalen', prijs: 13.50 },
-    { naam: 'Prei', soort: 'nog te bepalen', prijs: 13.50 },
-    { naam: 'Runderhaas', soort: 'nog te bepalen', prijs: 13.50 },
-    { naam: 'Venkel', soort: 'nog te bepalen', prijs: 13.50 }
-  ];
-
-  ingredienten: Ingredient[] = this.backendData.map(data => new Ingredient(data.naam, data.soort, data.prijs));
-
+  constructor(private ingredientenService: IngredientenService) {}
 }
