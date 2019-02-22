@@ -80,6 +80,12 @@ header {
   width: 100%;
   margin: 0 auto;
 }
+.carousel-inner-text {
+  text-shadow: 0 0 3px #000000;
+}
+.carousel-inner-text h2 {
+  font-size: 3em;
+}
 .important_info {
   font-size: small;
   color: grey;
