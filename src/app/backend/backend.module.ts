@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // BackEnd imports
 import { BackEndHomeComponent } from './components/home/home.component';
@@ -34,11 +34,6 @@ import { FilterPipe } from './components/restaurant/filter.pipe';
     TafelsComponent,
     FilterPipe
   ],
-  imports: [
-    CommonModule,
-    BackEndRoutingModule,
-    NgbModule,
-    FormsModule
-  ]
+  imports: [CommonModule, BackEndRoutingModule, NgbModule, FormsModule]
 })
-export class BackendModule { }
+export class BackendModule {}
