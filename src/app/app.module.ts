@@ -8,10 +8,9 @@ import { BackendModule } from './backend/backend.module';
 import { HttpClientModule } from '@angular/common/http';
 import { RoomsService } from './services/rooms.service';
 import { KamersPipe } from './shared/pipes/kamers.pipe';
-import { TafelsFormComponent } from './shared/components/tafels-form/tafels-form.component';
 
 @NgModule({
-  declarations: [AppComponent, TafelsFormComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

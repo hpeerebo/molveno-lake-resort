@@ -7,7 +7,7 @@ import { BackEndHomeComponent } from './components/home/home.component';
 import { BackEndActiviteitenComponent } from './components/activiteiten/activiteiten.component';
 import { BackEndKamersComponent } from './components/kamers/kamers.component';
 import { BackEndLoginComponent } from './components/login/login.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { KamersPipe } from '../shared/pipes/kamers.pipe';
 import { KamersFormComponent } from './components/kamers/kamers-form/kamers-form.component';
 import { KamerDetailsComponent } from './components/kamers/kamer-details/kamer-details.component';
@@ -31,6 +31,6 @@ import { TafelsComponent } from './components/restaurant/tafels/tafels.component
     GerechtenComponent,
     TafelsComponent
   ],
-  imports: [CommonModule, BackEndRoutingModule, NgbModule, FormsModule]
+  imports: [CommonModule, BackEndRoutingModule, NgbModule, FormsModule, ReactiveFormsModule]
 })
 export class BackendModule {}
