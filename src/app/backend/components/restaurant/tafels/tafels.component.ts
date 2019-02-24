@@ -15,15 +15,23 @@ export class TafelsComponent {
 
   constructor(private tafelsService: TafelsService, private modalService: NgbModal) {}
 
-  openFormModal() {
-    const modalRef = this.modalService.open(FormTafelComponent);
+  openFormTafelModal(tafel?: Tafel) {
+    const modal = this.modalService.open(FormTafelComponent);
 
-    modalRef.result
+    if (tafel) {
+      modal.componentInstance.tafel = tafel;
+    }
+
+    modal.result
       .then(result => {
         console.log(result);
       })
       .catch(error => {
         console.log(error);
       });
+  }
+
+  verwijderTafel(tafel: Tafel) {
+    console.log(tafel);
   }
 }

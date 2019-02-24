@@ -1,4 +1,4 @@
-<button class="btn btn-primary mt-2" (click)="openFormModal()">Nieuw</button>
+<button class="btn btn-primary mt-2" (click)="openFormTafelModal()">Nieuw</button>
 
 <div class="table-responsive mt-2">
   <table class="table table-striped table-sm">
@@ -6,12 +6,17 @@
       <tr>
         <th>Nummer</th>
         <th>Personen</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let tafel of (tafels | async)">
         <td>{{ tafel.nummer }}</td>
         <td>{{ tafel.personen }}</td>
+        <td>
+          <i class="fas fa-edit mr-2" placement="top" ngbTooltip="Wijzigen" (click)="openFormTafelModal(tafel)"></i>
+          <i class="fas fa-trash-alt" placement="top" ngbTooltip="Verwijderen" (click)="verwijderTafel(tafel)"></i>
+        </td>
       </tr>
     </tbody>
   </table>

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Tafel } from 'src/app/models/tafel';
 
 @Component({
   selector: 'app-form-tafel',
@@ -9,7 +10,9 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class FormTafelComponent implements OnInit {
 
-  public tafelsForm = this.formBuilder.group({
+  @Input() tafel: Tafel | undefined = undefined;
+
+  public tafelForm = this.formBuilder.group({
     tafelnummer: [0, Validators.min(1)],
     aantalPersonen: [0, [Validators.min(1), Validators.max(12)]]
   });
@@ -17,14 +20,24 @@ export class FormTafelComponent implements OnInit {
   constructor(public activeModal: NgbActiveModal, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    if (this.tafel) {
+      this.tafelForm.setValue({
+        tafelnummer: this.tafel.nummer,
+        aantalPersonen: this.tafel.personen
+      });
+    }
   }
 
   get tafelnummer() {
-    return this.tafelsForm.get('tafelnummer');
+    return this.tafelForm.get('tafelnummer');
   }
 
   get aantalPersonen() {
-    return this.tafelsForm.get('aantalPersonen');
+    return this.tafelForm.get('aantalPersonen');
+  }
+
+  submitForm() {
+    this.activeModal.close(this.tafelForm.value);
   }
 
 }
