@@ -13,9 +13,9 @@
       <tr *ngFor="let tafel of (tafels | async)">
         <td>{{ tafel.nummer }}</td>
         <td>{{ tafel.personen }}</td>
-        <td>
+        <td class="text-right">
           <i class="fas fa-edit mr-2" placement="top" ngbTooltip="Wijzigen" (click)="openFormTafelModal(tafel)"></i>
-          <i class="fas fa-trash-alt" placement="top" ngbTooltip="Verwijderen" (click)="verwijderTafel(tafel)"></i>
+          <i class="fas fa-trash-alt mr-2" placement="top" ngbTooltip="Verwijderen" (click)="verwijderTafel(tafel)"></i>
         </td>
       </tr>
     </tbody>
