@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Gerecht } from 'src/app/models/gerecht';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGerechtComponent } from 'src/app/shared/components/form-gerecht/form-gerecht.component';
+import { ModalConfirmComponent } from 'src/app/shared/components/modal-confirm/modal-confirm.component';
 
 @Component({
   selector: 'app-gerechten',
@@ -32,6 +33,14 @@ export class GerechtenComponent {
   }
 
   verwijderGerecht(gerecht: Gerecht) {
-    console.log(gerecht);
+    this.modalService.open(ModalConfirmComponent).result
+      .then(result => {
+        if (result === 'yes') {
+          console.log(gerecht);
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 }

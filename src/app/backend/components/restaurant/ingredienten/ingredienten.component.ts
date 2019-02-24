@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Ingredient } from 'src/app/models/ingredient';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormIngredientComponent } from 'src/app/shared/components/form-ingredient/form-ingredient.component';
+import { ModalConfirmComponent } from 'src/app/shared/components/modal-confirm/modal-confirm.component';
 
 @Component({
   selector: 'app-ingredienten',
@@ -32,6 +33,14 @@ export class IngredientenComponent {
   }
 
   verwijderIngredient(ingredient: Ingredient) {
-    console.log(ingredient);
+    this.modalService.open(ModalConfirmComponent).result
+      .then(result => {
+        if (result === 'yes') {
+          console.log(ingredient);
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 }

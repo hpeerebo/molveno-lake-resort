@@ -4,6 +4,7 @@ import { Tafel } from 'src/app/models/tafel';
 import { TafelsService } from 'src/app/services/tafels.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormTafelComponent } from 'src/app/shared/components/form-tafel/form-tafel.component';
+import { ModalConfirmComponent } from 'src/app/shared/components/modal-confirm/modal-confirm.component';
 
 @Component({
   selector: 'app-tafels',
@@ -32,6 +33,14 @@ export class TafelsComponent {
   }
 
   verwijderTafel(tafel: Tafel) {
-    console.log(tafel);
+    this.modalService.open(ModalConfirmComponent).result
+      .then(result => {
+        if (result === 'yes') {
+          console.log(tafel);
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 }
