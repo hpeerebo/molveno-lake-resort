@@ -1,4 +1,4 @@
-<button class="btn btn-primary mt-2" (click)="open(form)">Nieuw</button>
+<button class="btn btn-primary mt-2" (click)="openFormModal()">Nieuw</button>
 
 <div class="table-responsive mt-2">
   <table class="table table-striped table-sm">
@@ -16,40 +16,3 @@
     </tbody>
   </table>
 </div>
-
-<ng-template #form let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Tafel</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('cancel')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <form [formGroup]="tafelsForm">
-      <div class="form-group">
-        <label>Tafelnummer</label>
-        <input
-          type="number"
-          class="form-control"
-          formControlName="tafelnummer"
-          [class.is-invalid]="tafelnummer?.invalid && tafelnummer?.touched"
-          ngbAutofocus
-        />
-        <small class="text-danger" [class.d-none]="tafelnummer?.valid || tafelnummer?.untouched">minimaal 1</small>
-      </div>
-      <div class="form-group">
-        <label>Aantal Personen</label>
-        <input
-          type="number"
-          class="form-control"
-          formControlName="aantalPersonen"
-          [class.is-invalid]="aantalPersonen?.invalid && aantalPersonen?.touched"
-        />
-        <small class="text-danger" [class.d-none]="aantalPersonen?.valid || aantalPersonen?.untouched">minimaal 1 en maximaal 12</small>
-      </div>
-    </form>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('save')" [disabled]="tafelsForm.invalid">Save</button>
-  </div>
-</ng-template>

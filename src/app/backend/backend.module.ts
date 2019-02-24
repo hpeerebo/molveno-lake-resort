@@ -16,6 +16,7 @@ import { BackEndRoutingModule } from './backend-routing.module';
 import { IngredientenComponent } from './components/restaurant/ingredienten/ingredienten.component';
 import { GerechtenComponent } from './components/restaurant/gerechten/gerechten.component';
 import { TafelsComponent } from './components/restaurant/tafels/tafels.component';
+import { FormTafelComponent } from '../shared/components/form-tafel/form-tafel.component';
 
 @NgModule({
   declarations: [
@@ -29,8 +30,12 @@ import { TafelsComponent } from './components/restaurant/tafels/tafels.component
     KamerDetailsComponent,
     IngredientenComponent,
     GerechtenComponent,
-    TafelsComponent
+    TafelsComponent,
+    FormTafelComponent
   ],
-  imports: [CommonModule, BackEndRoutingModule, NgbModule, FormsModule, ReactiveFormsModule]
+  imports: [CommonModule, BackEndRoutingModule, NgbModule, FormsModule, ReactiveFormsModule],
+  entryComponents: [
+    FormTafelComponent
+  ]
 })
 export class BackendModule {}
