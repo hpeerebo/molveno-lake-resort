@@ -33,8 +33,9 @@ export class IngredientenComponent {
   }
 
   verwijderIngredient(ingredient: Ingredient) {
-    this.modalService.open(ModalConfirmComponent).result
-      .then(result => {
+    this.modalService
+      .open(ModalConfirmComponent)
+      .result.then(result => {
         if (result === 'yes') {
           console.log(ingredient);
         }

@@ -33,8 +33,9 @@ export class GerechtenComponent {
   }
 
   verwijderGerecht(gerecht: Gerecht) {
-    this.modalService.open(ModalConfirmComponent).result
-      .then(result => {
+    this.modalService
+      .open(ModalConfirmComponent)
+      .result.then(result => {
         if (result === 'yes') {
           console.log(gerecht);
         }

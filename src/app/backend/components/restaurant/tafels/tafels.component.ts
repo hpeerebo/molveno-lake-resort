@@ -33,8 +33,9 @@ export class TafelsComponent {
   }
 
   verwijderTafel(tafel: Tafel) {
-    this.modalService.open(ModalConfirmComponent).result
-      .then(result => {
+    this.modalService
+      .open(ModalConfirmComponent)
+      .result.then(result => {
         if (result === 'yes') {
           console.log(tafel);
         }
