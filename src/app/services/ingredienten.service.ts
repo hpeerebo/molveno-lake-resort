@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class IngredientenService {
-  public readonly api: string = 'http://www.mocky.io/v2/5c6fe74a38000052003fca7d';
+  public readonly api: string = 'http://www.mocky.io/v2/5c729b2b33000065007601be';
 
   constructor(private http: HttpClient) { }
 
@@ -17,7 +17,7 @@ export class IngredientenService {
   }
 
   private static ingredientToIngredientMapper(ingredient: IIngredient): Ingredient {
-    return new Ingredient(ingredient.naam, ingredient.soort, ingredient.prijs);
+    return new Ingredient(ingredient.naam, ingredient.eenheid, ingredient.prijs);
   }
 
   getAllIngredienten(): Observable<Ingredient[]> {
@@ -34,6 +34,6 @@ interface IIngredientenResponse {
 
 interface IIngredient {
   naam: string;
-  soort: string;
+  eenheid: string;
   prijs: number;
 }
