@@ -28,6 +28,10 @@ export class FormTafelComponent implements OnInit {
     }
   }
 
+  submitForm() {
+    this.activeModal.close(this.tafelForm.value);
+  }
+
   get tafelnummer() {
     return this.tafelForm.get('tafelnummer');
   }
@@ -35,9 +39,4 @@ export class FormTafelComponent implements OnInit {
   get aantalPersonen() {
     return this.tafelForm.get('aantalPersonen');
   }
-
-  submitForm() {
-    this.activeModal.close(this.tafelForm.value);
-  }
-
 }

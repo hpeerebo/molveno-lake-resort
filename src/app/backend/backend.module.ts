@@ -17,6 +17,7 @@ import { IngredientenComponent } from './components/restaurant/ingredienten/ingr
 import { GerechtenComponent } from './components/restaurant/gerechten/gerechten.component';
 import { TafelsComponent } from './components/restaurant/tafels/tafels.component';
 import { FormTafelComponent } from '../shared/components/form-tafel/form-tafel.component';
+import { FormGerechtComponent } from '../shared/components/form-gerecht/form-gerecht.component';
 
 @NgModule({
   declarations: [
@@ -31,11 +32,10 @@ import { FormTafelComponent } from '../shared/components/form-tafel/form-tafel.c
     IngredientenComponent,
     GerechtenComponent,
     TafelsComponent,
-    FormTafelComponent
+    FormTafelComponent,
+    FormGerechtComponent
   ],
   imports: [CommonModule, BackEndRoutingModule, NgbModule, FormsModule, ReactiveFormsModule],
-  entryComponents: [
-    FormTafelComponent
-  ]
+  entryComponents: [FormTafelComponent, FormGerechtComponent]
 })
 export class BackendModule {}
