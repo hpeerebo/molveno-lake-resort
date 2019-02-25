@@ -1,0 +1,34 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">Tafel</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('cancel')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="tafelForm">
+    <div class="form-group">
+      <label>Tafelnummer</label>
+      <input
+        type="number"
+        class="form-control"
+        formControlName="tafelnummer"
+        [class.is-invalid]="tafelnummer?.invalid && tafelnummer?.touched"
+        ngbAutofocus
+      />
+      <small class="text-danger" [class.d-none]="tafelnummer?.valid || tafelnummer?.untouched">minimaal 1</small>
+    </div>
+    <div class="form-group">
+      <label>Aantal Personen</label>
+      <input
+        type="number"
+        class="form-control"
+        formControlName="aantalPersonen"
+        [class.is-invalid]="aantalPersonen?.invalid && aantalPersonen?.touched"
+      />
+      <small class="text-danger" [class.d-none]="aantalPersonen?.valid || aantalPersonen?.untouched">minimaal 1 en maximaal 12</small>
+    </div>
+  </form>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" (click)="submitForm()" [disabled]="tafelForm.invalid">Save</button>
+  </div>
+</div>

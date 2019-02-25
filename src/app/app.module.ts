@@ -7,12 +7,10 @@ import {FrontendModule} from "./frontend/frontend.module";
 import {BackendModule} from "./backend/backend.module";
 import {HttpClientModule} from '@angular/common/http';
 import {RoomService} from './services/rooms.service';
-import { KamersPipe } from './shared/pipes/kamers.pipe';
+import {KamersPipe} from './shared/pipes/kamers.pipe';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -20,10 +18,8 @@ import { KamersPipe } from './shared/pipes/kamers.pipe';
     FrontendModule,
     BackendModule,
     HttpClientModule
-
   ],
   providers: [RoomService],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-}
+export class AppModule {}

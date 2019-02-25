@@ -3,19 +3,18 @@
   <img class="mr-md-3" src="assets/img/logo-64.png" alt="Logo">
   <h1 class="my-0 mr-md-auto font-weight-normal brush">Molveno Lake Resort</h1>
   <nav class="my-2 my-md-0 mr-md-3">
-    <a class="p-2 text-dark" href="/home">Hotel</a>
-    <a class="p-2 text-dark" href="/kamers">Kamers</a>
-    <a class="p-2 text-dark" href="/restaurant">Restaurant</a>
-    <a class="p-2 text-dark" href="/activiteiten">Activiteiten</a>
-    <a class="p-2 text-dark" href="/contact">Contact</a>
+    <a class="p-2 text-dark" [routerLink]="['/home']" routerLinkActive="active" >Hotel</a>
+    <a class="p-2 text-dark" [routerLink]="['/kamers']" routerLinkActive="active" >Kamers</a>
+    <a class="p-2 text-dark" [routerLink]="['/restaurant']" routerLinkActive="active" >Restaurant</a>
+    <a class="p-2 text-dark" [routerLink]="['/activiteiten']" routerLinkActive="active" >Activiteiten</a>
+    <a class="p-2 text-dark" [routerLink]="['/contact']" routerLinkActive="active" >Contact</a>
   </nav>
-  <a class="btn btn-outline-primary" href="login">Login</a>
+  <a class="btn btn-outline-primary" [routerLink]="['/login']" routerLinkActive="active" >Login</a>
 </header>
 
 <router-outlet></router-outlet>
 
 <!-- FOOTER -->
 <footer class="container">
-  <p class="float-right"><a href="#">Back to top</a></p>
-  <p>&copy; 2017-2018 Molveno Lake Resort, Inc.</p>
+  <p>&copy; 2017-2019 Molveno Lake Resort, Inc.</p>
 </footer>
