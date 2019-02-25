@@ -19,7 +19,6 @@ import { FormTafelComponent } from '../shared/components/form-tafel/form-tafel.c
 import { FormGerechtComponent } from '../shared/components/form-gerecht/form-gerecht.component';
 import { FormIngredientComponent } from '../shared/components/form-ingredient/form-ingredient.component';
 import { ModalConfirmComponent } from '../shared/components/modal-confirm/modal-confirm.component';
-import { ActiviteitenFormComponent } from './components/activiteiten/activiteiten-form/activiteiten-form/activiteiten-form.component';
 
 @NgModule({
   declarations: [
@@ -36,8 +35,7 @@ import { ActiviteitenFormComponent } from './components/activiteiten/activiteite
     FormTafelComponent,
     FormGerechtComponent,
     FormIngredientComponent,
-    ModalConfirmComponent,
-    ActiviteitenFormComponent
+    ModalConfirmComponent
   ],
   imports: [CommonModule, BackEndRoutingModule, NgbModule, FormsModule, ReactiveFormsModule],
   entryComponents: [FormTafelComponent, FormGerechtComponent, FormIngredientComponent, ModalConfirmComponent]
