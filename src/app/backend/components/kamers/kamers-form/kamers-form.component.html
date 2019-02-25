@@ -1,8 +1,14 @@
-<div class="container w-50">
+<div class="container">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Kamer Toevoegen / Wijzigen</h4>
+        <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <div class="modal-body">
     <div [hidden]="submitted">
-      <h1>Kamer Form</h1>
+      <h6>Voer de nieuwe gegevens in</h6>
       <form (ngSubmit)="onSubmit()" #kamerForm="ngForm">
-          {{diagnostic}}
         <div class="form-group">
           <label for="kamerNummer">KamerNummer</label>
           <input type="number" class="form-control" id="kamerNummer"
@@ -14,7 +20,7 @@
           </div>
         </div>
 
-          
+
           <div class="form-group">
               <label for="kamerType">Kamer Type</label>
               <select class="form-control" id="kamerType"
@@ -76,22 +82,27 @@
                          status is verplicht
                     </div>
                   </div>
-  
-        <button type="submit" class="btn btn-success" [disabled]="!kamerForm.form.valid">Submit</button>
+
+                  <button type="submit" class="btn btn-success" [disabled]="!kamerForm.form.valid">Submit</button>
         <!--button type="button" class="btn btn-danger" (click)="newKamer(); kamerForm.reset()">New Kamer</button-->
-  
-       <!-- NOT SHOWN IN DOCS -->
+
+       <!-- NOT SHOWN IN DOCS
         <div>
           <hr>
           Name via form.controls = {{showFormControls(kamerForm)}}
         </div>
-       <!-- - -->
+        -->
       </form>
     </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Save click')">Annuleren</button>
+        <!--button type="button" class="btn btn-success" (click)="saveRoom(model); activeModal.close('Save click')" [disabled]="!kamerForm.form.valid">Opslaan</button-->
+      </div>
   </div>
 
-    <div [hidden]="!submitted">     
-          <app-kamers></app-kamers>       
+    <div [hidden]="!submitted">
+          <app-kamers></app-kamers>
     </div>
 
     <!--div [hidden]="!submitted">
@@ -123,8 +134,7 @@
         <br>
         <button class="btn btn-primary" (click)="submitted=false">Edit</button>
       </div-->
-    
-   
-  
-  
- 
+
+
+
+

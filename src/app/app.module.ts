@@ -6,7 +6,7 @@ import {FormsModule} from "@angular/forms";
 import {FrontendModule} from "./frontend/frontend.module";
 import {BackendModule} from "./backend/backend.module";
 import {HttpClientModule} from '@angular/common/http';
-import {RoomsService} from './services/rooms.service';
+import {RoomService} from './services/rooms.service';
 import { KamersPipe } from './shared/pipes/kamers.pipe';
 
 @NgModule({
@@ -22,7 +22,7 @@ import { KamersPipe } from './shared/pipes/kamers.pipe';
     HttpClientModule
 
   ],
-  providers: [RoomsService],
+  providers: [RoomService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
