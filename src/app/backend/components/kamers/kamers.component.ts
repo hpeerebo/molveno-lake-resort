@@ -12,7 +12,6 @@ import { Kamer } from "./kamer";
 import { Subscription } from "rxjs";
 import { take, tap } from "rxjs/operators";
 import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
-import { KamersFormTestComponent } from "./kamers-form/kamers-form-test/kamers-form-test.component";
 import { KamersFormComponent } from "./kamers-form/kamers-form.component";
 
 @Component({
