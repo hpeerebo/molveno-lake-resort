@@ -1,130 +1,163 @@
-<div class="container w-50">
+<div class="container">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">
+      Kamer Toevoegen / Wijzigen
+    </h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="activeModal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
     <div [hidden]="submitted">
-      <h1>Kamer Form</h1>
+      <h6>Voer de nieuwe gegevens in</h6>
       <form (ngSubmit)="onSubmit()" #kamerForm="ngForm">
-          {{diagnostic}}
         <div class="form-group">
           <label for="kamerNummer">KamerNummer</label>
-          <input type="number" class="form-control" id="kamerNummer"
-                 required
-                 [(ngModel)]="model.kamerNummer" name="kamerNummer"
-                 #kamerNummer="ngModel">
-          <div [hidden]="kamerNummer.valid || kamerNummer.pristine" class="alert alert-danger">
-               Kamer nummer is verplicht
+          <input
+            type="number"
+            class="form-control"
+            id="kamerNummer"
+            required
+            [(ngModel)]="model.kamerNummer"
+            name="kamerNummer"
+            #kamerNummer="ngModel"
+          />
+          <div
+            [hidden]="kamerNummer.valid || kamerNummer.pristine"
+            class="alert alert-danger"
+          >
+            Kamer nummer is verplicht
           </div>
         </div>
 
-          
-          <div class="form-group">
-              <label for="kamerType">Kamer Type</label>
-              <select class="form-control" id="kamerType"
-                      required
-                      [(ngModel)]="model.kamerType" name="kamerType"
-                      #kamerType="ngModel">
-                <option *ngFor="let type of kamerSoort" [value]="type">{{type}}</option>
-              </select>
-              <div [hidden]="kamerType.valid || kamerType.pristine" class="alert alert-danger">
-                Kamer Type is verplicht
-              </div>
-            </div>
-
-            <div class="form-group">
-                <label for="kamerLigging">Kamer Ligging</label>
-                <select class="form-control" id="KamerLigging"
-                        required
-                        [(ngModel)]="model.kamerLigging" name="kamerLigging"
-                        #kamerLigging="ngModel">
-                  <option *ngFor="let ligging of kamerUitzicht" [value]="ligging">{{ligging}}</option>
-                </select>
-                <div [hidden]="kamerLigging.valid || kamerLigging.pristine" class="alert alert-danger">
-                  Kamer ligging is verplicht
-                </div>
-              </div>
-
-            <div class="form-group">
-                <label for="aantalPersonen">Aantalpersonen</label>
-                <input type="number" class="form-control" id="aantalPersonen"
-                       required
-                       [(ngModel)]="model.aantalPersonen" name="aantalPersonen"
-                       #aantalPersonen="ngModel">
-                <div [hidden]="aantalPersonen.valid || aantalPersonen.pristine"
-                     class="alert alert-danger">
-                     Aantalpersonen is verplicht
-                </div>
-              </div>
-
-              <div class="form-group">
-                  <label for="prijs">Prijs</label>
-                  <input type="number" class="form-control" id="prijs"
-                         required
-                         [(ngModel)]="model.prijs" name="prijs"
-                         #prijs="ngModel">
-                  <div [hidden]="prijs.valid || prijs.pristine"
-                       class="alert alert-danger">
-                       Prijs is verplicht
-                  </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="status">Status</label>
-                    <input type="text" class="form-control" id="status"
-                           required
-                           [(ngModel)]="model.status" name="status"
-                           #status="ngModel">
-                    <div [hidden]="status.valid || status.pristine"
-                         class="alert alert-danger">
-                         status is verplicht
-                    </div>
-                  </div>
-  
-        <button type="submit" class="btn btn-success" [disabled]="!kamerForm.form.valid">Submit</button>
-        <!--button type="button" class="btn btn-danger" (click)="newKamer(); kamerForm.reset()">New Kamer</button-->
-  
-       <!-- NOT SHOWN IN DOCS -->
-        <div>
-          <hr>
-          Name via form.controls = {{showFormControls(kamerForm)}}
+        <div class="form-group">
+          <label for="kamerType">Kamer Type</label>
+          <select
+            class="form-control"
+            id="kamerType"
+            required
+            [(ngModel)]="model.kamerType"
+            name="kamerType"
+            #kamerType="ngModel"
+          >
+            <option *ngFor="let type of kamerSoort" [value]="type">{{
+              type
+            }}</option>
+          </select>
+          <div
+            [hidden]="kamerType.valid || kamerType.pristine"
+            class="alert alert-danger"
+          >
+            Kamer Type is verplicht
+          </div>
         </div>
-       <!-- - -->
+
+        <div class="form-group">
+          <label for="kamerLigging">Kamer Ligging</label>
+          <select
+            class="form-control"
+            id="KamerLigging"
+            required
+            [(ngModel)]="model.kamerLigging"
+            name="kamerLigging"
+            #kamerLigging="ngModel"
+          >
+            <option *ngFor="let ligging of kamerUitzicht" [value]="ligging">{{
+              ligging
+            }}</option>
+          </select>
+          <div
+            [hidden]="kamerLigging.valid || kamerLigging.pristine"
+            class="alert alert-danger"
+          >
+            Kamer ligging is verplicht
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="aantalPersonen">Aantalpersonen</label>
+          <input
+            type="number"
+            class="form-control"
+            id="aantalPersonen"
+            required
+            [(ngModel)]="model.aantalPersonen"
+            name="aantalPersonen"
+            #aantalPersonen="ngModel"
+          />
+          <div
+            [hidden]="aantalPersonen.valid || aantalPersonen.pristine"
+            class="alert alert-danger"
+          >
+            Aantalpersonen is verplicht
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="prijs">Prijs</label>
+          <input
+            type="number"
+            class="form-control"
+            id="prijs"
+            required
+            [(ngModel)]="model.prijs"
+            name="prijs"
+            #prijs="ngModel"
+          />
+          <div
+            [hidden]="prijs.valid || prijs.pristine"
+            class="alert alert-danger"
+          >
+            Prijs is verplicht
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="status">Status</label>
+          <input
+            type="text"
+            class="form-control"
+            id="status"
+            required
+            [(ngModel)]="model.status"
+            name="status"
+            #status="ngModel"
+          />
+          <div
+            [hidden]="status.valid || status.pristine"
+            class="alert alert-danger"
+          >
+            status is verplicht
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          class="btn btn-success"
+          [disabled]="!kamerForm.form.valid"
+        >
+          Submit
+        </button>
       </form>
     </div>
   </div>
-
-    <div [hidden]="!submitted">     
-          <app-kamers></app-kamers>       
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      (click)="activeModal.close('Save click')"
+    >
+      Annuleren
+    </button>
     </div>
+</div>
 
-    <!--div [hidden]="!submitted">
-        <h2>You submitted the following:</h2>
-        <div class="row">
-          <div class="col-xs-3">Kamernummer</div>
-          <div class="col-xs-9">{{ model.kamerNummer }}</div>
-        </div>
-        <div class="row">
-          <div class="col-xs-3">KamerType</div>
-          <div class="col-xs-9">{{ model.kamerType }}</div>
-        </div>
-        <div class="row">
-          <div class="col-xs-3">Kamerligging</div>
-          <div class="col-xs-9">{{ model.kamerLigging }}</div>
-        </div>
-        <div class="row">
-            <div class="col-xs-3">Aantalpersonen</div>
-            <div class="col-xs-9">{{ model.aantalPersonen }}</div>
-          </div>
-          <div class="row">
-              <div class="col-xs-3">Prijs</div>
-              <div class="col-xs-9">{{ model.prijs }}</div>
-            </div>
-            <div class="row">
-                <div class="col-xs-3">Status</div>
-                <div class="col-xs-9">{{ model.status }}</div>
-              </div>
-        <br>
-        <button class="btn btn-primary" (click)="submitted=false">Edit</button>
-      </div-->
-    
-   
-  
-  
- 
+<div [hidden]="!submitted">
+  <app-kamers></app-kamers>
+</div>
+

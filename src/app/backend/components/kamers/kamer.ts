@@ -1,19 +1,15 @@
-export interface KamerResponse{
-    kamerNummer:number;
-    kamerType: string;
-    kamerLigging: string;
-    aantalPersonen: number;
-    prijs: number;
-    status: string;
-  }
-  export class Kamer implements KamerResponse{
-    kamerNummer:number;
-    kamerType:string;
-    kamerLigging:string;
-    aantalPersonen:number;
-    prijs:number;
-    status:string;
-  
+
+  export class Kamer{
+    constructor(
+    public kamerNummer: number,
+    public kamerType: string,
+    public kamerLigging: string,
+    public aantalPersonen: number,
+    public prijs: number,
+    public status: string){}
+    }
+
+/*
     constructor(kamerNummer:number, kamerType:string, kamerLigging:string, aantalPersonen:number, prijs:number, status:string){
       this.kamerNummer = kamerNummer;
       this.kamerType = kamerType;
@@ -23,5 +19,4 @@ export interface KamerResponse{
       this.status = status;
     }
   }
-  
-  
+*/

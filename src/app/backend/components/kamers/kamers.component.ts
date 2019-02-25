@@ -1,51 +1,154 @@
-import { Component, OnInit, Directive, Input, Output, ViewChildren, QueryList } from '@angular/core';
-import { RoomsService } from 'src/app/services/rooms.service';
-import { Kamer } from './kamer';
+import {
+  Component,
+  OnInit,
+  Directive,
+  Input,
+  Output,
+  ViewChildren,
+  QueryList
+} from "@angular/core";
+import { RoomService } from "src/app/services/rooms.service";
+import { Kamer } from "./kamer";
+import { Subscription } from "rxjs";
+import { take, tap } from "rxjs/operators";
+import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
+import { KamersFormComponent } from "./kamers-form/kamers-form.component";
 
 @Component({
-  selector: 'app-kamers',
-  templateUrl: './kamers.component.html',
-  styleUrls: ['./kamers.component.scss']
+  selector: "app-kamers",
+  templateUrl: "./kamers.component.html",
+  styleUrls: ["./kamers.component.scss"]
 })
 //export let kamers:Kamer[] = [];
 export class BackEndKamersComponent implements OnInit {
   //public kamers :KamerResponse[] = [];
-  public kamers :Kamer[] | undefined = [];
-  show:string = "";
-  selectedKamer : Kamer | undefined;
-  soortkamer = ['Budget', 'Standaard','Lux'];
- constructor(private roomservice: RoomsService){
-  //roomservice.getRoom().subscribe(result => this.kamers = result);
+  public kamers: Kamer[] | undefined = [];
+  show: string = "";
+  public selectedKamer?: Kamer;
+  soortkamer = ["Budget", "Standaard", "Lux"];
+  closeResult: string = "";
+  private subscriptions: Subscription = new Subscription();
+  constructor(
+    private roomservice: RoomService,
+    private modalService: NgbModal
+  ) {}
+  ngOnInit() {
+    this.getRoom();
+  }
 
-}
-ngOnInit() {
-  this.getRoom();
-}
+  getRoom() {
+    //this.roomservice.getRoom().subscribe(result => this.kamers = result);
+    this.roomservice
+      .getRoom()
+      .pipe(
+        take(1),
+        tap(result => (this.kamers = result))
+      )
+      .subscribe();
+  }
+  onSelect(kamer: Kamer): void {
+    this.selectedKamer = kamer;
+  }
+  showReservedRooms() {
+    // this.kamers = [...this.kamers].filter(item => item.status==="reserved");
+    this.show = "reserved";
+  }
+  showFreeRooms() {
+    this.show = "free";
+  }
+  showAllRooms() {
+    this.show = "all";
+  }
+  showBookedRooms() {
+    this.show = "booked";
+  }
 
-getRoom(){
-  this.roomservice.getRoom().subscribe(result => this.kamers = result);
-}
-onSelect(kamer: Kamer): void {
-  this.selectedKamer = kamer;
-}
-showReservedRooms(){
- // this.kamers = [...this.kamers].filter(item => item.status==="reserved");
- this.show = "reserved";
-}
-showFreeRooms(){
-  this.show = "free";
- }
-showAllRooms(){
-  this.show = "all";
- }
- showBookedRooms(){
-  this.show = "booked";
- }
+  deleteRoom(kamer: Kamer) {
+    if (this.kamers) {
+      this.kamers = [...this.kamers].filter(item => item !== kamer);
+    }
+  }
+  addRoom(kamer: Kamer) {
+    //let lengte = this.kamers.push(kamer);
+  }
+  open(content: NgbModal) {
+    this.modalService
+      .open(content, { size: "lg", ariaLabelledBy: "modal-basic-title" })
+      .result.then(
+        result => {
+          this.closeResult = `Closed with: ${result}`;
+        },
+        reason => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        }
+      );
+  }
+  openSm(content: NgbModal) {
+    this.modalService
+      .open(content, { ariaLabelledBy: "modal-basic-title" })
+      .result.then(
+        result => {
+          this.closeResult = `Closed with: ${result}`;
+        },
+        reason => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        }
+      );
+  }
+  openNewFormModal() {
+    const modalRef = this.modalService.open(KamersFormComponent, {
+      size: "lg",
+      ariaLabelledBy: "modal-basic-title"
+    });
+    modalRef.result.then(resultPromise => {
+      this.closeResult = resultPromise;
+      if (this.kamers) {
+        this.kamers.push(
+          new Kamer(
+            resultPromise.kamerNummer,
+            resultPromise.kamerType,
+            resultPromise.kamerLigging,
+            resultPromise.aantalPersonen,
+            resultPromise.prijs,
+            resultPromise.status
+          )
+        );
+      }
+    });
+    console.log("result = " + this.closeResult);
+    console.log("Kamers = " + this.kamers);
+  }
+  openEditFormModal() {
+    const modalRef = this.modalService.open(KamersFormComponent, {
+      size: "lg",
+      ariaLabelledBy: "modal-basic-title"
+    });
+    modalRef.componentInstance.model = this.selectedKamer;
 
- deleteRoom(kamer:Kamer){
-  //this.kamers = [...this.kamers].filter(item => item !==kamer);
- }
- addRoom(kamer:Kamer){
-   //let lengte = this.kamers.push(kamer);
- }
+    modalRef.result.then(resultPromise => {
+      //this.closeResult = resultPromise;
+      (this.kamers = this.kamers),
+        new Kamer(
+          resultPromise.kamerNummer,
+          resultPromise.kamerType,
+          resultPromise.kamerLigging,
+          resultPromise.aantalPersonen,
+          resultPromise.prijs,
+          resultPromise.status
+        );
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return "by pressing ESC";
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return "by clicking on a backdrop";
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+  onRoomSubmitted(room: Kamer) {
+    console.log(room);
+  }
 }

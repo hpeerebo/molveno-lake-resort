@@ -10,7 +10,6 @@ import { BackEndLoginComponent } from './components/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { KamersPipe } from '../shared/pipes/kamers.pipe';
 import { KamersFormComponent } from './components/kamers/kamers-form/kamers-form.component';
-import { KamerDetailsComponent } from './components/kamers/kamer-details/kamer-details.component';
 import { BackEndComponent } from './backend.component';
 import { BackEndRoutingModule } from './backend-routing.module';
 import { IngredientenComponent } from './components/restaurant/ingredienten/ingredienten.component';
@@ -30,7 +29,6 @@ import { ModalConfirmComponent } from '../shared/components/modal-confirm/modal-
     BackEndLoginComponent,
     KamersPipe,
     KamersFormComponent,
-    KamerDetailsComponent,
     IngredientenComponent,
     GerechtenComponent,
     TafelsComponent,
