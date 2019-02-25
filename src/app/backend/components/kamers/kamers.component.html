@@ -1,4 +1,4 @@
-<div class="table-responsive w-100">
+<div>
   <!--pre>{{kamers | json}}</pre-->
   <br />
 
@@ -34,6 +34,8 @@
         <th>Kamerligging</th>
         <th>Aantalpersonen</th>
         <th>Prijs</th>
+        <th></th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -44,10 +46,8 @@
         <td>{{ kamer.aantalPersonen }}</td>
         <td>{{ kamer.prijs | currency: "EUR" }}</td>
         <td style="text-align: right">
-          <button type="button" class="btn  btn-sm" (click)="onSelect(kamer); openEditFormModal()"><img src="../../../../assets/img/edit-btn.jpg" /></button>
-        </td>
-        <td style="text-align: right">
-          <button type="button" class="btn  btn-sm" (click)="onSelect(kamer); openSm(deleteModal)"><img src="../../../../assets/img/delete-btn.jpg" /></button>
+          <i class="fas fa-edit mr-2" placement="top" ngbTooltip="Wijzigen" (click)="onSelect(kamer); openEditFormModal()"></i>
+          <i class="fas fa-trash-alt mr-2" placement="top" ngbTooltip="Verwijderen" (click)="onSelect(kamer); openSm(deleteModal)"></i>
         </td>
       </tr>
     </tbody>
