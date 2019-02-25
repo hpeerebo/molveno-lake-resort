@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { KamersComponent } from 'src/app/frontend/components/kamers/kamers.component';
-import { BackEndKamersComponent } from '../kamers.component';
+import { ManagementPortalKamersComponent } from '../kamers.component';
 import { APP_BASE_HREF } from '@angular/common';
 import { Router } from '@angular/router';
 import { Kamer } from '../kamer';

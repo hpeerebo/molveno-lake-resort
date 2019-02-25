@@ -20,7 +20,7 @@ import { KamersFormComponent } from "./kamers-form/kamers-form.component";
   styleUrls: ["./kamers.component.scss"]
 })
 //export let kamers:Kamer[] = [];
-export class BackEndKamersComponent implements OnInit {
+export class ManagementPortalKamersComponent implements OnInit {
   //public kamers :KamerResponse[] = [];
   public kamers: Kamer[] | undefined = [];
   show: string = "";
