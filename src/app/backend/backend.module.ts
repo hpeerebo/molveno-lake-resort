@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // BackEnd imports
 import { BackEndHomeComponent } from './components/home/home.component';
 import { BackEndActiviteitenComponent } from './components/activiteiten/activiteiten.component';
 import { BackEndKamersComponent } from './components/kamers/kamers.component';
 import { BackEndLoginComponent } from './components/login/login.component';
-import { FormControl, FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { KamersPipe } from '../shared/pipes/kamers.pipe';
 import { KamersFormComponent } from './components/kamers/kamers-form/kamers-form.component';
 import { KamerDetailsComponent } from './components/kamers/kamer-details/kamer-details.component';
@@ -16,7 +16,10 @@ import { BackEndRoutingModule } from './backend-routing.module';
 import { IngredientenComponent } from './components/restaurant/ingredienten/ingredienten.component';
 import { GerechtenComponent } from './components/restaurant/gerechten/gerechten.component';
 import { TafelsComponent } from './components/restaurant/tafels/tafels.component';
-import { FilterPipe } from './components/restaurant/filter.pipe';
+import { FormTafelComponent } from '../shared/components/form-tafel/form-tafel.component';
+import { FormGerechtComponent } from '../shared/components/form-gerecht/form-gerecht.component';
+import { FormIngredientComponent } from '../shared/components/form-ingredient/form-ingredient.component';
+import { ModalConfirmComponent } from '../shared/components/modal-confirm/modal-confirm.component';
 
 @NgModule({
   declarations: [
@@ -25,20 +28,18 @@ import { FilterPipe } from './components/restaurant/filter.pipe';
     BackEndActiviteitenComponent,
     BackEndKamersComponent,
     BackEndLoginComponent,
-    // BackEndRestaurantComponent, commented due to merge conflict resolve (team restaurant check if this is stil necessary)
     KamersPipe,
     KamersFormComponent,
     KamerDetailsComponent,
     IngredientenComponent,
     GerechtenComponent,
     TafelsComponent,
-    FilterPipe
+    FormTafelComponent,
+    FormGerechtComponent,
+    FormIngredientComponent,
+    ModalConfirmComponent
   ],
-  imports: [
-    CommonModule,
-    BackEndRoutingModule,
-    NgbModule,
-    FormsModule
-  ]
+  imports: [CommonModule, BackEndRoutingModule, NgbModule, FormsModule, ReactiveFormsModule],
+  entryComponents: [FormTafelComponent, FormGerechtComponent, FormIngredientComponent, ModalConfirmComponent]
 })
-export class BackendModule { }
+export class BackendModule {}

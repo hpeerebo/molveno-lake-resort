@@ -1,5 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Ingredient } from './ingredient';
+import { Component } from '@angular/core';
+import { IngredientenService } from 'src/app/services/ingredienten.service';
+import { Observable } from 'rxjs';
+import { Ingredient } from 'src/app/models/ingredient';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { FormIngredientComponent } from 'src/app/shared/components/form-ingredient/form-ingredient.component';
+import { ModalConfirmComponent } from 'src/app/shared/components/modal-confirm/modal-confirm.component';
 
 @Component({
   selector: 'app-ingredienten',
@@ -7,23 +12,36 @@ import { Ingredient } from './ingredient';
   styleUrls: ['./ingredienten.component.scss']
 })
 export class IngredientenComponent {
+  public ingredienten: Observable<Ingredient[]> = this.ingredientenService.getAllIngredienten();
 
-  backendData = [
-    { naam: 'Aardappelen', soort: 'nog te bepalen', prijs: 13.50 },
-    { naam: 'Bleekselderij', soort: 'nog te bepalen', prijs: 13.50 },
-    { naam: 'Broccoli', soort: 'nog te bepalen', prijs: 13.50 },
-    { naam: 'Courgette', soort: 'nog te bepalen', prijs: 13.50 },
-    { naam: 'Fazant', soort: 'nog te bepalen', prijs: 13.50 },
-    { naam: 'Forel', soort: 'nog te bepalen', prijs: 13.50 },
-    { naam: 'Kaas', soort: 'nog te bepalen', prijs: 13.50 },
-    { naam: 'Knoflook', soort: 'nog te bepalen', prijs: 13.50 },
-    { naam: 'Krab', soort: 'nog te bepalen', prijs: 13.50 },
-    { naam: 'Linzen', soort: 'nog te bepalen', prijs: 13.50 },
-    { naam: 'Prei', soort: 'nog te bepalen', prijs: 13.50 },
-    { naam: 'Runderhaas', soort: 'nog te bepalen', prijs: 13.50 },
-    { naam: 'Venkel', soort: 'nog te bepalen', prijs: 13.50 }
-  ];
+  constructor(private ingredientenService: IngredientenService, private modalService: NgbModal) {}
 
-  ingredienten: Ingredient[] = this.backendData.map(data => new Ingredient(data.naam, data.soort, data.prijs));
+  openFormIngredientModal(ingredient?: Ingredient) {
+    const modal = this.modalService.open(FormIngredientComponent);
 
+    if (ingredient) {
+      modal.componentInstance.ingredient = ingredient;
+    }
+
+    modal.result
+      .then(result => {
+        console.log(result);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
+  verwijderIngredient(ingredient: Ingredient) {
+    this.modalService
+      .open(ModalConfirmComponent)
+      .result.then(result => {
+        if (result === 'yes') {
+          console.log(ingredient);
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
 }

@@ -1,39 +1,47 @@
 import { Component } from '@angular/core';
-import { Tafel } from './tafel';
+import { Observable } from 'rxjs';
+import { Tafel } from 'src/app/models/tafel';
+import { TafelsService } from 'src/app/services/tafels.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { FormTafelComponent } from 'src/app/shared/components/form-tafel/form-tafel.component';
+import { ModalConfirmComponent } from 'src/app/shared/components/modal-confirm/modal-confirm.component';
 
 @Component({
   selector: 'app-tafels',
   templateUrl: './tafels.component.html',
   styleUrls: ['./tafels.component.scss']
 })
-
 export class TafelsComponent {
+  public tafels: Observable<Tafel[]> = this.tafelsService.getAllTafels();
 
-  backendData = [
-    { tafelNummer: 1, aantalPersonen: 4, vrij: true  },
-    { tafelNummer: 2, aantalPersonen: 4, vrij: true  },
-    { tafelNummer: 3, aantalPersonen: 2, vrij: false  },
-    { tafelNummer: 4, aantalPersonen: 4, vrij: true  },
-    { tafelNummer: 5, aantalPersonen: 4, vrij: false  },
-    { tafelNummer: 6, aantalPersonen: 6, vrij: true  },
-    { tafelNummer: 7, aantalPersonen: 2, vrij: true  },
-    { tafelNummer: 8, aantalPersonen: 4, vrij: false  },
-    { tafelNummer: 9, aantalPersonen: 4, vrij: true  },
-    { tafelNummer: 10, aantalPersonen: 2, vrij: false  },
-    { tafelNummer: 11, aantalPersonen: 4, vrij: true  },
-    { tafelNummer: 12, aantalPersonen: 4, vrij: true  },
-    { tafelNummer: 13, aantalPersonen: 6, vrij: false  },
-    { tafelNummer: 14, aantalPersonen: 2, vrij: true  },
-    { tafelNummer: 15, aantalPersonen: 2, vrij: true  }
-  ];
+  constructor(private tafelsService: TafelsService, private modalService: NgbModal) {}
 
-  tafels: Tafel[] = this.backendData.map(data => new Tafel(data.tafelNummer, data.aantalPersonen, data.vrij));
+  openFormTafelModal(tafel?: Tafel) {
+    const modal = this.modalService.open(FormTafelComponent);
 
-  // show free items in table (free item = true)
-  // show all items with show = false
-  show = true;
-  tableFilterFunction(table: any): boolean {
-    return table.vrij;
+    if (tafel) {
+      modal.componentInstance.tafel = tafel;
+    }
+
+    modal.result
+      .then(result => {
+        console.log(result);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
+  verwijderTafel(tafel: Tafel) {
+    this.modalService
+      .open(ModalConfirmComponent)
+      .result.then(result => {
+        if (result === 'yes') {
+          console.log(tafel);
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
 }
