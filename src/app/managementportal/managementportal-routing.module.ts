@@ -16,14 +16,14 @@ const routes: Routes = [
     path: '',
     component: ManagementportalComponent,
     children: [
-      { path: 'management-portal/home', component: ManagementPortalHomeComponent },
-      { path: 'management-portal/login', component: ManagementPortalLoginComponent },
-      { path: 'management-portal/kamers', component: ManagementPortalKamersComponent },
-      { path: 'management-portal/kamers-form', component: ManagementPortalKamersFormComponent },
-      { path: 'management-portal/activiteiten', component: ManagementPortalActiviteitenComponent },
-      { path: 'management-portal/restaurant/tafels', component: ManagementPortalTafelsComponent },
-      { path: 'management-portal/restaurant/ingredienten', component: ManagementPortalIngredientenComponent },
-      { path: 'management-portal/restaurant/gerechten', component: ManagementPortalGerechtenComponent }
+      { path: 'managementportal/home', component: ManagementPortalHomeComponent },
+      { path: 'managementportal/login', component: ManagementPortalLoginComponent },
+      { path: 'managementportal/kamers', component: ManagementPortalKamersComponent },
+      { path: 'managementportal/kamers-form', component: ManagementPortalKamersFormComponent },
+      { path: 'managementportal/activiteiten', component: ManagementPortalActiviteitenComponent },
+      { path: 'managementportal/restaurant/tafels', component: ManagementPortalTafelsComponent },
+      { path: 'managementportal/restaurant/ingredienten', component: ManagementPortalIngredientenComponent },
+      { path: 'managementportal/restaurant/gerechten', component: ManagementPortalGerechtenComponent }
     ]
   }
 ];
