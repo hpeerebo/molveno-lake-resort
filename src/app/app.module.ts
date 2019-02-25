@@ -4,7 +4,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {FormsModule} from "@angular/forms";
 import {FrontendModule} from "./frontend/frontend.module";
-import {BackendModule} from "./backend/backend.module";
+import {ManagementPortalModule} from "./management-portal/management-portal.module";
 import {HttpClientModule} from '@angular/common/http';
 import {RoomService} from './services/rooms.service';
 import {KamersPipe} from './shared/pipes/kamers.pipe';
@@ -16,7 +16,7 @@ import {KamersPipe} from './shared/pipes/kamers.pipe';
     AppRoutingModule,
     FormsModule,
     FrontendModule,
-    BackendModule,
+    ManagementPortalModule,
     HttpClientModule
   ],
   providers: [RoomService],

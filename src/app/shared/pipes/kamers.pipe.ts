@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 //import { Kamer } from 'src/app/services/rooms.service';
-import { Kamer } from 'src/app/backend/components/kamers/kamer';
+import { Kamer } from 'src/app/management-portal/components/kamers/kamer';
 
 @Pipe({
   name: 'kamersfilter'

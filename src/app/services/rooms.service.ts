@@ -9,7 +9,7 @@ import {
 } from "@angular/common/http";
 import { Observable, BehaviorSubject } from "rxjs";
 import { Type } from "@angular/compiler";
-import { Kamer } from "../backend/components/kamers/kamer";
+import { Kamer } from "../management-portal/components/kamers/kamer";
 
 @Injectable({
   providedIn: "root"
