@@ -1,7 +1,4 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { KamersComponent } from 'src/app/frontend/components/kamers/kamers.component';
-import { ManagementPortalKamersComponent } from '../kamers.component';
-import { APP_BASE_HREF } from '@angular/common';
 import { Router } from '@angular/router';
 import { Kamer } from '../kamer';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -12,7 +9,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './kamers-form.component.html',
   styleUrls: ['./kamers-form.component.scss']
 })
-export class KamersFormComponent implements OnInit {
+export class ManagementPortalKamersFormComponent implements OnInit {
 
   kamerSoort = ['Budget', 'Standaard','Lux'];
   kamerUitzicht = ['Zeezicht', 'Bergzicht','Tuinzicht'];

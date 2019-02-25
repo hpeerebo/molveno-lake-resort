@@ -12,7 +12,7 @@ import { Kamer } from "./kamer";
 import { Subscription } from "rxjs";
 import { take, tap } from "rxjs/operators";
 import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
-import { KamersFormComponent } from "./kamers-form/kamers-form.component";
+import { ManagementPortalKamersFormComponent } from "./kamers-form/kamers-form.component";
 
 @Component({
   selector: "app-kamers",
@@ -96,7 +96,7 @@ export class ManagementPortalKamersComponent implements OnInit {
       );
   }
   openNewFormModal() {
-    const modalRef = this.modalService.open(KamersFormComponent, {
+    const modalRef = this.modalService.open(ManagementPortalKamersFormComponent, {
       size: "lg",
       ariaLabelledBy: "modal-basic-title"
     });
@@ -119,7 +119,7 @@ export class ManagementPortalKamersComponent implements OnInit {
     console.log("Kamers = " + this.kamers);
   }
   openEditFormModal() {
-    const modalRef = this.modalService.open(KamersFormComponent, {
+    const modalRef = this.modalService.open(ManagementPortalKamersFormComponent, {
       size: "lg",
       ariaLabelledBy: "modal-basic-title"
     });

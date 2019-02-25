@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { KamersFormComponent } from './kamers-form.component';
+import { ManagementPortalKamersFormComponent } from './kamers-form.component';
 
-describe('KamersFormComponent', () => {
-  let component: KamersFormComponent;
-  let fixture: ComponentFixture<KamersFormComponent>;
+describe('ManagementPortalKamersFormComponent', () => {
+  let component: ManagementPortalKamersFormComponent;
+  let fixture: ComponentFixture<ManagementPortalKamersFormComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ KamersFormComponent ]
+      declarations: [ ManagementPortalKamersFormComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(KamersFormComponent);
+    fixture = TestBed.createComponent(ManagementPortalKamersFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

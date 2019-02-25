@@ -11,7 +11,7 @@ import { ModalConfirmComponent } from 'src/app/shared/components/modal-confirm/m
   templateUrl: './gerechten.component.html',
   styleUrls: ['./gerechten.component.scss']
 })
-export class GerechtenComponent {
+export class ManagementPortalGerechtenComponent {
   public gerechten: Observable<Gerecht[]> = this.gerechtenService.getAllGerechten();
 
   constructor(private gerechtenService: GerechtenService, private modalService: NgbModal) {}

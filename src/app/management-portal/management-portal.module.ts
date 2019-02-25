@@ -9,12 +9,12 @@ import { ManagementPortalKamersComponent } from './components/kamers/kamers.comp
 import { ManagementPortalLoginComponent } from './components/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { KamersPipe } from '../shared/pipes/kamers.pipe';
-import { KamersFormComponent } from './components/kamers/kamers-form/kamers-form.component';
+import { ManagementPortalKamersFormComponent } from './components/kamers/kamers-form/kamers-form.component';
 import { ManagementPortalComponent } from './management-portal.component';
 import { ManagementPortalRoutingModule } from './management-portal-routing.module';
-import { IngredientenComponent } from './components/restaurant/ingredienten/ingredienten.component';
-import { GerechtenComponent } from './components/restaurant/gerechten/gerechten.component';
-import { TafelsComponent } from './components/restaurant/tafels/tafels.component';
+import { ManagementPortalIngredientenComponent } from './components/restaurant/ingredienten/ingredienten.component';
+import { ManagementPortalGerechtenComponent } from './components/restaurant/gerechten/gerechten.component';
+import { ManagementPortalTafelsComponent } from './components/restaurant/tafels/tafels.component';
 import { FormTafelComponent } from '../shared/components/form-tafel/form-tafel.component';
 import { FormGerechtComponent } from '../shared/components/form-gerecht/form-gerecht.component';
 import { FormIngredientComponent } from '../shared/components/form-ingredient/form-ingredient.component';
@@ -28,10 +28,10 @@ import { ModalConfirmComponent } from '../shared/components/modal-confirm/modal-
     ManagementPortalKamersComponent,
     ManagementPortalLoginComponent,
     KamersPipe,
-    KamersFormComponent,
-    IngredientenComponent,
-    GerechtenComponent,
-    TafelsComponent,
+    ManagementPortalKamersFormComponent,
+    ManagementPortalIngredientenComponent,
+    ManagementPortalGerechtenComponent,
+    ManagementPortalTafelsComponent,
     FormTafelComponent,
     FormGerechtComponent,
     FormIngredientComponent,

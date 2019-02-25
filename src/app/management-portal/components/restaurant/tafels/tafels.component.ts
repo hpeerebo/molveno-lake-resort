@@ -11,7 +11,7 @@ import { ModalConfirmComponent } from 'src/app/shared/components/modal-confirm/m
   templateUrl: './tafels.component.html',
   styleUrls: ['./tafels.component.scss']
 })
-export class TafelsComponent {
+export class ManagementPortalTafelsComponent {
   public tafels: Observable<Tafel[]> = this.tafelsService.getAllTafels();
 
   constructor(private tafelsService: TafelsService, private modalService: NgbModal) {}

@@ -11,7 +11,7 @@ import { ModalConfirmComponent } from 'src/app/shared/components/modal-confirm/m
   templateUrl: './ingredienten.component.html',
   styleUrls: ['./ingredienten.component.scss']
 })
-export class IngredientenComponent {
+export class ManagementPortalIngredientenComponent {
   public ingredienten: Observable<Ingredient[]> = this.ingredientenService.getAllIngredienten();
 
   constructor(private ingredientenService: IngredientenService, private modalService: NgbModal) {}
