@@ -9,8 +9,6 @@ import { GerechtenComponent } from './components/restaurant/gerechten/gerechten.
 import { TafelsComponent } from './components/restaurant/tafels/tafels.component';
 import { BackEndActiviteitenComponent } from "./components/activiteiten/activiteiten.component";
 import { BackEndComponent } from "./backend.component";
-import { KamerDetailsComponent } from './components/kamers/kamer-details/kamer-details.component';
-import { KamersFormTestComponent } from './components/kamers/kamers-form/kamers-form-test/kamers-form-test.component';
 
 const routes: Routes = [
   {
@@ -20,8 +18,6 @@ const routes: Routes = [
       { path: 'backend/login', component: BackEndLoginComponent},
       { path: 'backend/kamers', component: BackEndKamersComponent},
       { path: 'backend/kamers-form', component: KamersFormComponent},
-      {path: 'backend/kamers-form-test', component: KamersFormTestComponent},
-      { path: 'backend/kamers-details', component: KamerDetailsComponent},
       { path: 'backend/activiteiten', component: BackEndActiviteitenComponent},
       { path: 'backend/restaurant/tafels', component: TafelsComponent },
       { path: 'backend/restaurant/ingredienten', component: IngredientenComponent },

@@ -47,15 +47,13 @@
           <button type="button" class="btn  btn-sm" (click)="onSelect(kamer); openEditFormModal()"><img src="../../../../assets/img/edit-btn.jpg" /></button>
         </td>
         <td style="text-align: right">
-          <!--button type="button" class="btn btn-danger btn-sm" (click)="onSelect(kamer); deleteRoom(kamer)"><img src="../../../../assets/img/delete-btn-sm.jpg" /></button-->
           <button type="button" class="btn  btn-sm" (click)="onSelect(kamer); openSm(deleteModal)"><img src="../../../../assets/img/delete-btn.jpg" /></button>
         </td>
       </tr>
     </tbody>
   </table>
 </div>
-<!--pre>{{closeResult | json}}</pre-->
-<!--app-kamer-details></app-kamer-details-->
+
 <!-- Modal to confirm deleting room-->
 <ng-template #deleteModal let-modal>
     <div class="modal-header">
@@ -77,45 +75,3 @@
       <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Nee</button>
     </div>
   </ng-template>
-  <!-- end of modal-->
-  <!--app-kamers-form [model]="selectedKamer" (roomSubmitted)="onRoomSubmitted($event)"></app-kamers-form-->
-<!--div *ngIf="selectedKamer">
-    <h2> Kamer {{ selectedKamer?.kamerNummer }} Details</h2>
-    <div><span>Kamernummer: </span>{{ selectedKamer?.kamerNummer }}</div>
-    <div>
-      <label
-        >Type kamer:
-        <input [(ngModel)]="selectedKamer.kamerType" placeholder="Type kamer" />
-      </label>
-    </div>
-    <div>
-      <label
-        >Kamer Ligging:
-        <input
-          [(ngModel)]="selectedKamer.kamerLigging"
-          placeholder="kamer Ligging"
-        />
-      </label>
-    </div>
-    <div>
-      <label
-        >Aantal Personen:
-        <input
-          [(ngModel)]="selectedKamer.aantalPersonen"
-          placeholder="Aantal Personen"
-        />
-      </label>
-    </div>
-    <div>
-      <label
-        >Prijs:
-        <input [(ngModel)]="selectedKamer.prijs" placeholder="Prijs" />
-      </label>
-    </div>
-    <button (click)="goBack()">go back</button>
-
-
-
-</div-->
-
-

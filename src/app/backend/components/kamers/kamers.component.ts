@@ -32,9 +32,7 @@ export class BackEndKamersComponent implements OnInit {
   constructor(
     private roomservice: RoomService,
     private modalService: NgbModal
-  ) {
-    //roomservice.getRoom().subscribe(result => this.kamers = result);
-  }
+  ) {}
   ngOnInit() {
     this.getRoom();
   }
@@ -117,8 +115,6 @@ export class BackEndKamersComponent implements OnInit {
           )
         );
       }
-
-      //this.kamers = [...this.kamers], (new Kamer(resultPromise.kamerNummer, resultPromise.kamerType, resultPromise.kamerLigging, resultPromise.aantalPersonen, resultPromise.prijs, resultPromise.status ));
     });
     console.log("result = " + this.closeResult);
     console.log("Kamers = " + this.kamers);
