@@ -8,11 +8,11 @@ import {
   QueryList
 } from "@angular/core";
 import { ActiviteitenService } from "src/app/services/activiteiten.service";
-import { Kamer } from "./kamer";
+// import { Kamer } from "./kamer";
 import { Subscription } from "rxjs";
 import { take, tap } from "rxjs/operators";
 import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
-import { activiteitenFormComponent } from "./activiteiten-form/activiteiten-form.component";
+// import { activiteitenFormComponent } from "./activiteiten-form/activiteiten-form.component";
 import { Activiteit } from 'src/app/models/activiteit';
 
 @Component({
@@ -40,7 +40,7 @@ export class BackEndactiviteitenComponent implements OnInit {
   getAct() {
     //this.actservice.getAct().subscribe(result => this.activiteiten = result);
     this.actservice
-      .getAct()
+      .getAllActiviteiten()
       .pipe(
         take(1),
         tap(result => (this.activiteiten = result))
@@ -128,7 +128,7 @@ export class BackEndactiviteitenComponent implements OnInit {
     modalRef.result.then(resultPromise => {
       //this.closeResult = resultPromise;
       (this.activiteiten = this.activiteiten),
-        new Kamer(
+        new Activiteit(
           resultPromise.activiteitNummer,
           resultPromise.activiteitNaam,
           resultPromise.activiteitDatum,
