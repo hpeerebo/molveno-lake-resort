@@ -8,13 +8,13 @@ import { ManagementPortalActiviteitenComponent } from "./components/activiteiten
 import { ManagementPortalIngredientenComponent } from './components/restaurant/ingredienten/ingredienten.component';
 import { ManagementPortalGerechtenComponent } from './components/restaurant/gerechten/gerechten.component';
 import { ManagementPortalTafelsComponent } from './components/restaurant/tafels/tafels.component';
-import { ManagementPortalComponent } from './management-portal.component';
+import { ManagementportalComponent } from './managementportal.component';
 
 
 const routes: Routes = [
   {
     path: '',
-    component: ManagementPortalComponent,
+    component: ManagementportalComponent,
     children: [
       { path: 'management-portal/home', component: ManagementPortalHomeComponent },
       { path: 'management-portal/login', component: ManagementPortalLoginComponent },
@@ -32,4 +32,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class ManagementPortalRoutingModule {}
+export class ManagementportalRoutingModule {}

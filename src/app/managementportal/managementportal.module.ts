@@ -10,8 +10,8 @@ import { ManagementPortalLoginComponent } from './components/login/login.compone
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { KamersPipe } from '../shared/pipes/kamers.pipe';
 import { ManagementPortalKamersFormComponent } from './components/kamers/kamers-form/kamers-form.component';
-import { ManagementPortalComponent } from './management-portal.component';
-import { ManagementPortalRoutingModule } from './management-portal-routing.module';
+import { ManagementportalComponent } from './managementportal.component';
+import { ManagementportalRoutingModule } from './managementportal-routing.module';
 import { ManagementPortalIngredientenComponent } from './components/restaurant/ingredienten/ingredienten.component';
 import { ManagementPortalGerechtenComponent } from './components/restaurant/gerechten/gerechten.component';
 import { ManagementPortalTafelsComponent } from './components/restaurant/tafels/tafels.component';
@@ -22,7 +22,7 @@ import { ModalConfirmComponent } from '../shared/components/modal-confirm/modal-
 
 @NgModule({
   declarations: [
-    ManagementPortalComponent,
+    ManagementportalComponent,
     ManagementPortalHomeComponent,
     ManagementPortalActiviteitenComponent,
     ManagementPortalKamersComponent,
@@ -37,7 +37,7 @@ import { ModalConfirmComponent } from '../shared/components/modal-confirm/modal-
     FormIngredientComponent,
     ModalConfirmComponent
   ],
-  imports: [CommonModule, ManagementPortalRoutingModule, NgbModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, ManagementportalRoutingModule, NgbModule, FormsModule, ReactiveFormsModule],
   entryComponents: [FormTafelComponent, FormGerechtComponent, FormIngredientComponent, ModalConfirmComponent]
 })
-export class ManagementPortalModule {}
+export class ManagementportalModule {}
