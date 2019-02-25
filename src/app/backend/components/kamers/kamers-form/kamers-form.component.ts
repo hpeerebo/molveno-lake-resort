@@ -18,7 +18,7 @@ export class KamersFormComponent implements OnInit {
   kamerSoort = ['Budget', 'Standaard','Lux'];
   kamerUitzicht = ['Zeezicht', 'Bergzicht','Tuinzicht'];
  @Input() model = new Kamer(0, this.kamerSoort[0], this.kamerUitzicht[0], 3, 50, "free");
- //@Output() roomSubmitted: EventEmitter<Kamer> = new EventEmitter<Kamer>();
+// @Output() roomSubmitted: EventEmitter<Kamer> = new EventEmitter<Kamer>();
   submitted = false;
  // @Input() public room?: Kamer = undefined;
 
@@ -27,7 +27,7 @@ export class KamersFormComponent implements OnInit {
   onSubmit() { this.submitted = true;
    // console.log(this.model.kamerNummer + " + " + this.model.kamerType + " + " + this.model.kamerLigging);
    console.log(this.model);
-   //this.roomSubmitted.emit(this.model);
+//   this.roomSubmitted.emit(this.model);
    this.activeModal.close(this.model);
   // this.router.navigate(['kamer-details']);
   }
