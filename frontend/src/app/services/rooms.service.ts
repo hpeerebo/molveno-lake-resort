@@ -22,6 +22,7 @@ export class RoomService {
   getRoom(): Observable<Kamer[]> {
     const headers = new HttpHeaders({});
     return this.http.get<KamerResponse>("http://www.mocky.io/v2/5c65473a3300005c11b99c33", {headers: headers})
+    //return this.http.get<KamerResponse>("http://localhost:3000/kamers", {headers: headers})
     .pipe(
       map(RoomService.IOMDBResponseKamerToKamerMapper),
     )
