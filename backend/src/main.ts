@@ -10,7 +10,9 @@ async function bootstrap() {
     .setTitle('Molveno')
     .setDescription('Backend for the Molveno application')
     .setVersion('1.0')
-    .addTag('Molveno')
+    .addTag('kamers')
+    .addTag('restaurant')
+    .addTag('activiteiten')
     .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api', app, document);

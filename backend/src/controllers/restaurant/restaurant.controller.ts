@@ -2,7 +2,9 @@ import { Controller, Get, Post, Body } from '@nestjs/common';
 import { Tafel } from 'src/models/tafel';
 import { TafelService } from 'src/services/tafel/tafel.service';
 import { CreateTafelDto } from 'src/dto/create-tafel-dto';
+import { ApiUseTags } from '@nestjs/swagger';
 
+@ApiUseTags('restaurant')
 @Controller('restaurant')
 export class RestaurantController {
 
