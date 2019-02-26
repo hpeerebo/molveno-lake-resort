@@ -1,8 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ActiviteitEntity } from 'src/entities/activiteit-entity';
-import { Repository } from 'typeorm';
+import { Repository, Any } from 'typeorm';
 import { CreateActiviteitDto } from 'src/dto/create-activiteit-dto';
+import { isString } from 'util';
+import { Activiteit } from 'src/models/activiteit';
 
 @Injectable()
 export class ActiviteitService {
@@ -19,5 +21,9 @@ export class ActiviteitService {
   }
   async  getActiviteit(): Promise<ActiviteitEntity[]> {
     return this.activiteitRepository.find();
+  }
+
+  public async deleteActiviteit(): Promise<void> {
+    return await this.activiteitRepository.clear();
   }
 }

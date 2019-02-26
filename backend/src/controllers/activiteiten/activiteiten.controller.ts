@@ -1,4 +1,4 @@
-import { Controller, Body, Post, Get, Param } from '@nestjs/common';
+import { Controller, Body, Post, Get, Param, Delete } from '@nestjs/common';
 import { Activiteit } from 'src/models/activiteit';
 import { ActiviteitEntity } from 'src/entities/activiteit-entity';
 import { CreateActiviteitDto } from 'src/dto/create-activiteit-dto';
@@ -27,5 +27,10 @@ export class ActiviteitenController {
   @Get('')
   getActiviteit(): Promise<Activiteit[]> {
     return this.activiteitenService.getActiviteit();
+  }
+
+  @Delete()
+  deleteActiviteit() {
+    return this.activiteitenService.deleteActiviteit();
   }
 }
