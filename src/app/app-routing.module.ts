@@ -6,6 +6,11 @@ const routes: Routes = [
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
+  },
+  {
+    path: 'managementportal',
+    redirectTo: 'managementportal/home',
+    pathMatch: 'full'
   }
 ];
 
