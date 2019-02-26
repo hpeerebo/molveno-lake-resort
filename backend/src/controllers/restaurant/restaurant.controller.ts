@@ -6,12 +6,15 @@ import { ApiUseTags } from '@nestjs/swagger';
 import { Gerecht } from 'src/models/gerecht';
 import { GerechtService } from 'src/services/gerecht/gerecht.service';
 import { CreateGerechtDto } from 'src/dto/create-gerecht-dto';
+import { Ingredient } from 'src/models/ingredient';
+import { CreateIngredientDto } from 'src/dto/create-ingredient-dto';
+import { IngredientService } from 'src/services/ingredient/ingredient.service';
 
 @ApiUseTags('restaurant')
 @Controller('restaurant')
 export class RestaurantController {
 
-    constructor(private tafelService: TafelService, private gerechtService: GerechtService) { }
+    constructor(private tafelService: TafelService, private gerechtService: GerechtService, private ingredientenService: IngredientService) { }
 
     @Get('tafels')
     getTafels(): Tafel[] {
@@ -31,5 +34,15 @@ export class RestaurantController {
     @Post('gerechten')
     createGerecht(@Body() body: CreateGerechtDto): void {
         this.gerechtService.createGerecht(body);
+    }
+
+    @Get('ingredienten')
+    getIngredienten(): Ingredient[] {
+        return this.ingredientenService.getIngredienten();
+    }
+
+    @Post('ingredienten')
+    createIngredient(@Body() body: CreateIngredientDto): void {
+        this.ingredientenService.createIngredient(body);
     }
 }
