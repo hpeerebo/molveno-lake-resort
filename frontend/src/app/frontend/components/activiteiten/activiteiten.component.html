@@ -1,148 +1,84 @@
 <div class="row mb-4">
-  <div class="col-lg-12">
-    <ngb-carousel *ngIf="images">
-      <ng-template ngbSlide>
-        <img [src]="images[0]" alt="Random first slide" style="width:100%; height:100%; background:#777; color:#777;">
-        <div class="carousel-caption carousel-inner-text">
-          <h2>ACTIVITEITEN</h2>
-          <p>Bij ons hoeft u zich nooit te vervelen. Wij bieden een groot aanbood aan activiteiten. Er is voor een ieder wat wils. Kijk regelmatig in ons steeds wisselende aanbod. We zien u graag terug. U bent van harte welkom!</p>
-          <p>
-            <button class="btn btn-lg btn-primary" (click)="open(modalReservation)">Reserveer</button>
-          </p>
-        </div>
-      </ng-template>
-      <ng-template ngbSlide>
-        <img [src]="images[1]" alt="Random second slide" style="width:100%; height:100%; background:#777; color:#777;">
-        <div class="carousel-caption carousel-inner-text">
-          <h2>ACTIVITEITEN</h2>
-          <p>Bij ons hoeft u zich nooit te vervelen. Wij bieden een groot aanbood aan activiteiten. Er is voor een ieder wat wils. Kijk regelmatig in ons steeds wisselende aanbod. We zien u graag terug. U bent van harte welkom!</p>
-          <p>
-            <button class="btn btn-lg btn-primary" (click)="open(modalReservation)">Reserveer</button>
-          </p>
-        </div>
-      </ng-template>
-      <ng-template ngbSlide>
-        <img [src]="images[2]" alt="Random third slide" style="width:100%; height:100%; background:#777; color:#777;">
-        <div class="carousel-caption carousel-inner-text">
-          <h2>ACTIVITEITEN</h2>
-          <p>Bij ons hoeft u zich nooit te vervelen. Wij bieden een groot aanbood aan activiteiten. Er is voor een ieder wat wils. Kijk regelmatig in ons steeds wisselende aanbod. We zien u graag terug. U bent van harte welkom!</p>
-          <p>
-            <button class="btn btn-lg btn-primary" (click)="open(modalReservation)">Reserveer</button>
-          </p>
-        </div>
-      </ng-template>
-    </ngb-carousel>
-  </div>
-</div>
-
-<div class="container">
-  <div class="card-deck mb-3 text-center">
-    <div class="card mb-4 shadow-sm">
-      <div class="card-header">
-        <h4 class="my-0 font-weight-normal">Wijnproeverij</h4>
-      </div>
-      <div class="card-body">
-        <h1 class="card-title pricing-card-title">vanaf Eur.10,- <small class="text-muted"></small></h1>
-        <img class="rounded-circle" src="assets/img/thumb_activiteit_wijn.png" class="img-thumbnail" alt="Wandellen">
-        <p></p>
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary btn-block btn-primary" data-toggle="modal"
-                data-target="#WijnModal"> Meer info </button>
-        <!-- Modal -->
-        <div class="modal fade" id="WijnModal" tabindex="-1" role="dialog" aria-labelledby="WijnModalLabel"
-             aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="WijnModalLabel">Lorem</h5> <button type="button" class="close"
-                                                                               data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
-              </div>
-              <div class="modal-body">
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi neque debitis quia ipsa sint
-                  dolore ducimus et illum omnis porro quas assumenda iure vel earum culpa, eos nulla beatae enim..</p>
-              </div>
-              <div class="modal-footer"> <button type="button" class="btn btn-secondary"
-                                                 data-dismiss="modal">Sluiten</button>
-                <button type="button" class="btn btn-primary">Boeken</button> </div>
-            </div>
+    <div class="col-lg-12">
+      <ngb-carousel *ngIf="images">
+        <ng-template ngbSlide>
+          <img
+            [src]="images[0]"
+            alt="Random first slide"
+            style="width:100%; height:100%; background:#777; color:#777;"
+          />
+          <div class="carousel-caption carousel-inner-text">
+            <h2>ACTIVITEITEN</h2>
+            <p>
+              Bij ons hoeft u zich nooit te vervelen. Wij bieden een groot aanbod
+              aan activiteiten. Er is voor een ieder wat wils. Kijk regelmatig in
+              ons steeds wisselende aanbod. We zien u graag terug. U bent van
+              harte welkom!
+            </p>
           </div>
-        </div>
-        <p></p>
-        <button type="button" class="btn btn-primary btn-block btn-primary movelake">Aanmelden</button>
-      </div>
-    </div>
-    <div class="card mb-4 shadow-sm">
-      <div class="card-header">
-        <h4 class="my-0 font-weight-normal">Wandeltochten</h4>
-      </div>
-      <div class="card-body">
-        <h1 class="card-title pricing-card-title">Vanaf Eur.15,- <small class="text-muted"></small></h1>
-        <img class="rounded-circle" src="assets/img/thumb_activiteit_wandel.png" class="img-thumbnail"
-             alt="Cinque Terre">
-        <p></p>
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary btn-block btn-primary" data-toggle="modal"
-                data-target="#wandelModal"> Meer info </button>
-        <!-- Modal -->
-        <div class="modal fade" id="wandelModal" tabindex="-1" role="dialog" aria-labelledby="wandelModalLabel"
-             aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="wandelModalLabel">Lorem</h5> <button type="button" class="close"
-                                                                                 data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
-              </div>
-              <div class="modal-body">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis eaque aperiam libero, vero
-                  tempora dolorum quam quis ea, sint veniam eius, excepturi delectus nisi doloremque dolore cumque
-                  consequuntur nulla est..</p>
-              </div>
-              <div class="modal-footer"> <button type="button" class="btn btn-secondary"
-                                                 data-dismiss="modal">Sluiten</button>
-                <button type="button" class="btn btn-primary">Boeken</button> </div>
-            </div>
+        </ng-template>
+        <ng-template ngbSlide>
+          <img
+            [src]="images[1]"
+            alt="Random second slide"
+            style="width:100%; height:100%; background:#777; color:#777;"
+          />
+          <div class="carousel-caption carousel-inner-text">
+            <h2>ACTIVITEITEN</h2>
+            <p>
+              Bij ons hoeft u zich nooit te vervelen. Wij bieden een groot aanbod
+              aan activiteiten. Er is voor een ieder wat wils. Kijk regelmatig in
+              ons steeds wisselende aanbod. We zien u graag terug. U bent van
+              harte welkom!
+            </p>
           </div>
-        </div>
-        <p></p>
-        <button type="button" class="btn btn-primary btn-block btn-primary movelake">Aanmelden</button>
-
-      </div>
-    </div>
-    <div class="card mb-4 shadow-sm">
-      <div class="card-header">
-        <h4 class="my-0 font-weight-normal">Watersport op het meer</h4>
-      </div>
-      <div class="card-body">
-        <h1 class="card-title pricing-card-title">Vanaf Eur.20,-<small class="text-muted"></small></h1>
-        <img class="rounded-circle" src="assets/img/thumb_activiteit_zeilen.png" class="img-thumbnail" alt="Zeilen">
-        <p></p>
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary btn-block btn-primary" data-toggle="modal"
-                data-target="#watersport"> Meer info </button>
-        <!-- Modal -->
-        <div class="modal fade" id="watersport" tabindex="-1" role="dialog" aria-labelledby="watersportLabel"
-             aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="watersportLabel">lorem</h5>
-                <button type="button" class="close" np
-                        data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              </div>
-              <div class="modal-body">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, ullam iste obcaecati, assumenda id
-                  reiciendis, laborum atque repellendus officia repudiandae a quo modi porro voluptate culpa sequi
-                  nihil molestiae saepe?</p>
-              </div>
-              <div class="modal-footer"> <button type="button" class="btn btn-secondary"
-                                                 data-dismiss="modal">Sluiten</button>
-                <button type="button" class="btn btn-primary">Boeken</button> </div>
-            </div>
+        </ng-template>
+        <ng-template ngbSlide>
+          <img
+            [src]="images[2]"
+            alt="Random third slide"
+            style="width:100%; height:100%; background:#777; color:#777;"
+          />
+          <div class="carousel-caption carousel-inner-text">
+            <h2>ACTIVITEITEN</h2>
+            <p>
+              Bij ons hoeft u zich nooit te vervelen. Wij bieden een groot aanbod
+              aan activiteiten. Er is voor een ieder wat wils. Kijk regelmatig in
+              ons steeds wisselende aanbod. We zien u graag terug. U bent van
+              harte welkom!
+            </p>
           </div>
-        </div>
-        <p></p>
-        <button type="button" class="btn btn-primary btn-block btn-primary movelake">Aanmelden</button>
-      </div>
+        </ng-template>
+      </ngb-carousel>
     </div>
   </div>
+
+
+<div class="table-responsive mt-2">
+  <table class="table table-striped table-sm">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Activiteit</th>
+        <th>Datum</th>
+        <th>Capaciteit</th>
+        <th>Prijs</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let activiteit of (activiteiten | async)">
+        <td><img src="assets/img/thumb_{{ activiteit.thumb }}" /></td>
+        <td>
+          <h4>{{ activiteit.naam }}</h4>
+          {{ activiteit.beschrijving }}
+        </td>
+        <td>{{ activiteit.datum }}<br>
+          <button type="button" class="btn btn-primary btn-block btn-primary movelake">Aanmelden</button>
+        </td>
+        <td>{{ activiteit.capaciteit }}</td>
+        <td>{{ activiteit.prijs | currency: "EUR" }}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>

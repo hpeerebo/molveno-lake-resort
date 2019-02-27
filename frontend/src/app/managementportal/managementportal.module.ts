@@ -18,6 +18,7 @@ import { ManagementPortalTafelsComponent } from './components/restaurant/tafels/
 import { FormTafelComponent } from '../shared/components/form-tafel/form-tafel.component';
 import { FormGerechtComponent } from '../shared/components/form-gerecht/form-gerecht.component';
 import { FormIngredientComponent } from '../shared/components/form-ingredient/form-ingredient.component';
+import { FormActiviteitComponent } from '../shared/components/form-activiteit/form-activiteit.component'
 import { ModalConfirmComponent } from '../shared/components/modal-confirm/modal-confirm.component';
 
 @NgModule({
@@ -35,9 +36,10 @@ import { ModalConfirmComponent } from '../shared/components/modal-confirm/modal-
     FormTafelComponent,
     FormGerechtComponent,
     FormIngredientComponent,
+    FormActiviteitComponent,
     ModalConfirmComponent
   ],
   imports: [CommonModule, ManagementportalRoutingModule, NgbModule, FormsModule, ReactiveFormsModule],
-  entryComponents: [FormTafelComponent, FormGerechtComponent, FormIngredientComponent, ModalConfirmComponent]
+  entryComponents: [FormTafelComponent, FormGerechtComponent, FormIngredientComponent, FormActiviteitComponent, ModalConfirmComponent]
 })
 export class ManagementportalModule {}
