@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Kamer } from 'src/models/kamer';
+import { CreateKamerDto } from 'src/dto/create-kamer-dto';
 
 @Injectable()
 export class KamerService {

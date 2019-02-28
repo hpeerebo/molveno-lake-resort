@@ -135,29 +135,29 @@
             status is verplicht
           </div>
         </div>
+        <div class="modal-footer justify-content-start">
+            <button
+            type="submit"
+            class="btn btn-success ml-2"
+            [disabled]="!kamerForm.form.valid"
+          >
+            Submit
+          </button>
 
-        <button
-          type="submit"
-          class="btn btn-success"
-          [disabled]="!kamerForm.form.valid"
-        >
-          Submit
-        </button>
+          <button
+            type="button"
+            class="btn btn-outline-dark"
+            (click)="activeModal.close()"
+          >
+            Annuleren
+          </button>
+          </div>
       </form>
     </div>
   </div>
-  <div class="modal-footer">
-    <button
-      type="button"
-      class="btn btn-outline-dark"
-      (click)="activeModal.close('Save click')"
-    >
-      Annuleren
-    </button>
-    </div>
 </div>
 
-<div [hidden]="!submitted">
+<!--div [hidden]="!submitted">
   <app-kamers></app-kamers>
-</div>
+</div-->
 

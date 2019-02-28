@@ -21,6 +21,7 @@ export class ManagementPortalKamersFormComponent implements OnInit {
 
   onSubmit() { this.submitted = true;
     this.activeModal.close(this.model);
+    location.reload();
 //   this.roomSubmitted.emit(this.model);
 // this.router.navigate(['kamer-details']);
   }

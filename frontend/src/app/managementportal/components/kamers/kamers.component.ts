@@ -101,7 +101,16 @@ export class ManagementPortalKamersComponent implements OnInit {
       ariaLabelledBy: "modal-basic-title"
     });
     modalRef.result.then(resultPromise => {
-      this.closeResult = resultPromise;
+      this.roomservice.saveRoom(new Kamer(
+        resultPromise.kamerNummer,
+        resultPromise.kamerType,
+        resultPromise.kamerLigging,
+        resultPromise.aantalPersonen,
+        resultPromise.prijs,
+        resultPromise.status
+      ));
+   //   this.closeResult = resultPromise;
+   /*
       if (this.kamers) {
         this.kamers.push(
           new Kamer(
@@ -114,9 +123,8 @@ export class ManagementPortalKamersComponent implements OnInit {
           )
         );
       }
+    */
     });
-    console.log("result = " + this.closeResult);
-    console.log("Kamers = " + this.kamers);
   }
   openEditFormModal() {
     const modalRef = this.modalService.open(ManagementPortalKamersFormComponent, {
@@ -127,6 +135,15 @@ export class ManagementPortalKamersComponent implements OnInit {
 
     modalRef.result.then(resultPromise => {
       //this.closeResult = resultPromise;
+      this.roomservice.saveRoom(new Kamer(
+        resultPromise.kamerNummer,
+        resultPromise.kamerType,
+        resultPromise.kamerLigging,
+        resultPromise.aantalPersonen,
+        resultPromise.prijs,
+        resultPromise.status
+      ));
+      /*
       (this.kamers = this.kamers),
         new Kamer(
           resultPromise.kamerNummer,
@@ -136,7 +153,9 @@ export class ManagementPortalKamersComponent implements OnInit {
           resultPromise.prijs,
           resultPromise.status
         );
+        */
     });
+
   }
 
   private getDismissReason(reason: any): string {
