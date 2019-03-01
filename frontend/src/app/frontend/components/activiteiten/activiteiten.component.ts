@@ -9,11 +9,7 @@ import { ActiviteitenService } from 'src/app/services/activiteiten.service';
   styleUrls: ['./activiteiten.component.scss']
 })
 export class ActiviteitenComponent implements OnInit {
-  images = [
-    'assets/img/activiteit_wandel.png',
-    'assets/img/activiteit_wijn.png',
-    'assets/img/activiteit_zeilen.png'
-];
+
   public activiteiten: Observable<
   Activiteit[]
 > = this.activiteitenService.getAllActiviteiten();
