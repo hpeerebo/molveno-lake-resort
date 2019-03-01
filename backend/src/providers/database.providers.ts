@@ -1,4 +1,5 @@
 import { createConnection } from 'typeorm';
+import { KamerEntity } from 'src/models/entities/kamer.entity';
 
 export const databaseProviders = [
   {

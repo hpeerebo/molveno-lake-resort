@@ -1,9 +1,8 @@
 export class Kamer{
     constructor(
-    public kamerNummer: number,
+    public kamerNummer: string,
     public kamerType: string,
     public kamerLigging: string,
     public aantalPersonen: number,
-    public prijs: number,
-    public status: string){}
+    public prijs: number){}
     }

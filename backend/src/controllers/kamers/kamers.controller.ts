@@ -8,6 +8,15 @@ export class KamersController {
   constructor(private kamerService: KamerService) {}
 
   @Get('kamers')
+  public getKamers(): Promise<Kamer[]> {
+    return this.kamerService.getKamers();
+  }
+  @Post('kamers')
+  public saveKamer(@Body() createkamerdto: CreateKamerDto): void {
+    this.kamerService.saveCreateMovieDTO(createkamerdto);
+  } 
+
+  /* @Get('kamers')
   public getKamers(): Kamer[] {
     return this.kamerService.getKamers();
   }
@@ -15,5 +24,5 @@ export class KamersController {
   public saveKamer(@Body() room: CreateKamerDto): void {
     console.log('room ' + room);
     this.kamerService.saveKamer(room);
-  }
+  } */
 }
