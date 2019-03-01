@@ -11,6 +11,6 @@ export class TafelService {
     }
 
     createTafel(body: CreateTafelDto): void {
-        this.tafels = [...this.tafels, new Tafel(body.nummer, body.personen)];
+        this.tafels = [...this.tafels, new Tafel(body.kenmerk, body.personen)];
     }
 }
