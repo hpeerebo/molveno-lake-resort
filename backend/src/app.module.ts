@@ -9,11 +9,36 @@ import { KamerService } from './services/kamer/kamer.service';
 import { TafelService } from './services/tafel/tafel.service';
 import { IngredientService } from './services/ingredient/ingredient.service';
 import { GerechtService } from './services/gerecht/gerecht.service';
-import { DatabaseModule } from './providers/database.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { TafelRepoEntity } from './entities/tafel.entity';
 
 @Module({
-  imports: [DatabaseModule],
-  controllers: [AppController, ActiviteitenController, KamersController, RestaurantController],
-  providers: [AppService, ActiviteitService, KamerService, TafelService, IngredientService, GerechtService],
+  imports: [
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      host: 'localhost',
+      port: 5432,
+      username: 'postgres',
+      password: 'root',
+      database: 'molveno',
+      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      synchronize: true,
+    }),
+    TypeOrmModule.forFeature([TafelRepoEntity]),
+  ],
+  controllers: [
+    AppController,
+    ActiviteitenController,
+    KamersController,
+    RestaurantController,
+  ],
+  providers: [
+    AppService,
+    ActiviteitService,
+    KamerService,
+    TafelService,
+    IngredientService,
+    GerechtService,
+  ],
 })
 export class AppModule {}
