@@ -1,12 +1,15 @@
 import { ApiModelProperty } from '@nestjs/swagger';
-import { IsString, IsNumber } from 'class-validator';
+import { IsString, IsInt, Length, Min, Max } from 'class-validator';
 
 export class CreateTafelDto {
     @ApiModelProperty()
-    @IsNumber()
-    public readonly nummer: number;
+    @IsString()
+    @Length(1, 50)
+    public readonly kenmerk: string;
 
     @ApiModelProperty()
-    @IsNumber()
+    @IsInt()
+    @Min(1)
+    @Max(16)
     public readonly personen: number;
 }

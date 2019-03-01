@@ -1,6 +1,6 @@
 export class Tafel {
     constructor(
-        public readonly nummer: number,
+        public readonly kenmerk: string,
         public readonly personen: number,
     ) { }
 }
