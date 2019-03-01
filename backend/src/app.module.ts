@@ -9,9 +9,10 @@ import { KamerService } from './services/kamer/kamer.service';
 import { TafelService } from './services/tafel/tafel.service';
 import { IngredientService } from './services/ingredient/ingredient.service';
 import { GerechtService } from './services/gerecht/gerecht.service';
+import { DatabaseModule } from './providers/database.module';
 
 @Module({
-  imports: [],
+  imports: [DatabaseModule],
   controllers: [AppController, ActiviteitenController, KamersController, RestaurantController],
   providers: [AppService, ActiviteitService, KamerService, TafelService, IngredientService, GerechtService],
 })
