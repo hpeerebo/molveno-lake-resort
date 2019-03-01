@@ -17,7 +17,7 @@ export class RestaurantController {
     constructor(private tafelService: TafelService, private gerechtService: GerechtService, private ingredientenService: IngredientService) { }
 
     @Get('tafels')
-    getTafels(): Tafel[] {
+    getTafels(): Promise<Tafel[]>  {
         return this.tafelService.getTafels();
     }
 
