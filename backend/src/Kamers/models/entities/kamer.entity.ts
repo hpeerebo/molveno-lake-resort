@@ -1,17 +1,17 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, PrimaryColumn } from "typeorm";
 
 @Entity()
 export class KamerEntity {
     @PrimaryGeneratedColumn() public readonly id?: number;
-    @Column('varchar') public readonly kamerNummer: string;
+    @PrimaryColumn('varchar') public readonly kamerNaam: string;
     @Column('varchar') public readonly kamerType: string;
     @Column('varchar') public readonly kamerLigging: string;
     @Column('integer') public readonly aantalPersonen: number;
     @Column('integer') public readonly prijs: number;
     //@Column('varchar') public readonly status: string;
     
-    constructor(kamerNummer: string, kamerType: string, kamerLigging: string, aantalPersonen: number,  prijs: number) {
-		this.kamerNummer = kamerNummer;
+    constructor(kamerNaam: string, kamerType: string, kamerLigging: string, aantalPersonen: number,  prijs: number) {
+		this.kamerNaam = kamerNaam;
 		this.kamerType = kamerType;
 		this.kamerLigging = kamerLigging;
 		this.aantalPersonen = aantalPersonen;

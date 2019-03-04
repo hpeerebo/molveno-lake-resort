@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 //import { Kamer } from 'src/app/services/rooms.service';
-import { Kamer } from 'src/app/managementportal/components/kamers/kamer';
+import { Kamer } from 'src/app/models/kamer';
 
 @Pipe({
   name: 'kamersfilter'
@@ -8,6 +8,7 @@ import { Kamer } from 'src/app/managementportal/components/kamers/kamer';
  export class KamersPipe implements PipeTransform {
 
    transform(value: Kamer[], args: string): Kamer[] {
+    /*
      if(args==="reserved"){
        return [...value].filter(item => item.status==="reserved");
      }
@@ -17,7 +18,8 @@ import { Kamer } from 'src/app/managementportal/components/kamers/kamer';
     else if(args==="free"){
       return [...value].filter(item => item.status==="free");
     }
-    else if(args==="all"){
+    */
+   if(args==="all"){
       return value;
     }
      else return value;

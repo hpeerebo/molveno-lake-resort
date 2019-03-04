@@ -1,12 +1,12 @@
 
   export class Kamer{
     constructor(
-    public kamerNummer: number,
+    public kamerNaam: string,
     public kamerType: string,
     public kamerLigging: string,
     public aantalPersonen: number,
-    public prijs: number,
-    public status: string){}
+    public prijs: number){}
+//    public status: string){}
     }
 
 /*

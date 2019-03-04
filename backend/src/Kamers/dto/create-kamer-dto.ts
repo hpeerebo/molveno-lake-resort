@@ -1,11 +1,11 @@
 import { ApiModelProperty } from '@nestjs/swagger';
 import { IsString, IsNumber } from 'node_modules/class-validator/index';
-import { KamerEntity } from 'src/models/entities/kamer.entity';
+import { KamerEntity } from '../models/entities/kamer.entity';
 
 export class CreateKamerDto {
   @IsString()
   @ApiModelProperty()
-  public readonly kamerNummer: string;
+  public readonly kamerNaam: string;
   @IsString()
   @ApiModelProperty()
   public readonly kamerType: string;
@@ -23,7 +23,7 @@ export class CreateKamerDto {
  // public readonly status: string;
  kamerEntity() {
   return new KamerEntity(
-    this.kamerNummer,
+    this.kamerNaam,
     this.kamerType,
     this.kamerLigging,
     this.aantalPersonen,

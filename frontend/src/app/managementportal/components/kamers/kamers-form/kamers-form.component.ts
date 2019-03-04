@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { Kamer } from '../kamer';
+import { Kamer } from '../../../../models/kamer';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 
@@ -12,8 +12,9 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 export class ManagementPortalKamersFormComponent implements OnInit {
 
   kamerSoort = ['Budget', 'Standaard','Lux'];
-  kamerUitzicht = ['Zeezicht', 'Bergzicht','Tuinzicht'];
- @Input() model = new Kamer(0, this.kamerSoort[0], this.kamerUitzicht[0], 3, 50, "free");
+  kamerUitzicht = ['Meerzicht', 'Bergzicht','Tuinzicht'];
+ @Input() model = new Kamer("0", this.kamerSoort[0], this.kamerUitzicht[0], 3, 50,);
+  action = "";
 // @Output() roomSubmitted: EventEmitter<Kamer> = new EventEmitter<Kamer>();
   submitted = false;
 
@@ -21,14 +22,14 @@ export class ManagementPortalKamersFormComponent implements OnInit {
 
   onSubmit() { this.submitted = true;
     this.activeModal.close(this.model);
-    location.reload();
+   // location.reload();
 //   this.roomSubmitted.emit(this.model);
 // this.router.navigate(['kamer-details']);
   }
 
   showFormControls(form: any) {
-    return form && form.controls['KamerNummer'] &&
-    form.controls['KamerNummer'].value;
+    return form && form.controls['KamerNaam'] &&
+    form.controls['KamerNaam'].value;
   }
 
   constructor(public activeModal: NgbActiveModal, private router : Router) {

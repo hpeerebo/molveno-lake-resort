@@ -8,7 +8,7 @@ import { TafelService } from './services/tafel/tafel.service';
 import { IngredientService } from './services/ingredient/ingredient.service';
 import { GerechtService } from './services/gerecht/gerecht.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { KamersModule } from './modules/kamers.module';
+import { KamersModule } from './Kamers/modules/kamers.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot(), KamersModule ],

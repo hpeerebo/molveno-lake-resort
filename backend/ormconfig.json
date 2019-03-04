@@ -6,6 +6,5 @@
   "password": "root",
   "database": "molveno",
   "entities": ["src/**/**.entity{.ts,.js}"],
-  "synchronize": true,
-  "logging": true
+  "synchronize": true
 }

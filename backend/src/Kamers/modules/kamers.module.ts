@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { KamerService } from 'src/services/kamer/kamer.service';
-import { KamersController } from 'src/controllers/kamers/kamers.controller';
-import { KamerEntity } from 'src/models/entities/kamer.entity';
+import { KamerService } from 'src/Kamers/services/kamer.service';
+import { KamersController } from 'src/Kamers/controllers/kamers.controller';
+import { KamerEntity } from '../models/entities/kamer.entity';
+
 
 @Module({
     imports: [TypeOrmModule.forFeature([KamerEntity])],

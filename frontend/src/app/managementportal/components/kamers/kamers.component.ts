@@ -8,7 +8,7 @@ import {
   QueryList
 } from "@angular/core";
 import { RoomService } from "src/app/services/rooms.service";
-import { Kamer } from "./kamer";
+import { Kamer } from "../../../models/kamer";
 import { Subscription } from "rxjs";
 import { take, tap } from "rxjs/operators";
 import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
@@ -65,7 +65,8 @@ export class ManagementPortalKamersComponent implements OnInit {
 
   deleteRoom(kamer: Kamer) {
     if (this.kamers) {
-      this.kamers = [...this.kamers].filter(item => item !== kamer);
+      this.roomservice.deleteRoom(kamer);
+      //this.kamers = [...this.kamers].filter(item => item !== kamer);
     }
   }
   addRoom(kamer: Kamer) {
@@ -98,32 +99,17 @@ export class ManagementPortalKamersComponent implements OnInit {
   openNewFormModal() {
     const modalRef = this.modalService.open(ManagementPortalKamersFormComponent, {
       size: "lg",
-      ariaLabelledBy: "modal-basic-title"
+      ariaLabelledBy: "modal-basic-title",
     });
+    modalRef.componentInstance.action = "add";
     modalRef.result.then(resultPromise => {
       this.roomservice.saveRoom(new Kamer(
-        resultPromise.kamerNummer,
+        resultPromise.kamerNaam,
         resultPromise.kamerType,
         resultPromise.kamerLigging,
         resultPromise.aantalPersonen,
-        resultPromise.prijs,
-        resultPromise.status
+        resultPromise.prijs
       ));
-   //   this.closeResult = resultPromise;
-   /*
-      if (this.kamers) {
-        this.kamers.push(
-          new Kamer(
-            resultPromise.kamerNummer,
-            resultPromise.kamerType,
-            resultPromise.kamerLigging,
-            resultPromise.aantalPersonen,
-            resultPromise.prijs,
-            resultPromise.status
-          )
-        );
-      }
-    */
     });
   }
   openEditFormModal() {
@@ -132,28 +118,17 @@ export class ManagementPortalKamersComponent implements OnInit {
       ariaLabelledBy: "modal-basic-title"
     });
     modalRef.componentInstance.model = this.selectedKamer;
+    modalRef.componentInstance.action = "edit";
 
     modalRef.result.then(resultPromise => {
-      //this.closeResult = resultPromise;
-      this.roomservice.saveRoom(new Kamer(
-        resultPromise.kamerNummer,
+      this.closeResult = resultPromise;
+      this.roomservice.updateRoom(new Kamer(
+        resultPromise.kamerNaam,
         resultPromise.kamerType,
         resultPromise.kamerLigging,
         resultPromise.aantalPersonen,
-        resultPromise.prijs,
-        resultPromise.status
+        resultPromise.prijs
       ));
-      /*
-      (this.kamers = this.kamers),
-        new Kamer(
-          resultPromise.kamerNummer,
-          resultPromise.kamerType,
-          resultPromise.kamerLigging,
-          resultPromise.aantalPersonen,
-          resultPromise.prijs,
-          resultPromise.status
-        );
-        */
     });
 
   }
