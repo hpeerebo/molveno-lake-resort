@@ -4,13 +4,13 @@ import { Tafel } from 'src/models/tafel';
 @Entity()
 export class TafelRepoEntity {
     @PrimaryGeneratedColumn()
-    id: number;
+    public readonly id: number;
 
     @Column({ type: 'varchar', length: 50 })
-    kenmerk: string;
+    public readonly kenmerk: string;
 
     @Column('int')
-    personen: number;
+    public readonly personen: number;
 
     constructor(kenmerk: string, personen: number) {
         this.kenmerk = kenmerk;

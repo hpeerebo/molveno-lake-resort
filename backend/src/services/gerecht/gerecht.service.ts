@@ -1,16 +1,25 @@
 import { Injectable } from '@nestjs/common';
 import { Gerecht } from 'src/models/gerecht';
 import { CreateGerechtDto } from 'src/dto/create-gerecht-dto';
+import { GerechtRepoEntity } from 'src/entities/gerecht.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class GerechtService {
-    private gerechten: Gerecht[] = [];
+    
+    constructor(
+        @InjectRepository(GerechtRepoEntity)
+        private readonly gerechtRepository: Repository<GerechtRepoEntity>,
+    ) { }
 
-    getGerechten(): Gerecht[] {
-        return this.gerechten;
+    async getGerechten(): Promise<Gerecht[]> {
+        const gerechtenEntities = await this.gerechtRepository.find();
+        const gerechten = gerechtenEntities.map(gerechtEntity => gerechtEntity.mapToGerecht());
+        return gerechten;
     }
 
-    createGerecht(body: CreateGerechtDto): void {
-        this.gerechten = [...this.gerechten, new Gerecht(body.naam, body.type, body.subtype, body.prijs)];
+    createGerecht(gerechtDto: CreateGerechtDto): void {
+        this.gerechtRepository.save(gerechtDto.mapToGerechtEntity());
     }
 }

@@ -1,20 +1,27 @@
 import { ApiModelProperty } from '@nestjs/swagger';
-import { IsNumber, IsString } from 'class-validator';
+import { Length, IsEnum, IsPositive } from 'class-validator';
+import { GerechtType } from 'src/enums/gerechttype';
+import { GerechtSubType } from 'src/enums/gerechtsubtype';
+import { GerechtRepoEntity } from 'src/entities/gerecht.entity';
 
 export class CreateGerechtDto {
     @ApiModelProperty()
-    @IsString()
-    public naam: string;
+    @Length(1, 50)
+    public readonly naam: string;
 
     @ApiModelProperty()
-    @IsString()
-    public type: string;
+    @IsEnum(GerechtType, {message: JSON.stringify(GerechtType)})
+    public readonly type: GerechtType;
 
     @ApiModelProperty()
-    @IsString()
-    public subtype: string;
+    @IsEnum(GerechtSubType, {message: JSON.stringify(GerechtSubType)})
+    public readonly subtype: GerechtSubType;
 
     @ApiModelProperty()
-    @IsNumber()
-    public prijs: number;
+    @IsPositive()
+    public readonly prijs: number;
+
+    mapToGerechtEntity(): GerechtRepoEntity {
+        return new GerechtRepoEntity(this.naam, this.type, this.subtype, this.prijs);
+    }
 }

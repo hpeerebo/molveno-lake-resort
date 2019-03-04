@@ -1,16 +1,25 @@
 import { Injectable } from '@nestjs/common';
 import { Ingredient } from 'src/models/ingredient';
 import { CreateIngredientDto } from 'src/dto/create-ingredient-dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { IngredientRepoEntity } from 'src/entities/ingredient.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class IngredientService {
-    private ingredienten: Ingredient[] = [];
 
-    getIngredienten(): Ingredient[] {
-        return this.ingredienten;
+    constructor(
+        @InjectRepository(IngredientRepoEntity)
+        private readonly ingredientRepository: Repository<IngredientRepoEntity>,
+    ) { }
+
+    async getIngredienten(): Promise<Ingredient[]> {
+        const ingredientEntities = await this.ingredientRepository.find();
+        const ingredienten = ingredientEntities.map(ingredientEntity => ingredientEntity.mapToIngredient());
+        return ingredienten;
     }
 
-    createIngredient(body: CreateIngredientDto): void {
-        this.ingredienten = [...this.ingredienten, new Ingredient(body.naam, body.eenheid, body.prijs)];
+    createIngredient(ingredientDto: CreateIngredientDto): void {
+        this.ingredientRepository.save(ingredientDto.mapToIngredientEntity());
     }
 }

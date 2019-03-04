@@ -22,27 +22,27 @@ export class RestaurantController {
     }
 
     @Post('tafels')
-    createTafel(@Body() body: CreateTafelDto): void {
-        this.tafelService.createTafel(body);
+    createTafel(@Body() tafelDto: CreateTafelDto): Promise<{message: string}> {
+        return this.tafelService.createTafel(tafelDto);
     }
 
     @Get('gerechten')
-    getGerechten(): Gerecht[] {
+    getGerechten(): Promise<Gerecht[]> {
         return this.gerechtService.getGerechten();
     }
 
     @Post('gerechten')
-    createGerecht(@Body() body: CreateGerechtDto): void {
-        this.gerechtService.createGerecht(body);
+    createGerecht(@Body() gerechtDto: CreateGerechtDto): void {
+        this.gerechtService.createGerecht(gerechtDto);
     }
 
     @Get('ingredienten')
-    getIngredienten(): Ingredient[] {
+    getIngredienten(): Promise<Ingredient[]> {
         return this.ingredientenService.getIngredienten();
     }
 
     @Post('ingredienten')
-    createIngredient(@Body() body: CreateIngredientDto): void {
-        this.ingredientenService.createIngredient(body);
+    createIngredient(@Body() ingredientDto: CreateIngredientDto): void {
+        this.ingredientenService.createIngredient(ingredientDto);
     }
 }
