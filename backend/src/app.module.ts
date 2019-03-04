@@ -11,6 +11,7 @@ import { IngredientService } from './services/ingredient/ingredient.service';
 import { GerechtService } from './services/gerecht/gerecht.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TafelRepoEntity } from './entities/tafel.entity';
+import { ActiviteitEntity } from './entities/activiteit-entity';
 
 @Module({
   imports: [
@@ -21,10 +22,10 @@ import { TafelRepoEntity } from './entities/tafel.entity';
       username: 'postgres',
       password: 'root',
       database: 'molveno',
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      entities: [__dirname + '/**/*-entity{.ts,.js}', __dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),
-    TypeOrmModule.forFeature([TafelRepoEntity]),
+    TypeOrmModule.forFeature([TafelRepoEntity, ActiviteitEntity]),
   ],
   controllers: [
     AppController,
