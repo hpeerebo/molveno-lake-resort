@@ -36,6 +36,7 @@
         <th>Prijs</th>
         <th></th>
         <th></th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -45,6 +46,9 @@
         <td>{{ kamer.kamerLigging }}</td>
         <td>{{ kamer.aantalPersonen }}</td>
         <td>{{ kamer.prijs | currency: "EUR" }}</td>
+        <td>
+          <i class="fas fa-marker mr-2" placement="top" ngbTooltip="Reserveren" (click)="onSelect(kamer); openEditFormModal()"></i>
+        </td>
         <td style="text-align: right">
           <i class="fas fa-edit mr-2" placement="top" ngbTooltip="Wijzigen" (click)="onSelect(kamer); openEditFormModal()"></i>
           <i class="fas fa-trash-alt mr-2" placement="top" ngbTooltip="Verwijderen" (click)="onSelect(kamer); openSm(deleteModal)"></i>
