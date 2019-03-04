@@ -14,7 +14,7 @@ export class ActiviteitService {
     return this.activiteitRepository.save(activiteit);
   }
 
-  public saveActivitiet(activiteit: ActiviteitEntity): void {
+  public saveActiviteit(activiteit: ActiviteitEntity): void {
     this.activiteitRepository.save([activiteit]);
   }
   async  getActiviteit(): Promise<ActiviteitEntity[]> {

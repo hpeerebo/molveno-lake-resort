@@ -22,9 +22,9 @@ export class ActiviteitenController {
       createActiviteit.thumb,
 
     );
-    return this.activiteitenService.saveActivitiet(activiteit);
+    return this.activiteitenService.saveActiviteit(activiteit);
   }
-  @Get('getactivitiet')
+  @Get('')
   getActiviteit(): Promise<Activiteit[]> {
     return this.activiteitenService.getActiviteit();
   }

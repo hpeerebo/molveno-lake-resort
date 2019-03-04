@@ -4,18 +4,19 @@ import { Activiteit } from "../models/activiteit";
 import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
 
+
 @Injectable({
   providedIn: "root"
 })
 export class ActiviteitenService {
   public readonly api: string =
-    "http://www.mocky.io/v2/5c7678443200008a22f461b2";
+    "http://localhost:4200/api/activiteiten";
 
   constructor(private http: HttpClient) {}
 
-  private static activiteitenResponseToActiviteitMapper( activiteitenResponse: IActiviteitenResponse ): Activiteit[] {
+  private static activiteitenResponseToActiviteitMapper( activiteitenResponse: IActiviteit[] ): Activiteit[] {
     console.log (activiteitenResponse);
-    return activiteitenResponse.activiteiten.map( ActiviteitenService.activiteitToActiviteitMapper );
+    return activiteitenResponse.map( ActiviteitenService.activiteitToActiviteitMapper );
   }
 
   private static activiteitToActiviteitMapper(
@@ -33,19 +34,18 @@ export class ActiviteitenService {
 
   getAllActiviteiten(): Observable<Activiteit[]> {
     return this.http
-      .get<IActiviteitenResponse>(this.api)
+      .get<IActiviteit[]>(this.api)
       .pipe(map(ActiviteitenService.activiteitenResponseToActiviteitMapper));
-  }
+        }
+
 }
 
-interface IActiviteitenResponse {
-  activiteiten: IActiviteit[];
-}
+
 
 interface IActiviteit {
   naam: string;
   beschrijving: string;
-  datum: string;
+  datum: number;
   capaciteit: number;
   prijs: number;
   thumb: string;
