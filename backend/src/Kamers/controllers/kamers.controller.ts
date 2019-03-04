@@ -21,6 +21,6 @@ export class KamersController {
   } 
   @Delete('kamers/:kamernaam')
   public deleteKamer(@Body() createkamerdto: CreateKamerDto): void {
-    this.kamerService.deleteKamer(createkamerdto.kamerNaam);
+   // this.kamerService.deleteKamer(createkamerdto.kamerNaam);
   } 
 }
