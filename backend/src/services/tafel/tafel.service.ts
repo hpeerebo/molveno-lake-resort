@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { Tafel } from 'src/models/tafel';
 import { CreateTafelDto } from 'src/dto/create-tafel-dto';
 import { TafelRepoEntity } from 'src/entities/tafel.entity';
@@ -19,17 +19,12 @@ export class TafelService {
         return tafels;
     }
 
-    async createTafel(tafelDto: CreateTafelDto): Promise<{ message: string }> {
-        const existingTables = await this.tafelRepository.find({ where: { kenmerk: tafelDto.kenmerk } });
-        if (existingTables.length === 0) {
+    async createTafel(tafelDto: CreateTafelDto): Promise<void> {
+        const tafelExists = await this.tafelRepository.find({ where: { kenmerk: tafelDto.kenmerk } });
+        if (!tafelExists) {
             this.tafelRepository.save(tafelDto.mapToTafelEntity());
-            return {
-                message: 'ok',
-            };
         } else {
-            return {
-                message: 'kenmerk bestaat al',
-            };
+            throw new HttpException('Een tafel met dit kenmerk bestaat al', HttpStatus.CONFLICT);
         }
     }
 }
