@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Put, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Put, Delete, Param } from '@nestjs/common';
 import { KamerService } from 'src/Kamers/services/kamer.service';
 import { CreateKamerDto } from 'src/Kamers/dto/create-kamer-dto';
 import { Kamer } from '../models/kamer';
@@ -20,7 +20,7 @@ export class KamersController {
     this.kamerService.updateCreateMovieDTO(createkamerdto);
   } 
   @Delete('kamers/:kamernaam')
-  public deleteKamer(@Body() createkamerdto: CreateKamerDto): void {
-   // this.kamerService.deleteKamer(createkamerdto.kamerNaam);
+  public deleteKamer(@Param('kamernaam') kamerNaam: string): void {
+   this.kamerService.deleteKamer(kamerNaam);
   } 
 }

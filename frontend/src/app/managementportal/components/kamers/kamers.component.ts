@@ -1,12 +1,4 @@
-import {
-  Component,
-  OnInit,
-  Directive,
-  Input,
-  Output,
-  ViewChildren,
-  QueryList
-} from "@angular/core";
+import {Component, OnInit, Directive, Input, Output, ViewChildren, QueryList} from "@angular/core";
 import { RoomService } from "src/app/services/rooms.service";
 import { Kamer } from "../../../models/kamer";
 import { Subscription } from "rxjs";

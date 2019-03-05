@@ -21,9 +21,8 @@ export class KamerService {
         this.kamersepository.update({kamerNaam: createkamerdto.kamerNaam}, { kamerType: createkamerdto.kamerType, 
             kamerLigging: createkamerdto.kamerLigging, aantalPersonen: createkamerdto.aantalPersonen, prijs: createkamerdto.prijs });
      }
-     public deleteKamer(createkamerdto: CreateKamerDto){
-         console.log(createkamerdto.kamerNaam);
-         this.kamersepository.delete(createkamerdto.kamerNaam);
+     public deleteKamer(kamernaam: string){
+         this.kamersepository.delete({kamerNaam: kamernaam});
          //this.kamersepository.query("delete from kamer_entity where KamerNaam = kamer1 ");
      }
 }
