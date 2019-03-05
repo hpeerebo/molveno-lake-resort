@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Kamer } from '../models/kamer';
 import { KamerEntity } from '../models/entities/kamer.entity';
+import {UpdateKamerDto} from "../dto/update-kamer-dto";
 
 @Injectable()
 export class KamerService {
@@ -11,19 +12,17 @@ export class KamerService {
 
     public getKamers(): Promise<Kamer[]>{
         return this.kamersepository.find()
-        .then(kamersEntities => kamersEntities.map(kamerEntity => new Kamer(kamerEntity.kamerNaam, kamerEntity.kamerType, 
-            kamerEntity.kamerLigging, kamerEntity.aantalPersonen, kamerEntity.prijs)));
+        .then(kamersEntities => kamersEntities.map(kamerEntity => kamerEntity.mapToKamers()));
     }
     public saveCreateMovieDTO(createkamerdto: CreateKamerDto) {
         this.kamersepository.save(createkamerdto.kamerEntity());
      }
-     public updateCreateMovieDTO(createkamerdto: CreateKamerDto) {
-        this.kamersepository.update({kamerNaam: createkamerdto.kamerNaam}, { kamerType: createkamerdto.kamerType, 
-            kamerLigging: createkamerdto.kamerLigging, aantalPersonen: createkamerdto.aantalPersonen, prijs: createkamerdto.prijs });
+     public updateCreateMovieDTO(updateKamerDto: UpdateKamerDto) {
+        this.kamersepository.update({kamerNaam: updateKamerDto.kamerNaam}, { kamerType: updateKamerDto.kamerType,
+            kamerLigging: updateKamerDto.kamerLigging, aantalPersonen: updateKamerDto.aantalPersonen, prijs: updateKamerDto.prijs });
      }
      public deleteKamer(kamernaam: string){
          this.kamersepository.delete({kamerNaam: kamernaam});
-         //this.kamersepository.query("delete from kamer_entity where KamerNaam = kamer1 ");
      }
 }
 

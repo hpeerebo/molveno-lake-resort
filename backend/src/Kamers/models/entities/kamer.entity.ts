@@ -9,8 +9,7 @@ export class KamerEntity {
     @Column('varchar') public readonly kamerLigging: string;
     @Column('integer') public readonly aantalPersonen: number;
     @Column('integer') public readonly prijs: number;
-    //@Column('varchar') public readonly status: string;
-    
+
     constructor(kamerNaam: string, kamerType: string, kamerLigging: string, aantalPersonen: number,  prijs: number) {
 		this.kamerNaam = kamerNaam;
 		this.kamerType = kamerType;
@@ -19,7 +18,7 @@ export class KamerEntity {
 		this.prijs = prijs;
 	}
 
-    mapToKamersg(): Kamer {
-        return new Kamer(this.kamerNaam, this.kamerType, this.kamerLigging, this.aantalPersonen , this.prijs);
+    mapToKamers(): Kamer {
+        return new Kamer(this.id, this.kamerNaam, this.kamerType, this.kamerLigging, this.aantalPersonen , this.prijs);
     }
 } 

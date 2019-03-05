@@ -10,10 +10,7 @@ export class KamerreserveringService {
 constructor(@InjectRepository(KamerReserveringEntity) private readonly kamerreserveringepository: Repository<KamerReserveringEntity>,){}
 public getKamers(): Promise<KamerReservering[]>{
     return this.kamerreserveringepository.find()
-    .then(kamerreserveringEntities => kamerreserveringEntities.map(kamerreserveringEntity => new KamerReservering(kamerreserveringEntity.id,
-        kamerreserveringEntity.voornaam, kamerreserveringEntity.achternaam, kamerreserveringEntity.telefoonnummer, kamerreserveringEntity.emailadres,
-        kamerreserveringEntity.identiteitsid, kamerreserveringEntity.postcode, kamerreserveringEntity.straat, kamerreserveringEntity.huisnummer,
-        kamerreserveringEntity.woonplaats, kamerreserveringEntity.land, kamerreserveringEntity.datumvan, kamerreserveringEntity.datumtot, kamerreserveringEntity.kamerid)));
+    .then(kamerreserveringEntities => kamerreserveringEntities.map(kamerreserveringEntities => kamerreserveringEntities.mapToKamersReserving()));
 }
 public saveCreateKamerReserveringDTO(kamerreservering: CreateKamerreserveringDto) {
     this.kamerreserveringepository.save(kamerreservering.kamerReserveringEntity());
