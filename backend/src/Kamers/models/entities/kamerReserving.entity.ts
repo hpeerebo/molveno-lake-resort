@@ -1,4 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, PrimaryColumn } from 'typeorm';
+import {KamerReservering} from "../kamerReservering";
 
 @Entity()
 export class KamerReserveringEntity {
@@ -47,5 +48,9 @@ export class KamerReserveringEntity {
     this.datumvan = datumvan;
     this.datumtot = datumtot;
     this.kamerid = kamerid;
+  }
+
+  mapToKamersReserving(): KamerReservering {
+    return new KamerReservering(this.voornaam, this.achternaam, this.telefoonnummer, this.emailadres , this.identiteitsid, this.postcode, this.straat, this.huisnummer, this.woonplaats, this.land, this.datumvan, this.datumtot, this.kamerid);
   }
 }

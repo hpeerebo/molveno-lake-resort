@@ -1,4 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, PrimaryColumn } from "typeorm";
+import {Kamer} from "../kamer";
 
 @Entity()
 export class KamerEntity {
@@ -17,4 +18,8 @@ export class KamerEntity {
 		this.aantalPersonen = aantalPersonen;
 		this.prijs = prijs;
 	}
+
+    mapToKamersg(): Kamer {
+        return new Kamer(this.kamerNaam, this.kamerType, this.kamerLigging, this.aantalPersonen , this.prijs);
+    }
 } 
