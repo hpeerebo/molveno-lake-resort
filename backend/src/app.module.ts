@@ -13,6 +13,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { TafelRepoEntity } from './entities/tafel.entity';
 import { GerechtRepoEntity } from './entities/gerecht.entity';
 import { IngredientRepoEntity } from './entities/ingredient.entity';
+import { TafelreserveringService } from './services/tafelreservering/tafelreservering.service';
+import { TafelreserveringRepoEntity } from './entities/tafelreservering.entity';
 
 @Module({
   imports: [
@@ -26,7 +28,7 @@ import { IngredientRepoEntity } from './entities/ingredient.entity';
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),
-    TypeOrmModule.forFeature([TafelRepoEntity, GerechtRepoEntity, IngredientRepoEntity]),
+    TypeOrmModule.forFeature([TafelRepoEntity, GerechtRepoEntity, IngredientRepoEntity, TafelreserveringRepoEntity]),
   ],
   controllers: [
     AppController,
@@ -41,6 +43,7 @@ import { IngredientRepoEntity } from './entities/ingredient.entity';
     TafelService,
     IngredientService,
     GerechtService,
+    TafelreserveringService,
   ],
 })
 export class AppModule { }

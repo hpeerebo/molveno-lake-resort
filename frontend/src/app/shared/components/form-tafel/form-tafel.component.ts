@@ -22,7 +22,7 @@ export class FormTafelComponent implements OnInit {
   ngOnInit() {
     if (this.tafel) {
       this.tafelForm.setValue({
-        tafelnummer: this.tafel.nummer,
+        tafelnummer: this.tafel.kenmerk,
         aantalPersonen: this.tafel.personen
       });
     }

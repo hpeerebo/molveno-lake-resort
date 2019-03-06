@@ -7,9 +7,9 @@
 <div class="modal-body">
   <form [formGroup]="tafelForm">
     <div class="form-group">
-      <label>Tafelnummer</label>
+      <label>Kenmerk</label>
       <input
-        type="number"
+        type="text"
         class="form-control"
         formControlName="tafelnummer"
         [class.is-invalid]="tafelnummer?.invalid && tafelnummer?.touched"

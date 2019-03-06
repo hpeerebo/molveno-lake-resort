@@ -8,7 +8,8 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class TafelsService {
-  public readonly api: string = 'http://www.mocky.io/v2/5c6fba953800002c003fc942';
+  //public readonly api: string = 'http://www.mocky.io/v2/5c6fba953800002c003fc942';
+  public readonly api: string = '/api/restaurant/tafels';
 
   constructor(private http: HttpClient) { }
 
@@ -17,7 +18,7 @@ export class TafelsService {
   }
 
   private static tafelToTafelMapper(tafel: ITafel): Tafel {
-    return new Tafel(tafel.nummer, tafel.personen);
+    return new Tafel(tafel.kenmerk, tafel.personen);
   }
 
   getAllTafels(): Observable<Tafel[]> {
@@ -33,6 +34,6 @@ interface ITafelsResponse {
 }
 
 interface ITafel {
-  nummer: number;
+  kenmerk: string;
   personen: number;
 }

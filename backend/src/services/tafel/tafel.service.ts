@@ -19,10 +19,10 @@ export class TafelService {
         return tafels;
     }
 
-    async createTafel(tafelDto: CreateTafelDto): Promise<void> {
-        const tafelExists = await this.tafelRepository.find({ where: { kenmerk: tafelDto.kenmerk } });
+    async createTafel(tafelEntity: TafelRepoEntity): Promise<TafelRepoEntity> {
+        const tafelExists = !!await this.tafelRepository.findOne({ where: { kenmerk: tafelEntity.kenmerk } });
         if (!tafelExists) {
-            this.tafelRepository.save(tafelDto.mapToTafelEntity());
+            return this.tafelRepository.save(tafelEntity);
         } else {
             throw new HttpException('Een tafel met dit kenmerk bestaat al', HttpStatus.CONFLICT);
         }

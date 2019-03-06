@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { Gerecht } from 'src/models/gerecht';
 import { CreateGerechtDto } from 'src/dto/create-gerecht-dto';
 import { GerechtRepoEntity } from 'src/entities/gerecht.entity';
@@ -7,7 +7,7 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class GerechtService {
-    
+
     constructor(
         @InjectRepository(GerechtRepoEntity)
         private readonly gerechtRepository: Repository<GerechtRepoEntity>,
@@ -19,7 +19,12 @@ export class GerechtService {
         return gerechten;
     }
 
-    createGerecht(gerechtDto: CreateGerechtDto): void {
-        this.gerechtRepository.save(gerechtDto.mapToGerechtEntity());
+    async createGerecht(gerechtEntity: GerechtRepoEntity): Promise<GerechtRepoEntity> {
+        const gerechtExists = !!await this.gerechtRepository.findOne({ where: { naam: gerechtEntity.naam } });
+        if (!gerechtExists) {
+            return this.gerechtRepository.save(gerechtEntity);
+        } else {
+            throw new HttpException('Een gerecht met deze naam bestaat al', HttpStatus.CONFLICT);
+        }
     }
 }

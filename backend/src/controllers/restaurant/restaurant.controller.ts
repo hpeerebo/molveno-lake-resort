@@ -9,44 +9,69 @@ import { CreateGerechtDto } from 'src/dto/create-gerecht-dto';
 import { Ingredient } from 'src/models/ingredient';
 import { CreateIngredientDto } from 'src/dto/create-ingredient-dto';
 import { IngredientService } from 'src/services/ingredient/ingredient.service';
+import { Tafelreservering } from 'src/models/tafelreservering';
+import { TafelreserveringService } from 'src/services/tafelreservering/tafelreservering.service';
+import { CreateTafelreserveringDto } from 'src/dto/create-tafelreservering-dto';
 
 @ApiUseTags('restaurant')
 @Controller('restaurant')
 export class RestaurantController {
 
-    constructor(private tafelService: TafelService, private gerechtService: GerechtService, private ingredientenService: IngredientService) { }
+    constructor(
+        private tafelService: TafelService,
+        private gerechtService: GerechtService,
+        private ingredientenService: IngredientService,
+        private tafelreserveringService: TafelreserveringService,
+    ) { }
 
     @Get('tafels')
     @ApiOperation({ title: 'Haal een lijst op van alle tafels' })
-    getTafels(): Promise<Tafel[]>  {
-        return this.tafelService.getTafels();
+    async getTafels(): Promise<{ tafels: Tafel[] }> {
+        const tafels = await this.tafelService.getTafels();
+        return {tafels};
     }
 
     @Post('tafels')
     @ApiOperation({ title: 'Voeg een nieuwe tafel toe' })
     @ApiResponse({ status: 201, description: 'De tafel is succesvol aangemaakt' })
     @ApiResponse({ status: 409, description: 'Een tafel met dit kenmerk bestaat al' })
-    createTafel(@Body() tafelDto: CreateTafelDto): Promise<void> {
-        return this.tafelService.createTafel(tafelDto);
+    async createTafel(@Body() tafelDto: CreateTafelDto): Promise<Tafel> {
+        const tafelEntity = await this.tafelService.createTafel(tafelDto.mapToTafelEntity());
+        return tafelEntity.mapToTafel();
     }
 
     @Get('gerechten')
-    getGerechten(): Promise<Gerecht[]> {
-        return this.gerechtService.getGerechten();
+    async getGerechten(): Promise<{ gerechten: Gerecht[] }> {
+        const gerechten = await this.gerechtService.getGerechten();
+        return {gerechten};
     }
 
     @Post('gerechten')
-    createGerecht(@Body() gerechtDto: CreateGerechtDto): void {
-        this.gerechtService.createGerecht(gerechtDto);
+    async createGerecht(@Body() gerechtDto: CreateGerechtDto): Promise<Gerecht> {
+        const gerechtEntity = await this.gerechtService.createGerecht(gerechtDto.mapToGerechtEntity());
+        return gerechtEntity.mapToGerecht();
     }
 
     @Get('ingredienten')
-    getIngredienten(): Promise<Ingredient[]> {
-        return this.ingredientenService.getIngredienten();
+    async getIngredienten(): Promise<{ ingredienten: Ingredient[] }> {
+        const ingredienten = await this.ingredientenService.getIngredienten();
+        return {ingredienten};
     }
 
     @Post('ingredienten')
-    createIngredient(@Body() ingredientDto: CreateIngredientDto): void {
-        this.ingredientenService.createIngredient(ingredientDto);
+    async createIngredient(@Body() ingredientDto: CreateIngredientDto): Promise<Ingredient> {
+        const ingredientEntity = await this.ingredientenService.createIngredient(ingredientDto.mapToIngredientEntity());
+        return ingredientEntity.mapToIngredient();
+    }
+
+    @Get('reserveringen')
+    getReserveringen(): Promise<Tafelreservering[]> {
+        return this.tafelreserveringService.getReserveringen();
+    }
+
+    @Post('reserveringen')
+    async createReservering(@Body() tafelreserveringDto: CreateTafelreserveringDto): Promise<Tafelreservering> {
+        const reserveringEntity = await this.tafelreserveringService.createReservering(tafelreserveringDto.mapToTafelreserveringEntity());
+        return reserveringEntity.mapToTafelreservering();
     }
 }

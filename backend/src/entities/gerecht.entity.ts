@@ -3,12 +3,12 @@ import { GerechtType } from 'src/enums/gerechttype';
 import { GerechtSubType } from 'src/enums/gerechtsubtype';
 import { Gerecht } from 'src/models/gerecht';
 
-@Entity()
+@Entity('gerecht')
 export class GerechtRepoEntity {
     @PrimaryGeneratedColumn()
     public readonly id: number;
 
-    @Column({ type: 'varchar', length: 50 })
+    @Column({ type: 'varchar', length: 50, unique: true })
     public readonly naam: string;
 
     @Column({ type: 'varchar', length: 20 })
@@ -17,7 +17,7 @@ export class GerechtRepoEntity {
     @Column({ type: 'varchar', length: 20 })
     public readonly subtype: GerechtSubType;
 
-    @Column('money')
+    @Column('numeric')
     public readonly prijs: number;
 
     constructor(

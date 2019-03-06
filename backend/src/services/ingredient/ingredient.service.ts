@@ -1,6 +1,5 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { Ingredient } from 'src/models/ingredient';
-import { CreateIngredientDto } from 'src/dto/create-ingredient-dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { IngredientRepoEntity } from 'src/entities/ingredient.entity';
 import { Repository } from 'typeorm';
@@ -19,7 +18,12 @@ export class IngredientService {
         return ingredienten;
     }
 
-    createIngredient(ingredientDto: CreateIngredientDto): void {
-        this.ingredientRepository.save(ingredientDto.mapToIngredientEntity());
+    async createIngredient(ingredientEntity: IngredientRepoEntity): Promise<IngredientRepoEntity> {
+        const ingredientExists = !!await this.ingredientRepository.findOne({ where: { naam: ingredientEntity.naam } });
+        if (!ingredientExists) {
+            return this.ingredientRepository.save(ingredientEntity);
+        } else {
+            throw new HttpException('Een ingredient met deze naam bestaat al', HttpStatus.CONFLICT);
+        }
     }
 }
