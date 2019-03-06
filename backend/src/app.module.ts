@@ -12,6 +12,9 @@ import { GerechtService } from './services/gerecht/gerecht.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TafelRepoEntity } from './entities/tafel.entity';
 import { ActiviteitEntity } from './entities/activiteit-entity';
+import { ActiviteitenResController } from './controllers/activiteiten-res/activiteiten-res.controller';
+import { ActiviteitResService } from './services/activiteit-res/activiteit-res.service';
+import { ActiviteitResEntity } from './entities/activiteit-res-entity';
 
 @Module({
   imports: [
@@ -25,17 +28,19 @@ import { ActiviteitEntity } from './entities/activiteit-entity';
       entities: [__dirname + '/**/*-entity{.ts,.js}', __dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),
-    TypeOrmModule.forFeature([TafelRepoEntity, ActiviteitEntity]),
+    TypeOrmModule.forFeature([TafelRepoEntity, ActiviteitEntity, ActiviteitResEntity]),
   ],
   controllers: [
     AppController,
     ActiviteitenController,
+    ActiviteitenResController,
     KamersController,
     RestaurantController,
   ],
   providers: [
     AppService,
     ActiviteitService,
+    ActiviteitResService,
     KamerService,
     TafelService,
     IngredientService,
