@@ -35,6 +35,7 @@ export class ActiviteitenResService {
       .pipe(map(ActiviteitenResService.activiteitenResponseToActiviteitMapper));
         }
 
+
 }
 
 interface IActiviteitres {
