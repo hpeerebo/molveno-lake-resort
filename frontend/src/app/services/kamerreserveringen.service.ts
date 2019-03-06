@@ -21,6 +21,9 @@ export class KamerreserveringenService {
       kamerreservering.woonplaats, kamerreservering.land, kamerreservering.datumvan, kamerreservering.datumtot, kamerreservering.kamernaam))),
      )
   }
+  saveKamerReservering(kamerreservering: KamerReservering){
+    this.http.post(`${KamerreserveringenService.api}`, kamerreservering);
+  }
 }
 
 export interface IKamerReservering {

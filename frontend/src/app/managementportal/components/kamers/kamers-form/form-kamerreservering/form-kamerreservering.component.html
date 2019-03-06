@@ -26,7 +26,11 @@
       <input type="text" class="form-control" formControlName="emailadres" [class.is-invalid]="kamerreserveringForm.controls.emailadres.invalid && kamerreserveringForm.controls.emailadres.touched" ngbAutofocus />
       <small class="text-danger" [class.d-none]="kamerreserveringForm.controls.emailadres.valid || kamerreserveringForm.controls.emailadres.untouched">Vereist</small>
     </div>
-
+    <div class="form-group">
+        <label>Indentiteit</label>
+        <input type="text" class="form-control" formControlName="identiteitsid" [class.is-invalid]="kamerreserveringForm.controls.identiteitsid.invalid && kamerreserveringForm.controls.identiteitsid.touched" ngbAutofocus />
+        <small class="text-danger" [class.d-none]="kamerreserveringForm.controls.identiteitsid.valid || kamerreserveringForm.controls.identiteitsid.untouched">Vereist</small>
+      </div>
     <div class="form-group">
       <label>Straat</label>
       <input type="text" class="form-control" formControlName="straat" [class.is-invalid]="kamerreserveringForm.controls.straat.invalid && kamerreserveringForm.controls.straat.touched" ngbAutofocus />
@@ -64,7 +68,9 @@
     </div>
     <div class="form-group">
       <label>Kamernaam</label>
-      <input readonly type="text" class="form-control" value="{{kamernaam}}" formControlName="kamernaam" />
+      <input type="text" class="form-control" value="{{kamernaam}}" formControlName="kamernaam" [class.is-invalid]="kamerreserveringForm.controls.kamernaam.invalid && kamerreserveringForm.controls.kamernaam.touched" ngbAutofocus />
+      <small class="text-danger" [class.d-none]="kamerreserveringForm.controls.kamernaam.valid || kamerreserveringForm.controls.kamernaam.untouched">Vereist</small>
+      <!--input readonly type="text" class="form-control" value="{{kamernaam}}" formControlName="kamernaam" /-->
 
     </div>
   </form>

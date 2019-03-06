@@ -13,6 +13,7 @@ public getKamerReserveringen(): Promise<KamerReservering[]>{
     .then(kamerreserveringEntities => kamerreserveringEntities.map(kamerreserveringEntities => kamerreserveringEntities.mapToKamersReserving()));
 }
 public saveCreateKamerReserveringDTO(kamerreservering: CreateKamerreserveringDto) {
+    console.log('kamerreservering: '+ kamerreservering);
     this.kamerreserveringepository.save(kamerreservering.kamerReserveringEntity());
  }
 }

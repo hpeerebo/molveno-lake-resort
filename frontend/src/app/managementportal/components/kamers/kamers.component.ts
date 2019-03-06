@@ -7,6 +7,7 @@ import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
 import { ManagementPortalKamersFormComponent } from "./kamers-form/kamers-form.component";
 import { KamerReservering } from 'src/app/models/kamerreservering';
 import { FormKamerreserveringComponent } from './kamers-form/form-kamerreservering/form-kamerreservering.component';
+import { KamerreserveringenService } from 'src/app/services/kamerreserveringen.service';
 
 @Component({
   selector: "app-kamers",
@@ -24,6 +25,7 @@ export class ManagementPortalKamersComponent implements OnInit {
   private subscriptions: Subscription = new Subscription();
   constructor(
     private roomservice: RoomService,
+    private kamerreserveringservice: KamerreserveringenService,
     private modalService: NgbModal
   ) {}
   ngOnInit() {
@@ -140,18 +142,30 @@ export class ManagementPortalKamersComponent implements OnInit {
     console.log(room);
   }
   openFormKamerReserveringModal(kamernaam: string){
-    const modal = this.modalService.open(FormKamerreserveringComponent);
+    const modalKamerReservering = this.modalService.open(FormKamerreserveringComponent);
 
      if (kamernaam) {
-      modal.componentInstance.kamernaam = kamernaam;
+      modalKamerReservering.componentInstance.kamernaam = kamernaam;
     }
-
-    modal.result
-      .then(result => {
-        console.log(result);
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    console.log ('result : ' + modalKamerReservering.result)
+    modalKamerReservering.result.then(resultPromise => {
+      this.closeResult = resultPromise;
+      this.kamerreserveringservice.saveKamerReservering(new KamerReservering(
+        resultPromise.id,
+        resultPromise.voornaam,
+        resultPromise.achternaam,
+        resultPromise.telefoonnummer,
+        resultPromise.emailadres,
+        resultPromise.identiteitsid,
+        resultPromise.postcode,
+        resultPromise.straat,
+        resultPromise.huisnummer,
+        resultPromise.woonplaats,
+        resultPromise.land,
+        resultPromise.datumvan,
+        resultPromise.datumtot,
+        kamernaam,
+      ));
+    });
   }
 }

@@ -12,7 +12,7 @@ import { KamerReserveringFormGroup } from './kamerreserveringformgroup';
 export class FormKamerreserveringComponent implements OnInit {
   kamerreservering: KamerReservering | undefined = undefined;
   kamernaam: string = "";
-
+  submitted = false;
   public kamerreserveringForm = new KamerReserveringFormGroup();
 
   constructor(public activeModal: NgbActiveModal, private formBuilder: FormBuilder) {}
@@ -39,5 +39,6 @@ export class FormKamerreserveringComponent implements OnInit {
   }
   submitForm() {
     this.activeModal.close(this.kamerreserveringForm.value);
+    console.log('onsubmit' + this.kamerreserveringForm.controls.voornaam)
   }
- }
+}
