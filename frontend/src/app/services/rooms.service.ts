@@ -15,12 +15,11 @@ import { Kamer } from "../models/kamer";
   providedIn: "root"
 })
 export class RoomService {
-  private static api = `/api/kamers/`;
+  private static api = `/api/kamers`;
   constructor(private http: HttpClient) {}
 
   getRoom(): Observable<Kamer[]> {
     const headers = new HttpHeaders({});
-   // return this.http.get<KamerResponse>("http://www.mocky.io/v2/5c65473a3300005c11b99c33", {headers: headers})
    return this.http.get<KamerDetails>(`${RoomService.api}`, {headers: headers})
     .pipe(
      map((data: any) => data.map((kamer: Kamer) =>new Kamer(kamer.kamerNaam, kamer.kamerType, kamer.kamerLigging, kamer.aantalPersonen, kamer.prijs))),
@@ -37,7 +36,7 @@ export class RoomService {
   }
   deleteRoom(room: Kamer){
     //this.http.delete("/api/kamers/", {params:{kamernaam: room.kamerNaam}}).subscribe();
-    this.http.delete(`${RoomService.api}${room.kamerNaam}`).subscribe();
+    this.http.delete(`${RoomService.api}/${room.kamerNaam}`).subscribe();
     location.reload();
   }
 }

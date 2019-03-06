@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { KamerReservering } from '../models/kamerreservering';
-import { map } from 'rxjs/operators';
+import {map, take} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -22,8 +22,13 @@ export class KamerreserveringenService {
      )
   }
   saveKamerReservering(kamerreservering: KamerReservering){
-    this.http.post(`${KamerreserveringenService.api}`, kamerreservering);
+    console.log(kamerreservering);
+    this.http.post('/api/kamerreservering', kamerreservering)
+      .pipe(
+        take(1)
+      ).subscribe()
   }
+
 }
 
 export interface IKamerReservering {

@@ -1,13 +1,13 @@
-import {Component, OnInit, Directive, Input, Output, ViewChildren, QueryList} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import { RoomService } from "src/app/services/rooms.service";
 import { Kamer } from "../../../models/kamer";
 import { Subscription } from "rxjs";
 import { take, tap } from "rxjs/operators";
 import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
 import { ManagementPortalKamersFormComponent } from "./kamers-form/kamers-form.component";
-import { KamerReservering } from 'src/app/models/kamerreservering';
 import { FormKamerreserveringComponent } from './kamers-form/form-kamerreservering/form-kamerreservering.component';
 import { KamerreserveringenService } from 'src/app/services/kamerreserveringen.service';
+import {KamerReservering} from "../../../models/kamerreservering";
 
 @Component({
   selector: "app-kamers",
@@ -45,19 +45,6 @@ export class ManagementPortalKamersComponent implements OnInit {
   onSelect(kamer: Kamer): void {
     this.selectedKamer = kamer;
   }
-  showReservedRooms() {
-    // this.kamers = [...this.kamers].filter(item => item.status==="reserved");
-    this.show = "reserved";
-  }
-  showFreeRooms() {
-    this.show = "free";
-  }
-  showAllRooms() {
-    this.show = "all";
-  }
-  showBookedRooms() {
-    this.show = "booked";
-  }
 
   deleteRoom(kamer: Kamer) {
     if (this.kamers) {
@@ -65,9 +52,7 @@ export class ManagementPortalKamersComponent implements OnInit {
       //this.kamers = [...this.kamers].filter(item => item !== kamer);
     }
   }
-  addRoom(kamer: Kamer) {
-    //let lengte = this.kamers.push(kamer);
-  }
+
   open(content: NgbModal) {
     this.modalService
       .open(content, { size: "lg", ariaLabelledBy: "modal-basic-title" })
@@ -138,16 +123,14 @@ export class ManagementPortalKamersComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
-  onRoomSubmitted(room: Kamer) {
-    console.log(room);
-  }
+
   openFormKamerReserveringModal(kamernaam: string){
     const modalKamerReservering = this.modalService.open(FormKamerreserveringComponent);
 
      if (kamernaam) {
       modalKamerReservering.componentInstance.kamernaam = kamernaam;
     }
-    console.log ('result : ' + modalKamerReservering.result)
+    modalKamerReservering.componentInstance.action = "add";
     modalKamerReservering.result.then(resultPromise => {
       this.closeResult = resultPromise;
       this.kamerreserveringservice.saveKamerReservering(new KamerReservering(
@@ -164,8 +147,9 @@ export class ManagementPortalKamersComponent implements OnInit {
         resultPromise.land,
         resultPromise.datumvan,
         resultPromise.datumtot,
-        kamernaam,
+        kamernaam
       ));
     });
+
   }
 }

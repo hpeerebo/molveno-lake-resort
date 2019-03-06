@@ -14,10 +14,10 @@ export class KamerService {
         return this.kamersepository.find()
         .then(kamersEntities => kamersEntities.map(kamerEntity => kamerEntity.mapToKamers()));
     }
-    public saveCreateMovieDTO(createkamerdto: CreateKamerDto) {
+    public saveKamer(createkamerdto: CreateKamerDto) {
         this.kamersepository.save(createkamerdto.kamerEntity());
      }
-     public updateCreateMovieDTO(updateKamerDto: UpdateKamerDto) {
+     public updateKamer(updateKamerDto: UpdateKamerDto) {
         this.kamersepository.update({kamerNaam: updateKamerDto.kamerNaam}, { kamerType: updateKamerDto.kamerType,
             kamerLigging: updateKamerDto.kamerLigging, aantalPersonen: updateKamerDto.aantalPersonen, prijs: updateKamerDto.prijs });
      }

@@ -3,7 +3,6 @@ import { KamerreserveringenService } from 'src/app/services/kamerreserveringen.s
 import { take, tap } from 'rxjs/operators';
 import { KamerReservering } from 'src/app/models/kamerreservering';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { FormKamerreserveringComponent } from '../kamers-form/form-kamerreservering/form-kamerreservering.component';
 
 @Component({
   selector: 'app-kamerreservering',

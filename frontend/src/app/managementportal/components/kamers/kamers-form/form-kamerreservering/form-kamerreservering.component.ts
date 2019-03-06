@@ -35,10 +35,25 @@ export class FormKamerreserveringComponent implements OnInit {
         kamernaam: this.kamerreservering.kamernaam
       });
     }
-//    this.kamerreserveringForm.valueChanges.subscribe(console.log);
   }
+
   submitForm() {
-    this.activeModal.close(this.kamerreserveringForm.value);
-    console.log('onsubmit' + this.kamerreserveringForm.controls.voornaam)
+    this.activeModal.close(new KamerReservering(
+      this.kamerreserveringForm.value.id,
+      this.kamerreserveringForm.value.voornaam,
+      this.kamerreserveringForm.value.achternaam,
+      this.kamerreserveringForm.value.telefoonnummer,
+      this.kamerreserveringForm.value.emailadres,
+      this.kamerreserveringForm.value.identiteitsid,
+      this.kamerreserveringForm.value.postcode,
+      this.kamerreserveringForm.value.straat,
+      this.kamerreserveringForm.value.huisnummer,
+      this.kamerreserveringForm.value.woonplaats,
+      this.kamerreserveringForm.value.land,
+      this.kamerreserveringForm.value.datumvan,
+      this.kamerreserveringForm.value.datumtot,
+      this.kamerreserveringForm.value.kamernaam
+    ));
+    location.reload();
   }
 }
