@@ -35,7 +35,7 @@ export class ActiviteitReserveringenComponent {
       });
   }
 
-  verwijderActiviteit(reserveringen: Reservering) {
+  verwijderActiviteitRes(reserveringen: Reservering) {
     this.modalService
       .open(ModalConfirmComponent)
       .result.then(result => {

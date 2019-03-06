@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators';
 })
 export class ActiviteitenResService {
   public readonly api: string =
-    "http://localhost:4200/api/activiteiten/reserveringen";
+    "http://localhost:4200/api/activiteiten-res/";
 
   constructor(private http: HttpClient) {}
 
