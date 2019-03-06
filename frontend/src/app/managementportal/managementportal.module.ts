@@ -45,6 +45,6 @@ import { FormKamerreserveringComponent } from './components/kamers/kamers-form/f
     FormKamerreserveringComponent,
   ],
   imports: [CommonModule, ManagementportalRoutingModule, NgbModule, FormsModule, ReactiveFormsModule],
-  entryComponents: [FormTafelComponent, FormGerechtComponent, FormIngredientComponent, FormActiviteitComponent, ModalConfirmComponent]
+  entryComponents: [FormTafelComponent, FormGerechtComponent, FormIngredientComponent, FormActiviteitComponent, ModalConfirmComponent, FormKamerreserveringComponent]
 })
 export class ManagementportalModule {}

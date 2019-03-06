@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { KamerReservering } from 'src/app/models/kamerreservering';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, Validators } from '@angular/forms';
+import { KamerReserveringFormGroup } from './kamerreserveringformgroup';
 
 @Component({
   selector: 'app-form-kamerreservering',
@@ -10,13 +11,17 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class FormKamerreserveringComponent implements OnInit {
   kamerreservering: KamerReservering | undefined = undefined;
+  kamernaam: string = ""
 
-  public kamerreserveringForm = this.formBuilder.group({
+  public kamerreserveringForm = new KamerReserveringFormGroup();
+
+ /*  public kamerreserveringForm = this.formBuilder.group({
     voornaam: ['', Validators.required],
     achternaam: ['', Validators.required],
     telefoonnummer: ['', Validators.required],
-    emailadres: [0, Validators.min(0)]
-  });
+    emailadres: ['', Validators.required],
+
+  }); */
 
   constructor(public activeModal: NgbActiveModal, private formBuilder: FormBuilder) {}
 
@@ -29,6 +34,7 @@ export class FormKamerreserveringComponent implements OnInit {
         emailadres: this.kamerreservering.emailadres
       });
     }
+//    this.kamerreserveringForm.valueChanges.subscribe(console.log);
   }
   submitForm() {
     this.activeModal.close(this.kamerreserveringForm.value);

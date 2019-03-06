@@ -8,11 +8,11 @@ export class KamerreserveringController {
     constructor(private readonly kamerreserveringservice : KamerreserveringService){}
 
     @Get('')
-    public getKamers(): Promise<KamerReservering[]> {
-      return this.kamerreserveringservice.getKamers();
+    public getKamerReserveringen(): Promise<KamerReservering[]> {
+      return this.kamerreserveringservice.getKamerReserveringen();
     } 
     @Post('')
-  public saveKamer(@Body() CreateKamerreserveringDto: CreateKamerreserveringDto): void {
-   this.kamerreserveringservice.saveCreateKamerReserveringDTO(CreateKamerreserveringDto);
+  public saveKamerReservering(@Body() createKamerreserveringDto: CreateKamerreserveringDto): void {
+   this.kamerreserveringservice.saveCreateKamerReserveringDTO(createKamerreserveringDto);
   }    
 }

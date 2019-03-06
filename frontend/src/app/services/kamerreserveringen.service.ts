@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators';
 })
 export class KamerreserveringenService {
 
-  private static api = `/api/kamerreserveringen/`;
+  private static api = `/api/kamerreservering`;
   constructor(private http: HttpClient) {}
 
   getKamerReserveringen(): Observable<KamerReservering[]> {
@@ -18,7 +18,7 @@ export class KamerreserveringenService {
      map((data: any) => data.map((kamerreservering: KamerReservering) =>new KamerReservering(kamerreservering.id,
       kamerreservering.voornaam, kamerreservering.achternaam, kamerreservering.telefoonnummer, kamerreservering.emailadres,
       kamerreservering.identiteitsid, kamerreservering.postcode, kamerreservering.straat, kamerreservering.huisnummer,
-      kamerreservering.woonplaats, kamerreservering.land, kamerreservering.datumvan, kamerreservering.datumtot, kamerreservering.kamerid))),
+      kamerreservering.woonplaats, kamerreservering.land, kamerreservering.datumvan, kamerreservering.datumtot, kamerreservering.kamernaam))),
      )
   }
 }
@@ -37,5 +37,5 @@ export interface IKamerReservering {
      land: string,
      datumvan: string,
      datumtot: string,
-     kamerid: number
+     kamernaam: string
 }

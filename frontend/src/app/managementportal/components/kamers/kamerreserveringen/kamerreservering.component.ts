@@ -21,22 +21,9 @@ export class KamerreserveringComponent implements OnInit {
     tap(result => (this.kamerreserveringen = result)))
     .subscribe();
   }
-  openFormKamerReserveringModal(kamerreservering?: KamerReservering) {
-    const modal = this.modalService.open(FormKamerreserveringComponent);
 
-    if (kamerreservering) {
-      modal.componentInstance.kamerreservering = kamerreservering;
-    }
-
-    modal.result
-      .then(result => {
-        console.log(result);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }
   ngOnInit() {
+    this.getKamerReserveringen();
   }
 
 }

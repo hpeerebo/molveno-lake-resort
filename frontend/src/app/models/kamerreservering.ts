@@ -13,5 +13,5 @@ export class KamerReservering{
     public land: string,
     public datumvan: string,
     public datumtot: string,
-    public kamerid: number){}
+    public kamernaam: string){}
   }

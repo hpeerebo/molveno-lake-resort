@@ -15,7 +15,7 @@ export class KamerReservering{
         public land: string,
         public datumvan: string,
         public datumtot: string,
-        public kamerid: number){}
+        public kamernaam: string){}
 
     public static fromKamerReservering(kamerReserveringEntity: KamerReserveringEntity): KamerReservering {
         return new KamerReservering(kamerReserveringEntity.id,
@@ -31,6 +31,6 @@ export class KamerReservering{
             kamerReserveringEntity.land,
             kamerReserveringEntity.datumvan,
             kamerReserveringEntity.datumtot,
-            kamerReserveringEntity.kamerid);
+            kamerReserveringEntity.kamernaam);
     }
 }

@@ -5,6 +5,8 @@ import { Subscription } from "rxjs";
 import { take, tap } from "rxjs/operators";
 import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
 import { ManagementPortalKamersFormComponent } from "./kamers-form/kamers-form.component";
+import { KamerReservering } from 'src/app/models/kamerreservering';
+import { FormKamerreserveringComponent } from './kamers-form/form-kamerreservering/form-kamerreservering.component';
 
 @Component({
   selector: "app-kamers",
@@ -136,5 +138,20 @@ export class ManagementPortalKamersComponent implements OnInit {
   }
   onRoomSubmitted(room: Kamer) {
     console.log(room);
+  }
+  openFormKamerReserveringModal(kamernaam: string){
+    const modal = this.modalService.open(FormKamerreserveringComponent);
+
+     if (kamernaam) {
+      modal.componentInstance.kamernaam = kamernaam;
+    }
+
+    modal.result
+      .then(result => {
+        console.log(result);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 }

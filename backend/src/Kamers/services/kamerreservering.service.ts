@@ -8,7 +8,7 @@ import { CreateKamerreserveringDto } from '../dto/create-kamerreservering-dto';
 @Injectable()
 export class KamerreserveringService {
 constructor(@InjectRepository(KamerReserveringEntity) private readonly kamerreserveringepository: Repository<KamerReserveringEntity>,){}
-public getKamers(): Promise<KamerReservering[]>{
+public getKamerReserveringen(): Promise<KamerReservering[]>{
     return this.kamerreserveringepository.find()
     .then(kamerreserveringEntities => kamerreserveringEntities.map(kamerreserveringEntities => kamerreserveringEntities.mapToKamersReserving()));
 }

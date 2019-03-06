@@ -51,9 +51,9 @@ export class CreateKamerreserveringDto {
   @ApiModelProperty()
   public readonly datumtot: string;
 
-  @IsNumber()
+  @IsString()
   @ApiModelProperty()
-  public readonly kamerid: number;
+  public readonly kamernaam: string;
 
   kamerReserveringEntity() {
     return new KamerReserveringEntity(
@@ -69,7 +69,7 @@ export class CreateKamerreserveringDto {
       this.land,
       this.datumvan,
       this.datumtot,
-      this.kamerid,
+      this.kamernaam,
     );
   }
 }

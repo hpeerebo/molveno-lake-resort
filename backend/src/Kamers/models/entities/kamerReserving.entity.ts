@@ -16,7 +16,7 @@ export class KamerReserveringEntity {
   @Column('varchar') public readonly land: string;
   @Column('varchar') public readonly datumvan: string;
   @Column('varchar') public readonly datumtot: string;
-  @Column('integer') public readonly kamerid: number;
+  @Column('varchar') public readonly kamernaam: string;
 
   constructor(
     voornaam: string,
@@ -31,7 +31,7 @@ export class KamerReserveringEntity {
     land: string,
     datumvan: string,
     datumtot: string,
-    kamerid: number,
+    kamernaam: string,
   ) {
     this.voornaam = voornaam;
     this.achternaam = achternaam;
@@ -45,10 +45,10 @@ export class KamerReserveringEntity {
     this.land = land;
     this.datumvan = datumvan;
     this.datumtot = datumtot;
-    this.kamerid = kamerid;
+    this.kamernaam = kamernaam;
   }
 
   mapToKamersReserving(): KamerReservering {
-    return new KamerReservering(this.id, this.voornaam, this.achternaam, this.telefoonnummer, this.emailadres , this.identiteitsid, this.postcode, this.straat, this.huisnummer, this.woonplaats, this.land, this.datumvan, this.datumtot, this.kamerid);
+    return new KamerReservering(this.id, this.voornaam, this.achternaam, this.telefoonnummer, this.emailadres , this.identiteitsid, this.postcode, this.straat, this.huisnummer, this.woonplaats, this.land, this.datumvan, this.datumtot, this.kamernaam);
   }
 }
