@@ -14,7 +14,10 @@ import { ModalConfirmComponent } from 'src/app/shared/components/modal-confirm/m
 export class ManagementPortalTafelsComponent {
   public tafels: Observable<Tafel[]> = this.tafelsService.getAllTafels();
 
-  constructor(private tafelsService: TafelsService, private modalService: NgbModal) {}
+  constructor(
+    private tafelsService: TafelsService,
+    private modalService: NgbModal,
+    ) {}
 
   openFormTafelModal(tafel?: Tafel) {
     const modal = this.modalService.open(FormTafelComponent);
@@ -25,7 +28,7 @@ export class ManagementPortalTafelsComponent {
 
     modal.result
       .then(result => {
-        console.log(result);
+        this.tafelsService.addNewTafel(result);
       })
       .catch(error => {
         console.log(error);

@@ -29,7 +29,10 @@ export class FormTafelComponent implements OnInit {
   }
 
   submitForm() {
-    this.activeModal.close(this.tafelForm.value);
+    this.activeModal.close(new Tafel(
+      this.tafelForm.value.tafelnummer,
+      this.tafelForm.value.aantalPersonen
+    ));
   }
 
   get tafelnummer() {

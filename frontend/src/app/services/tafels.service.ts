@@ -2,13 +2,12 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Tafel } from '../models/tafel';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TafelsService {
-  //public readonly api: string = 'http://www.mocky.io/v2/5c6fba953800002c003fc942';
   public readonly api: string = '/api/restaurant/tafels';
 
   constructor(private http: HttpClient) { }
@@ -26,6 +25,13 @@ export class TafelsService {
       .pipe(
         map(TafelsService.tafelsResponseToTafelMapper)
       );
+  }
+
+  addNewTafel(tafel: Tafel): void {
+    this.http.post(this.api, tafel)
+    .pipe(
+      take(1)
+    ).subscribe()
   }
 }
 
