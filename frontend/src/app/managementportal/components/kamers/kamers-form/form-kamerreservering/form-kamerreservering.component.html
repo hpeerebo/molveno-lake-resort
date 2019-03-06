@@ -1,0 +1,74 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">Kamerreservering</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('cancel')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="kamerreserveringForm">
+    <div class="form-group">
+      <label>Voornaam</label>
+      <input type="text" class="form-control" formControlName="voornaam" [class.is-invalid]="voornaam?.invalid && voornaam?.touched" ngbAutofocus />
+      <small class="text-danger" [class.d-none]="voornaam?.valid || voornaam?.untouched">Vereist</small>
+    </div>
+    <div class="form-group">
+      <label>Achternaam</label>
+      <input type="text" class="form-control" formControlName="achternaam" [class.is-invalid]="achternaam?.invalid && achternaam?.touched" ngbAutofocus />
+      <small class="text-danger" [class.d-none]="achternaam?.valid || achternaam?.untouched">Vereist</small>
+    </div>
+    <div class="form-group">
+      <label>Telefoonnummer</label>
+      <input type="text" class="form-control" formControlName="telefoonnummer" [class.is-invalid]="telefoonnummer?.invalid && telefoonnummer?.touched" ngbAutofocus />
+      <small class="text-danger" [class.d-none]="telefoonnummer?.valid || telefoonnummer?.untouched">Vereist</small>
+    </div>
+    <div class="form-group">
+      <label>E-mailadres</label>
+      <input type="text" class="form-control" formControlName="emailadres" [class.is-invalid]="emailadres?.invalid && emailadres?.touched" ngbAutofocus />
+      <small class="text-danger" [class.d-none]="emailadres?.valid || emailadres?.untouched">Vereist</small>
+    </div>
+
+    <div class="form-group">
+      <label>Straat</label>
+      <input type="text" class="form-control" formControlName="straat" [class.is-invalid]="straat?.invalid && straat?.touched" ngbAutofocus />
+      <small class="text-danger" [class.d-none]="straat?.valid || straat?.untouched">Vereist</small>
+    </div>
+    <div class="form-group">
+      <label>Huisnummer</label>
+      <input type="text" class="form-control" formControlName="huisnummer" [class.is-invalid]="huisnummer?.invalid && huisnummer?.touched" ngbAutofocus />
+      <small class="text-danger" [class.d-none]="huisnummer?.valid || huisnummer?.untouched">Vereist</small>
+    </div>
+    <div class="form-group">
+      <label>Postcode</label>
+      <input type="text" class="form-control" formControlName="postcode" [class.is-invalid]="postcode?.invalid && postcode?.touched" ngbAutofocus />
+      <small class="text-danger" [class.d-none]="postcode?.valid || postcode?.untouched">Vereist</small>
+    </div>
+    <div class="form-group">
+      <label>Woonplaats</label>
+      <input type="text" class="form-control" formControlName="woonplaats" [class.is-invalid]="woonplaats?.invalid && woonplaats?.touched" ngbAutofocus />
+      <small class="text-danger" [class.d-none]="woonplaats?.valid || woonplaats?.untouched">Vereist</small>
+    </div>
+    <div class="form-group">
+      <label>Land</label>
+      <input type="text" class="form-control" formControlName="land" [class.is-invalid]="land?.invalid && land?.touched" ngbAutofocus />
+      <small class="text-danger" [class.d-none]="land?.valid || land?.untouched">Vereist</small>
+    </div>
+    <div class="form-group">
+      <label>Aankomst datum</label>
+      <input type="text" class="form-control" formControlName="datumvan" [class.is-invalid]="datumvan?.invalid && datumvan?.touched" ngbAutofocus />
+      <small class="text-danger" [class.d-none]="datumvan?.valid || datumvan?.untouched">Vereist</small>
+    </div>
+    <div class="form-group">
+      <label>Vertrek datum</label>
+      <input type="text" class="form-control" formControlName="datumtot" [class.is-invalid]="datumtot?.invalid && datumtot?.touched" ngbAutofocus />
+      <small class="text-danger" [class.d-none]="datumtot?.valid || datumtot?.untouched">Vereist</small>
+    </div>
+    <div class="form-group">
+      <label>Kamernummer</label>
+      <input type="text" class="form-control" formControlName="kamerid" [class.is-invalid]="kamerid?.invalid && kamerid?.touched" ngbAutofocus />
+      <small class="text-danger" [class.d-none]="kamerid?.valid || kamerid?.untouched">Vereist</small>
+    </div>
+  </form>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" (click)="submitForm()" [disabled]="kamerreserveringForm.invalid">Save</button>
+  </div>
+</div>

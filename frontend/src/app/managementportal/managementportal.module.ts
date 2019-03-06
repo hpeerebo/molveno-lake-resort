@@ -21,6 +21,7 @@ import { FormIngredientComponent } from '../shared/components/form-ingredient/fo
 import { FormActiviteitComponent } from '../shared/components/form-activiteit/form-activiteit.component'
 import { ModalConfirmComponent } from '../shared/components/modal-confirm/modal-confirm.component';
 import { KamerreserveringComponent } from './components/kamers/kamerreserveringen/kamerreservering.component';
+import { FormKamerreserveringComponent } from './components/kamers/kamers-form/form-kamerreservering/form-kamerreservering.component';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { KamerreserveringComponent } from './components/kamers/kamerreserveringe
     FormActiviteitComponent,
     ModalConfirmComponent,
     KamerreserveringComponent,
+    FormKamerreserveringComponent,
   ],
   imports: [CommonModule, ManagementportalRoutingModule, NgbModule, FormsModule, ReactiveFormsModule],
   entryComponents: [FormTafelComponent, FormGerechtComponent, FormIngredientComponent, FormActiviteitComponent, ModalConfirmComponent]
