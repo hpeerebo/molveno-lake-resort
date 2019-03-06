@@ -11,17 +11,9 @@ import { KamerReserveringFormGroup } from './kamerreserveringformgroup';
 })
 export class FormKamerreserveringComponent implements OnInit {
   kamerreservering: KamerReservering | undefined = undefined;
-  kamernaam: string = ""
+  kamernaam: string = "";
 
   public kamerreserveringForm = new KamerReserveringFormGroup();
-
- /*  public kamerreserveringForm = this.formBuilder.group({
-    voornaam: ['', Validators.required],
-    achternaam: ['', Validators.required],
-    telefoonnummer: ['', Validators.required],
-    emailadres: ['', Validators.required],
-
-  }); */
 
   constructor(public activeModal: NgbActiveModal, private formBuilder: FormBuilder) {}
 
@@ -31,7 +23,16 @@ export class FormKamerreserveringComponent implements OnInit {
         voornaam: this.kamerreservering.voornaam,
         achternaam: this.kamerreservering.achternaam,
         telefoonnummer: this.kamerreservering.telefoonnummer,
-        emailadres: this.kamerreservering.emailadres
+        emailadres: this.kamerreservering.emailadres,
+        identiteitsid: this.kamerreservering.identiteitsid,
+        postcode: this.kamerreservering.postcode,
+        straat: this.kamerreservering.straat,
+        huisnummer: this.kamerreservering.huisnummer,
+        woonplaats: this.kamerreservering.woonplaats,
+        land: this.kamerreservering.land,
+        datumvan: this.kamerreservering.datumvan,
+        datumtot: this.kamerreservering.datumtot,
+        kamernaam: this.kamerreservering.kamernaam
       });
     }
 //    this.kamerreserveringForm.valueChanges.subscribe(console.log);
@@ -39,8 +40,4 @@ export class FormKamerreserveringComponent implements OnInit {
   submitForm() {
     this.activeModal.close(this.kamerreserveringForm.value);
   }
-  get voornaam() {
-    return this.kamerreserveringForm.get('voornaam');
-  }
-
-}
+ }
