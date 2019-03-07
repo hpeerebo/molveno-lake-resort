@@ -28,7 +28,7 @@ export class ActiviteitReserveringenComponent {
 
     modal.result
       .then(result => {
-        console.log(result);
+        this.activiteitenService.saveActiviteitRes(result);
       })
       .catch(error => {
         console.log(error);

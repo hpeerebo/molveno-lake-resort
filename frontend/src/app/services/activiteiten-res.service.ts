@@ -35,6 +35,11 @@ export class ActiviteitenResService {
       .pipe(map(ActiviteitenResService.activiteitenResponseToActiviteitMapper));
         }
 
+  saveActiviteitRes(reservering:Reservering){
+    return this.http
+      .post<IActiviteitres[]>(this.api+'savereservering', reservering)
+      .subscribe()
+  }
 
 }
 
