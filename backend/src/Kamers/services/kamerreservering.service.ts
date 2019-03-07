@@ -16,4 +16,7 @@ public saveCreateKamerReserveringDTO(kamerreservering: CreateKamerreserveringDto
     console.log('kamerreservering: '+ kamerreservering);
     this.kamerreserveringepository.save(kamerreservering.kamerReserveringEntity());
  }
+ public deleteKamerReservering(kamerid: number){
+    this.kamerreserveringepository.delete({id: kamerid});
+ }
 }

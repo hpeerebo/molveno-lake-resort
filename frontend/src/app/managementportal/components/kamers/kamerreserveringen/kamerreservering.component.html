@@ -37,7 +37,7 @@
       <td>{{kamerreservering.land}}</td-->
         <td style="text-align: right">
             <i class="fas fa-edit mr-2" placement="top" ngbTooltip="Toon gegevens" (click)="openFormKamerReserveringDetailsModal(kamerreservering)"></i>
-            <i class="fas fa-trash-alt mr-2" placement="top" ngbTooltip="Verwijderen" ></i>
+            <i class="fas fa-trash-alt mr-2" placement="top" ngbTooltip="Verwijderen" (click)="deleteRoom(kamerreservering)" ></i>
          </td>
     </tr>
   </tbody>

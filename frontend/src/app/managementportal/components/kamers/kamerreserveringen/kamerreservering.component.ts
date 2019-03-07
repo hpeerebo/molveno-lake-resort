@@ -33,5 +33,11 @@ export class KamerreserveringComponent implements OnInit {
       modalKamerReservering.componentInstance.kamerReservering = kamerReservering;
     }
   }
+  deleteRoom(kamerdata: KamerReservering) {
+    if (kamerdata) {
+      this.kamerreserveringservice.deleteKamerReservering(kamerdata);
+      //this.kamers = [...this.kamers].filter(item => item !== kamer);
+    }
+  }
 
 }

@@ -28,6 +28,11 @@ export class KamerreserveringenService {
         take(1)
       ).subscribe()
   }
+  deleteKamerReservering(kamerdata: KamerReservering){
+    console.log(kamerdata);
+    this.http.delete(`${KamerreserveringenService.api}/${kamerdata.id}`).subscribe();
+    location.reload();
+  }
 
 }
 
