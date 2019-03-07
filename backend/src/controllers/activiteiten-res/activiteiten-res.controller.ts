@@ -3,16 +3,17 @@ import { ActiviteitResService } from 'src/services/activiteit-res/activiteit-res
 import { CreateActiviteitResDto } from 'src/dto/create-activiteit-res-dto';
 import { ActiviteitResEntity } from 'src/entities/activiteit-res-entity';
 import { ActiviteitRes } from 'src/models/activiteit-res';
+import { ApiUseTags } from '@nestjs/swagger';
 
 @Controller('activiteiten-res')
+@ApiUseTags('activiteiten')
 export class ActiviteitenResController {
-
-  constructor(
-    private readonly activiteitenResService: ActiviteitResService,
-  ) {}
+  constructor(private readonly activiteitenResService: ActiviteitResService) {}
 
   @Post('savereservering')
-  public saveReservering(@Body() createReservering: CreateActiviteitResDto): void {
+  public saveReservering(
+    @Body() createReservering: CreateActiviteitResDto,
+  ): void {
     const reservering: ActiviteitResEntity = new ActiviteitResEntity(
       createReservering.naamActiviteit,
       createReservering.datum,

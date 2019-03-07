@@ -20,6 +20,19 @@ export class ActiviteitService {
     this.activiteitRepository.save([activiteit]);
   }
 
+  public updateActiviteit(activiteit: CreateActiviteitDto): void {
+    this.activiteitRepository.update(
+      { id: activiteit.id },
+      {
+        beschrijving: activiteit.beschrijving,
+        capaciteit: activiteit.capaciteit,
+        datum: activiteit.datum,
+        prijs: activiteit.prijs,
+        thumb: activiteit.thumb,
+      },
+    );
+  }
+
   async getActiviteit(): Promise<ActiviteitEntity[]> {
     return this.activiteitRepository.find();
   }

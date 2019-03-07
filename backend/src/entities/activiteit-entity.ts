@@ -11,6 +11,7 @@ export class ActiviteitEntity {
   @Column('varchar') public readonly thumb: string;
 
   constructor(
+    id: number,
     naam: string,
     beschrijving: string,
     capaciteit: number,
@@ -18,6 +19,7 @@ export class ActiviteitEntity {
     prijs: number,
     thumb: string,
   ) {
+    this.id = id;
     this.naam = naam;
     this.beschrijving = beschrijving;
     this.capaciteit = capaciteit;
