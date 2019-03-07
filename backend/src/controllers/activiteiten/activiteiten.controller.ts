@@ -29,8 +29,8 @@ export class ActiviteitenController {
     return this.activiteitenService.getActiviteit();
   }
 
-  @Delete()
-  deleteActiviteit() {
-    return this.activiteitenService.deleteActiviteit();
+  @Delete('/:activiteitId')
+    public deleteActiviteit(@Param('activiteitId') activiteitId: number): void{
+      this.activiteitenService.deleteActiviteit(activiteitId);
+    }
   }
-}

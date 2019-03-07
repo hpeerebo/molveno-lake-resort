@@ -23,7 +23,7 @@ export class ActiviteitService {
     return this.activiteitRepository.find();
   }
 
-  public async deleteActiviteit(): Promise<void> {
-    return await this.activiteitRepository.clear();
+  public deleteActiviteit(activiteitId: number){
+    this.activiteitRepository.delete({id: activiteitId});
   }
 }

@@ -1,5 +1,6 @@
 export class Activiteit {
   constructor(
+    public id: number,
     public naam: string,
     public beschrijving: string,
     public datum: number,
