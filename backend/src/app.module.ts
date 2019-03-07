@@ -2,14 +2,15 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ActiviteitenController } from './controllers/activiteiten/activiteiten.controller';
-import { KamersController } from './controllers/kamers/kamers.controller';
+import { KamersController } from './Kamers/controllers/kamers.controller';
+import { KamerService } from './Kamers/services/kamer.service';
 import { RestaurantController } from './controllers/restaurant/restaurant.controller';
 import { ActiviteitService } from './services/activiteit/activiteit.service';
-import { KamerService } from './services/kamer/kamer.service';
 import { TafelService } from './services/tafel/tafel.service';
 import { IngredientService } from './services/ingredient/ingredient.service';
 import { GerechtService } from './services/gerecht/gerecht.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { KamersModule } from './Kamers/modules/kamers.module';
 import { TafelRepoEntity } from './entities/tafel.entity';
 import { ActiviteitEntity } from './entities/activiteit-entity';
 import { ActiviteitenResController } from './controllers/activiteiten-res/activiteiten-res.controller';
@@ -17,7 +18,7 @@ import { ActiviteitResService } from './services/activiteit-res/activiteit-res.s
 import { ActiviteitResEntity } from './entities/activiteit-res-entity';
 
 @Module({
-  imports: [
+  imports: [KamersModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
