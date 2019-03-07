@@ -12,7 +12,7 @@ import { ModalConfirmComponent } from 'src/app/shared/components/modal-confirm/m
   styleUrls: ['./tafels.component.scss']
 })
 export class ManagementPortalTafelsComponent {
-  public tafels: Observable<Tafel[]> = this.tafelsService.getAllTafels();
+  public tafels: Observable<Tafel[] | undefined> = this.tafelsService.getAllTafels();
 
   constructor(
     private tafelsService: TafelsService,

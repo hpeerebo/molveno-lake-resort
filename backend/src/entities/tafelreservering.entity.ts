@@ -6,7 +6,7 @@ export class TafelreserveringRepoEntity {
     @PrimaryGeneratedColumn()
     public readonly id: number;
 
-    @Column({ type: 'timestamp' })
+    @Column({ type: 'varchar', length: 50 })
     public readonly aanvangstijd: string;
 
     @Column('int')

@@ -20,4 +20,8 @@ export class TafelreserveringService {
     async createReservering(tafelreserveringEntity: TafelreserveringRepoEntity): Promise<TafelreserveringRepoEntity> {
         return this.tafelreserveringRepository.save(tafelreserveringEntity);
     }
+
+    async deleteReservering(tafelreserveringEntity: TafelreserveringRepoEntity): Promise<TafelreserveringRepoEntity> {
+        return this.tafelreserveringRepository.delete()
+    }
 }

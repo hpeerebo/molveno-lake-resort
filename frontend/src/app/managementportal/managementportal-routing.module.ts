@@ -9,6 +9,7 @@ import { ManagementPortalIngredientenComponent } from './components/restaurant/i
 import { ManagementPortalGerechtenComponent } from './components/restaurant/gerechten/gerechten.component';
 import { ManagementPortalTafelsComponent } from './components/restaurant/tafels/tafels.component';
 import { ManagementportalComponent } from './managementportal.component';
+import { ReserveringenComponent } from './components/restaurant/reserveringen/reserveringen.component';
 
 
 const routes: Routes = [
@@ -22,6 +23,7 @@ const routes: Routes = [
       { path: 'managementportal/kamers-form', component: ManagementPortalKamersFormComponent },
       { path: 'managementportal/activiteiten', component: ManagementPortalActiviteitenComponent },
       { path: 'managementportal/restaurant/tafels', component: ManagementPortalTafelsComponent },
+      { path: 'managementportal/restaurant/reserveringen', component: ReserveringenComponent },
       { path: 'managementportal/restaurant/ingredienten', component: ManagementPortalIngredientenComponent },
       { path: 'managementportal/restaurant/gerechten', component: ManagementPortalGerechtenComponent }
     ]

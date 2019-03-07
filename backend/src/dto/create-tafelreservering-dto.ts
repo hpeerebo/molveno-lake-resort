@@ -4,7 +4,7 @@ import { TafelreserveringRepoEntity } from 'src/entities/tafelreservering.entity
 
 export class CreateTafelreserveringDto {
     @ApiModelProperty()
-    @IsDateString()
+    @IsString()
     public readonly aanvangstijd: string;
 
     @ApiModelProperty()

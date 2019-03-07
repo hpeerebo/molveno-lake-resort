@@ -20,6 +20,8 @@ import { FormGerechtComponent } from '../shared/components/form-gerecht/form-ger
 import { FormIngredientComponent } from '../shared/components/form-ingredient/form-ingredient.component';
 import { FormActiviteitComponent } from '../shared/components/form-activiteit/form-activiteit.component'
 import { ModalConfirmComponent } from '../shared/components/modal-confirm/modal-confirm.component';
+import { ReserveringenComponent } from './components/restaurant/reserveringen/reserveringen.component';
+import { FormTafelreserveringComponent } from '../shared/components/form-tafelreservering/form-tafelreservering.component';
 
 @NgModule({
   declarations: [
@@ -34,12 +36,14 @@ import { ModalConfirmComponent } from '../shared/components/modal-confirm/modal-
     ManagementPortalGerechtenComponent,
     ManagementPortalTafelsComponent,
     FormTafelComponent,
+    FormTafelreserveringComponent,
     FormGerechtComponent,
     FormIngredientComponent,
     FormActiviteitComponent,
-    ModalConfirmComponent
+    ModalConfirmComponent,
+    ReserveringenComponent
   ],
   imports: [CommonModule, ManagementportalRoutingModule, NgbModule, FormsModule, ReactiveFormsModule],
-  entryComponents: [FormTafelComponent, FormGerechtComponent, FormIngredientComponent, FormActiviteitComponent, ModalConfirmComponent]
+  entryComponents: [FormTafelComponent, FormTafelreserveringComponent, FormGerechtComponent, FormIngredientComponent, FormActiviteitComponent, ModalConfirmComponent]
 })
 export class ManagementportalModule {}

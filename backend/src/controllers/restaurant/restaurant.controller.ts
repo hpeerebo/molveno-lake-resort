@@ -65,8 +65,9 @@ export class RestaurantController {
     }
 
     @Get('reserveringen')
-    getReserveringen(): Promise<Tafelreservering[]> {
-        return this.tafelreserveringService.getReserveringen();
+    async getReserveringen(): Promise<{ reserveringen: Tafelreservering[] }> {
+        const reserveringen = await this.tafelreserveringService.getReserveringen();
+        return {reserveringen};
     }
 
     @Post('reserveringen')

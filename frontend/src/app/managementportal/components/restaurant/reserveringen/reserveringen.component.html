@@ -1,0 +1,29 @@
+<div class="d-flex justify-content-end mt-2">
+  <button class="btn btn-primary" (click)="openFormTafelreserveringModal()">Nieuwe Reservering</button>
+</div>
+
+<div class="table-responsive mt-2">
+<table class="table table-striped table-sm">
+  <thead>
+    <tr>
+      <th>Aanvangstijd</th>
+      <th>Personen</th>
+      <th>Naam</th>
+      <th>Telefoon</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let reservering of (reserveringen | async)">
+      <td>{{ reservering.aanvangstijd }}</td>
+      <td>{{ reservering.personen }}</td>
+      <td>{{ reservering.naam }}</td>
+      <td>{{ reservering.telefoon }}</td>
+      <td class="text-right">
+        <i class="fas fa-edit mr-2" placement="top" ngbTooltip="Wijzigen" (click)="openFormTafelreserveringModal(reservering)"></i>
+        <i class="fas fa-trash-alt mr-2" placement="top" ngbTooltip="Verwijderen" (click)="verwijderReservering(reservering)"></i>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
