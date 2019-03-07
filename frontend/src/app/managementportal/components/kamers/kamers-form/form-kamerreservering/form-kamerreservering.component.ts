@@ -17,6 +17,7 @@ export class FormKamerreserveringComponent implements OnInit {
 
   constructor(public activeModal: NgbActiveModal, private formBuilder: FormBuilder) {}
 
+
   ngOnInit() {
     if (this.kamerreservering) {
       this.kamerreserveringForm.setValue({

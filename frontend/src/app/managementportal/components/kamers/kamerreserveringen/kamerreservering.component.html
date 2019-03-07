@@ -7,15 +7,17 @@
       <th>Achternaam</th>
       <th>Telefoon</th>
       <th>E-mail</th>
-      <th>Identiteit</th>
+      <th>Aankomst</th>
+      <th>Vertrek</th>
+      <th>Kamer</th>
+      <th></th>
+      <!--th>Identiteit</th>
       <th>Postcode</th>
       <th>Straat</th>
       <th>Huisnummer</th>
       <th>Woonplaats</th>
-      <th>Land</th>
-      <th>Aankomst</th>
-      <th>Vertrek</th>
-      <th>Kamer</th>
+      <th>Land</th-->
+
     </tr>
   </thead>
   <tbody>
@@ -24,15 +26,19 @@
       <td>{{kamerreservering.achternaam}}</td>
       <td>{{kamerreservering.telefoonnummer}}</td>
       <td>{{kamerreservering.emailadres}}</td>
-      <td>{{kamerreservering.identiteitsid}}</td>
+      <td>{{kamerreservering.datumvan}}</td>
+      <td>{{kamerreservering.datumtot}} </td>
+      <td>{{kamerreservering.kamernaam}}</td>
+      <!--td>{{kamerreservering.identiteitsid}}</td>
       <td>{{kamerreservering.postcode}}</td>
       <td>{{kamerreservering.straat}} </td>
       <td>{{kamerreservering.huisnummer}}</td>
       <td>{{kamerreservering.woonplaats}}</td>
-      <td>{{kamerreservering.land}}</td>
-      <td>{{kamerreservering.datumvan}}</td>
-      <td>{{kamerreservering.datumtot}} </td>
-      <td>{{kamerreservering.kamernaam}}</td>
+      <td>{{kamerreservering.land}}</td-->
+        <td style="text-align: right">
+            <i class="fas fa-edit mr-2" placement="top" ngbTooltip="Toon gegevens" (click)="openKamerReserveringDetails(kamerreservering)"></i>
+            <i class="fas fa-trash-alt mr-2" placement="top" ngbTooltip="Verwijderen" ></i>
+         </td>
     </tr>
   </tbody>
 </table>
