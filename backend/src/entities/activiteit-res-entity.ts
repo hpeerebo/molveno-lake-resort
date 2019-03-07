@@ -6,7 +6,7 @@ export class ActiviteitResEntity {
   @Column('varchar') public readonly naamActiviteit: string;
   @Column('integer') public readonly datum: number;
   @Column('varchar') public readonly emailGast: string;
-  @Column('varchar') public readonly aantalPersonen: number;
+  @Column('integer') public readonly aantalPersonen: number;
 
   constructor(
     naamActiviteit: string,

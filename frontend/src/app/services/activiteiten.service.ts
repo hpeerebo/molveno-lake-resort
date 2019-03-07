@@ -10,7 +10,7 @@ import { map } from "rxjs/operators";
 })
 export class ActiviteitenService {
   public readonly api: string =
-    "http://localhost:4200/api/activiteiten";
+    "http://localhost:4200/api/activiteiten/";
 
   constructor(private http: HttpClient) {}
 
@@ -37,6 +37,12 @@ export class ActiviteitenService {
       .get<IActiviteit[]>(this.api)
       .pipe(map(ActiviteitenService.activiteitenResponseToActiviteitMapper));
         }
+
+  saveActiviteit(activiteit:Activiteit){
+    return this.http
+    .post<IActiviteit[]>(this.api+'saveactiviteit', activiteit)
+    .subscribe()
+  }
 
 }
 

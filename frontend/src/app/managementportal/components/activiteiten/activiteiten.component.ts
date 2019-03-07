@@ -29,9 +29,9 @@ export class ManagementPortalActiviteitenComponent {
     }
 
     modal.result
-      .then(result => {
-        console.log(result);
-      })
+    .then(result => {
+      this.activiteitenService.saveActiviteit(result);
+    })
       .catch(error => {
         console.log(error);
       });

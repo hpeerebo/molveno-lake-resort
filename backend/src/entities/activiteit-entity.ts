@@ -5,9 +5,9 @@ export class ActiviteitEntity {
   @PrimaryGeneratedColumn() public readonly id: number;
   @Column('varchar') public readonly naam: string;
   @Column('varchar') public readonly beschrijving: string;
-  @Column('varchar') public readonly capaciteit: number;
+  @Column('integer') public readonly capaciteit: number;
   @Column('integer') public readonly datum: number;
-  @Column('varchar') public readonly prijs: number;
+  @Column('integer') public readonly prijs: number;
   @Column('varchar') public readonly thumb: string;
 
   constructor(
