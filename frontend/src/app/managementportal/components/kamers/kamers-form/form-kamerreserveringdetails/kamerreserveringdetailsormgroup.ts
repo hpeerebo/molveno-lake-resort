@@ -1,6 +1,6 @@
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-export class KamerReserveringFormGroup extends FormGroup{
+export class Kamerreserveringdetailsormgroup extends FormGroup{
   public static controls = {
     voornaam: new FormControl('', Validators.required),
     achternaam: new FormControl('', Validators.required),
@@ -17,7 +17,7 @@ export class KamerReserveringFormGroup extends FormGroup{
     kamernaam: new FormControl(undefined),
   };
   constructor(){
-    super(KamerReserveringFormGroup.controls);
+    super(Kamerreserveringdetailsormgroup.controls);
   }
 
 }

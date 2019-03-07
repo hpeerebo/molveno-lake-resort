@@ -52,13 +52,12 @@
     <div class="modal-body">
       <form>
         <div class="form-group">
-          <P>Kamernummer {{selectedKamer?.kamerNaam}} wordt verwijderd.</P>
-          <h3>Weet je het zeker?</h3>
+          <P>Uw staat op het punt om kamer <i>{{selectedKamer?.kamerNaam}}</i> te verwijderen. Weet u dit zeker?</P>
         </div>
       </form>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-danger" (click)="deleteRoom(selectedKamer); modal.close('Save click')">Ja</button>
+      <button type="button" class="btn btn btn-success" (click)="deleteRoom(selectedKamer); modal.close('Save click')">Ja</button>
       <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Nee</button>
     </div>
   </ng-template>

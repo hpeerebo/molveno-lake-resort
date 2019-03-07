@@ -1,8 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { KamerReservering } from 'src/app/models/kamerreservering';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, Validators } from '@angular/forms';
 import { KamerReserveringFormGroup } from './kamerreserveringformgroup';
+import {FormKamerreserveringdetailsComponent} from "../form-kamerreserveringdetails/form-kamerreserveringdetails.component";
 
 @Component({
   selector: 'app-form-kamerreservering',
@@ -15,7 +16,8 @@ export class FormKamerreserveringComponent implements OnInit {
   submitted = false;
   public kamerreserveringForm = new KamerReserveringFormGroup();
 
-  constructor(public activeModal: NgbActiveModal, private formBuilder: FormBuilder) {}
+  constructor(public activeModal: NgbActiveModal, private formBuilder: FormBuilder,  private modalService: NgbModal) {}
+
 
   ngOnInit() {
     if (this.kamerreservering) {
@@ -56,4 +58,5 @@ export class FormKamerreserveringComponent implements OnInit {
     ));
     location.reload();
   }
+
 }

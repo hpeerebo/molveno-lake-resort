@@ -3,6 +3,8 @@ import { KamerreserveringenService } from 'src/app/services/kamerreserveringen.s
 import { take, tap } from 'rxjs/operators';
 import { KamerReservering } from 'src/app/models/kamerreservering';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
+import {FormKamerreserveringdetailsComponent} from "../kamers-form/form-kamerreserveringdetails/form-kamerreserveringdetails.component";
 
 @Component({
   selector: 'app-kamerreservering',
@@ -11,7 +13,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class KamerreserveringComponent implements OnInit {
   kamerreserveringen: KamerReservering[] | undefined = [];
-  constructor(private readonly kamerreserveringservice: KamerreserveringenService, private readonly modalService: NgbModal) { }
+  constructor(private readonly kamerreserveringservice: KamerreserveringenService, private readonly modalService: NgbModal, private router: Router) { }
 
   getKamerReserveringen(){
     this.kamerreserveringservice.getKamerReserveringen()
@@ -23,6 +25,19 @@ export class KamerreserveringComponent implements OnInit {
 
   ngOnInit() {
     this.getKamerReserveringen();
+  }
+
+  openFormKamerReserveringDetailsModal(kamerReservering: KamerReservering){
+    const modalKamerReservering = this.modalService.open(FormKamerreserveringdetailsComponent);
+    if (kamerReservering) {
+      modalKamerReservering.componentInstance.kamerReservering = kamerReservering;
+    }
+  }
+  deleteRoom(kamerdata: KamerReservering) {
+    if (kamerdata) {
+      this.kamerreserveringservice.deleteKamerReservering(kamerdata);
+      //this.kamers = [...this.kamers].filter(item => item !== kamer);
+    }
   }
 
 }
