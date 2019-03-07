@@ -1,11 +1,11 @@
-1,kamer 1,Lux,Bergzicht,5,99
-2,kamer 2,Budget,Meerzicht,4,79
+1,Spaceroom,Lux,Bergzicht,5,99
+2,Vissen,Budget,Meerzicht,4,79
 4,De kleine kapitein,Lux,Meerzicht,6,299
 5,Meerzicht,Standaard,Meerzicht,2,99
-3,kamer 3,Standaard,Tuinzicht,4,179
-6,kamer 6,Budget,Meerzicht,2,49
-7,kamer 7,Lux,Bergzicht,3,199
-8,kamer 4,Standaard,Tuinzicht,5,89
-9,kamer 8,Budget,Tuinzicht,4,69
-10,kamer 11,Standaard,Tuinzicht,6,199
+3,1,Standaard,Tuinzicht,4,179
+6,2,Budget,Meerzicht,2,49
+7,3,Lux,Bergzicht,3,199
+8,4,Standaard,Tuinzicht,5,89
+9,De bruidssuite,Budget,Tuinzicht,4,69
+10,Room 666,Standaard,Tuinzicht,6,199
 11,De grote vriendelijke reus,Lux,Bergzicht,12,599
