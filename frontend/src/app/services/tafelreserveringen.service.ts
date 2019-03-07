@@ -19,7 +19,7 @@ export class TafelreserveringenService {
   }
 
   private static reserveringenToReserveringMapper(reservering: IReservering): Tafelreservering {
-    return new Tafelreservering(reservering.aanvangstijd, reservering.personen, reservering.naam, reservering.telefoon);
+    return new Tafelreservering(reservering.aanvangstijd, reservering.personen, reservering.naam, reservering.telefoon, reservering.id);
   }
 
   getAllReserveringen(refreshCache: boolean = false): Observable<Tafelreservering[] | undefined> {
@@ -41,6 +41,14 @@ export class TafelreserveringenService {
         tap(() => this.getAllReserveringen(true))
       ).subscribe()
   }
+
+  deleteReservering(reservering: Tafelreservering): void {
+    this.http.delete(`${this.api}/${reservering.id}`)
+      .pipe(
+        take(1),
+        tap(() => this.getAllReserveringen(true))
+      ).subscribe()
+  }
 }
 
 interface IReserveringenResponse {
@@ -48,6 +56,7 @@ interface IReserveringenResponse {
 }
 
 interface IReservering {
+  id: number;
   aanvangstijd: string;
   personen: number;
   naam: string;

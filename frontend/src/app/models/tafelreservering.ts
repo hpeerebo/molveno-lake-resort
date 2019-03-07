@@ -4,5 +4,6 @@ export class Tafelreservering {
     public readonly personen: number,
     public readonly naam: string,
     public readonly telefoon: string,
+    public readonly id?: number,
   ) { }
 }

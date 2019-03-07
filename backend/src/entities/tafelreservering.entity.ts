@@ -26,6 +26,6 @@ export class TafelreserveringRepoEntity {
     }
 
     mapToTafelreservering(): Tafelreservering {
-        return new Tafelreservering(this.aanvangstijd, this.personen, this.naam, this.telefoon);
+        return new Tafelreservering(this.id, this.aanvangstijd, this.personen, this.naam, this.telefoon);
     }
 }

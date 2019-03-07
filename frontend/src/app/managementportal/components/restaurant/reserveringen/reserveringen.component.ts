@@ -43,7 +43,7 @@ export class ReserveringenComponent implements OnInit {
       .open(ModalConfirmComponent)
       .result.then(result => {
         if (result === 'yes') {
-          console.log(reservering);
+          this.tafelreserveringenService.deleteReservering(reservering);
         }
       })
       .catch(error => {
