@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ActiviteitenController } from './controllers/activiteiten/activiteiten.controller';
+import { KamersController } from './Kamers/controllers/kamers.controller';
+import { KamerService } from './Kamers/services/kamer.service';
 import { RestaurantController } from './controllers/restaurant/restaurant.controller';
 import { ActiviteitService } from './services/activiteit/activiteit.service';
 import { TafelService } from './services/tafel/tafel.service';
@@ -12,7 +14,7 @@ import { KamersModule } from './Kamers/modules/kamers.module';
 import { TafelRepoEntity } from './entities/tafel.entity';
 
 @Module({
-  imports: [
+  imports: [KamersModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
