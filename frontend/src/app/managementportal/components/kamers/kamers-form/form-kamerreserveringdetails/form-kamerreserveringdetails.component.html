@@ -1,5 +1,5 @@
 <div class="modal-header">
-  <h4 class="modal-title" id="modal-basic-title">Kamerresevering - <i>{{kamernaam}}</i></h4>
+  <h4 class="modal-title" id="modal-basic-title">Kamerreseveringdetails- <i>{{kamerReservering.kamernaam}}</i></h4>
   <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('cancel')">
     <span aria-hidden="true">&times;</span>
   </button>
@@ -9,84 +9,65 @@
     <div class="container, form-row">
       <div class="form-group col-md-6">
         <label>Aankomst datum</label>
-        <input type="date" class="form-control" formControlName="datumvan" />
-
+        <input readonly type="date" class="form-control" formControlName="datumvan" value="{{kamerReservering.datumvan}}"/>
       </div>
       <div class="form-group col-md-6">
-
         <label>Vertrek datum</label>
-        <input type="date" class="form-control" formControlName="datumtot" [class.is-invalid]="kamerreserveringdetailsForm.controls.datumtot.invalid && kamerreserveringdetailsForm.controls.datumtot.touched" ngbAutofocus />
-        <small class="text-danger" [class.d-none]="kamerreserveringdetailsForm.controls.datumtot.valid || kamerreserveringdetailsForm.controls.datumtot.untouched">Vereist</small>
-
+        <input readonly type="date" class="form-control" formControlName="datumtot" value="{{kamerReservering.datumtot}}"/>
       </div>
     </div>
     <div class="container, form-row">
       <div class="form-group col-md-6">
         <label>Voornaam</label>
-        <input type="text" class="form-control" formControlName="voornaam" value = "{{kamerReservering?.voornaam}}" />
-
+        <input readonly type="text" class="form-control" formControlName="voornaam" value="{{kamerReservering.voornaam}}"/>
       </div>
       <div class="form-group col-md-6">
         <label>Achternaam</label>
-        <input type="text" class="form-control" formControlName="achternaam" [class.is-invalid]="kamerreserveringdetailsForm.controls.achternaam.invalid && kamerreserveringdetailsForm.controls.achternaam.touched" ngbAutofocus />
-        <small class="text-danger" [class.d-none]="kamerreserveringdetailsForm.controls.achternaam?.valid || kamerreserveringdetailsForm.controls.achternaam.untouched">Vereist</small>
+        <input readonly type="text" class="form-control" formControlName="achternaam" value="{{kamerReservering.achternaam}}"/>
       </div>
     </div>
     <div class="container, form-row">
       <div class="form-group col-md-6">
         <label>Telefoonnummer</label>
-        <input type="text" class="form-control" formControlName="telefoonnummer" [class.is-invalid]="kamerreserveringdetailsForm.controls.telefoonnummer.invalid && kamerreserveringdetailsForm.controls.telefoonnummer.touched" ngbAutofocus />
-        <small class="text-danger" [class.d-none]="kamerreserveringdetailsForm.controls.telefoonnummer.valid || kamerreserveringdetailsForm.controls.telefoonnummer.untouched">Vereist</small>
+        <input readonly type="text" class="form-control" formControlName="telefoonnummer" value="{{kamerReservering.telefoonnummer}}"/>
       </div>
       <div class="form-group col-md-6">
         <label>E-mailadres</label>
-        <input type="text" class="form-control" formControlName="emailadres" [class.is-invalid]="kamerreserveringdetailsForm.controls.emailadres.invalid && kamerreserveringdetailsForm.controls.emailadres.touched" ngbAutofocus />
-        <small class="text-danger" [class.d-none]="kamerreserveringdetailsForm.controls.emailadres.valid || kamerreserveringdetailsForm.controls.emailadres.untouched">Vereist</small>
+        <input readonly type="text" class="form-control" formControlName="emailadres" value="{{kamerReservering.emailadres}}"/>
       </div>
     </div>
     <div class="container, form-row">
       <div class="form-group col-md-8">
         <label>Straat</label>
-        <input type="text" class="form-control" formControlName="straat" [class.is-invalid]="kamerreserveringdetailsForm.controls.straat.invalid && kamerreserveringdetailsForm.controls.straat.touched" ngbAutofocus />
-        <small class="text-danger" [class.d-none]="kamerreserveringdetailsForm.controls.straat.valid || kamerreserveringdetailsForm.controls.straat.untouched">Vereist</small>
+        <input readonly type="text" class="form-control" formControlName="straat" value="{{kamerReservering.straat}}"/>
       </div>
       <div class="form-group col-md-2">
         <label>Nummer</label>
-        <input type="text" class="form-control" formControlName="huisnummer" [class.is-invalid]="kamerreserveringdetailsForm.controls.huisnummer.invalid && kamerreserveringdetailsForm.controls.huisnummer.touched" ngbAutofocus />
-        <small class="text-danger" [class.d-none]="kamerreserveringdetailsForm.controls.huisnummer.valid || kamerreserveringdetailsForm.controls.huisnummer.untouched">Vereist</small>
+        <input readonly type="text" class="form-control" formControlName="huisnummer" value="{{kamerReservering.huisnummer}}"/>
       </div>
       <div class="form-group col-md-2">
         <label>Postcode</label>
-        <input type="text" class="form-control" formControlName="postcode" [class.is-invalid]="kamerreserveringdetailsForm.controls.postcode.invalid && kamerreserveringdetailsForm.controls.postcode.touched" ngbAutofocus />
-        <small class="text-danger" [class.d-none]="kamerreserveringdetailsForm.controls.postcode.valid || kamerreserveringdetailsForm.controls.postcode.untouched">Vereist</small>
+        <input readonly type="text" class="form-control" formControlName="postcode" value="{{kamerReservering.postcode}}"/>
       </div>
     </div>
     <div class="container, form-row">
       <div class="form-group col-md-6">
         <label>Woonplaats</label>
-        <input type="text" class="form-control" formControlName="woonplaats" [class.is-invalid]="kamerreserveringdetailsForm.controls.woonplaats.invalid && kamerreserveringdetailsForm.controls.woonplaats.touched" ngbAutofocus />
-        <small class="text-danger" [class.d-none]="kamerreserveringdetailsForm.controls.woonplaats.valid || kamerreserveringdetailsForm.controls.woonplaats.untouched">Vereist</small>
+        <input readonly type="text" class="form-control" formControlName="woonplaats" value="{{kamerReservering.woonplaats}}"/>
       </div>
       <div class="form-group col-md-6">
         <label>Land</label>
-        <input type="text" class="form-control" placeholder="Nederland" formControlName="land" [class.is-invalid]="kamerreserveringdetailsForm.controls.land.invalid && kamerreserveringdetailsForm.controls.land.touched" ngbAutofocus />
-        <small class="text-danger" [class.d-none]="kamerreserveringdetailsForm.controls.land.valid || kamerreserveringdetailsForm.controls.land.untouched">Vereist</small>
+        <input readonly type="text" class="form-control"  formControlName="land" value="{{kamerReservering.land}}"/>
       </div>
     </div>
 
 
     <div class="form-group">
       <label>Document nummer (paspoort, rijbewijs, ID)</label>
-      <input type="text" class="form-control" formControlName="identiteitsid" [class.is-invalid]="kamerreserveringdetailsForm.controls.identiteitsid.invalid && kamerreserveringdetailsForm.controls.identiteitsid.touched" ngbAutofocus />
-      <small class="text-danger" [class.d-none]="kamerreserveringdetailsForm.controls.identiteitsid.valid || kamerreserveringdetailsForm.controls.identiteitsid.untouched">Vereist</small>
-    </div>
-
-    <div class="form-group">
-      <input type="hidden" class="form-control" value="{{kamernaam}}" formControlName="kamernaam">
-
+      <input readonly type="text" class="form-control" formControlName="identiteitsid" value="{{kamerReservering.identiteitsid}}"/>
     </div>
   </form>
   <div class="modal-footer">
-    <button type="button" class="btn btn-success" (click)="submitForm()" [disabled]="kamerreserveringdetailsForm.invalid">Save</button>
+    <button type="button" class="btn btn-success" (click)="activeModal.dismiss('cancel')" >Sluiten</button>
   </div>
 </div>
