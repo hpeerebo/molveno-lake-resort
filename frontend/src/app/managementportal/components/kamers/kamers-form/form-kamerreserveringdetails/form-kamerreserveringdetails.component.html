@@ -9,8 +9,8 @@
     <div class="container, form-row">
       <div class="form-group col-md-6">
         <label>Aankomst datum</label>
-        <input type="date" class="form-control" formControlName="datumvan" [class.is-invalid]="kamerreserveringdetailsForm.controls.datumvan.invalid && kamerreserveringdetailsForm.controls.datumvan.touched" ngbAutofocus />
-        <small class="text-danger" [class.d-none]="kamerreserveringdetailsForm.controls.datumvan.valid || kamerreserveringdetailsForm.controls.datumvan.untouched">Vereist</small>
+        <input type="date" class="form-control" formControlName="datumvan" />
+
       </div>
       <div class="form-group col-md-6">
 
@@ -23,8 +23,8 @@
     <div class="container, form-row">
       <div class="form-group col-md-6">
         <label>Voornaam</label>
-        <input type="text" class="form-control" formControlName="voornaam" [class.is-invalid]="kamerreserveringdetailsForm.controls.voornaam.invalid && kamerreserveringdetailsForm.controls.voornaam.touched" ngbAutofocus />
-        <small class="text-danger" [class.d-none]="kamerreserveringdetailsForm.controls.voornaam.valid || kamerreserveringdetailsForm.controls.voornaam.untouched">Vereist</small>
+        <input type="text" class="form-control" formControlName="voornaam" value = "{{kamerReservering?.voornaam}}" />
+
       </div>
       <div class="form-group col-md-6">
         <label>Achternaam</label>

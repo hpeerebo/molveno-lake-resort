@@ -29,7 +29,6 @@ export class KamerreserveringComponent implements OnInit {
 
   openFormKamerReserveringDetailsModal(kamerReservering: KamerReservering){
     const modalKamerReservering = this.modalService.open(FormKamerreserveringdetailsComponent);
-    console.log(kamerReservering);
     if (kamerReservering) {
       modalKamerReservering.componentInstance.kamerReservering = kamerReservering;
     }
