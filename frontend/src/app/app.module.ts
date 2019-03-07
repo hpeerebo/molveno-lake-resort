@@ -2,7 +2,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {FrontendModule} from "./frontend/frontend.module";
 import {ManagementportalModule} from "./managementportal/managementportal.module";
 import {HttpClientModule} from '@angular/common/http';
@@ -16,6 +16,7 @@ import { FormTafelreserveringComponent } from './shared/components/form-tafelres
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     FrontendModule,
     ManagementportalModule,
     HttpClientModule
