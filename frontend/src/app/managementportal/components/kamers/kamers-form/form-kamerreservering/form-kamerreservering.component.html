@@ -6,7 +6,24 @@
 </div>
 <div class="modal-body">
   <form [formGroup]="kamerreserveringForm">
+
     <div class="row">
+      <div class="row">
+        <div class="col-6 text-left">
+          <div class="form-group">
+            <label>Aankomst datum</label>
+            <input type="date" class="form-control" formControlName="datumvan" [class.is-invalid]="kamerreserveringForm.controls.datumvan.invalid && kamerreserveringForm.controls.datumvan.touched" ngbAutofocus />
+            <small class="text-danger" [class.d-none]="kamerreserveringForm.controls.datumvan.valid || kamerreserveringForm.controls.datumvan.untouched">Vereist</small>
+          </div>
+        </div>
+        <div class="col-6 text-left">
+          <div class="form-group">
+            <label>Vertrek datum</label>
+            <input type="date" class="form-control" formControlName="datumtot" [class.is-invalid]="kamerreserveringForm.controls.datumtot.invalid && kamerreserveringForm.controls.datumtot.touched" ngbAutofocus />
+            <small class="text-danger" [class.d-none]="kamerreserveringForm.controls.datumtot.valid || kamerreserveringForm.controls.datumtot.untouched">Vereist</small>
+          </div>
+        </div>
+      </div>
       <div class="col-6 text-left">
         <div class="form-group">
         <label>Voornaam</label>
@@ -59,23 +76,6 @@
           <label>Land</label>
           <input type="text" class="form-control" formControlName="land" [class.is-invalid]="kamerreserveringForm.controls.land.invalid && kamerreserveringForm.controls.land.touched" ngbAutofocus />
           <small class="text-danger" [class.d-none]="kamerreserveringForm.controls.land.valid || kamerreserveringForm.controls.land.untouched">Vereist</small>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-6 text-left">
-        <div class="form-group">
-          <label>Aankomst datum</label>
-          <input type="date" class="form-control" formControlName="datumvan" [class.is-invalid]="kamerreserveringForm.controls.datumvan.invalid && kamerreserveringForm.controls.datumvan.touched" ngbAutofocus />
-          <small class="text-danger" [class.d-none]="kamerreserveringForm.controls.datumvan.valid || kamerreserveringForm.controls.datumvan.untouched">Vereist</small>
-        </div>
-      </div>
-      <div class="col-6 text-left">
-        <div class="form-group">
-          <label>Vertrek datum</label>
-          <input type="date" class="form-control" formControlName="datumtot" [class.is-invalid]="kamerreserveringForm.controls.datumtot.invalid && kamerreserveringForm.controls.datumtot.touched" ngbAutofocus />
-          <small class="text-danger" [class.d-none]="kamerreserveringForm.controls.datumtot.valid || kamerreserveringForm.controls.datumtot.untouched">Vereist</small>
         </div>
       </div>
     </div>
