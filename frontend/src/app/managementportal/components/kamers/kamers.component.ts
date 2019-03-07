@@ -1,18 +1,13 @@
-import {
-  Component,
-  OnInit,
-  Directive,
-  Input,
-  Output,
-  ViewChildren,
-  QueryList
-} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import { RoomService } from "src/app/services/rooms.service";
-import { Kamer } from "./kamer";
+import { Kamer } from "../../../models/kamer";
 import { Subscription } from "rxjs";
 import { take, tap } from "rxjs/operators";
 import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
 import { ManagementPortalKamersFormComponent } from "./kamers-form/kamers-form.component";
+import { FormKamerreserveringComponent } from './kamers-form/form-kamerreservering/form-kamerreservering.component';
+import { KamerreserveringenService } from 'src/app/services/kamerreserveringen.service';
+import {KamerReservering} from "../../../models/kamerreservering";
 
 @Component({
   selector: "app-kamers",
@@ -30,6 +25,7 @@ export class ManagementPortalKamersComponent implements OnInit {
   private subscriptions: Subscription = new Subscription();
   constructor(
     private roomservice: RoomService,
+    private kamerreserveringservice: KamerreserveringenService,
     private modalService: NgbModal
   ) {}
   ngOnInit() {
@@ -49,28 +45,14 @@ export class ManagementPortalKamersComponent implements OnInit {
   onSelect(kamer: Kamer): void {
     this.selectedKamer = kamer;
   }
-  showReservedRooms() {
-    // this.kamers = [...this.kamers].filter(item => item.status==="reserved");
-    this.show = "reserved";
-  }
-  showFreeRooms() {
-    this.show = "free";
-  }
-  showAllRooms() {
-    this.show = "all";
-  }
-  showBookedRooms() {
-    this.show = "booked";
-  }
 
   deleteRoom(kamer: Kamer) {
     if (this.kamers) {
-      this.kamers = [...this.kamers].filter(item => item !== kamer);
+      this.roomservice.deleteRoom(kamer);
+      //this.kamers = [...this.kamers].filter(item => item !== kamer);
     }
   }
-  addRoom(kamer: Kamer) {
-    //let lengte = this.kamers.push(kamer);
-  }
+
   open(content: NgbModal) {
     this.modalService
       .open(content, { size: "lg", ariaLabelledBy: "modal-basic-title" })
@@ -98,25 +80,18 @@ export class ManagementPortalKamersComponent implements OnInit {
   openNewFormModal() {
     const modalRef = this.modalService.open(ManagementPortalKamersFormComponent, {
       size: "lg",
-      ariaLabelledBy: "modal-basic-title"
+      ariaLabelledBy: "modal-basic-title",
     });
+    modalRef.componentInstance.action = "add";
     modalRef.result.then(resultPromise => {
-      this.closeResult = resultPromise;
-      if (this.kamers) {
-        this.kamers.push(
-          new Kamer(
-            resultPromise.kamerNummer,
-            resultPromise.kamerType,
-            resultPromise.kamerLigging,
-            resultPromise.aantalPersonen,
-            resultPromise.prijs,
-            resultPromise.status
-          )
-        );
-      }
+      this.roomservice.saveRoom(new Kamer(
+        resultPromise.kamerNaam,
+        resultPromise.kamerType,
+        resultPromise.kamerLigging,
+        resultPromise.aantalPersonen,
+        resultPromise.prijs
+      ));
     });
-    console.log("result = " + this.closeResult);
-    console.log("Kamers = " + this.kamers);
   }
   openEditFormModal() {
     const modalRef = this.modalService.open(ManagementPortalKamersFormComponent, {
@@ -124,19 +99,19 @@ export class ManagementPortalKamersComponent implements OnInit {
       ariaLabelledBy: "modal-basic-title"
     });
     modalRef.componentInstance.model = this.selectedKamer;
+    modalRef.componentInstance.action = "edit";
 
     modalRef.result.then(resultPromise => {
-      //this.closeResult = resultPromise;
-      (this.kamers = this.kamers),
-        new Kamer(
-          resultPromise.kamerNummer,
-          resultPromise.kamerType,
-          resultPromise.kamerLigging,
-          resultPromise.aantalPersonen,
-          resultPromise.prijs,
-          resultPromise.status
-        );
+      this.closeResult = resultPromise;
+      this.roomservice.updateRoom(new Kamer(
+        resultPromise.kamerNaam,
+        resultPromise.kamerType,
+        resultPromise.kamerLigging,
+        resultPromise.aantalPersonen,
+        resultPromise.prijs
+      ));
     });
+
   }
 
   private getDismissReason(reason: any): string {
@@ -148,7 +123,33 @@ export class ManagementPortalKamersComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
-  onRoomSubmitted(room: Kamer) {
-    console.log(room);
+
+  openFormKamerReserveringModal(kamernaam: string){
+    const modalKamerReservering = this.modalService.open(FormKamerreserveringComponent);
+
+     if (kamernaam) {
+      modalKamerReservering.componentInstance.kamernaam = kamernaam;
+    }
+    modalKamerReservering.componentInstance.action = "add";
+    modalKamerReservering.result.then(resultPromise => {
+      this.closeResult = resultPromise;
+      this.kamerreserveringservice.saveKamerReservering(new KamerReservering(
+        resultPromise.id,
+        resultPromise.voornaam,
+        resultPromise.achternaam,
+        resultPromise.telefoonnummer,
+        resultPromise.emailadres,
+        resultPromise.identiteitsid,
+        resultPromise.postcode,
+        resultPromise.straat,
+        resultPromise.huisnummer,
+        resultPromise.woonplaats,
+        resultPromise.land,
+        resultPromise.datumvan,
+        resultPromise.datumtot,
+        kamernaam
+      ));
+    });
+
   }
 }

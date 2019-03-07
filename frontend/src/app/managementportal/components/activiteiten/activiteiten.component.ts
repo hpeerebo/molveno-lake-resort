@@ -29,9 +29,9 @@ export class ManagementPortalActiviteitenComponent {
     }
 
     modal.result
-      .then(result => {
-        console.log(result);
-      })
+    .then(result => {
+      this.activiteitenService.saveActiviteit(result);
+    })
       .catch(error => {
         console.log(error);
       });
@@ -42,6 +42,7 @@ export class ManagementPortalActiviteitenComponent {
       .open(ModalConfirmComponent)
       .result.then(result => {
         if (result === "yes") {
+          this.activiteitenService.deleteActiviteit(activiteit);
           console.log(activiteit);
         }
       })

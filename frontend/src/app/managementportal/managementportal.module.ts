@@ -22,6 +22,11 @@ import { FormActiviteitComponent } from '../shared/components/form-activiteit/fo
 import { ModalConfirmComponent } from '../shared/components/modal-confirm/modal-confirm.component';
 import { ReserveringenComponent } from './components/restaurant/reserveringen/reserveringen.component';
 import { FormTafelreserveringComponent } from '../shared/components/form-tafelreservering/form-tafelreservering.component';
+import { ActiviteitReserveringenComponent } from './components/activiteiten/activiteit-reserveringen/activiteit-reserveringen.component';
+import { FormActiviteitResComponent } from '../shared/components/form-activiteit-res/form-activiteit-res.component';
+import { KamerreserveringComponent } from './components/kamers/kamerreserveringen/kamerreservering.component';
+import { FormKamerreserveringComponent } from './components/kamers/kamers-form/form-kamerreservering/form-kamerreservering.component';
+import {FormKamerreserveringdetailsComponent} from "./components/kamers/kamers-form/form-kamerreserveringdetails/form-kamerreserveringdetails.component";
 
 @NgModule({
   declarations: [
@@ -39,11 +44,16 @@ import { FormTafelreserveringComponent } from '../shared/components/form-tafelre
     FormTafelreserveringComponent,
     FormGerechtComponent,
     FormIngredientComponent,
-    FormActiviteitComponent,
+    FormActiviteitComponent,   
+    FormActiviteitResComponent,
     ModalConfirmComponent,
-    ReserveringenComponent
+    ReserveringenComponent,
+    ActiviteitReserveringenComponent,
+    KamerreserveringComponent,
+    FormKamerreserveringComponent,
+    FormKamerreserveringdetailsComponent
   ],
   imports: [CommonModule, ManagementportalRoutingModule, NgbModule, FormsModule, ReactiveFormsModule],
-  entryComponents: [FormTafelComponent, FormTafelreserveringComponent, FormGerechtComponent, FormIngredientComponent, FormActiviteitComponent, ModalConfirmComponent]
+  entryComponents: [FormTafelComponent, FormTafelreserveringComponent, FormGerechtComponent, FormIngredientComponent, FormActiviteitComponent,  FormActiviteitResComponent, ModalConfirmComponent, FormKamerreserveringComponent, FormKamerreserveringdetailsComponent]
 })
 export class ManagementportalModule {}

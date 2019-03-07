@@ -11,14 +11,24 @@
     <div [hidden]="submitted">
       <h6>Voer de nieuwe gegevens in</h6>
       <form (ngSubmit)="onSubmit()" #kamerForm="ngForm">
+        <div *ngIf="action === 'edit', then edit else add"></div>
+        <ng-template #edit>
         <div class="form-group">
-          <label for="kamerNummer">KamerNummer</label>
-          <input type="number" class="form-control" id="kamerNummer" required [(ngModel)]="model.kamerNummer"
-            name="kamerNummer" #kamerNummer="ngModel" />
-          <div [hidden]="kamerNummer.valid || kamerNummer.pristine" class="alert alert-danger">
+          <label for="kamerNaam">Kamernaam</label>
+          <input readonly type="text" class="form-control" id="kamerNaam" required [(ngModel)]="model.kamerNaam"
+            name="kamerNaam" #kamerNaam="ngModel" />
+        </div>
+      </ng-template>
+      <ng-template #add>
+        <div class="form-group">
+          <label for="kamerNaam">Kamernaam</label>
+          <input type="text" class="form-control" id="kamerNaam" required [(ngModel)]="model.kamerNaam"
+            name="kamerNaam" #kamerNaam="ngModel" />
+          <div [hidden]="kamerNaam.valid || kamerNaam.pristine" class="alert alert-danger">
             Kamer nummer is verplicht
           </div>
         </div>
+      </ng-template>
 
         <div class="form-group">
           <label for="kamerType">Kamer Type</label>
@@ -64,29 +74,33 @@
           </div>
         </div>
 
-        <div class="form-group">
+        <!-- <div class="form-group">
           <label for="status">Status</label>
           <input type="text" class="form-control" id="status" required [(ngModel)]="model.status" name="status"
             #status="ngModel" />
           <div [hidden]="status.valid || status.pristine" class="alert alert-danger">
             status is verplicht
           </div>
-        </div>
-
-
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-success" [disabled]="!kamerForm.form.valid">
-            Submit
+        </div> -->
+        <div class="modal-footer justify-content-start">
+            <button
+            type="submit"
+            class="btn btn-success ml-2"
+            [disabled]="!kamerForm.form.valid"
+          >
+            Opslaan
           </button>
-          <button type="button" class="btn btn-outline-dark" (click)="activeModal.close()">
+
+          <button
+            type="button"
+            class="btn btn-outline-dark"
+            (click)="activeModal.close()"
+          >
             Annuleren
           </button>
-        </div>
+          </div>
       </form>
     </div>
   </div>
 </div>
 
-<div [hidden]="!submitted">
-  <app-kamers></app-kamers>
-</div>
