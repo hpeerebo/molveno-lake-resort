@@ -41,7 +41,10 @@
         </h6>
         <ul class="nav flex-column mb-2">
           <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/managementportal/activiteiten']" routerLinkActive="active" >Activiteiten</a>
+            <a class="nav-link" [routerLink]="['/managementportal/activiteiten']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" >Activiteiten</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/managementportal/activiteiten/activiteit-reserveringen']" routerLinkActive="active" >Reserveringen</a>
           </li>
         </ul>
       </div>
