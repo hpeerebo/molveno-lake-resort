@@ -3,7 +3,7 @@ import { Gerecht } from 'src/models/gerecht';
 import { CreateGerechtDto } from 'src/dto/create-gerecht-dto';
 import { GerechtRepoEntity } from 'src/entities/gerecht.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, DeleteResult } from 'typeorm';
 
 @Injectable()
 export class GerechtService {
@@ -26,5 +26,9 @@ export class GerechtService {
         } else {
             throw new HttpException('Een gerecht met deze naam bestaat al', HttpStatus.CONFLICT);
         }
+    }
+
+    deleteGerecht(id: number): Promise<DeleteResult> {
+        return this.gerechtRepository.delete({id});
     }
 }

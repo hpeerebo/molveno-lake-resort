@@ -2,7 +2,7 @@ import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { Ingredient } from 'src/models/ingredient';
 import { InjectRepository } from '@nestjs/typeorm';
 import { IngredientRepoEntity } from 'src/entities/ingredient.entity';
-import { Repository } from 'typeorm';
+import { Repository, DeleteResult } from 'typeorm';
 
 @Injectable()
 export class IngredientService {
@@ -25,5 +25,9 @@ export class IngredientService {
         } else {
             throw new HttpException('Een ingredient met deze naam bestaat al', HttpStatus.CONFLICT);
         }
+    }
+
+    deleteIngredient(id: number): Promise<DeleteResult> {
+        return this.ingredientRepository.delete({id});
     }
 }

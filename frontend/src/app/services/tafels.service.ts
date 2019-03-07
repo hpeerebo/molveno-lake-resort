@@ -19,7 +19,7 @@ export class TafelsService {
   }
 
   private static tafelToTafelMapper(tafel: ITafel): Tafel {
-    return new Tafel(tafel.kenmerk, tafel.personen);
+    return new Tafel(tafel.kenmerk, tafel.personen, tafel.id);
   }
 
   getAllTafels(refreshCache: boolean = false): Observable<Tafel[] | undefined> {
@@ -41,6 +41,14 @@ export class TafelsService {
         tap(() => this.getAllTafels(true))
       ).subscribe()
   }
+
+  deleteTafel(tafel: Tafel): void {
+    this.http.delete(`${this.api}/${tafel.id}`)
+      .pipe(
+        take(1),
+        tap(() => this.getAllTafels(true))
+      ).subscribe()
+  }
 }
 
 interface ITafelsResponse {
@@ -48,6 +56,7 @@ interface ITafelsResponse {
 }
 
 interface ITafel {
+  id: number;
   kenmerk: string;
   personen: number;
 }

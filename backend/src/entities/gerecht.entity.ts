@@ -33,6 +33,6 @@ export class GerechtRepoEntity {
     }
 
     mapToGerecht(): Gerecht {
-        return new Gerecht(this.naam, this.type, this.subtype, this.prijs);
+        return new Gerecht(this.id, this.naam, this.type, this.subtype, this.prijs);
     }
 }

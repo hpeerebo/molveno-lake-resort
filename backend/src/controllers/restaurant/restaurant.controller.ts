@@ -41,6 +41,11 @@ export class RestaurantController {
         return tafelEntity.mapToTafel();
     }
 
+    @Delete('tafels/:id')
+    deleteTafel(@Param('id') id: number): Promise<DeleteResult> {
+        return this.tafelService.deleteTafel(id);
+    }
+
     @Get('gerechten')
     async getGerechten(): Promise<{ gerechten: Gerecht[] }> {
         const gerechten = await this.gerechtService.getGerechten();
@@ -53,6 +58,11 @@ export class RestaurantController {
         return gerechtEntity.mapToGerecht();
     }
 
+    @Delete('gerechten/:id')
+    deleteGerecht(@Param('id') id: number): Promise<DeleteResult> {
+        return this.gerechtService.deleteGerecht(id);
+    }
+
     @Get('ingredienten')
     async getIngredienten(): Promise<{ ingredienten: Ingredient[] }> {
         const ingredienten = await this.ingredientenService.getIngredienten();
@@ -63,6 +73,11 @@ export class RestaurantController {
     async createIngredient(@Body() ingredientDto: CreateIngredientDto): Promise<Ingredient> {
         const ingredientEntity = await this.ingredientenService.createIngredient(ingredientDto.mapToIngredientEntity());
         return ingredientEntity.mapToIngredient();
+    }
+
+    @Delete('ingredienten/:id')
+    deleteIngredient(@Param('id') id: number): Promise<DeleteResult> {
+        return this.ingredientenService.deleteIngredient(id);
     }
 
     @Get('reserveringen')

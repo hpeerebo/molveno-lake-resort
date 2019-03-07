@@ -40,7 +40,7 @@ export class ManagementPortalTafelsComponent {
       .open(ModalConfirmComponent)
       .result.then(result => {
         if (result === 'yes') {
-          console.log(tafel);
+          this.tafelsService.deleteTafel(tafel);
         }
       })
       .catch(error => {

@@ -21,7 +21,7 @@ export class TafelreserveringService {
         return this.tafelreserveringRepository.save(tafelreserveringEntity);
     }
 
-    async deleteReservering(id: number): Promise<DeleteResult> {
+    deleteReservering(id: number): Promise<DeleteResult> {
         return this.tafelreserveringRepository.delete({id});
     }
 }

@@ -3,7 +3,7 @@ import { Tafel } from 'src/models/tafel';
 import { CreateTafelDto } from 'src/dto/create-tafel-dto';
 import { TafelRepoEntity } from 'src/entities/tafel.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, DeleteResult } from 'typeorm';
 
 @Injectable()
 export class TafelService {
@@ -26,5 +26,9 @@ export class TafelService {
         } else {
             throw new HttpException('Een tafel met dit kenmerk bestaat al', HttpStatus.CONFLICT);
         }
+    }
+
+    deleteTafel(id: number): Promise<DeleteResult> {
+        return this.tafelRepository.delete({id});
     }
 }
