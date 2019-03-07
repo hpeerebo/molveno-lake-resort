@@ -42,6 +42,7 @@ export class ManagementPortalActiviteitenComponent {
       .open(ModalConfirmComponent)
       .result.then(result => {
         if (result === "yes") {
+          this.activiteitenService.deleteActiviteit(activiteit);
           console.log(activiteit);
         }
       })

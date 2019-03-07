@@ -25,13 +25,13 @@ export class ActiviteitenService {
     activiteit: IActiviteit
   ): Activiteit {
     return new Activiteit(
-      activiteit.id,
       activiteit.naam,
       activiteit.beschrijving,
       activiteit.datum,
       activiteit.capaciteit,
       activiteit.prijs,
-      activiteit.thumb
+      activiteit.thumb,
+      activiteit.id
     );
   }
 
@@ -55,11 +55,11 @@ export class ActiviteitenService {
 }
 
 interface IActiviteit {
-  id: number;
   naam: string;
   beschrijving: string;
   datum: number;
   capaciteit: number;
   prijs: number;
   thumb: string;
+  id: number;
 }
