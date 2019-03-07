@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { Tafel } from '../models/tafel';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { map, take, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TafelsService {
-  public readonly api: string = 'http://www.mocky.io/v2/5c6fba953800002c003fc942';
+  public readonly api: string = '/api/restaurant/tafels';
+
+  public readonly tafelCache = new BehaviorSubject<Tafel[] | undefined>(undefined);
 
   constructor(private http: HttpClient) { }
 
@@ -17,14 +19,27 @@ export class TafelsService {
   }
 
   private static tafelToTafelMapper(tafel: ITafel): Tafel {
-    return new Tafel(tafel.nummer, tafel.personen);
+    return new Tafel(tafel.kenmerk, tafel.personen);
   }
 
-  getAllTafels(): Observable<Tafel[]> {
-    return this.http.get<ITafelsResponse>(this.api)
+  getAllTafels(refreshCache: boolean = false): Observable<Tafel[] | undefined> {
+    if (this.tafelCache.getValue() === undefined || refreshCache) {
+      this.http.get<ITafelsResponse>(this.api)
+        .pipe(
+          take(1),
+          map(TafelsService.tafelsResponseToTafelMapper),
+          tap(tafels => this.tafelCache.next(tafels))
+        ).subscribe()
+    }
+    return this.tafelCache;
+  }
+
+  addNewTafel(tafel: Tafel): void {
+    this.http.post(this.api, tafel)
       .pipe(
-        map(TafelsService.tafelsResponseToTafelMapper)
-      );
+        take(1),
+        tap(() => this.getAllTafels(true))
+      ).subscribe()
   }
 }
 
@@ -33,6 +48,6 @@ interface ITafelsResponse {
 }
 
 interface ITafel {
-  nummer: number;
+  kenmerk: string;
   personen: number;
 }

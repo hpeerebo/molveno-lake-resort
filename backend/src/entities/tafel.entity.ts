@@ -1,18 +1,23 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, Unique } from 'typeorm';
+import { Tafel } from 'src/models/tafel';
 
-@Entity()
+@Entity('tafel')
 export class TafelRepoEntity {
     @PrimaryGeneratedColumn()
-    id: number;
+    public readonly id: number;
 
-    @Column({ type: 'varchar', length: 50 })
-    kenmerk: string;
+    @Column({ type: 'varchar', length: 50, unique: true })
+    public readonly kenmerk: string;
 
     @Column('int')
-    personen: number;
+    public readonly personen: number;
 
     constructor(kenmerk: string, personen: number) {
         this.kenmerk = kenmerk;
         this.personen = personen;
+    }
+
+    mapToTafel(): Tafel {
+        return new Tafel(this.kenmerk, this.personen);
     }
 }

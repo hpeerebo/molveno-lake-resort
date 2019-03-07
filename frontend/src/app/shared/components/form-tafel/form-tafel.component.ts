@@ -14,7 +14,7 @@ export class FormTafelComponent implements OnInit {
 
   public tafelForm = this.formBuilder.group({
     tafelnummer: [0, Validators.min(1)],
-    aantalPersonen: [0, [Validators.min(1), Validators.max(12)]]
+    aantalPersonen: [0, [Validators.min(1), Validators.max(16)]]
   });
 
   constructor(public activeModal: NgbActiveModal, private formBuilder: FormBuilder) { }
@@ -22,14 +22,17 @@ export class FormTafelComponent implements OnInit {
   ngOnInit() {
     if (this.tafel) {
       this.tafelForm.setValue({
-        tafelnummer: this.tafel.nummer,
+        tafelnummer: this.tafel.kenmerk,
         aantalPersonen: this.tafel.personen
       });
     }
   }
 
   submitForm() {
-    this.activeModal.close(this.tafelForm.value);
+    this.activeModal.close(new Tafel(
+      this.tafelForm.value.tafelnummer,
+      this.tafelForm.value.aantalPersonen
+    ));
   }
 
   get tafelnummer() {
