@@ -14,7 +14,7 @@ export class FormTafelComponent implements OnInit {
 
   public tafelForm = this.formBuilder.group({
     tafelnummer: [0, Validators.min(1)],
-    aantalPersonen: [0, [Validators.min(1), Validators.max(12)]]
+    aantalPersonen: [0, [Validators.min(1), Validators.max(16)]]
   });
 
   constructor(public activeModal: NgbActiveModal, private formBuilder: FormBuilder) { }
