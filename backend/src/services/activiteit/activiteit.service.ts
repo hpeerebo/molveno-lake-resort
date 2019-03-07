@@ -11,7 +11,7 @@ export class ActiviteitService {
   constructor(
     @InjectRepository(ActiviteitEntity)
     private readonly activiteitRepository: Repository<ActiviteitEntity>,
-  ) { }
+  ) {}
   public insert(activiteit: CreateActiviteitDto): Promise<ActiviteitEntity> {
     return this.activiteitRepository.save(activiteit);
   }
@@ -19,11 +19,12 @@ export class ActiviteitService {
   public saveActiviteit(activiteit: ActiviteitEntity): void {
     this.activiteitRepository.save([activiteit]);
   }
-  async  getActiviteit(): Promise<ActiviteitEntity[]> {
+
+  async getActiviteit(): Promise<ActiviteitEntity[]> {
     return this.activiteitRepository.find();
   }
 
-  public deleteActiviteit(activiteitId: number){
-    this.activiteitRepository.delete({id: activiteitId});
+  public deleteActiviteit(activiteitId: number) {
+    this.activiteitRepository.delete({ id: activiteitId });
   }
 }

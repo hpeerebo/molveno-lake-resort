@@ -1,11 +1,11 @@
 export class Activiteit {
   constructor(
+    public id: number,
     public naam: string,
     public beschrijving: string,
     public datum: number,
     public capaciteit: number,
     public prijs: number,
-    public thumb: string,
-    public id: number
+    public thumb: string
   ) {}
 }

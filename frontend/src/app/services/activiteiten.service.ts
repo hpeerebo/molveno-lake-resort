@@ -8,7 +8,7 @@ import { map } from "rxjs/operators";
   providedIn: "root"
 })
 export class ActiviteitenService {
-  public readonly api: string = "http://localhost:4200/api/activiteiten/";
+  public readonly api: string = `/api/activiteiten/`;
 
   constructor(private http: HttpClient) {}
 
@@ -25,13 +25,13 @@ export class ActiviteitenService {
     activiteit: IActiviteit
   ): Activiteit {
     return new Activiteit(
+      activiteit.id,
       activiteit.naam,
       activiteit.beschrijving,
       activiteit.datum,
       activiteit.capaciteit,
       activiteit.prijs,
-      activiteit.thumb,
-      activiteit.id
+      activiteit.thumb
     );
   }
 
@@ -47,19 +47,23 @@ export class ActiviteitenService {
       .subscribe();
   }
 
-  deleteActiviteit(activiteit: Activiteit){
-    this.http
-    .delete<IActiviteit[]>(this.api + activiteit.id)
-    .subscribe();
+  updateActiviteit(activiteit: Activiteit) {
+    return this.http
+      .post<IActiviteit[]>(this.api + "updateactiviteit", activiteit)
+      .subscribe();
+  }
+
+  deleteActiviteit(activiteit: Activiteit) {
+    this.http.delete<IActiviteit[]>(this.api + activiteit.id).subscribe();
   }
 }
 
 interface IActiviteit {
+  id: number;
   naam: string;
   beschrijving: string;
   datum: number;
   capaciteit: number;
   prijs: number;
   thumb: string;
-  id: number;
 }

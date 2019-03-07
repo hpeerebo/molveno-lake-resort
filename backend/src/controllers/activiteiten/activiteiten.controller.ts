@@ -6,10 +6,7 @@ import { ActiviteitService } from 'src/services/activiteit/activiteit.service';
 
 @Controller('activiteiten')
 export class ActiviteitenController {
-
-  constructor(
-    private readonly activiteitenService: ActiviteitService,
-  ) {}
+  constructor(private readonly activiteitenService: ActiviteitService) {}
 
   @Post('saveactiviteit')
   public saveActiviteit(@Body() createActiviteit: CreateActiviteitDto): void {
@@ -20,17 +17,17 @@ export class ActiviteitenController {
       createActiviteit.datum,
       createActiviteit.prijs,
       createActiviteit.thumb,
-
     );
     return this.activiteitenService.saveActiviteit(activiteit);
   }
+
   @Get('')
   getActiviteit(): Promise<Activiteit[]> {
     return this.activiteitenService.getActiviteit();
   }
 
   @Delete('/:activiteitId')
-    public deleteActiviteit(@Param('activiteitId') activiteitId: number): void{
-      this.activiteitenService.deleteActiviteit(activiteitId);
-    }
+  public deleteActiviteit(@Param('activiteitId') activiteitId: number): void {
+    this.activiteitenService.deleteActiviteit(activiteitId);
   }
+}
