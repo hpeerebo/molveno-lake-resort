@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Body, Delete, Param } from '@nestjs/common';
 import { Tafel } from 'src/models/tafel';
 import { TafelService } from 'src/services/tafel/tafel.service';
 import { CreateTafelDto } from 'src/dto/create-tafel-dto';
@@ -12,6 +12,7 @@ import { IngredientService } from 'src/services/ingredient/ingredient.service';
 import { Tafelreservering } from 'src/models/tafelreservering';
 import { TafelreserveringService } from 'src/services/tafelreservering/tafelreservering.service';
 import { CreateTafelreserveringDto } from 'src/dto/create-tafelreservering-dto';
+import { DeleteResult } from 'typeorm';
 
 @ApiUseTags('restaurant')
 @Controller('restaurant')
@@ -28,7 +29,7 @@ export class RestaurantController {
     @ApiOperation({ title: 'Haal een lijst op van alle tafels' })
     async getTafels(): Promise<{ tafels: Tafel[] }> {
         const tafels = await this.tafelService.getTafels();
-        return {tafels};
+        return { tafels };
     }
 
     @Post('tafels')
@@ -43,7 +44,7 @@ export class RestaurantController {
     @Get('gerechten')
     async getGerechten(): Promise<{ gerechten: Gerecht[] }> {
         const gerechten = await this.gerechtService.getGerechten();
-        return {gerechten};
+        return { gerechten };
     }
 
     @Post('gerechten')
@@ -55,7 +56,7 @@ export class RestaurantController {
     @Get('ingredienten')
     async getIngredienten(): Promise<{ ingredienten: Ingredient[] }> {
         const ingredienten = await this.ingredientenService.getIngredienten();
-        return {ingredienten};
+        return { ingredienten };
     }
 
     @Post('ingredienten')
@@ -67,12 +68,17 @@ export class RestaurantController {
     @Get('reserveringen')
     async getReserveringen(): Promise<{ reserveringen: Tafelreservering[] }> {
         const reserveringen = await this.tafelreserveringService.getReserveringen();
-        return {reserveringen};
+        return { reserveringen };
     }
 
     @Post('reserveringen')
     async createReservering(@Body() tafelreserveringDto: CreateTafelreserveringDto): Promise<Tafelreservering> {
         const reserveringEntity = await this.tafelreserveringService.createReservering(tafelreserveringDto.mapToTafelreserveringEntity());
         return reserveringEntity.mapToTafelreservering();
+    }
+
+    @Delete('reserveringen/:id')
+    deleteReservering(@Param('id') id: number): Promise<DeleteResult> {
+        return this.tafelreserveringService.deleteReservering(id);
     }
 }

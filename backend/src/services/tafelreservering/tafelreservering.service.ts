@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { TafelreserveringRepoEntity } from 'src/entities/tafelreservering.entity';
-import { Repository } from 'typeorm';
+import { Repository, DeleteResult } from 'typeorm';
 import { Tafelreservering } from 'src/models/tafelreservering';
 
 @Injectable()
@@ -21,7 +21,7 @@ export class TafelreserveringService {
         return this.tafelreserveringRepository.save(tafelreserveringEntity);
     }
 
-    async deleteReservering(tafelreserveringEntity: TafelreserveringRepoEntity): Promise<TafelreserveringRepoEntity> {
-        return this.tafelreserveringRepository.delete()
+    async deleteReservering(id: number): Promise<DeleteResult> {
+        return this.tafelreserveringRepository.delete({id});
     }
 }

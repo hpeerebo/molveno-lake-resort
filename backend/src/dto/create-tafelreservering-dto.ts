@@ -1,5 +1,5 @@
 import { ApiModelProperty } from '@nestjs/swagger';
-import { IsDateString, IsInt, Min, Max, IsString } from 'class-validator';
+import { IsInt, Min, Max, IsString } from 'class-validator';
 import { TafelreserveringRepoEntity } from 'src/entities/tafelreservering.entity';
 
 export class CreateTafelreserveringDto {
