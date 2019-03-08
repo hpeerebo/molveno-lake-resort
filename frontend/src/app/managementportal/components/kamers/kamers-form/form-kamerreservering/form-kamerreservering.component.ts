@@ -1,9 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { KamerReservering } from 'src/app/models/kamerreservering';
-import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import { FormBuilder, Validators } from '@angular/forms';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import { KamerReserveringFormGroup } from './kamerreserveringformgroup';
-import {FormKamerreserveringdetailsComponent} from "../form-kamerreserveringdetails/form-kamerreserveringdetails.component";
 
 @Component({
   selector: 'app-form-kamerreservering',
@@ -13,10 +11,9 @@ import {FormKamerreserveringdetailsComponent} from "../form-kamerreserveringdeta
 export class FormKamerreserveringComponent implements OnInit {
   kamerreservering: KamerReservering | undefined = undefined;
   kamernaam: string = "";
-  submitted = false;
   public kamerreserveringForm = new KamerReserveringFormGroup();
 
-  constructor(public activeModal: NgbActiveModal, private formBuilder: FormBuilder,  private modalService: NgbModal) {}
+  constructor(public activeModal: NgbActiveModal) {}
 
 
   ngOnInit() {
