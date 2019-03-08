@@ -12,7 +12,7 @@ import { ModalConfirmComponent } from 'src/app/shared/components/modal-confirm/m
   styleUrls: ['./gerechten.component.scss']
 })
 export class ManagementPortalGerechtenComponent {
-  public gerechten: Observable<Gerecht[]> = this.gerechtenService.getAllGerechten();
+  public gerechten$: Observable<Gerecht[]> = this.gerechtenService.data$;
 
   constructor(private gerechtenService: GerechtenService, private modalService: NgbModal) {}
 
@@ -25,7 +25,7 @@ export class ManagementPortalGerechtenComponent {
 
     modal.result
       .then(result => {
-        console.log(result);
+        this.gerechtenService.addNewGerecht(result);
       })
       .catch(error => {
         console.log(error);
@@ -37,7 +37,7 @@ export class ManagementPortalGerechtenComponent {
       .open(ModalConfirmComponent)
       .result.then(result => {
         if (result === 'yes') {
-          console.log(gerecht);
+          this.gerechtenService.deleteGerecht(gerecht);
         }
       })
       .catch(error => {
