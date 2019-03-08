@@ -8,7 +8,7 @@ import { take, map, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class TafelreserveringenService {
-  public readonly api: string = '/api/restaurant/reserveringen';
+  private readonly api: string = '/api/restaurant/reserveringen';
 
   private readonly dataStore = new BehaviorSubject<Tafelreservering[]>([]);
   public readonly data$ = this.dataStore.asObservable();

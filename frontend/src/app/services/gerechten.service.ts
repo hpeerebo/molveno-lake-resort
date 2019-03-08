@@ -8,7 +8,7 @@ import { map, take, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class GerechtenService {
-  public readonly api: string = '/api/restaurant/gerechten';
+  private readonly api: string = '/api/restaurant/gerechten';
 
   private readonly dataStore = new BehaviorSubject<Gerecht[]>([]);
   public readonly data$ = this.dataStore.asObservable();
