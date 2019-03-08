@@ -1,5 +1,8 @@
+import { GerechtenService } from 'src/app/services/gerechten.service';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { Observable } from 'rxjs';
+import { Gerecht } from 'src/app/models/gerecht';
 
 @Component({
   selector: 'app-restaurant',
@@ -8,12 +11,13 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 })
 export class RestaurantComponent implements OnInit {
   images = ['assets/img/dishes/car1.jpg', 'assets/img/dishes/car2.jpg', 'assets/img/dishes/car3.jpg'];
+  public gerechten: Observable<Gerecht[]> = this.gerechtenService.getAllGerechten();
+
+  constructor(private gerechtenService: GerechtenService, private modalService: NgbModal) {}
 
   closeResult = '';
 
-  constructor(private modalService: NgbModal) {}
-
-  open(content: any) {
+    open(content: any) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
       result => {
         this.closeResult = `Closed with: ${result}`;
