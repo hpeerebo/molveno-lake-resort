@@ -43,13 +43,17 @@ export class ActiviteitenService {
 
   saveActiviteit(activiteit: Activiteit) {
     return this.http
-      .post<IActiviteit[]>(this.api + "saveactiviteit", activiteit)
+      .post<IActiviteit[]>(this.api /*+ "saveactiviteit"*/, activiteit)
       .subscribe();
   }
 
   updateActiviteit(activiteit: Activiteit) {
+    console.log(activiteit.id);
     return this.http
-      .post<IActiviteit[]>(this.api + "updateactiviteit", activiteit)
+      .post<IActiviteit[]>(
+        this.api /*+ "updateactiviteit"*/ + activiteit.id,
+        activiteit
+      )
       .subscribe();
   }
 

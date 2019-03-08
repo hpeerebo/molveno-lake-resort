@@ -26,15 +26,24 @@ export class ManagementPortalActiviteitenComponent {
 
     if (activiteit) {
       modal.componentInstance.activiteit = activiteit;
+      modal.result
+        .then(result => {
+          console.log("update", result);
+          this.activiteitenService.updateActiviteit(result);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    } else {
+      modal.result
+        .then(result => {
+          console.log("save", result);
+          this.activiteitenService.saveActiviteit(result);
+        })
+        .catch(error => {
+          console.log(error);
+        });
     }
-
-    modal.result
-    .then(result => {
-      this.activiteitenService.saveActiviteit(result);
-    })
-      .catch(error => {
-        console.log(error);
-      });
   }
 
   verwijderActiviteit(activiteit: Activiteit) {

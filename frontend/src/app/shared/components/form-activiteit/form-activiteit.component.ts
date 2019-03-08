@@ -8,7 +8,6 @@ import { Activiteit } from "src/app/models/activiteit";
   templateUrl: "./form-activiteit.component.html",
   styleUrls: ["./form-activiteit.component.scss"]
 })
-
 export class FormActiviteitComponent implements OnInit {
   @Input() activiteit: Activiteit | undefined = undefined;
 
@@ -34,7 +33,7 @@ export class FormActiviteitComponent implements OnInit {
         datum: this.activiteit.datum,
         capaciteit: this.activiteit.capaciteit,
         prijs: this.activiteit.prijs,
-        thumb: this.activiteit.thumb,
+        thumb: this.activiteit.thumb
       });
     }
   }

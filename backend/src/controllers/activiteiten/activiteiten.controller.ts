@@ -48,7 +48,7 @@ export class ActiviteitenController {
     return this.activiteitenService.getActiviteit();
   }
 
-  @Put('/activiteit')
+  @Put('')
   @ApiOperation({ title: 'Bijwerken van een activiteit' })
   @ApiResponse({
     status: 201,
