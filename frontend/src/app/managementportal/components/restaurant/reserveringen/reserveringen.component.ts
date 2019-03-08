@@ -12,7 +12,7 @@ import { FormTafelreserveringComponent } from 'src/app/shared/components/form-ta
   styleUrls: ['./reserveringen.component.scss']
 })
 export class ReserveringenComponent implements OnInit {
-  public reserveringen: Observable<Tafelreservering[] | undefined> = this.tafelreserveringenService.getAllReserveringen();
+  public reserveringen$: Observable<Tafelreservering[]> = this.tafelreserveringenService.data$;
 
   constructor(
     private tafelreserveringenService: TafelreserveringenService,

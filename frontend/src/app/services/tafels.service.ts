@@ -10,9 +10,12 @@ import { map, take, tap } from 'rxjs/operators';
 export class TafelsService {
   public readonly api: string = '/api/restaurant/tafels';
 
-  public readonly tafelCache = new BehaviorSubject<Tafel[] | undefined>(undefined);
+  private readonly dataStore = new BehaviorSubject<Tafel[]>([]);
+  public readonly data$: Observable<Tafel[]> = this.dataStore.asObservable();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.getAllTafels();
+  }
 
   private static tafelsResponseToTafelMapper(tafelsResponse: ITafelsResponse): Tafel[] {
     return tafelsResponse.tafels.map(TafelsService.tafelToTafelMapper);
@@ -22,32 +25,35 @@ export class TafelsService {
     return new Tafel(tafel.kenmerk, tafel.personen, tafel.id);
   }
 
-  getAllTafels(refreshCache: boolean = false): Observable<Tafel[] | undefined> {
-    if (this.tafelCache.getValue() === undefined || refreshCache) {
-      this.http.get<ITafelsResponse>(this.api)
-        .pipe(
-          take(1),
-          map(TafelsService.tafelsResponseToTafelMapper),
-          tap(tafels => this.tafelCache.next(tafels))
-        ).subscribe()
-    }
-    return this.tafelCache;
+  getAllTafels(): void {
+    this.http
+      .get<ITafelsResponse>(this.api)
+      .pipe(
+        take(1),
+        map(TafelsService.tafelsResponseToTafelMapper),
+        tap(tafels => this.dataStore.next(tafels))
+      )
+      .subscribe();
   }
 
   addNewTafel(tafel: Tafel): void {
-    this.http.post(this.api, tafel)
+    this.http
+      .post(this.api, tafel)
       .pipe(
         take(1),
-        tap(() => this.getAllTafels(true))
-      ).subscribe()
+        tap(() => this.getAllTafels())
+      )
+      .subscribe();
   }
 
   deleteTafel(tafel: Tafel): void {
-    this.http.delete(`${this.api}/${tafel.id}`)
+    this.http
+      .delete(`${this.api}/${tafel.id}`)
       .pipe(
         take(1),
-        tap(() => this.getAllTafels(true))
-      ).subscribe()
+        tap(() => this.getAllTafels())
+      )
+      .subscribe();
   }
 }
 

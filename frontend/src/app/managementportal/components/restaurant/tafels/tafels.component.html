@@ -12,7 +12,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let tafel of (tafels | async)">
+      <tr *ngFor="let tafel of (tafels$ | async)">
         <td>{{ tafel.kenmerk }}</td>
         <td>{{ tafel.personen }}</td>
         <td class="text-right">

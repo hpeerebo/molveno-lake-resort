@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { Ingredient } from '../models/ingredient';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { map, take, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -10,21 +10,49 @@ import { map } from 'rxjs/operators';
 export class IngredientenService {
   public readonly api: string = '/api/restaurant/ingredienten';
 
-  constructor(private http: HttpClient) { }
+  private readonly dataStore = new BehaviorSubject<Ingredient[]>([]);
+  public readonly data$ = this.dataStore.asObservable();
+
+  constructor(private http: HttpClient) {
+    this.getAllIngredienten();
+  }
 
   private static ingredientenResponseToIngredientMapper(ingredientenResponse: IIngredientenResponse): Ingredient[] {
     return ingredientenResponse.ingredienten.map(IngredientenService.ingredientToIngredientMapper);
   }
 
   private static ingredientToIngredientMapper(ingredient: IIngredient): Ingredient {
-    return new Ingredient(ingredient.naam, ingredient.eenheid, ingredient.prijs);
+    return new Ingredient(ingredient.naam, ingredient.eenheid, ingredient.prijs, ingredient.id);
   }
 
-  getAllIngredienten(): Observable<Ingredient[]> {
-    return this.http.get<IIngredientenResponse>(this.api)
+  getAllIngredienten(): void {
+    this.http.get<IIngredientenResponse>(this.api)
       .pipe(
-        map(IngredientenService.ingredientenResponseToIngredientMapper)
-      );
+        take(1),
+        map(IngredientenService.ingredientenResponseToIngredientMapper),
+        map(ingredienten => this.dataStore.next(ingredienten))
+      )
+      .subscribe();
+  }
+
+  addNewIngredient(ingredient: Ingredient): void {
+    this.http
+      .post(this.api, ingredient)
+      .pipe(
+        take(1),
+        tap(() => this.getAllIngredienten())
+      )
+      .subscribe();
+  }
+
+  deleteIngredient(ingredient: Ingredient): void {
+    this.http
+      .delete(`${this.api}/${ingredient.id}`)
+      .pipe(
+        take(1),
+        tap(() => this.getAllIngredienten())
+      )
+      .subscribe();
   }
 }
 
@@ -33,6 +61,7 @@ interface IIngredientenResponse {
 }
 
 interface IIngredient {
+  id: number;
   naam: string;
   eenheid: string;
   prijs: number;
