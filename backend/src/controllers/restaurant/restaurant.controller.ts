@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Delete, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body, Delete, Param, Put } from '@nestjs/common';
 import { Tafel } from 'src/models/tafel';
 import { TafelService } from 'src/services/tafel/tafel.service';
 import { CreateTafelDto } from 'src/dto/create-tafel-dto';
@@ -12,7 +12,7 @@ import { IngredientService } from 'src/services/ingredient/ingredient.service';
 import { Tafelreservering } from 'src/models/tafelreservering';
 import { TafelreserveringService } from 'src/services/tafelreservering/tafelreservering.service';
 import { CreateTafelreserveringDto } from 'src/dto/create-tafelreservering-dto';
-import { DeleteResult } from 'typeorm';
+import { DeleteResult, UpdateResult } from 'typeorm';
 
 @ApiUseTags('restaurant')
 @Controller('restaurant')
@@ -41,7 +41,19 @@ export class RestaurantController {
         return tafelEntity.mapToTafel();
     }
 
+    @Put('tafels/:id')
+    @ApiOperation({ title: 'Wijzig de gegevens van een bestaande tafel' })
+    @ApiResponse({ status: 200, description: 'De tafel is bijgewerkt' })
+    @ApiResponse({ status: 404, description: 'Een tafel met dit id is niet gevonden' })
+    @ApiResponse({ status: 409, description: 'Een tafel met dit kenmerk bestaat al' })
+    modifyTafel(@Param('id') id: number, @Body() tafelDto: CreateTafelDto): Promise<UpdateResult> {
+        return this.tafelService.updateTafel(id, tafelDto.mapToTafelEntity());
+    }
+
     @Delete('tafels/:id')
+    @ApiOperation({ title: 'Verwijder een tafel' })
+    @ApiResponse({ status: 200, description: 'De tafel is verwijderd' })
+    @ApiResponse({ status: 404, description: 'Een tafel met dit id is niet gevonden' })
     deleteTafel(@Param('id') id: number): Promise<DeleteResult> {
         return this.tafelService.deleteTafel(id);
     }
