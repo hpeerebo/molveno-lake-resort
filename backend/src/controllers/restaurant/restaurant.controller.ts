@@ -125,18 +125,32 @@ export class RestaurantController {
     }
 
     @Get('reserveringen')
+    @ApiOperation({ title: 'Haal een lijst op van alle reserveringen' })
     async getReserveringen(): Promise<{ reserveringen: Tafelreservering[] }> {
         const reserveringen = await this.tafelreserveringService.getReserveringen();
         return { reserveringen };
     }
 
     @Post('reserveringen')
+    @ApiOperation({ title: 'Voeg een nieuwe reservering toe' })
+    @ApiResponse({ status: 201, description: 'De reservering is succesvol aangemaakt' })
     async createReservering(@Body() tafelreserveringDto: CreateTafelreserveringDto): Promise<Tafelreservering> {
         const reserveringEntity = await this.tafelreserveringService.createReservering(tafelreserveringDto.mapToTafelreserveringEntity());
         return reserveringEntity.mapToTafelreservering();
     }
 
+    @Put('reserveringen/:id')
+    @ApiOperation({ title: 'Wijzig de gegevens van een reservering' })
+    @ApiResponse({ status: 200, description: 'De reservering is bijgewerkt' })
+    @ApiResponse({ status: 404, description: 'Een reservering met dit id is niet gevonden' })
+    modifyReservering(@Param('id') id: number, @Body() tafelreserveringDto: CreateTafelreserveringDto): Promise<UpdateResult> {
+        return this.tafelreserveringService.updateReservering(id, tafelreserveringDto.mapToTafelreserveringEntity());
+    }
+
     @Delete('reserveringen/:id')
+    @ApiOperation({ title: 'Verwijder een reservering' })
+    @ApiResponse({ status: 200, description: 'De reservering is verwijderd' })
+    @ApiResponse({ status: 404, description: 'Een reservering met dit id is niet gevonden' })
     deleteReservering(@Param('id') id: number): Promise<DeleteResult> {
         return this.tafelreserveringService.deleteReservering(id);
     }
