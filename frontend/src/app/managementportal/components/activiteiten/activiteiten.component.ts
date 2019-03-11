@@ -24,6 +24,11 @@ export class ManagementPortalActiviteitenComponent {
 
   openEditFormActiviteitModal(activiteit: Activiteit) {
     const modal = this.modalService.open(FormActiviteitComponent);
+    console.log("wijzigen activiteiten formulier");
+    console.log("activiteit", activiteit);
+    console.log("modal", modal);
+
+    modal.componentInstance.activiteit = activiteit;
     modal.result
       .then(result => {
         console.log("update", result);
@@ -33,38 +38,23 @@ export class ManagementPortalActiviteitenComponent {
         console.log(error);
       });
   }
-  // const modalRef = this.modalService.open(ManagementPortalKamersFormComponent, {
-  //   size: "lg",
-  //   ariaLabelledBy: "modal-basic-title"
-  // });
-  // modalRef.componentInstance.model = this.selectedKamer;
-  // modalRef.componentInstance.action = "edit";
-
-  // modalRef.result.then(resultPromise => {
-  //   this.closeResult = resultPromise;
-  //   this.roomservice.updateRoom(new Kamer(
-  //     resultPromise.kamerNaam,
-  //     resultPromise.kamerType,
-  //     resultPromise.kamerLigging,
-  //     resultPromise.aantalPersonen,
-  //     resultPromise.prijs
-  //   ));
-  //   });
 
   openFormActiviteitModal(activiteit?: Activiteit) {
     const modal = this.modalService.open(FormActiviteitComponent);
+    console.log("activiteiten component");
+    console.log(activiteit);
 
     if (activiteit) {
       modal.componentInstance.activiteit = activiteit;
-      modal.result
-        .then(result => {
-          console.log("save", result);
-          this.activiteitenService.saveActiviteit(result);
-        })
-        .catch(error => {
-          console.log(error);
-        });
     }
+    modal.result
+      .then(result => {
+        console.log("save", result);
+        this.activiteitenService.saveActiviteit(result);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   verwijderActiviteit(activiteit: Activiteit) {
