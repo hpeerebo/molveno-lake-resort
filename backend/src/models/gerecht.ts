@@ -3,6 +3,7 @@ import { GerechtSubType } from 'src/enums/gerechtsubtype';
 
 export class Gerecht {
     constructor(
+        public readonly id: number,
         public readonly naam: string,
         public readonly type: GerechtType,
         public readonly subtype: GerechtSubType,

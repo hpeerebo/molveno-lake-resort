@@ -30,7 +30,20 @@ export class FormIngredientComponent implements OnInit {
   }
 
   submitForm() {
-    this.activeModal.close(this.ingredientForm.value);
+    if (this.ingredient){
+      this.ingredient.naam = this.ingredientForm.value.naam;
+      this.ingredient.eenheid = this.ingredientForm.value.eenheid;
+      this.ingredient.prijs = Number(this.ingredientForm.value.prijs);
+      this.activeModal.close(
+        this.ingredient
+      )
+    } else {
+      this.activeModal.close(new Ingredient(
+        this.ingredientForm.value.naam,
+        this.ingredientForm.value.eenheid,
+        this.ingredientForm.value.prijs
+      ));
+    }
   }
 
   get naam() {

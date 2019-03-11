@@ -12,7 +12,7 @@ import { FormTafelreserveringComponent } from 'src/app/shared/components/form-ta
   styleUrls: ['./reserveringen.component.scss']
 })
 export class ReserveringenComponent implements OnInit {
-  public reserveringen: Observable<Tafelreservering[] | undefined> = this.tafelreserveringenService.getAllReserveringen();
+  public reserveringen$: Observable<Tafelreservering[]> = this.tafelreserveringenService.data$;
 
   field: string = "";
   public clickColumnHandler(event: string): string {
@@ -28,16 +28,20 @@ export class ReserveringenComponent implements OnInit {
   ngOnInit() {
   }
 
-  openFormTafelreserveringModal(reservering?: Tafelreservering) {
+  openFormTafelreserveringModal(tafelreservering?: Tafelreservering) {
     const modal = this.modalService.open(FormTafelreserveringComponent);
 
-    if (reservering) {
-      modal.componentInstance.reservering = reservering;
+    if (tafelreservering) {
+      modal.componentInstance.tafelreservering = tafelreservering;
     }
 
     modal.result
       .then(result => {
-        this.tafelreserveringenService.addNewReservering(result);
+        if (result.id) {
+          this.tafelreserveringenService.updateTafelreservering(result);
+        } else {
+          this.tafelreserveringenService.addNewReservering(result);
+        }
       })
       .catch(error => {
         console.log(error);

@@ -1,9 +1,9 @@
 export class Tafelreservering {
   constructor(
-    public readonly aanvangstijd: string,
-    public readonly personen: number,
-    public readonly naam: string,
-    public readonly telefoon: string,
-    public readonly id?: number,
+    public aanvangstijd: string,
+    public personen: number,
+    public naam: string,
+    public telefoon: string,
+    public id?: number,
   ) { }
 }

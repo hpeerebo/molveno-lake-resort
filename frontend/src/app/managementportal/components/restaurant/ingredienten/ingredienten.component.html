@@ -13,7 +13,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let ingredient of (ingredienten | async | sortgrid:field)">
+      <tr *ngFor="let ingredient of (ingredienten$ | async | sortgrid:field)">
         <td>{{ingredient.naam}}</td>
         <td>{{ingredient.eenheid}}</td>
         <td>{{ingredient.prijs | currency: 'EUR'}}</td>

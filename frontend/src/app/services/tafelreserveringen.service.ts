@@ -8,11 +8,14 @@ import { take, map, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class TafelreserveringenService {
-  public readonly api: string = '/api/restaurant/reserveringen';
+  private readonly api: string = '/api/restaurant/reserveringen';
 
-  public readonly reserveringCache = new BehaviorSubject<Tafelreservering[] | undefined>(undefined);
+  private readonly dataStore = new BehaviorSubject<Tafelreservering[]>([]);
+  public readonly data$ = this.dataStore.asObservable();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.getAllReserveringen();
+  }
 
   private static reserveringenResponseToReserveringMapper(reserveringenResponse: IReserveringenResponse): Tafelreservering[] {
     return reserveringenResponse.reserveringen.map(TafelreserveringenService.reserveringenToReserveringMapper);
@@ -22,32 +25,45 @@ export class TafelreserveringenService {
     return new Tafelreservering(reservering.aanvangstijd, reservering.personen, reservering.naam, reservering.telefoon, reservering.id);
   }
 
-  getAllReserveringen(refreshCache: boolean = false): Observable<Tafelreservering[] | undefined> {
-    if (this.reserveringCache.getValue() === undefined || refreshCache) {
-      this.http.get<IReserveringenResponse>(this.api)
-        .pipe(
-          take(1),
-          map(TafelreserveringenService.reserveringenResponseToReserveringMapper),
-          tap(reserveringen => this.reserveringCache.next(reserveringen))
-        ).subscribe()
-    }
-    return this.reserveringCache;
+  getAllReserveringen(): void {
+    this.http
+      .get<IReserveringenResponse>(this.api)
+      .pipe(
+        take(1),
+        map(TafelreserveringenService.reserveringenResponseToReserveringMapper),
+        tap(reserveringen => this.dataStore.next(reserveringen))
+      )
+      .subscribe();
   }
 
   addNewReservering(reservering: Tafelreservering): void {
-    this.http.post(this.api, reservering)
+    this.http
+      .post(this.api, reservering)
       .pipe(
         take(1),
-        tap(() => this.getAllReserveringen(true))
-      ).subscribe()
+        tap(() => this.getAllReserveringen())
+      )
+      .subscribe();
+  }
+
+  updateTafelreservering(tafelreservering: Tafelreservering): void {
+    this.http
+      .put(`${this.api}/${tafelreservering.id}`, tafelreservering)
+      .pipe(
+        take(1),
+        tap(() => this.getAllReserveringen())
+      )
+      .subscribe();
   }
 
   deleteReservering(reservering: Tafelreservering): void {
-    this.http.delete(`${this.api}/${reservering.id}`)
+    this.http
+      .delete(`${this.api}/${reservering.id}`)
       .pipe(
         take(1),
-        tap(() => this.getAllReserveringen(true))
-      ).subscribe()
+        tap(() => this.getAllReserveringen())
+      )
+      .subscribe();
   }
 }
 

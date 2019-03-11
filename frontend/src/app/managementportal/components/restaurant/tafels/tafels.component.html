@@ -12,7 +12,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let tafel of (tafels | async | sortgrid:field)">
+      <tr *ngFor="let tafel of (tafels$ | async | sortgrid:field)">
         <td>{{ tafel.kenmerk }}</td>
         <td>{{ tafel.personen }}</td>
         <td class="text-right">

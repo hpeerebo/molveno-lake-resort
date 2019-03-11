@@ -27,6 +27,6 @@ export class IngredientRepoEntity {
     }
 
     mapToIngredient(): Ingredient {
-        return new Ingredient(this.naam, this.eenheid, this.prijs);
+        return new Ingredient(this.id, this.naam, this.eenheid, this.prijs);
     }
 }

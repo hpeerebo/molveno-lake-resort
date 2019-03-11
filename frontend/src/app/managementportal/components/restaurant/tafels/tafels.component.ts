@@ -12,7 +12,7 @@ import { ModalConfirmComponent } from 'src/app/shared/components/modal-confirm/m
   styleUrls: ['./tafels.component.scss']
 })
 export class ManagementPortalTafelsComponent {
-  public tafels: Observable<Tafel[] | undefined> = this.tafelsService.getAllTafels();
+  public tafels$: Observable<Tafel[]> = this.tafelsService.data$;
 
   field: string = "";
   public clickColumnHandler(event: string): string {
@@ -34,7 +34,11 @@ export class ManagementPortalTafelsComponent {
 
     modal.result
       .then(result => {
-        this.tafelsService.addNewTafel(result);
+        if (result.id) {
+          this.tafelsService.updateTafel(result);
+        } else {
+          this.tafelsService.addNewTafel(result);
+        }
       })
       .catch(error => {
         console.log(error);
@@ -46,7 +50,7 @@ export class ManagementPortalTafelsComponent {
       .open(ModalConfirmComponent)
       .result.then(result => {
         if (result === 'yes') {
-          console.log(tafel);
+          this.tafelsService.deleteTafel(tafel);
         }
       })
       .catch(error => {

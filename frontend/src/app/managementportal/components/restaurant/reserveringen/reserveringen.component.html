@@ -14,7 +14,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let reservering of (reserveringen | async | sortgrid:field)">
+    <tr *ngFor="let reservering of (reserveringen$ | async | sortgrid:field)">
       <td>{{ reservering.aanvangstijd }}</td>
       <td>{{ reservering.personen }}</td>
       <td>{{ reservering.naam }}</td>

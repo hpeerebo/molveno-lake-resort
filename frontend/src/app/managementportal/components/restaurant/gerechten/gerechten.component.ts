@@ -19,7 +19,7 @@ export class ManagementPortalGerechtenComponent {
     return console.log(this.field), this.field;
   }
 
-  public gerechten: Observable<Gerecht[]> = this.gerechtenService.getAllGerechten();
+  public gerechten$: Observable<Gerecht[]> = this.gerechtenService.data$;
 
   constructor(private gerechtenService: GerechtenService, private modalService: NgbModal) {}
 
@@ -32,7 +32,11 @@ export class ManagementPortalGerechtenComponent {
 
     modal.result
       .then(result => {
-        console.log(result);
+        if (result.id) {
+          this.gerechtenService.updateGerecht(result);
+        } else {
+          this.gerechtenService.addNewGerecht(result);
+        }
       })
       .catch(error => {
         console.log(error);
@@ -44,7 +48,7 @@ export class ManagementPortalGerechtenComponent {
       .open(ModalConfirmComponent)
       .result.then(result => {
         if (result === 'yes') {
-          console.log(gerecht);
+          this.gerechtenService.deleteGerecht(gerecht);
         }
       })
       .catch(error => {

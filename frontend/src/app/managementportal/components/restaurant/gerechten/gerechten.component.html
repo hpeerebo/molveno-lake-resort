@@ -14,7 +14,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let gerecht of (gerechten | async | sortgrid:field)">
+      <tr *ngFor="let gerecht of (gerechten$ | async | sortgrid:field)">
         <td>{{gerecht.naam}}</td>
         <td>{{gerecht.type}}</td>
         <td>{{gerecht.subtype}}</td>
