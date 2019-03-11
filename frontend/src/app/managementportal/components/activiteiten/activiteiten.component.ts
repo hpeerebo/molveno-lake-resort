@@ -2,9 +2,10 @@ import { Component } from "@angular/core";
 import { ActiviteitenService } from "src/app/services/activiteiten.service";
 import { Observable } from "rxjs";
 import { Activiteit } from "src/app/models/activiteit";
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { NgbModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
 import { FormActiviteitComponent } from "src/app/shared/components/form-activiteit/form-activiteit.component";
 import { ModalConfirmComponent } from "src/app/shared/components/modal-confirm/modal-confirm.component";
+import { ActiviteitReserveringenComponent } from "./activiteit-reserveringen/activiteit-reserveringen.component";
 
 @Component({
   selector: "app-activiteiten",
@@ -21,20 +22,40 @@ export class ManagementPortalActiviteitenComponent {
     private modalService: NgbModal
   ) {}
 
+  openEditFormActiviteitModal(activiteit: Activiteit) {
+    const modal = this.modalService.open(FormActiviteitComponent);
+    modal.result
+      .then(result => {
+        console.log("update", result);
+        this.activiteitenService.updateActiviteit(result);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+  // const modalRef = this.modalService.open(ManagementPortalKamersFormComponent, {
+  //   size: "lg",
+  //   ariaLabelledBy: "modal-basic-title"
+  // });
+  // modalRef.componentInstance.model = this.selectedKamer;
+  // modalRef.componentInstance.action = "edit";
+
+  // modalRef.result.then(resultPromise => {
+  //   this.closeResult = resultPromise;
+  //   this.roomservice.updateRoom(new Kamer(
+  //     resultPromise.kamerNaam,
+  //     resultPromise.kamerType,
+  //     resultPromise.kamerLigging,
+  //     resultPromise.aantalPersonen,
+  //     resultPromise.prijs
+  //   ));
+  //   });
+
   openFormActiviteitModal(activiteit?: Activiteit) {
     const modal = this.modalService.open(FormActiviteitComponent);
 
     if (activiteit) {
       modal.componentInstance.activiteit = activiteit;
-      modal.result
-        .then(result => {
-          console.log("update", result);
-          this.activiteitenService.updateActiviteit(result);
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    } else {
       modal.result
         .then(result => {
           console.log("save", result);

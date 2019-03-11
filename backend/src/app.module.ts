@@ -22,7 +22,8 @@ import { ActiviteitResService } from './services/activiteit-res/activiteit-res.s
 import { ActiviteitResEntity } from './entities/activiteit-res-entity';
 
 @Module({
-  imports: [KamersModule,
+  imports: [
+    KamersModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
@@ -30,10 +31,21 @@ import { ActiviteitResEntity } from './entities/activiteit-res-entity';
       username: 'postgres',
       password: 'root',
       database: 'molveno',
-      entities: [__dirname + '/**/*-entity{.ts,.js}', __dirname + '/**/*.entity{.ts,.js}'],
+      entities: [
+        __dirname + '/**/*-entity{.ts,.js}',
+        __dirname + '/**/*.entity{.ts,.js}',
+      ],
       synchronize: true,
     }),
-    TypeOrmModule.forFeature([TafelRepoEntity, GerechtRepoEntity, IngredientRepoEntity, TafelreserveringRepoEntity, ActiviteitEntity, ActiviteitResEntity]),
+    TypeOrmModule.forFeature([
+      TafelRepoEntity,
+      GerechtRepoEntity,
+      IngredientRepoEntity,
+      TafelreserveringRepoEntity,
+      ActiviteitEntity,
+      ActiciteitPlanningService,
+      ActiviteitResEntity,
+    ]),
   ],
   controllers: [
     AppController,
@@ -53,4 +65,4 @@ import { ActiviteitResEntity } from './entities/activiteit-res-entity';
     TafelreserveringService,
   ],
 })
-export class AppModule { }
+export class AppModule {}

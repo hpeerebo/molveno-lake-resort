@@ -23,12 +23,12 @@
         <td>{{ activiteit.datum }}</td>
         <td>{{ activiteit.capaciteit }}</td>
         <td>{{ activiteit.prijs | currency: "EUR" }}</td>
-        <td class="text-right">
+        <td class="text-align: right">
           <i
             class="fas fa-edit mr-2"
             placement="top"
             ngbTooltip="Wijzigen"
-            (click)="openFormActiviteitModal(activiteit)"
+            (click)="openEditFormActiviteitModal(activiteit)"
           ></i>
           <i
             class="fas fa-trash-alt mr-2"
