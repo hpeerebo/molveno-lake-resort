@@ -22,16 +22,20 @@ export class ReserveringenComponent implements OnInit {
   ngOnInit() {
   }
 
-  openFormTafelreserveringModal(reservering?: Tafelreservering) {
+  openFormTafelreserveringModal(tafelreservering?: Tafelreservering) {
     const modal = this.modalService.open(FormTafelreserveringComponent);
 
-    if (reservering) {
-      modal.componentInstance.reservering = reservering;
+    if (tafelreservering) {
+      modal.componentInstance.tafelreservering = tafelreservering;
     }
 
     modal.result
       .then(result => {
-        this.tafelreserveringenService.addNewReservering(result);
+        if (result.id) {
+          this.tafelreserveringenService.updateTafelreservering(result);
+        } else {
+          this.tafelreserveringenService.addNewReservering(result);
+        }
       })
       .catch(error => {
         console.log(error);

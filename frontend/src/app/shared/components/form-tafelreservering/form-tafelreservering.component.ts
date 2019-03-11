@@ -33,12 +33,22 @@ export class FormTafelreserveringComponent implements OnInit {
   }
 
   submitForm() {
-    this.activeModal.close(new Tafelreservering(
-      this.tafelreserveringForm.value.aanvangstijd,
-      this.tafelreserveringForm.value.personen,
-      this.tafelreserveringForm.value.naam,
-      this.tafelreserveringForm.value.telefoon,
-    ));
+    if (this.tafelreservering) {
+      this.tafelreservering.aanvangstijd = this.tafelreserveringForm.value.aanvangstijd;
+      this.tafelreservering.personen = this.tafelreserveringForm.value.personen;
+      this.tafelreservering.naam = this.tafelreserveringForm.value.naam;
+      this.tafelreservering.telefoon = this.tafelreserveringForm.value.telefoon;
+      this.activeModal.close(
+        this.tafelreservering
+      )
+    } else {
+      this.activeModal.close(new Tafelreservering(
+        this.tafelreserveringForm.value.aanvangstijd,
+        this.tafelreserveringForm.value.personen,
+        this.tafelreserveringForm.value.naam,
+        this.tafelreserveringForm.value.telefoon,
+      ));
+    }
   }
 
   get aanvangstijd() {

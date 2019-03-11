@@ -25,7 +25,11 @@ export class ManagementPortalIngredientenComponent {
 
     modal.result
       .then(result => {
-        this.ingredientenService.addNewIngredient(result);
+        if (result.id) {
+          this.ingredientenService.updateIngredient(result);
+        } else {
+          this.ingredientenService.addNewIngredient(result);
+        }
       })
       .catch(error => {
         console.log(error);

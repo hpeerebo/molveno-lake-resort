@@ -46,6 +46,16 @@ export class TafelreserveringenService {
       .subscribe();
   }
 
+  updateTafelreservering(tafelreservering: Tafelreservering): void {
+    this.http
+      .put(`${this.api}/${tafelreservering.id}`, tafelreservering)
+      .pipe(
+        take(1),
+        tap(() => this.getAllReserveringen())
+      )
+      .subscribe();
+  }
+
   deleteReservering(reservering: Tafelreservering): void {
     this.http
       .delete(`${this.api}/${reservering.id}`)

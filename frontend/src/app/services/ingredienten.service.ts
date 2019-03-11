@@ -45,6 +45,16 @@ export class IngredientenService {
       .subscribe();
   }
 
+  updateIngredient(ingredient: Ingredient): void {
+    this.http
+      .put(`${this.api}/${ingredient.id}`, ingredient)
+      .pipe(
+        take(1),
+        tap(() => this.getAllIngredienten())
+      )
+      .subscribe();
+  }
+
   deleteIngredient(ingredient: Ingredient): void {
     this.http
       .delete(`${this.api}/${ingredient.id}`)

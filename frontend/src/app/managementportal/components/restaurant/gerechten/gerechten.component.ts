@@ -25,7 +25,11 @@ export class ManagementPortalGerechtenComponent {
 
     modal.result
       .then(result => {
-        this.gerechtenService.addNewGerecht(result);
+        if (result.id) {
+          this.gerechtenService.updateGerecht(result);
+        } else {
+          this.gerechtenService.addNewGerecht(result);
+        }
       })
       .catch(error => {
         console.log(error);

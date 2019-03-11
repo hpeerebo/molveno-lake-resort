@@ -28,7 +28,11 @@ export class ManagementPortalTafelsComponent {
 
     modal.result
       .then(result => {
-        this.tafelsService.addNewTafel(result);
+        if (result.id) {
+          this.tafelsService.updateTafel(result);
+        } else {
+          this.tafelsService.addNewTafel(result);
+        }
       })
       .catch(error => {
         console.log(error);

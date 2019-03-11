@@ -45,6 +45,16 @@ export class GerechtenService {
       .subscribe();
   }
 
+  updateGerecht(gerecht: Gerecht): void {
+    this.http
+      .put(`${this.api}/${gerecht.id}`, gerecht)
+      .pipe(
+        take(1),
+        tap(() => this.getAllGerechten())
+      )
+      .subscribe();
+  }
+
   deleteGerecht(gerecht: Gerecht): void {
     this.http
       .delete(`${this.api}/${gerecht.id}`)

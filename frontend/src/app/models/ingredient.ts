@@ -4,5 +4,5 @@ export class Ingredient {
     public eenheid: string,
     public prijs: number,
     public id?: number
-  ) {}
+  ) { }
 }

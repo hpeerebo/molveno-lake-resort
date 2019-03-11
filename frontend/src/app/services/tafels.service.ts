@@ -46,6 +46,16 @@ export class TafelsService {
       .subscribe();
   }
 
+  updateTafel(tafel: Tafel): void {
+    this.http
+      .put(`${this.api}/${tafel.id}`, tafel)
+      .pipe(
+        take(1),
+        tap(() => this.getAllTafels())
+      )
+      .subscribe();
+  }
+
   deleteTafel(tafel: Tafel): void {
     this.http
       .delete(`${this.api}/${tafel.id}`)
