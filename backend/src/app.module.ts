@@ -43,7 +43,6 @@ import { ActiviteitResEntity } from './entities/activiteit-res-entity';
       IngredientRepoEntity,
       TafelreserveringRepoEntity,
       ActiviteitEntity,
-      ActiciteitPlanningService,
       ActiviteitResEntity,
     ]),
   ],

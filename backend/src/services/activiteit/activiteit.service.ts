@@ -24,6 +24,7 @@ export class ActiviteitService {
     this.activiteitRepository.update(
       { id: activiteit.id },
       {
+        naam: activiteit.naam,
         beschrijving: activiteit.beschrijving,
         capaciteit: activiteit.capaciteit,
         datum: activiteit.datum,
