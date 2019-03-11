@@ -12,6 +12,13 @@ import { ModalConfirmComponent } from "src/app/shared/components/modal-confirm/m
   styleUrls: ["./ingredienten.component.scss"]
 })
 export class ManagementPortalIngredientenComponent {
+
+  field: string = "";
+  public clickColumnHandler(event: string): string {
+    this.field = event;
+    return console.log(this.field), this.field;
+  }
+
   public ingredienten: Observable<
     Ingredient[]
   > = this.ingredientenService.getAllIngredienten();

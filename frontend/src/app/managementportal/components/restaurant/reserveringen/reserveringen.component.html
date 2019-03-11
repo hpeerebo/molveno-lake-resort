@@ -6,15 +6,15 @@
 <table class="table table-striped table-sm">
   <thead>
     <tr>
-      <th>Aanvangstijd</th>
-      <th>Personen</th>
-      <th>Naam</th>
+      <th class="handCursor" (click)="clickColumnHandler('aanvangstijd')">Aanvangstijd</th>
+      <th class="handCursor" (click)="clickColumnHandler('personen')">Personen</th>
+      <th class="handCursor" (click)="clickColumnHandler('naam')">Naam</th>
       <th>Telefoon</th>
       <th></th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let reservering of (reserveringen | async)">
+    <tr *ngFor="let reservering of (reserveringen | async | sortgrid:field)">
       <td>{{ reservering.aanvangstijd }}</td>
       <td>{{ reservering.personen }}</td>
       <td>{{ reservering.naam }}</td>
