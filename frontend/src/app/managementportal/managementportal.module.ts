@@ -27,6 +27,7 @@ import { FormActiviteitResComponent } from '../shared/components/form-activiteit
 import { KamerreserveringComponent } from './components/kamers/kamerreserveringen/kamerreservering.component';
 import { FormKamerreserveringComponent } from './components/kamers/kamers-form/form-kamerreservering/form-kamerreservering.component';
 import {FormKamerreserveringdetailsComponent} from "./components/kamers/kamers-form/form-kamerreserveringdetails/form-kamerreserveringdetails.component";
+import { SortgridPipe } from '../shared/pipes/sortgrid.pipe';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import {FormKamerreserveringdetailsComponent} from "./components/kamers/kamers-f
     ManagementPortalKamersComponent,
     ManagementPortalLoginComponent,
     KamersPipe,
+    SortgridPipe,
     ManagementPortalKamersFormComponent,
     ManagementPortalIngredientenComponent,
     ManagementPortalGerechtenComponent,
@@ -44,7 +46,7 @@ import {FormKamerreserveringdetailsComponent} from "./components/kamers/kamers-f
     FormTafelreserveringComponent,
     FormGerechtComponent,
     FormIngredientComponent,
-    FormActiviteitComponent,   
+    FormActiviteitComponent,
     FormActiviteitResComponent,
     ModalConfirmComponent,
     ReserveringenComponent,

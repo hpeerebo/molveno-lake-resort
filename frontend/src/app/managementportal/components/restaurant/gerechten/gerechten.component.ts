@@ -12,6 +12,13 @@ import { ModalConfirmComponent } from 'src/app/shared/components/modal-confirm/m
   styleUrls: ['./gerechten.component.scss']
 })
 export class ManagementPortalGerechtenComponent {
+
+  field: string = "";
+  public clickColumnHandler(event: string): string {
+    this.field = event;
+    return console.log(this.field), this.field;
+  }
+
   public gerechten$: Observable<Gerecht[]> = this.gerechtenService.data$;
 
   constructor(private gerechtenService: GerechtenService, private modalService: NgbModal) {}

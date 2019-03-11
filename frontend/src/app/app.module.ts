@@ -7,8 +7,7 @@ import {FrontendModule} from "./frontend/frontend.module";
 import {ManagementportalModule} from "./managementportal/managementportal.module";
 import {HttpClientModule} from '@angular/common/http';
 import {RoomService} from './services/rooms.service';
-import {KamersPipe} from './shared/pipes/kamers.pipe';
-import { FormTafelreserveringComponent } from './shared/components/form-tafelreservering/form-tafelreservering.component';
+import { SortGridService } from './shared/services/sort-grid.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,7 +20,7 @@ import { FormTafelreserveringComponent } from './shared/components/form-tafelres
     ManagementportalModule,
     HttpClientModule
   ],
-  providers: [RoomService],
+  providers: [RoomService, SortGridService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
