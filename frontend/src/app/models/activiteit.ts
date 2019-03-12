@@ -3,7 +3,7 @@ export class Activiteit {
     public id: number,
     public naam: string,
     public beschrijving: string,
-    public datum: number,
+    public datum: Date,
     public capaciteit: number,
     public prijs: number,
     public thumb: string

@@ -61,7 +61,7 @@ interface IActiviteit {
   id: number;
   naam: string;
   beschrijving: string;
-  datum: number;
+  datum: Date;
   capaciteit: number;
   prijs: number;
   thumb: string;

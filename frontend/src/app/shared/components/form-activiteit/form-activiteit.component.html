@@ -1,6 +1,11 @@
 <div class="modal-header">
   <h4 class="modal-title" id="modal-basic-title">Activiteit</h4>
-  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('cancel')">
+  <button
+    type="button"
+    class="close"
+    aria-label="Close"
+    (click)="activeModal.dismiss('cancel')"
+  >
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
@@ -15,7 +20,9 @@
         [class.is-invalid]="naam?.invalid && naam?.touched"
         ngbAutofocus
       />
-      <small class="text-danger" [class.d-none]="naam?.valid || naam?.untouched">Verplicht</small>
+      <small class="text-danger" [class.d-none]="naam?.valid || naam?.untouched"
+        >Verplicht</small
+      >
     </div>
     <div class="form-group">
       <label>Beschrijving</label>
@@ -25,9 +32,13 @@
         formControlName="beschrijving"
         [class.is-invalid]="beschrijving?.invalid && beschrijving?.touched"
       />
-      <small class="text-danger" [class.d-none]="beschrijving?.valid || beschrijving?.untouched">Geef een korte beschrijving van de activiteit.</small>
+      <small
+        class="text-danger"
+        [class.d-none]="beschrijving?.valid || beschrijving?.untouched"
+        >Geef een korte beschrijving van de activiteit.</small
+      >
     </div>
-    <div class="form-group">
+    <!-- <div class="form-group">
       <label>Datum</label>
       <input
         type="number"
@@ -36,7 +47,20 @@
         [class.is-invalid]="datum?.invalid && datum?.touched"
       />
       <small class="text-danger" [class.d-none]="datum?.valid || datum?.untouched">Datum van de activiteit.</small>
+    </div> -->
+
+    <div class="form-group">
+      <label for="inputDateFrom">Datum activiteit</label>
+      <div class="form-group">
+        <div class="input-group date" id="datetimepicker6">
+          <input type="date" class="form-control" formControlName="datum" [class.is-invalid]="datum?.invalid && datum?.touched"/>
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+          </span>
+        </div>
+      </div>
     </div>
+
     <div class="form-group">
       <label>Capaciteit</label>
       <input
@@ -45,7 +69,11 @@
         formControlName="capaciteit"
         [class.is-invalid]="capaciteit?.invalid && capaciteit?.touched"
       />
-      <small class="text-danger" [class.d-none]="capaciteit?.valid || capaciteit?.untouched">Maximum aantal deelnemers.</small>
+      <small
+        class="text-danger"
+        [class.d-none]="capaciteit?.valid || capaciteit?.untouched"
+        >Maximum aantal deelnemers.</small
+      >
     </div>
     <div class="form-group">
       <label>Prijs</label>
@@ -55,7 +83,11 @@
         formControlName="prijs"
         [class.is-invalid]="prijs?.invalid && prijs?.touched"
       />
-      <small class="text-danger" [class.d-none]="prijs?.valid || prijs?.untouched">Prijs per persoon.</small>
+      <small
+        class="text-danger"
+        [class.d-none]="prijs?.valid || prijs?.untouched"
+        >Prijs per persoon.</small
+      >
     </div>
     <div class="form-group">
       <label>Foto</label>
@@ -65,10 +97,21 @@
         formControlName="thumb"
         [class.is-invalid]="thumb?.invalid && thumb?.touched"
       />
-      <small class="text-danger" [class.d-none]="thumb?.valid || thumb?.untouched">Fotonaam (als bekend).</small>
+      <small
+        class="text-danger"
+        [class.d-none]="thumb?.valid || thumb?.untouched"
+        >Fotonaam (als bekend).</small
+      >
     </div>
   </form>
   <div class="modal-footer">
-    <button type="button" class="btn btn-success" (click)="submitForm()" [disabled]="activiteitForm.invalid">Save</button>
+    <button
+      type="button"
+      class="btn btn-success"
+      (click)="submitForm()"
+      [disabled]="activiteitForm.invalid"
+    >
+      Save
+    </button>
   </div>
 </div>
