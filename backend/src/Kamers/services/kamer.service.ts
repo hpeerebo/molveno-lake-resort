@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CreateKamerDto } from 'src/Kamers/dto/create-kamer-dto';
-import { Repository } from 'typeorm';
+import { Repository, getRepository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Kamer } from '../models/kamer';
 import { KamerEntity } from '../models/entities/kamer.entity';
@@ -14,12 +14,15 @@ export class KamerService {
         return this.kamersepository.find()
         .then(kamersEntities => kamersEntities.map(kamerEntity => kamerEntity.mapToKamers()));
     }
-    public searchFreeRooms(datumvan: string, datumtot: string, kamertype: string): Promise<Kamer[]>{
-        console.log (kamertype)
+    public async searchFreeRooms(datumvan: string, datumtot: string, kamertype: string): Promise<Kamer[]>{
 
-        return this.kamersepository.find({where: {kamerType: kamertype}})
-        .then(kamersEntities => kamersEntities.map(kamerEntity => kamerEntity.mapToKamers()));
-        
+        return await getRepository(KamerEntity)
+            .createQueryBuilder("kamer")
+            .where(`kamer.kamerNaam NOT IN (select kamernaam from kamer_reservering_entity where datumvan >= '${datumvan}' 
+                    AND datumtot <= '${datumtot}') AND kamer.kamerType='${kamertype}'`)
+            .getMany()
+            .then(kamersEntities => kamersEntities.map(kamerEntity => kamerEntity.mapToKamers()));
+        //console.log(user);
     }
     public saveKamer(createkamerdto: CreateKamerDto) {
         this.kamersepository.save(createkamerdto.kamerEntity());

@@ -50,7 +50,6 @@ export class RoomService {
         this.kamersCacheSubject.next(kamers);
       })
     ).subscribe();
-
   }
   saveRoom(room: Kamer){
     this.http.post(`${RoomService.api}`, room)

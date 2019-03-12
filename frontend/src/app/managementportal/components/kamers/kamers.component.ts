@@ -147,6 +147,7 @@ export class ManagementPortalKamersComponent implements OnInit {
     modalKamerSearch.result.then(searchParameters => {
       this.roomservice.searchRoom(searchParameters.datumvan, searchParameters.datumtot, searchParameters.kamertype)
     }
+
       );
   }
 }
