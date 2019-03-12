@@ -18,9 +18,9 @@ export class CreateActiviteitDto {
   @ApiModelProperty()
   public readonly capaciteit: number;
 
-  @IsDate()
+  @IsString()
   @ApiModelProperty()
-  public readonly datum: Date;
+  public readonly datum: string;
 
   @IsNumber()
   @ApiModelProperty()

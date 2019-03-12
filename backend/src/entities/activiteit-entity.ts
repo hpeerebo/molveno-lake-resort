@@ -6,7 +6,7 @@ export class ActiviteitEntity {
   @Column('varchar') public readonly naam: string;
   @Column('varchar') public readonly beschrijving: string;
   @Column('integer') public readonly capaciteit: number;
-  @Column('Date') public readonly datum: Date;
+  @Column('varchar') public readonly datum: string;
   @Column('integer') public readonly prijs: number;
   @Column('varchar') public readonly thumb: string;
 
@@ -15,7 +15,7 @@ export class ActiviteitEntity {
     naam: string,
     beschrijving: string,
     capaciteit: number,
-    datum: Date,
+    datum: string,
     prijs: number,
     thumb: string,
   ) {

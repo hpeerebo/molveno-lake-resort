@@ -43,6 +43,7 @@ export class ActiviteitenService {
 
   saveActiviteit(activiteit: Activiteit): void {
     this.http.post<IActiviteit[]>(this.api, activiteit).subscribe();
+    console.log(activiteit);
     location.reload();
   }
 
