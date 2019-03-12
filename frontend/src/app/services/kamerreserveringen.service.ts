@@ -23,7 +23,7 @@ export class KamerreserveringenService {
   }
   saveKamerReservering(kamerreservering: KamerReservering){
     console.log(kamerreservering);
-    this.http.post('/api/kamerreservering', kamerreservering)
+    this.http.post(`${KamerreserveringenService.api}`, kamerreservering)
       .pipe(
         take(1)
       ).subscribe()

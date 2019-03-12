@@ -17,7 +17,6 @@ export class FormKamerreserveringdetailsComponent implements OnInit {
 
 
   ngOnInit() {
-    console.log (this.kamerReservering);
   }
 
 

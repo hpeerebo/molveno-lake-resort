@@ -3,7 +3,11 @@
   <br />
 
   <div class="row">
-    <div class="col-12 text-right">
+      <div class=" col-6 d-flex justify-content-start">
+          <button type="button" class="btn btn-danger" (click)= "showAvailableRoomsModal()">Beschikbare kamers</button>
+          <!--a href="/managementportal/kamers-form" class="btn btn-primary" role="button" aria-pressed="true">Add Room</a-->
+        </div>
+    <div class=" col-6 d-flex justify-content-end">
         <button type="button" class="btn btn-primary" (click)="openNewFormModal()">Kamer toevoegen</button>
         <!--a href="/managementportal/kamers-form" class="btn btn-primary" role="button" aria-pressed="true">Add Room</a-->
       </div>
@@ -24,7 +28,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let kamer of (kamers | kamersfilter: show)">
+      <tr *ngFor="let kamer of (kamers | async | kamersfilter: show)">
         <td>{{ kamer.kamerNaam }}</td>
         <td>{{ kamer.kamerType }}</td>
         <td>{{ kamer.kamerLigging }}</td>

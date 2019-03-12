@@ -17,6 +17,7 @@ export class FormKamerreserveringComponent implements OnInit {
 
 
   ngOnInit() {
+  //deze code is eigenlijk overbodig. KamerReservering wordt meegegeven vanuit kamerreservering component
     if (this.kamerreservering) {
       this.kamerreserveringForm.setValue({
         voornaam: this.kamerreservering.voornaam,
