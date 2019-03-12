@@ -1,5 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
+import { GerechtenService } from 'src/app/services/gerechten.service';
+import { Observable } from 'rxjs';
+import { Gerecht } from 'src/app/models/gerecht';
+import { filter, map } from 'rxjs/operators';
 
 @Component({
   selector: "app-restaurant",
@@ -13,7 +17,20 @@ export class RestaurantComponent implements OnInit {
     "assets/img/dishes/car3.jpg"
   ];
   closeResult = "";
-  constructor(private modalService: NgbModal) {}
+
+  public gerechten$: Observable<Gerecht[]> = this.gerechtenService.data$;
+
+  public filteredGerechten$: Observable<Gerecht[]> = new Observable();
+
+  public filterGerechten(filter: string): void {
+    this.filteredGerechten$ = this.gerechten$.pipe(
+      map(gerechten => gerechten.filter(gerecht => gerecht.type === filter))
+    )
+  };
+
+  constructor(private gerechtenService: GerechtenService, private modalService: NgbModal) {
+    this.filterGerechten('voorgerecht');
+   }
 
   open(content: any) {
     this.modalService
@@ -38,5 +55,5 @@ export class RestaurantComponent implements OnInit {
     }
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 }
