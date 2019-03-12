@@ -24,14 +24,9 @@ export class ManagementPortalActiviteitenComponent {
 
   openEditFormActiviteitModal(activiteit: Activiteit) {
     const modal = this.modalService.open(FormActiviteitComponent);
-    console.log("wijzigen activiteiten formulier");
-    console.log("activiteit", activiteit);
-    console.log("modal", modal);
-
     modal.componentInstance.activiteit = activiteit;
     modal.result
       .then(result => {
-        console.log("update", result);
         this.activiteitenService.updateActiviteit(result);
       })
       .catch(error => {
@@ -41,15 +36,11 @@ export class ManagementPortalActiviteitenComponent {
 
   openFormActiviteitModal(activiteit?: Activiteit) {
     const modal = this.modalService.open(FormActiviteitComponent);
-    console.log("activiteiten component");
-    console.log(activiteit);
-
     if (activiteit) {
       modal.componentInstance.activiteit = activiteit;
     }
     modal.result
       .then(result => {
-        console.log("save", result);
         this.activiteitenService.saveActiviteit(result);
       })
       .catch(error => {
@@ -63,7 +54,6 @@ export class ManagementPortalActiviteitenComponent {
       .result.then(result => {
         if (result === "yes") {
           this.activiteitenService.deleteActiviteit(activiteit);
-          console.log(activiteit);
         }
       })
       .catch(error => {

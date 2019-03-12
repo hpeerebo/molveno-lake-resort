@@ -12,6 +12,7 @@ export class FormActiviteitComponent implements OnInit {
   @Input() activiteit: Activiteit | undefined = undefined;
 
   public activiteitForm = this.formBuilder.group({
+    id: [0],
     naam: ["", Validators.required],
     beschrijving: ["", Validators.required],
     datum: ["", Validators.required],
@@ -26,10 +27,11 @@ export class FormActiviteitComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log("form activiteit component");
+    console.log("ngOninit form activiteit component");
     console.log(this.activiteit);
     if (this.activiteit) {
       this.activiteitForm.setValue({
+        id: this.activiteit.id,
         naam: this.activiteit.naam,
         beschrijving: this.activiteit.beschrijving,
         datum: this.activiteit.datum,

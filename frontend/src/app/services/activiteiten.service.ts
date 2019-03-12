@@ -41,24 +41,19 @@ export class ActiviteitenService {
       .pipe(map(ActiviteitenService.activiteitenResponseToActiviteitMapper));
   }
 
-  saveActiviteit(activiteit: Activiteit) {
-    return this.http
-      .post<IActiviteit[]>(this.api /*+ "saveactiviteit"*/, activiteit)
-      .subscribe();
+  saveActiviteit(activiteit: Activiteit): void {
+    this.http.post<IActiviteit[]>(this.api, activiteit).subscribe();
+    location.reload();
   }
 
   updateActiviteit(activiteit: Activiteit) {
-    console.log(activiteit.id);
-    return this.http
-      .post<IActiviteit[]>(
-        this.api /*+ "updateactiviteit"*/ + activiteit.id,
-        activiteit
-      )
-      .subscribe();
+    this.http.post<IActiviteit[]>(this.api, activiteit).subscribe();
+    location.reload();
   }
 
   deleteActiviteit(activiteit: Activiteit) {
     this.http.delete<IActiviteit[]>(this.api + activiteit.id).subscribe();
+    location.reload();
   }
 }
 
