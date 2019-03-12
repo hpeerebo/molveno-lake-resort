@@ -4,6 +4,9 @@ import { GerechtenService } from 'src/app/services/gerechten.service';
 import { Observable } from 'rxjs';
 import { Gerecht } from 'src/app/models/gerecht';
 import { filter, map } from 'rxjs/operators';
+import { TafelreserveringenService } from 'src/app/services/tafelreserveringen.service';
+import { Tafelreservering } from 'src/app/models/tafelreservering';
+import { FormTafelreserveringComponent } from 'src/app/shared/components/form-tafelreservering/form-tafelreservering.component';
 
 @Component({
   selector: "app-restaurant",
@@ -19,41 +22,41 @@ export class RestaurantComponent implements OnInit {
   closeResult = "";
 
   public gerechten$: Observable<Gerecht[]> = this.gerechtenService.data$;
-
   public filteredGerechten$: Observable<Gerecht[]> = new Observable();
+
+  constructor(
+    private gerechtenService: GerechtenService,
+    private tafelreserveringenService: TafelreserveringenService,
+    private modalService: NgbModal
+    ) {
+    this.filterGerechten('voorgerecht');
+   }
+
+   openFormTafelreserveringModal(tafelreservering?: Tafelreservering) {
+    const modal = this.modalService.open(FormTafelreserveringComponent);
+
+    if (tafelreservering) {
+      modal.componentInstance.tafelreservering = tafelreservering;
+    }
+
+    modal.result
+      .then(result => {
+        if (result.id) {
+          this.tafelreserveringenService.updateTafelreservering(result);
+        } else {
+          this.tafelreserveringenService.addNewReservering(result);
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
 
   public filterGerechten(filter: string): void {
     this.filteredGerechten$ = this.gerechten$.pipe(
       map(gerechten => gerechten.filter(gerecht => gerecht.type === filter))
     )
   };
-
-  constructor(private gerechtenService: GerechtenService, private modalService: NgbModal) {
-    this.filterGerechten('voorgerecht');
-   }
-
-  open(content: any) {
-    this.modalService
-      .open(content, { ariaLabelledBy: "modal-basic-title" })
-      .result.then(
-        result => {
-          this.closeResult = `Closed with: ${result}`;
-        },
-        reason => {
-          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-        }
-      );
-  }
-
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return "by pressing ESC";
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return "by clicking on a backdrop";
-    } else {
-      return `with: ${reason}`;
-    }
-  }
 
   ngOnInit() { }
 }

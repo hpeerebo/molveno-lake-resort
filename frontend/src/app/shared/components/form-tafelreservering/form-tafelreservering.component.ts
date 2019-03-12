@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Tafelreservering } from 'src/app/models/tafelreservering';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbCalendar, NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, Validators } from '@angular/forms';
+import { NgbTime } from '@ng-bootstrap/ng-bootstrap/timepicker/ngb-time';
 
 @Component({
   selector: 'app-form-tafelreservering',
@@ -10,16 +11,24 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class FormTafelreserveringComponent implements OnInit {
 
+  public currentDate: NgbDate = this.calendar.getToday();
+  public currentTime = {hour: 17, minute: 0};
+
   @Input() tafelreservering: Tafelreservering | undefined = undefined;
 
   public tafelreserveringForm = this.formBuilder.group({
-    aanvangstijd: [0, Validators.required],
+    aanvangsdatum: [this.currentDate, Validators.required],
+    aanvangstijd: [this.currentTime, Validators.required],
     personen: [0, [Validators.min(1), Validators.max(40)]],
     naam: ['', Validators.required],
     telefoon: ['', Validators.required]
   });
 
-  constructor(public activeModal: NgbActiveModal, private formBuilder: FormBuilder) { }
+  constructor(
+    public activeModal: NgbActiveModal,
+    private formBuilder: FormBuilder,
+    private calendar: NgbCalendar,
+    ) { }
 
   ngOnInit() {
     if (this.tafelreservering) {
