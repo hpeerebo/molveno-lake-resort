@@ -12,7 +12,6 @@ import { ActiviteitEntity } from 'src/entities/activiteit-entity';
 import { CreateActiviteitDto } from 'src/dto/create-activiteit-dto';
 import { ActiviteitService } from 'src/services/activiteit/activiteit.service';
 import { ApiUseTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
-import { create } from 'domain';
 
 @ApiUseTags('activiteiten')
 @Controller('activiteiten')
@@ -68,6 +67,7 @@ export class ActiviteitenController {
   }
 
   @Delete('/:activiteitId')
+  @ApiOperation({ title: 'Verwijder een bestaande activiteit' })
   public deleteActiviteit(@Param('activiteitId') activiteitId: number): void {
     this.activiteitenService.deleteActiviteit(activiteitId);
   }
