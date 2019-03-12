@@ -42,8 +42,7 @@ export class RoomService {
     return this.kamersCacheSubject;
   }
   searchRoom(datumvan: string, datumtot: string, kamertype: string){
-    console.log (datumvan + datumtot + kamertype)
-    this.http.get<KamerDetails>(`${RoomService.api}/search`, {params:{datumvan: datumvan, datumtot: datumtot, kamertype: kamertype}})
+    this.http.get<KamerDetails>(`${RoomService.api}/search/${datumvan}/${datumtot}/${kamertype}`)
     .pipe(
       map((data: any) => data.map((kamer: Kamer) =>new Kamer(kamer.kamerNaam, kamer.kamerType, kamer.kamerLigging, kamer.aantalPersonen, kamer.prijs))),
       take(1),

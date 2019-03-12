@@ -14,10 +14,11 @@ export class KamerService {
         return this.kamersepository.find()
         .then(kamersEntities => kamersEntities.map(kamerEntity => kamerEntity.mapToKamers()));
     }
-    public searchFreeRooms(datumvan: string, datumtot: string, kamertype: string){
-        console.log (datumvan +'-'+ datumtot +'-' + kamertype)
-       // return this.kamersepository.findOne({where: {kamerType: kamertype}})
-       // .then(kamerEntity => kamerEntity.mapToKamers());
+    public searchFreeRooms(datumvan: string, datumtot: string, kamertype: string): Promise<Kamer[]>{
+        console.log (kamertype)
+
+        return this.kamersepository.find({where: {kamerType: kamertype}})
+        .then(kamersEntities => kamersEntities.map(kamerEntity => kamerEntity.mapToKamers()));
         
     }
     public saveKamer(createkamerdto: CreateKamerDto) {
