@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { KamerreserveringenService } from 'src/app/services/kamerreserveringen.service';
-import { take, tap } from 'rxjs/operators';
 import { KamerReservering } from 'src/app/models/kamerreservering';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import {FormKamerreserveringdetailsComponent} from "../kamers-form/form-kamerreserveringdetails/form-kamerreserveringdetails.component";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-kamerreservering',
@@ -12,11 +12,11 @@ import {FormKamerreserveringdetailsComponent} from "../kamers-form/form-kamerres
   styleUrls: ['./kamerreservering.component.scss']
 })
 export class KamerreserveringComponent implements OnInit {
-  kamerreserveringen: KamerReservering[] | undefined = [];
-  public selectedResevering?: KamerReservering;
-  closeResult: string = "";
 
   constructor(private readonly kamerreserveringservice: KamerreserveringenService, private readonly modalService: NgbModal, private router: Router) { }
+  public kamerreserveringen: Observable<KamerReservering[] | undefined> = this.kamerreserveringservice.getKamerReserveringen();
+  public selectedResevering?: KamerReservering;
+  closeResult: string = "";
 
   field: string = "";
   public clickColumnHandler(event: string): string {
@@ -24,16 +24,8 @@ export class KamerreserveringComponent implements OnInit {
     return this.field;
   }
 
-  getKamerReserveringen(){
-    this.kamerreserveringservice.getKamerReserveringen()
-    .pipe(
-    take(1),
-    tap(result => (this.kamerreserveringen = result)))
-    .subscribe();
-  }
-
   ngOnInit() {
-    this.getKamerReserveringen();
+
   }
 
   openFormKamerReserveringDetailsModal(kamerReservering: KamerReservering){
@@ -61,7 +53,7 @@ export class KamerreserveringComponent implements OnInit {
     );
   }
 
-  deleteRoom(kamerdata: KamerReservering) {
+  deleteResevering(kamerdata: KamerReservering) {
     if (kamerdata) {
       this.kamerreserveringservice.deleteKamerReservering(kamerdata);
     }
