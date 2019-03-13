@@ -14,24 +14,21 @@
   </div>
 
   <br />
-
- <table>
+  <table class="table table-striped table-sm">
     <thead>
       <tr>
-        <th (click)="clickColumnHandler('kamerNaam')">Kamernaam</th>
-        <th (click)="clickColumnHandler('kamerType')">Kamertype</th>
-        <th (click)="clickColumnHandler('kamerLigging')">Kamerligging</th>
-        <th (click)="clickColumnHandler('aantalPersonen')">Aantalpersonen</th>
-        <th (click)="clickColumnHandler('prijs')">Prijs</th>
+        <th>Kamernaam</th>
+        <th>Kamertype</th>
+        <th>Kamerligging</th>
+        <th>Aantalpersonen</th>
+        <th>Prijs</th>
         <th></th>
         <th></th>
         <th></th>
       </tr>
     </thead>
     <tbody>
-
-      <tr *ngFor="let kamer of (kamers | kamersfilter: show | sortgrid:field)">
-      <!-- DubbelCheck <tr *ngFor="let kamer of (kamers | async | kamersfilter: show)">-->
+      <tr *ngFor="let kamer of (kamers | async | kamersfilter: show)">
         <td>{{ kamer.kamerNaam }}</td>
         <td>{{ kamer.kamerType }}</td>
         <td>{{ kamer.kamerLigging }}</td>
@@ -47,10 +44,6 @@
       </tr>
     </tbody>
   </table>
-
-
-
-
 </div>
 <!-- Modal to confirm deleting room-->
 <ng-template #deleteModal let-modal>
