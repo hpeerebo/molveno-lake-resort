@@ -3,13 +3,13 @@
 <table class="table table-striped table-sm">
   <thead>
     <tr>
-      <th>Voornaam</th>
-      <th>Achternaam</th>
-      <th>Telefoon</th>
-      <th>E-mail</th>
-      <th>Aankomst</th>
-      <th>Vertrek</th>
-      <th>Kamer</th>
+      <th (click)="clickColumnHandler('voornaam')">Voornaam</th>
+      <th (click)="clickColumnHandler('achternaam')">Achternaam</th>
+      <th (click)="clickColumnHandler('telefoonnummer')">Telefoon</th>
+      <th (click)="clickColumnHandler('emailadres')">E-mail</th>
+      <th (click)="clickColumnHandler('datumvan')">Aankomst</th>
+      <th (click)="clickColumnHandler('datumtot')">Vertrek</th>
+      <th (click)="clickColumnHandler('kamernaam')">Kamer</th>
       <th></th>
       <!--th>Identiteit</th>
       <th>Postcode</th>
@@ -21,7 +21,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let kamerreservering of kamerreserveringen">
+    <tr *ngFor="let kamerreservering of (kamerreserveringen |  sortgrid:field)" >
       <td>{{kamerreservering.voornaam}}</td>
       <td>{{kamerreservering.achternaam}}</td>
       <td>{{kamerreservering.telefoonnummer}}</td>

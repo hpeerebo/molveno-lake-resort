@@ -10,6 +10,11 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./kamers-form.component.scss']
 })
 export class ManagementPortalKamersFormComponent implements OnInit {
+  field: string = "";
+  public clickColumnHandler(event: string): string {
+    this.field = event;
+    return console.log(this.field), this.field;
+  }
 
   kamerSoort = ['Budget', 'Standaard','Lux'];
   kamerUitzicht = ['Meerzicht', 'Bergzicht','Tuinzicht'];

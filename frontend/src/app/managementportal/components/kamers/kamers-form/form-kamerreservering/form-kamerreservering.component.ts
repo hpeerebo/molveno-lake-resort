@@ -1,9 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { KamerReservering } from 'src/app/models/kamerreservering';
-import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import { FormBuilder, Validators } from '@angular/forms';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import { KamerReserveringFormGroup } from './kamerreserveringformgroup';
-import {FormKamerreserveringdetailsComponent} from "../form-kamerreserveringdetails/form-kamerreserveringdetails.component";
+
 
 @Component({
   selector: 'app-form-kamerreservering',
@@ -15,9 +14,13 @@ export class FormKamerreserveringComponent implements OnInit {
   kamernaam: string = "";
   submitted = false;
   public kamerreserveringForm = new KamerReserveringFormGroup();
+  constructor(public activeModal: NgbActiveModal) {}
 
-  constructor(public activeModal: NgbActiveModal, private formBuilder: FormBuilder,  private modalService: NgbModal) {}
-
+  field: string = "";
+  public clickColumnHandler(event: string): string {
+    this.field = event;
+    return console.log(this.field), this.field;
+  }
 
   ngOnInit() {
     if (this.kamerreservering) {
