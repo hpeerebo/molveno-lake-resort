@@ -11,6 +11,8 @@ import { KamerReserveringFormGroup } from './kamerreserveringformgroup';
 export class FormKamerreserveringComponent implements OnInit {
   kamerreservering: KamerReservering | undefined = undefined;
   kamernaam: string = "";
+  datumvan: string = ""
+  datumtot: string = "";
   public kamerreserveringForm = new KamerReserveringFormGroup();
 
   constructor(public activeModal: NgbActiveModal) {}
@@ -30,8 +32,10 @@ export class FormKamerreserveringComponent implements OnInit {
         huisnummer: this.kamerreservering.huisnummer,
         woonplaats: this.kamerreservering.woonplaats,
         land: this.kamerreservering.land,
-        datumvan: this.kamerreservering.datumvan,
-        datumtot: this.kamerreservering.datumtot,
+       // datumvan: this.kamerreservering.datumvan,
+       // datumtot: this.kamerreservering.datumtot,
+       datumvan: this.datumvan,
+       datumtot: this.datumtot,
         kamernaam: this.kamerreservering.kamernaam
       });
     }

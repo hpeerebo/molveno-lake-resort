@@ -34,7 +34,7 @@
         <td>{{ kamer.kamerLigging }}</td>
         <td>{{ kamer.aantalPersonen }}</td>
         <td>{{ kamer.prijs | currency: "EUR" }}</td>
-        <td>
+        <td *ngIf="showResButton">
           <i class="fas fa-marker mr-2" placement="top" ngbTooltip="Reserveren" (click)="openFormKamerReserveringModal(kamer.kamerNaam)"></i>
         </td>
         <td style="text-align: right">

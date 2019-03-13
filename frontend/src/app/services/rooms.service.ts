@@ -39,7 +39,6 @@ export class RoomService {
           })
         ).subscribe();
     }
-    console.log(`${RoomService.api}/search/${datumvan}/${datumtot}/${kamertype}`);
     return this.kamersCacheSubject;
   }
   saveRoom(room: Kamer){
@@ -51,7 +50,7 @@ export class RoomService {
     //location.reload();
   }
   updateRoom(room: Kamer){
-    this.http.put("/api/kamers/kamernaam", room)
+    this.http.put(`${RoomService.api}/kamernaam`, room)
     .pipe(
       take(1),
       tap(() => this.getRoom(true))

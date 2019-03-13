@@ -24,6 +24,9 @@ export class ManagementPortalKamersComponent implements OnInit {
   public selectedKamer?: Kamer;
   soortkamer = ["Budget", "Standaard", "Lux"];
   closeResult: string = "";
+  showResButton: boolean = false;
+  datumvan: string = '';
+  datumtot: string = '';
   private subscriptions: Subscription = new Subscription();
   constructor(
     private roomservice: RoomService,
@@ -121,9 +124,13 @@ export class ManagementPortalKamersComponent implements OnInit {
      if (kamernaam) {
       modalKamerReservering.componentInstance.kamernaam = kamernaam;
     }
-    modalKamerReservering.componentInstance.action = "add";
+    if (this.datumvan) {
+      modalKamerReservering.componentInstance.datumvan = this.datumvan;
+    }
+    if (this.datumtot) {
+      modalKamerReservering.componentInstance.datumtot = this.datumtot;
+    }
     modalKamerReservering.result.then(resultPromise => {
-      this.closeResult = resultPromise;
       this.kamerreserveringservice.saveKamerReservering(new KamerReservering(
         resultPromise.id,
         resultPromise.voornaam,
@@ -141,13 +148,21 @@ export class ManagementPortalKamersComponent implements OnInit {
         kamernaam
       ));
     });
+
   }
   showAvailableRoomsModal(){
     const modalKamerSearch = this.modalService.open(FormKamersbeschikbaarComponent);
     modalKamerSearch.result.then(searchParameters => {
+      this.datumvan = searchParameters.datumvan;
+      this.datumtot = searchParameters.datumtot;
       this.roomservice.searchRoom(true, searchParameters.datumvan, searchParameters.datumtot, searchParameters.kamertype)
-    }
-
-      );
+    },
+    ).finally(() => this.setVariables())
   }
+  setVariables(){
+    this.showResButton = true;
+    //console.log (this.datumvan, this.datumtot)
+
+  }
+
 }
