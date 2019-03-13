@@ -1,13 +1,14 @@
 import {Component, OnInit} from "@angular/core";
 import { RoomService } from "src/app/services/rooms.service";
 import { Kamer } from "../../../models/kamer";
-import { Subscription } from "rxjs";
+import { Subscription, Observable } from "rxjs";
 import { take, tap } from "rxjs/operators";
 import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
 import { ManagementPortalKamersFormComponent } from "./kamers-form/kamers-form.component";
 import { FormKamerreserveringComponent } from './kamers-form/form-kamerreservering/form-kamerreservering.component';
 import { KamerreserveringenService } from 'src/app/services/kamerreserveringen.service';
 import {KamerReservering} from "../../../models/kamerreservering";
+import { FormKamersbeschikbaarComponent } from './kamers-form/form-kamersbeschikbaar/form-kamersbeschikbaar.component';
 
 
 @Component({
@@ -25,7 +26,8 @@ export class ManagementPortalKamersComponent implements OnInit {
   }
 
   //public kamers :KamerResponse[] = [];
-  public kamers: Kamer[] | undefined = [];
+ // public kamers: Kamer[] | undefined = [];
+ public kamers: Observable<Kamer[] | undefined> = this.roomservice.getRoom();
   show: string = "";
   public selectedKamer?: Kamer;
   soortkamer = ["Budget", "Standaard", "Lux"];
@@ -39,19 +41,9 @@ export class ManagementPortalKamersComponent implements OnInit {
 
 
   ngOnInit() {
-    this.getRoom();
+
   }
 
-    getRoom() {
-    //this.roomservice.getRoom().subscribe(result => this.kamers = result);
-    this.roomservice
-      .getRoom()
-      .pipe(
-        take(1),
-        tap(result => (this.kamers = result))
-      )
-      .subscribe();
-  }
   onSelect(kamer: Kamer): void {
     this.selectedKamer = kamer;
   }
@@ -63,18 +55,7 @@ export class ManagementPortalKamersComponent implements OnInit {
     }
   }
 
-  open(content: NgbModal) {
-    this.modalService
-      .open(content, { size: "lg", ariaLabelledBy: "modal-basic-title" })
-      .result.then(
-        result => {
-          this.closeResult = `Closed with: ${result}`;
-        },
-        reason => {
-          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-        }
-      );
-  }
+
   openSm(content: NgbModal) {
     this.modalService
       .open(content, { ariaLabelledBy: "modal-basic-title" })
@@ -160,6 +141,13 @@ export class ManagementPortalKamersComponent implements OnInit {
         kamernaam
       ));
     });
+  }
+  showAvailableRoomsModal(){
+    const modalKamerSearch = this.modalService.open(FormKamersbeschikbaarComponent);
+    modalKamerSearch.result.then(searchParameters => {
+      this.roomservice.searchRoom(true, searchParameters.datumvan, searchParameters.datumtot, searchParameters.kamertype)
+    }
 
+      );
   }
 }

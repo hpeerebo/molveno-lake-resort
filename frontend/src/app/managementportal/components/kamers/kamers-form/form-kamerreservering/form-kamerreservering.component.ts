@@ -3,7 +3,6 @@ import { KamerReservering } from 'src/app/models/kamerreservering';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import { KamerReserveringFormGroup } from './kamerreserveringformgroup';
 
-
 @Component({
   selector: 'app-form-kamerreservering',
   templateUrl: './form-kamerreservering.component.html',
@@ -12,17 +11,18 @@ import { KamerReserveringFormGroup } from './kamerreserveringformgroup';
 export class FormKamerreserveringComponent implements OnInit {
   kamerreservering: KamerReservering | undefined = undefined;
   kamernaam: string = "";
-  submitted = false;
   public kamerreserveringForm = new KamerReserveringFormGroup();
   constructor(public activeModal: NgbActiveModal) {}
+
 
   field: string = "";
   public clickColumnHandler(event: string): string {
     this.field = event;
-    return console.log(this.field), this.field;
   }
 
+
   ngOnInit() {
+  //deze code is eigenlijk overbodig. KamerReservering wordt meegegeven vanuit kamerreservering component
     if (this.kamerreservering) {
       this.kamerreserveringForm.setValue({
         voornaam: this.kamerreservering.voornaam,

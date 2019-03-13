@@ -11,6 +11,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RestaurantComponent } from './components/restaurant/restaurant.component';
 import { FrontEndAppRoutingModule } from './frontend-routing.module';
 import { FrontEndComponent } from './frontend.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { FrontEndComponent } from './frontend.component';
     LoginComponent,
     RestaurantComponent
   ],
-  imports: [CommonModule, FrontEndAppRoutingModule, NgbModule]
+  imports: [CommonModule, FrontEndAppRoutingModule, NgbModule],
+  entryComponents: [LoginComponent]
 })
 export class FrontendModule {}

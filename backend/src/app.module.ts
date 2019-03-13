@@ -20,9 +20,11 @@ import { ActiviteitEntity } from './entities/activiteit-entity';
 import { ActiviteitenResController } from './controllers/activiteiten-res/activiteiten-res.controller';
 import { ActiviteitResService } from './services/activiteit-res/activiteit-res.service';
 import { ActiviteitResEntity } from './entities/activiteit-res-entity';
+import { UsersModule } from './features/users/users.module';
 
 @Module({
   imports: [KamersModule,
+    UsersModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',

@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./frontend.component.scss']
 })
 export class FrontEndComponent {
-
+  ngOnInit() {
+    console.log('tetst');
+  }
 }
