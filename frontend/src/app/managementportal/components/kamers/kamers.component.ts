@@ -22,7 +22,6 @@ export class ManagementPortalKamersComponent implements OnInit {
   field: string = "";
   public clickColumnHandler(event: string): string {
     this.field = event;
-    return console.log(this.field), this.field;
   }
 
   //public kamers :KamerResponse[] = [];
