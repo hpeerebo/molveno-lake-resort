@@ -168,7 +168,6 @@ export class ManagementPortalKamersComponent implements OnInit {
   }
   setVariables(){
     this.showResButton = true;
-    //console.log (this.datumvan, this.datumtot)
 
   }
 

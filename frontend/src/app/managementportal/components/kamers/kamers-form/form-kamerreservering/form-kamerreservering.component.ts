@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { KamerReservering } from 'src/app/models/kamerreservering';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import { KamerReserveringFormGroup } from './kamerreserveringformgroup';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-kamerreservering',
@@ -15,7 +16,7 @@ export class FormKamerreserveringComponent implements OnInit {
   datumtot: string = "";
   public kamerreserveringForm = new KamerReserveringFormGroup();
 
-  constructor(public activeModal: NgbActiveModal) {}
+  constructor(public activeModal: NgbActiveModal, private router: Router) {}
 
 
   ngOnInit() {
@@ -55,13 +56,14 @@ export class FormKamerreserveringComponent implements OnInit {
       this.kamerreserveringForm.value.huisnummer,
       this.kamerreserveringForm.value.woonplaats,
       this.kamerreserveringForm.value.land,
-      this.kamerreserveringForm.value.datumvan,
-      this.kamerreserveringForm.value.datumtot,
-     //this.datumvan,
-     //this.datumtot,
+      //this.kamerreserveringForm.value.datumvan,
+      //this.kamerreserveringForm.value.datumtot,
+     this.datumvan,
+     this.datumtot,
       this.kamerreserveringForm.value.kamernaam
     ));
     //location.reload();
+    this.router.navigateByUrl('managementportal/kamerreserveringen');
   }
 
 }
