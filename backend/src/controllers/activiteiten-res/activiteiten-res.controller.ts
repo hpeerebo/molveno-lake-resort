@@ -19,6 +19,15 @@ export class ActiviteitenResController {
   constructor(private readonly activiteitenResService: ActiviteitResService) {}
 
   @Post('')
+  @ApiOperation({ title: 'Maak een nieuwe reservering aan' })
+  @ApiResponse({
+    status: 201,
+    description: 'De reservering is succesvol aangemaakt',
+  })
+  @ApiResponse({
+    status: 409,
+    description: 'Een reservering met dit kenmerk bestaat al',
+  })
   public saveReservering(
     @Body() createReservering: CreateActiviteitResDto,
   ): void {
@@ -33,6 +42,7 @@ export class ActiviteitenResController {
     return this.activiteitenResService.saveReservering(reservering);
   }
   @Get('')
+  @ApiOperation({ title: 'Maak een lijst van reserveringen' })
   getReservering(): Promise<ActiviteitRes[]> {
     return this.activiteitenResService.getReservering();
   }
@@ -57,6 +67,7 @@ export class ActiviteitenResController {
   }
 
   @Delete(':reserveringId')
+  @ApiOperation({ title: 'Verwijder een bestaande reservering' })
   public deleteReservering(
     @Param('reserveringId') reserveringId: number,
   ): void {
