@@ -13,7 +13,7 @@ import { ModalConfirmComponent } from 'src/app/shared/components/modal-confirm/m
 })
 export class ManagementPortalGerechtenComponent {
 
-  field: string = "";
+  field: string = "naam";
   public clickColumnHandler(event: string): string {
     this.field = event;
     return console.log(this.field), this.field;
