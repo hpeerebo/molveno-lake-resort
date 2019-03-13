@@ -18,8 +18,9 @@ export class KamerreserveringComponent implements OnInit {
   field: string = "";
   public clickColumnHandler(event: string): string {
     this.field = event;
-    return console.log(this.field), this.field;
+    return this.field;
   }
+
   getKamerReserveringen(){
     this.kamerreserveringservice.getKamerReserveringen()
     .pipe(
