@@ -9,15 +9,12 @@
     <div class="container, form-row">
       <div class="form-group col-md-6">
             <label>Aankomst datum</label>
-            <input type="date" class="form-control" formControlName="datumvan" [class.is-invalid]="kamerreserveringForm.controls.datumvan.invalid && kamerreserveringForm.controls.datumvan.touched" ngbAutofocus />
-            <small class="text-danger" [class.d-none]="kamerreserveringForm.controls.datumvan.valid || kamerreserveringForm.controls.datumvan.untouched">Vereist</small>
+            <input readonly type="date" class="form-control" value={{datumvan}} formControlName="datumvan"  />
+
         </div>
         <div class="form-group col-md-6">
-
             <label>Vertrek datum</label>
-            <input type="date" class="form-control" formControlName="datumtot" [class.is-invalid]="kamerreserveringForm.controls.datumtot.invalid && kamerreserveringForm.controls.datumtot.touched" ngbAutofocus />
-            <small class="text-danger" [class.d-none]="kamerreserveringForm.controls.datumtot.valid || kamerreserveringForm.controls.datumtot.untouched">Vereist</small>
-
+            <input readonly type="date" class="form-control" value={{datumtot}} formControlName="datumtot"  />
         </div>
       </div>
       <div class="container, form-row">
