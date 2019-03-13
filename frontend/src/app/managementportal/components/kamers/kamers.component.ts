@@ -17,6 +17,13 @@ import { FormKamersbeschikbaarComponent } from './kamers-form/form-kamersbeschik
 })
 //export let kamers:Kamer[] = [];
 export class ManagementPortalKamersComponent implements OnInit {
+
+  field: string = "";
+  public clickColumnHandler(event: string): string {
+    this.field = event;
+    return this.field;
+  }
+
   //public kamers :KamerResponse[] = [];
  // public kamers: Kamer[] | undefined = [];
  public kamers: Observable<Kamer[] | undefined> = this.roomservice.getRoom();

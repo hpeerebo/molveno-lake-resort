@@ -8,7 +8,7 @@ import { ManagementPortalActiviteitenComponent } from './components/activiteiten
 import { ManagementPortalKamersComponent } from './components/kamers/kamers.component';
 import { ManagementPortalLoginComponent } from './components/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { KamersPipe } from '../shared/pipes/kamers.pipe';
+import { KamersPipe, SortgridPipe  } from '../shared/pipes/kamers.pipe';
 import { ManagementPortalKamersFormComponent } from './components/kamers/kamers-form/kamers-form.component';
 import { ManagementportalComponent } from './managementportal.component';
 import { ManagementportalRoutingModule } from './managementportal-routing.module';
@@ -54,7 +54,8 @@ import { FormKamersbeschikbaarComponent } from './components/kamers/kamers-form/
     KamerreserveringComponent,
     FormKamerreserveringComponent,
     FormKamerreserveringdetailsComponent,
-    FormKamersbeschikbaarComponent
+    FormKamersbeschikbaarComponent,
+    SortgridPipe
   ],
   imports: [CommonModule, ManagementportalRoutingModule, NgbModule, FormsModule, ReactiveFormsModule],
   entryComponents: [FormTafelComponent, FormTafelreserveringComponent, FormGerechtComponent, FormIngredientComponent, FormActiviteitComponent,  FormActiviteitResComponent, ModalConfirmComponent, FormKamerreserveringComponent, FormKamerreserveringdetailsComponent, FormKamersbeschikbaarComponent]
