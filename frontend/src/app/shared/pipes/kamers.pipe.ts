@@ -1,4 +1,4 @@
-import { Pipe, PipeTransform, Injectable } from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core';
 //import { Kamer } from 'src/app/services/rooms.service';
 import { Kamer } from 'src/app/models/kamer';
 
@@ -41,25 +41,3 @@ export class KamersPipe<T> implements PipeTransform {
   }
 }
 */
-@Pipe({
-  name: "sortgrid"
-})
-
-@Injectable()
-export class SortgridPipe implements PipeTransform {
-  transform(array: any, field: string): any {
-    if (!Array.isArray(array)) {
-      return;
-    }
-    array.sort((a: any, b: any) => {
-      if (a[field] < b[field]) {
-        return -1;
-      } else if (a[field] > b[field]) {
-        return 1;
-      } else {
-        return 0;
-      }
-    });
-    return array;
-  }
-}
