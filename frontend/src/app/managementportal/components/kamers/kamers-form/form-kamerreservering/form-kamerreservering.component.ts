@@ -32,16 +32,17 @@ export class FormKamerreserveringComponent implements OnInit {
         huisnummer: this.kamerreservering.huisnummer,
         woonplaats: this.kamerreservering.woonplaats,
         land: this.kamerreservering.land,
-       // datumvan: this.kamerreservering.datumvan,
-       // datumtot: this.kamerreservering.datumtot,
-       datumvan: this.datumvan,
-       datumtot: this.datumtot,
+        datumvan: this.kamerreservering.datumvan,
+        datumtot: this.kamerreservering.datumtot,
+       //datumvan: this.datumvan,
+       //datumtot: this.datumtot,
         kamernaam: this.kamerreservering.kamernaam
       });
     }
   }
 
   submitForm() {
+    console.log(this.kamerreserveringForm.value.datumvan);
     this.activeModal.close(new KamerReservering(
       this.kamerreserveringForm.value.id,
       this.kamerreserveringForm.value.voornaam,
@@ -56,9 +57,11 @@ export class FormKamerreserveringComponent implements OnInit {
       this.kamerreserveringForm.value.land,
       this.kamerreserveringForm.value.datumvan,
       this.kamerreserveringForm.value.datumtot,
+     //this.datumvan,
+     //this.datumtot,
       this.kamerreserveringForm.value.kamernaam
     ));
-    location.reload();
+    //location.reload();
   }
 
 }

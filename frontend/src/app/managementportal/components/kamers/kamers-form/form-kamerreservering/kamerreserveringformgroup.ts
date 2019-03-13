@@ -12,8 +12,8 @@ export class KamerReserveringFormGroup extends FormGroup{
     huisnummer: new FormControl('', Validators.required),
     woonplaats: new FormControl('', Validators.required),
     land: new FormControl('', Validators.required),
-    datumvan: new FormControl('', Validators.required),
-    datumtot: new FormControl('', Validators.required),
+    datumvan: new FormControl(undefined),
+    datumtot: new FormControl(undefined),
     kamernaam: new FormControl(undefined),
   };
   constructor(){
