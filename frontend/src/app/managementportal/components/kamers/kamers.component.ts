@@ -103,7 +103,7 @@ export class ManagementPortalKamersComponent implements OnInit {
     modalRef.componentInstance.action = "edit";
 
     modalRef.result.then(resultPromise => {
-      this.closeResult = resultPromise;
+      //this.closeResult = resultPromise;
       this.roomservice.updateRoom(new Kamer(
         resultPromise.kamerNaam,
         resultPromise.kamerType,
@@ -138,6 +138,7 @@ export class ManagementPortalKamersComponent implements OnInit {
       modalKamerReservering.componentInstance.datumtot = this.datumtot;
     }
     modalKamerReservering.result.then(resultPromise => {
+      this.closeResult = resultPromise;
       this.kamerreserveringservice.saveKamerReservering(new KamerReservering(
         resultPromise.id,
         resultPromise.voornaam,
@@ -164,11 +165,6 @@ export class ManagementPortalKamersComponent implements OnInit {
       this.datumtot = searchParameters.datumtot;
       this.roomservice.searchRoom(true, searchParameters.datumvan, searchParameters.datumtot, searchParameters.kamertype)
     },
-    ).finally(() => this.setVariables())
+    ).finally(() => this.showResButton = true)
   }
-  setVariables(){
-    this.showResButton = true;
-
-  }
-
 }

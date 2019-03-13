@@ -62,7 +62,7 @@ export class FormKamerreserveringComponent implements OnInit {
      this.datumtot,
       this.kamerreserveringForm.value.kamernaam
     ));
-    //location.reload();
+    location.reload();
     this.router.navigateByUrl('managementportal/kamerreserveringen');
   }
 
