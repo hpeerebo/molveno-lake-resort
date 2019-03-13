@@ -14,7 +14,7 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let kamerreservering of (kamerreserveringen |  sortgrid:field)" >
+  <tr *ngFor="let kamerreservering of (kamerreserveringen | async |  sortgrid:field)" >
     <td>{{kamerreservering.voornaam}}</td>
     <td>{{kamerreservering.achternaam}}</td>
     <td>{{kamerreservering.telefoonnummer}}</td>
@@ -77,6 +77,6 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-danger" (click)="modal.close('Save click')">Nee</button>
-    <button type="button" class="btn btn-success" (click)="deleteRoom(kamerreservering); modal.close('Save click')">Ja</button>
+    <button type="button" class="btn btn-success" (click)="deleteResevering(selectedResevering); modal.close('Save click')">Ja</button>
   </div>
 </ng-template>
