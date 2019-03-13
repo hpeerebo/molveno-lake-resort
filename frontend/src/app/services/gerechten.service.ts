@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Gerecht } from '../models/gerecht';
-import { Observable, BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { map, take, tap } from 'rxjs/operators';
 
 @Injectable({
@@ -10,11 +10,27 @@ import { map, take, tap } from 'rxjs/operators';
 export class GerechtenService {
   private readonly api: string = '/api/restaurant/gerechten';
 
-  private readonly dataStore = new BehaviorSubject<Gerecht[]>([]);
-  public readonly data$ = this.dataStore.asObservable();
+  public readonly gerechten$ = new BehaviorSubject<Gerecht[]>([]);
+  public readonly paginatedGerechten$ = new BehaviorSubject<Gerecht[]>([]);
+  public readonly total$ = new BehaviorSubject<number>(0);
+
+  public _pageSize: number = 4;
+  public _page: number = 1;
 
   constructor(private http: HttpClient) {
     this.getAllGerechten();
+  }
+
+  get page() { return this._page; }
+  set page(page: number) {
+    this._page = page;
+    this.paginateGerechten();
+  }
+
+  get pageSize() { return this._pageSize; }
+  set pageSize(pageSize: number) {
+    this._pageSize = pageSize;
+    this.paginateGerechten();
   }
 
   private static gerechtenResponseToGerechtMapper(gerechtenResponse: IGerechtenResponse): Gerecht[] {
@@ -30,9 +46,17 @@ export class GerechtenService {
       .pipe(
         take(1),
         map(GerechtenService.gerechtenResponseToGerechtMapper),
-        tap(gerechten => this.dataStore.next(gerechten))
+        tap(gerechten => {
+          this.gerechten$.next(gerechten);
+          this.total$.next(gerechten.length);
+          this.paginateGerechten();
+        })
       )
       .subscribe();
+  }
+
+  paginateGerechten(): void {
+    this.paginatedGerechten$.next(this.gerechten$.getValue().slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize));
   }
 
   addNewGerecht(gerecht: Gerecht): void {

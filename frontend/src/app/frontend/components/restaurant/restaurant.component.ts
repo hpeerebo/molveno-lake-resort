@@ -21,7 +21,7 @@ export class RestaurantComponent implements OnInit {
   ];
   closeResult = "";
 
-  public gerechten$: Observable<Gerecht[]> = this.gerechtenService.data$;
+  public gerechten$: Observable<Gerecht[]> = this.gerechtenService.gerechten$;
   public filteredGerechten$: Observable<Gerecht[]> = new Observable();
 
   constructor(

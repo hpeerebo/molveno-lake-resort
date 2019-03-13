@@ -14,7 +14,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let gerecht of (gerechten$ | async | sortgrid:field)">
+      <tr *ngFor="let gerecht of (gerechtenService.paginatedGerechten$ | async | sortgrid:field)">
         <td>{{gerecht.naam}}</td>
         <td>{{gerecht.type}}</td>
         <td>{{gerecht.subtype}}</td>
@@ -27,4 +27,12 @@
       </tr>
     </tbody>
   </table>
-</div>
+  <div class="d-flex justify-content-between">
+    <ngb-pagination [collectionSize]="gerechtenService.total$ | async" [(page)]="gerechtenService.page" [pageSize]="gerechtenService.pageSize">
+    </ngb-pagination>
+    <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="gerechtenService.pageSize">
+      <option [ngValue]="2">2 items per page</option>
+      <option [ngValue]="4">4 items per page</option>
+      <option [ngValue]="6">6 items per page</option>
+    </select>
+  </div>
