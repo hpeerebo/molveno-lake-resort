@@ -43,16 +43,16 @@ export class ActiviteitenService {
 
   saveActiviteit(activiteit: Activiteit): void {
     this.http.post<IActiviteit[]>(this.api, activiteit).subscribe();
-    console.log(activiteit);
+    // console.log(activiteit);
     // location.reload();
   }
 
-  updateActiviteit(activiteit: Activiteit) {
+  updateActiviteit(activiteit: Activiteit): void {
     this.http.post<IActiviteit[]>(this.api, activiteit).subscribe();
     // location.reload();
   }
 
-  deleteActiviteit(activiteit: Activiteit) {
+  deleteActiviteit(activiteit: Activiteit): void {
     this.http.delete<IActiviteit[]>(this.api + activiteit.id).subscribe();
     // location.reload();
   }

@@ -1,21 +1,25 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Reservering } from '../models/activiteit-res';
-import { map } from 'rxjs/operators';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
+import { Reservering } from "../models/activiteit-res";
+import { map } from "rxjs/operators";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class ActiviteitenResService {
   public readonly api: string =
-    "http://localhost:4200/api/activiteiten-res/";
+    "http://localhost:4200/api/activiteiten/reserveringen/";
 
   constructor(private http: HttpClient) {}
 
-  private static activiteitenResponseToActiviteitMapper( activiteitenResponse: IActiviteitres[] ): Reservering[] {
-    console.log (activiteitenResponse);
-    return activiteitenResponse.map( ActiviteitenResService.activiteitToActiviteitMapper );
+  private static activiteitenResponseToActiviteitMapper(
+    activiteitenResponse: IActiviteitres[]
+  ): Reservering[] {
+    console.log(activiteitenResponse);
+    return activiteitenResponse.map(
+      ActiviteitenResService.activiteitToActiviteitMapper
+    );
   }
 
   private static activiteitToActiviteitMapper(
@@ -25,7 +29,7 @@ export class ActiviteitenResService {
       activiteit.naamActiviteit,
       activiteit.datum,
       activiteit.emailGast,
-      activiteit.aantalPersonen,
+      activiteit.aantalPersonen
     );
   }
 
@@ -33,19 +37,18 @@ export class ActiviteitenResService {
     return this.http
       .get<IActiviteitres[]>(this.api)
       .pipe(map(ActiviteitenResService.activiteitenResponseToActiviteitMapper));
-        }
-
-  saveActiviteitRes(reservering:Reservering){
-    return this.http
-      .post<IActiviteitres[]>(this.api+'savereservering', reservering)
-      .subscribe()
   }
 
+  saveActiviteitRes(reservering: Reservering) {
+    return this.http
+      .post<IActiviteitres[]>(this.api + "savereservering", reservering)
+      .subscribe();
+  }
 }
 
 interface IActiviteitres {
-   naamActiviteit: string,
-   datum: number,
-   emailGast: string,
-   aantalPersonen: number,
+  naamActiviteit: string;
+  datum: number;
+  emailGast: string;
+  aantalPersonen: number;
 }
