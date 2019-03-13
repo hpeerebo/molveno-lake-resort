@@ -11,13 +11,6 @@
     <th (click)="clickColumnHandler('datumtot')">Vertrek</th>
     <th (click)="clickColumnHandler('kamernaam')">Kamer</th>
     <th></th>
-    <!--th>Identiteit</th>
-    <th>Postcode</th>
-    <th>Straat</th>
-    <th>Huisnummer</th>
-    <th>Woonplaats</th>
-    <th>Land</th-->
-
   </tr>
   </thead>
   <tbody>
@@ -29,17 +22,61 @@
     <td>{{kamerreservering.datumvan}}</td>
     <td>{{kamerreservering.datumtot}} </td>
     <td>{{kamerreservering.kamernaam}}</td>
-    <!--td>{{kamerreservering.identiteitsid}}</td>
-    <td>{{kamerreservering.postcode}}</td>
-    <td>{{kamerreservering.straat}} </td>
-    <td>{{kamerreservering.huisnummer}}</td>
-    <td>{{kamerreservering.woonplaats}}</td>
-    <td>{{kamerreservering.land}}</td-->
         <td style="text-align: right">
             <i class="fas fa-edit mr-2" placement="top" ngbTooltip="Toon gegevens" (click)="openFormKamerReserveringDetailsModal(kamerreservering)"></i>
-            <i class="fas fa-trash-alt mr-2" placement="top" ngbTooltip="Verwijderen" (click)="deleteRoom(kamerreservering)" ></i>
+          <i class="fas fa-trash-alt mr-2" placement="top" ngbTooltip="Verwijderen" (click)="onSelect(kamerreservering); openSm(deleteReseveringModal)" ></i>
          </td>
     </tr>
   </tbody>
 </table>
 </div>
+
+<!-- Modal to confirm deleting room-->
+<ng-template #deleteReseveringModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Resevering verwijderen</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <p>Uw staat op het punt de volgende resevering te verwijderen: </p>
+        <table class="table table-striped table-sm">
+          <tr>
+            <td>Gast: </td>
+            <td>{{selectedResevering?.voornaam}} {{selectedResevering?.achternaam}}</td>
+          </tr>
+          <tr>
+            <td>Kamernaam: </td>
+            <td>{{selectedResevering?.kamernaam}}</td>
+          </tr>
+          <tr>
+            <td>Van: </td>
+            <td>{{selectedResevering?.datumvan}}</td>
+          </tr>
+          <tr>
+            <td>Tot</td>
+            <td>{{selectedResevering?.datumtot}}</td>
+          </tr>
+          <tr>
+            <td>Email</td>
+            <td>{{selectedResevering?.emailadres}}</td>
+          </tr>
+          <tr>
+            <td>Telefoon</td>
+            <td>{{selectedResevering?.telefoonnummer}}</td>
+          </tr>
+
+        </table>
+        <p>Weet u dit zeker?</p>
+
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="modal.close('Save click')">Nee</button>
+    <button type="button" class="btn btn-success" (click)="deleteRoom(kamerreservering); modal.close('Save click')">Ja</button>
+  </div>
+</ng-template>
