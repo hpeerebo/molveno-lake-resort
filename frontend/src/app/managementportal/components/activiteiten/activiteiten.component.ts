@@ -5,7 +5,6 @@ import { Activiteit } from "src/app/models/activiteit";
 import { NgbModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
 import { FormActiviteitComponent } from "src/app/shared/components/form-activiteit/form-activiteit.component";
 import { ModalConfirmComponent } from "src/app/shared/components/modal-confirm/modal-confirm.component";
-import { ActiviteitReserveringenComponent } from "./activiteit-reserveringen/activiteit-reserveringen.component";
 
 @Component({
   selector: "app-activiteiten",
