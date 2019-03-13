@@ -14,7 +14,7 @@ import { ModalConfirmComponent } from 'src/app/shared/components/modal-confirm/m
 export class ManagementPortalTafelsComponent {
   public tafels$: Observable<Tafel[]> = this.tafelsService.data$;
 
-  field: string = "";
+  field: string = "kenmerk";
   public clickColumnHandler(event: string): string {
     this.field = event;
     return console.log(this.field), this.field;

@@ -1,7 +1,8 @@
 import { Injectable, Pipe, PipeTransform } from "@angular/core";
 
 @Pipe({
-  name: "sortgrid"
+  name: "sortgrid",
+  pure:true
 })
 
 @Injectable()
