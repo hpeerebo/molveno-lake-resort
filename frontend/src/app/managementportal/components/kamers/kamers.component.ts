@@ -157,6 +157,7 @@ export class ManagementPortalKamersComponent implements OnInit {
     });
 
   }
+
   showAvailableRoomsModal(){
     const modalKamerSearch = this.modalService.open(FormKamersbeschikbaarComponent);
     modalKamerSearch.result.then(searchParameters => {

@@ -68,4 +68,6 @@ export class KamerreserveringComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
+
+
 }

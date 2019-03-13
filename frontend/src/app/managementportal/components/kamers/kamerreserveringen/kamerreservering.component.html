@@ -1,35 +1,46 @@
+<div>
+  <!--pre>{{kamers | json}}</pre-->
+  <br />
 
-<div class="table-responsive mt-2">
-<table class="table table-striped table-sm">
-  <thead>
-  <tr>
-    <th (click)="clickColumnHandler('voornaam')">Voornaam</th>
-    <th (click)="clickColumnHandler('achternaam')">Achternaam</th>
-    <th (click)="clickColumnHandler('telefoonnummer')">Telefoon</th>
-    <th (click)="clickColumnHandler('emailadres')">E-mail</th>
-    <th (click)="clickColumnHandler('datumvan')">Aankomst</th>
-    <th (click)="clickColumnHandler('datumtot')">Vertrek</th>
-    <th (click)="clickColumnHandler('kamernaam')">Kamer</th>
-    <th></th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let kamerreservering of (kamerreserveringen | async |  sortgrid:field)" >
-    <td>{{kamerreservering.voornaam}}</td>
-    <td>{{kamerreservering.achternaam}}</td>
-    <td>{{kamerreservering.telefoonnummer}}</td>
-    <td>{{kamerreservering.emailadres}}</td>
-    <td>{{kamerreservering.datumvan}}</td>
-    <td>{{kamerreservering.datumtot}} </td>
-    <td>{{kamerreservering.kamernaam}}</td>
+  <div class="row">
+    <div class=" col-12 d-flex justify-content-start">
+      <button type="button" class="btn btn-primary" [routerLink]="['/managementportal/kamers']" >Resevering toevoegen</button>
+    </div>
+  </div>
+
+  <div class="table-responsive mt-2">
+    <table class="table table-striped table-sm">
+      <thead>
+      <tr>
+        <th (click)="clickColumnHandler('voornaam')">Voornaam</th>
+        <th (click)="clickColumnHandler('achternaam')">Achternaam</th>
+        <th (click)="clickColumnHandler('telefoonnummer')">Telefoon</th>
+        <th (click)="clickColumnHandler('emailadres')">E-mail</th>
+        <th (click)="clickColumnHandler('datumvan')">Aankomst</th>
+        <th (click)="clickColumnHandler('datumtot')">Vertrek</th>
+        <th (click)="clickColumnHandler('kamernaam')">Kamer</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let kamerreservering of (kamerreserveringen | async |  sortgrid:field)" >
+        <td>{{kamerreservering.voornaam}}</td>
+        <td>{{kamerreservering.achternaam}}</td>
+        <td>{{kamerreservering.telefoonnummer}}</td>
+        <td>{{kamerreservering.emailadres}}</td>
+        <td>{{kamerreservering.datumvan}}</td>
+        <td>{{kamerreservering.datumtot}} </td>
+        <td>{{kamerreservering.kamernaam}}</td>
         <td style="text-align: right">
-            <i class="fas fa-edit mr-2" placement="top" ngbTooltip="Toon gegevens" (click)="openFormKamerReserveringDetailsModal(kamerreservering)"></i>
+          <i class="fas fa-edit mr-2" placement="top" ngbTooltip="Toon gegevens" (click)="openFormKamerReserveringDetailsModal(kamerreservering)"></i>
           <i class="fas fa-trash-alt mr-2" placement="top" ngbTooltip="Verwijderen" (click)="onSelect(kamerreservering); openSm(deleteReseveringModal)" ></i>
-         </td>
-    </tr>
-  </tbody>
-</table>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
+
 
 <!-- Modal to confirm deleting room-->
 <ng-template #deleteReseveringModal let-modal>
@@ -42,7 +53,7 @@
   <div class="modal-body">
     <form>
       <div class="form-group">
-        <p>Uw staat op het punt de volgende resevering te verwijderen: </p>
+        <p>Uw staat op het punt om de volgende resevering te verwijderen: </p>
         <table class="table table-striped table-sm">
           <tr>
             <td>Gast: </td>
