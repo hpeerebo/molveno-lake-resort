@@ -10,13 +10,20 @@ import { KamerreserveringenService } from 'src/app/services/kamerreserveringen.s
 import {KamerReservering} from "../../../models/kamerreservering";
 import { FormKamersbeschikbaarComponent } from './kamers-form/form-kamersbeschikbaar/form-kamersbeschikbaar.component';
 
+
 @Component({
   selector: "app-kamers",
   templateUrl: "./kamers.component.html",
   styleUrls: ["./kamers.component.scss"]
 })
 //export let kamers:Kamer[] = [];
+
 export class ManagementPortalKamersComponent implements OnInit {
+  field: string = "";
+  public clickColumnHandler(event: string): string {
+    this.field = event;
+  }
+
   //public kamers :KamerResponse[] = [];
  // public kamers: Kamer[] | undefined = [];
  public kamers: Observable<Kamer[] | undefined> = this.roomservice.getRoom();
@@ -30,20 +37,12 @@ export class ManagementPortalKamersComponent implements OnInit {
     private kamerreserveringservice: KamerreserveringenService,
     private modalService: NgbModal
   ) {}
+
+
   ngOnInit() {
- //   this.getRoom();
+
   }
 
-  /* getRoom() {
-    //this.roomservice.getRoom().subscribe(result => this.kamers = result);
-    this.roomservice
-      .getRoom()
-      .pipe(
-        take(1),
-        tap(result => (this.kamers = result))
-      )
-      .subscribe();
-  } */
   onSelect(kamer: Kamer): void {
     this.selectedKamer = kamer;
   }

@@ -7,8 +7,6 @@ import {FrontendModule} from "./frontend/frontend.module";
 import {ManagementportalModule} from "./managementportal/managementportal.module";
 import {HttpClientModule} from '@angular/common/http';
 import {RoomService} from './services/rooms.service';
-import {KamersPipe} from './shared/pipes/kamers.pipe';
-import { FormTafelreserveringComponent } from './shared/components/form-tafelreservering/form-tafelreservering.component';
 
 @NgModule({
   declarations: [AppComponent],

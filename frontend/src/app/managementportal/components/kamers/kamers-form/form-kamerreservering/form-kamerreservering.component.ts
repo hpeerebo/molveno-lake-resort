@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { KamerReservering } from 'src/app/models/kamerreservering';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import { KamerReserveringFormGroup } from './kamerreserveringformgroup';
@@ -12,8 +12,13 @@ export class FormKamerreserveringComponent implements OnInit {
   kamerreservering: KamerReservering | undefined = undefined;
   kamernaam: string = "";
   public kamerreserveringForm = new KamerReserveringFormGroup();
-
   constructor(public activeModal: NgbActiveModal) {}
+
+
+  field: string = "";
+  public clickColumnHandler(event: string): string {
+    this.field = event;
+  }
 
 
   ngOnInit() {
