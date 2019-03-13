@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-end mt-2">
-    <button class="btn btn-primary" (click)="openFormGerechtModal()">Nieuw</button>
+  <button class="btn btn-primary" (click)="openFormGerechtModal()">Nieuw</button>
 </div>
 
 <div class="table-responsive mt-2">
@@ -21,7 +21,8 @@
         <td>{{gerecht.prijs | currency: 'EUR'}}</td>
         <td class="text-right">
           <i class="fas fa-edit mr-2" placement="top" ngbTooltip="Wijzigen" (click)="openFormGerechtModal(gerecht)"></i>
-          <i class="fas fa-trash-alt mr-2" placement="top" ngbTooltip="Verwijderen" (click)="verwijderGerecht(gerecht)"></i>
+          <i class="fas fa-trash-alt mr-2" placement="top" ngbTooltip="Verwijderen"
+            (click)="verwijderGerecht(gerecht)"></i>
         </td>
       </tr>
     </tbody>
