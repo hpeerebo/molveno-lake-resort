@@ -22,7 +22,7 @@ export class KamerService {
                     AND datumtot <= '${datumtot}') AND kamer.kamerType='${kamertype}'`)
             .getMany()
             .then(kamersEntities => kamersEntities.map(kamerEntity => kamerEntity.mapToKamers()));
-        //console.log(user);
+
     }
     public saveKamer(createkamerdto: CreateKamerDto) {
         this.kamersepository.save(createkamerdto.kamerEntity());
