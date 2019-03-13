@@ -28,7 +28,6 @@ export class FormActiviteitComponent implements OnInit {
 
   ngOnInit() {
     console.log("ngOninit form activiteit component");
-    console.log(this.activiteit);
     if (this.activiteit) {
       this.activiteitForm.setValue({
         id: this.activiteit.id,

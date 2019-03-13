@@ -39,16 +39,16 @@ export class FormActiviteitResComponent implements OnInit {
   submitForm() {
     this.activeModal.close(this.activiteitResForm.value);
   }
-  get naam() {
+  get naamActiviteit() {
     return this.activiteitResForm.get("naamActiviteit");
   }
-  get beschrijving() {
+  get datum() {
     return this.activiteitResForm.get("datum");
   }
-  get datum() {
+  get emailGast() {
     return this.activiteitResForm.get("emailGast");
   }
-  get capaciteit() {
+  get aantalPersonen() {
     return this.activiteitResForm.get("aantalPersonen");
   }
 }
