@@ -15,6 +15,12 @@ export class KamerreserveringComponent implements OnInit {
   kamerreserveringen: KamerReservering[] | undefined = [];
   constructor(private readonly kamerreserveringservice: KamerreserveringenService, private readonly modalService: NgbModal, private router: Router) { }
 
+  field: string = "";
+  public clickColumnHandler(event: string): string {
+    this.field = event;
+    return this.field;
+  }
+
   getKamerReserveringen(){
     this.kamerreserveringservice.getKamerReserveringen()
     .pipe(
