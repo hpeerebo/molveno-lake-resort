@@ -42,41 +42,43 @@
         </div>
       </div>
     <div class="container, form-row">
-        <div class="form-group col-md-8">
+        <div class="form-group col-md-9">
           <label>Straat</label>
           <input type="text" class="form-control" formControlName="straat" [class.is-invalid]="kamerreserveringForm.controls.straat.invalid && kamerreserveringForm.controls.straat.touched" ngbAutofocus />
           <small class="text-danger" [class.d-none]="kamerreserveringForm.controls.straat.valid || kamerreserveringForm.controls.straat.untouched">Vereist</small>
         </div>
-        <div class="form-group col-md-2">
+        <div class="form-group col-md-3">
           <label>Nummer</label>
           <input type="text" class="form-control" formControlName="huisnummer" [class.is-invalid]="kamerreserveringForm.controls.huisnummer.invalid && kamerreserveringForm.controls.huisnummer.touched" ngbAutofocus />
           <small class="text-danger" [class.d-none]="kamerreserveringForm.controls.huisnummer.valid || kamerreserveringForm.controls.huisnummer.untouched">Vereist</small>
         </div>
-        <div class="form-group col-md-2">
-          <label>Postcode</label>
-          <input type="text" class="form-control" formControlName="postcode" [class.is-invalid]="kamerreserveringForm.controls.postcode.invalid && kamerreserveringForm.controls.postcode.touched" ngbAutofocus />
-          <small class="text-danger" [class.d-none]="kamerreserveringForm.controls.postcode.valid || kamerreserveringForm.controls.postcode.untouched">Vereist</small>
-        </div>
-      </div>
-      <div class="container, form-row">
-          <div class="form-group col-md-6">
+    </div>
+    <div class="container, form-row">
+         <div class="form-group col-md-4">
+           <label>Postcode</label>
+           <input type="text" class="form-control" formControlName="postcode" [class.is-invalid]="kamerreserveringForm.controls.postcode.invalid && kamerreserveringForm.controls.postcode.touched" ngbAutofocus />
+           <small class="text-danger" [class.d-none]="kamerreserveringForm.controls.postcode.valid || kamerreserveringForm.controls.postcode.untouched">Vereist</small>
+         </div>
+        <div class="form-group col-md-8">
               <label>Woonplaats</label>
               <input type="text" class="form-control" formControlName="woonplaats" [class.is-invalid]="kamerreserveringForm.controls.woonplaats.invalid && kamerreserveringForm.controls.woonplaats.touched" ngbAutofocus />
               <small class="text-danger" [class.d-none]="kamerreserveringForm.controls.woonplaats.valid || kamerreserveringForm.controls.woonplaats.untouched">Vereist</small>
             </div>
-            <div class="form-group col-md-6">
-              <label>Land</label>
-              <input type="text" class="form-control" placeholder="Nederland" formControlName="land" [class.is-invalid]="kamerreserveringForm.controls.land.invalid && kamerreserveringForm.controls.land.touched" ngbAutofocus />
-              <small class="text-danger" [class.d-none]="kamerreserveringForm.controls.land.valid || kamerreserveringForm.controls.land.untouched">Vereist</small>
-            </div>
-          </div>
+      </div>
 
-
+    <div class="container, form-row">
+      <div class="form-group col-md-12">
+        <label>Land</label>
+        <input type="text" class="form-control" placeholder="Nederland" formControlName="land" [class.is-invalid]="kamerreserveringForm.controls.land.invalid && kamerreserveringForm.controls.land.touched" ngbAutofocus />
+        <small class="text-danger" [class.d-none]="kamerreserveringForm.controls.land.valid || kamerreserveringForm.controls.land.untouched">Vereist</small>
+      </div>
       <div class="form-group">
-        <label>Document nummer (paspoort, rijbewijs, ID)</label>
-        <input type="text" class="form-control" formControlName="identiteitsid" [class.is-invalid]="kamerreserveringForm.controls.identiteitsid.invalid && kamerreserveringForm.controls.identiteitsid.touched" ngbAutofocus />
+        <input type="hidden" value="none" class="form-control" formControlName="identiteitsid" [class.is-invalid]="kamerreserveringForm.controls.identiteitsid.invalid && kamerreserveringForm.controls.identiteitsid.touched" ngbAutofocus />
         <small class="text-danger" [class.d-none]="kamerreserveringForm.controls.identiteitsid.valid || kamerreserveringForm.controls.identiteitsid.untouched">Vereist</small>
       </div>
+
+    </div>
+
 
     <div class="form-group">
       <input type="hidden" class="form-control" value="{{kamernaam}}" formControlName="kamernaam">

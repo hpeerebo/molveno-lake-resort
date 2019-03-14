@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class FormKamerreserveringComponent implements OnInit {
   kamerreservering: KamerReservering | undefined = undefined;
   kamernaam: string = "";
-  datumvan: string = ""
+  datumvan: string = "";
   datumtot: string = "";
   public kamerreserveringForm = new KamerReserveringFormGroup();
 
@@ -35,8 +35,6 @@ export class FormKamerreserveringComponent implements OnInit {
         land: this.kamerreservering.land,
         datumvan: this.kamerreservering.datumvan,
         datumtot: this.kamerreservering.datumtot,
-       //datumvan: this.datumvan,
-       //datumtot: this.datumtot,
         kamernaam: this.kamerreservering.kamernaam
       });
     }
@@ -56,11 +54,9 @@ export class FormKamerreserveringComponent implements OnInit {
       this.kamerreserveringForm.value.huisnummer,
       this.kamerreserveringForm.value.woonplaats,
       this.kamerreserveringForm.value.land,
-      //this.kamerreserveringForm.value.datumvan,
-      //this.kamerreserveringForm.value.datumtot,
      this.datumvan,
      this.datumtot,
-      this.kamerreserveringForm.value.kamernaam
+     this.kamerreserveringForm.value.kamernaam
     ));
     location.reload();
     this.router.navigateByUrl('managementportal/kamerreserveringen');
