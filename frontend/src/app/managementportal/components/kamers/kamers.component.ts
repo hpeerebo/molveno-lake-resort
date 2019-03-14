@@ -29,7 +29,7 @@ export class ManagementPortalKamersComponent implements OnInit, AfterViewInit {
 
   public kamers: Observable<Kamer[] | undefined> = this.roomservice.getRoom();
   public selectedKamer?: Kamer;
-  private reseveer: null | string  = "";
+  private param: null | string  = "";
   field: string = "";
   show: string = "";
 
@@ -50,12 +50,13 @@ export class ManagementPortalKamersComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit () {
     this.route.paramMap.subscribe(params => {
-      this.reseveer = params.get("reseveer")
+      this.param = params.get("param")
     });
     setTimeout(() => {
-      if (this.reseveer == "reseveer") {
+      if (this.param == "reseveer") {
         this.showAvailableRoomsModal();
       }
+
     });
 
   }
