@@ -1,6 +1,7 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany } from 'typeorm';
 import { Eenheid } from 'src/enums/eenheid';
 import { Ingredient } from 'src/models/ingredient';
+import { GerechtRepoEntity } from './gerecht.entity';
 
 @Entity('ingredient')
 export class IngredientRepoEntity {
@@ -15,6 +16,9 @@ export class IngredientRepoEntity {
 
     @Column('numeric')
     public readonly prijs: number;
+
+    @ManyToMany(type => GerechtRepoEntity, gerecht => gerecht.ingredienten)
+	public gerechten: GerechtRepoEntity[];
 
     constructor(
         naam: string,

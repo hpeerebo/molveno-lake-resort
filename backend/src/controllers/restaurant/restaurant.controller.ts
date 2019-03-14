@@ -13,6 +13,8 @@ import { Tafelreservering } from 'src/models/tafelreservering';
 import { TafelreserveringService } from 'src/services/tafelreservering/tafelreservering.service';
 import { CreateTafelreserveringDto } from 'src/dto/create-tafelreservering-dto';
 import { DeleteResult, UpdateResult } from 'typeorm';
+import { GerechtDetails } from 'src/models/gerecht-details';
+import { AddIngredientDto } from 'src/dto/add-ingredient-dto';
 
 @ApiUseTags('restaurant')
 @Controller('restaurant')
@@ -65,6 +67,13 @@ export class RestaurantController {
         return { gerechten };
     }
 
+    @Get('gerechten/:id')
+    @ApiOperation({ title: 'Haal de details op van een gerecht' })
+    async getGerecht(@Param('id') id: number): Promise<{ gerecht: GerechtDetails }> {
+        const gerecht = await this.gerechtService.getGerechtDetails(id);
+        return { gerecht };
+    }
+
     @Post('gerechten')
     @ApiOperation({ title: 'Voeg een nieuw gerecht toe' })
     @ApiResponse({ status: 201, description: 'Het gerecht is succesvol aangemaakt' })
@@ -72,6 +81,15 @@ export class RestaurantController {
     async createGerecht(@Body() gerechtDto: CreateGerechtDto): Promise<Gerecht> {
         const gerechtEntity = await this.gerechtService.createGerecht(gerechtDto.mapToGerechtEntity());
         return gerechtEntity.mapToGerecht();
+    }
+
+    @Post('gerechten/:id/ingredienten')
+    @ApiOperation({ title: 'Voeg een ingredient aan een gerecht toe' })
+    @ApiResponse({ status: 201, description: 'Het ingredient is succesvol toegevoegd' })
+    async addIngredientToGerecht(@Param('id') gerechtId: number, @Body() addIngredientDto: AddIngredientDto): Promise<GerechtDetails> {
+        const ingredientRepoEntity = await this.ingredientenService.getIngredient(addIngredientDto.id)
+        const gerechtRepoEntity = await this.gerechtService.addIngredientToGerecht(gerechtId, ingredientRepoEntity);
+        return gerechtRepoEntity.mapToGerechtDetails();
     }
 
     @Put('gerechten/:id')

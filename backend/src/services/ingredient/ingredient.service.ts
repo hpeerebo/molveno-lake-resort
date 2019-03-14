@@ -18,6 +18,12 @@ export class IngredientService {
         return ingredienten;
     }
 
+    async getIngredient(id: number): Promise<IngredientRepoEntity> {
+        const ingredient = await this.ingredientRepository.findOne(id);
+        if (!ingredient) throw new HttpException('Er bestaat geen ingredient met dit id', HttpStatus.NOT_FOUND);
+        return ingredient;
+    }
+
     async createIngredient(ingredientEntity: IngredientRepoEntity): Promise<IngredientRepoEntity> {
         const ingredientExists = !!await this.ingredientRepository.findOne({ naam: ingredientEntity.naam });
         if (ingredientExists) throw new HttpException('Een ingredient met deze naam bestaat al', HttpStatus.CONFLICT);

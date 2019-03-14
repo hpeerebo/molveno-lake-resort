@@ -1,22 +1,35 @@
-import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus, Post } from '@nestjs/common';
 import { Gerecht } from 'src/models/gerecht';
-import { CreateGerechtDto } from 'src/dto/create-gerecht-dto';
 import { GerechtRepoEntity } from 'src/entities/gerecht.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, DeleteResult, UpdateResult, Not } from 'typeorm';
+import { GerechtDetails } from 'src/models/gerecht-details';
+import { IngredientRepoEntity } from 'src/entities/ingredient.entity';
 
 @Injectable()
 export class GerechtService {
 
     constructor(
         @InjectRepository(GerechtRepoEntity)
-        private readonly gerechtRepository: Repository<GerechtRepoEntity>,
+        private readonly gerechtRepository: Repository<GerechtRepoEntity>
     ) { }
 
     async getGerechten(): Promise<Gerecht[]> {
         const gerechtenEntities = await this.gerechtRepository.find();
         const gerechten = gerechtenEntities.map(gerechtEntity => gerechtEntity.mapToGerecht());
         return gerechten;
+    }
+
+    async getGerechtDetails(id: number): Promise<GerechtDetails> {
+        const gerecht = await this.gerechtRepository.findOne(id, { relations: ["ingredienten"] });
+        return gerecht.mapToGerechtDetails();
+    }
+
+    async addIngredientToGerecht(gerechtId: number, ingredientRepoEntity: IngredientRepoEntity): Promise<GerechtRepoEntity> {
+        const gerecht = await this.gerechtRepository.findOne(gerechtId, { relations: ["ingredienten"] });
+        if (!gerecht) throw new HttpException('Er bestaat geen gerecht met dit id', HttpStatus.NOT_FOUND);
+        gerecht.addIngredient(ingredientRepoEntity);
+        return this.gerechtRepository.save(gerecht);
     }
 
     async createGerecht(gerechtEntity: GerechtRepoEntity): Promise<GerechtRepoEntity> {
