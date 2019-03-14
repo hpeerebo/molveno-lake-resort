@@ -54,7 +54,7 @@ export class RestaurantComponent implements OnInit {
 
   public filterGerechten(filter: string): void {
     this.filteredGerechten$ = this.gerechten$.pipe(
-      map(gerechten => gerechten.filter(gerecht => gerecht.type === filter))
+      map(gerechten => gerechten.filter(gerecht => gerecht.type.toLowerCase() === filter.toLowerCase()))
     )
   };
 
