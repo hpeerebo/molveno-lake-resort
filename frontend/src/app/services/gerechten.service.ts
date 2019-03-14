@@ -14,7 +14,7 @@ export class GerechtenService {
   public readonly paginatedGerechten$ = new BehaviorSubject<Gerecht[]>([]);
   public readonly total$ = new BehaviorSubject<number>(0);
 
-  public _pageSize: number = 4;
+  public _pageSize: number = 10;
   public _page: number = 1;
 
   constructor(private http: HttpClient) {
