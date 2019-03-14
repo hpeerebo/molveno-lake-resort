@@ -1,59 +1,63 @@
 import {Component, OnInit} from "@angular/core";
 import { RoomService } from "src/app/services/rooms.service";
 import { Kamer } from "../../../models/kamer";
-import { Subscription, Observable } from "rxjs";
-import { take, tap } from "rxjs/operators";
+import { Observable } from "rxjs";
 import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
 import { ManagementPortalKamersFormComponent } from "./kamers-form/kamers-form.component";
 import { FormKamerreserveringComponent } from './kamers-form/form-kamerreservering/form-kamerreservering.component';
 import { KamerreserveringenService } from 'src/app/services/kamerreserveringen.service';
 import {KamerReservering} from "../../../models/kamerreservering";
 import { FormKamersbeschikbaarComponent } from './kamers-form/form-kamersbeschikbaar/form-kamersbeschikbaar.component';
+import {ActivatedRoute} from "@angular/router";
+
 
 @Component({
   selector: "app-kamers",
   templateUrl: "./kamers.component.html",
   styleUrls: ["./kamers.component.scss"]
 })
-//export let kamers:Kamer[] = [];
+
 export class ManagementPortalKamersComponent implements OnInit {
 
-  field: string = "";
-  public clickColumnHandler(event: string): string {
-    this.field = event;
-    return this.field;
-  }
+  constructor(
+    private roomservice: RoomService,
+    private kamerreserveringservice: KamerreserveringenService,
+    private modalService: NgbModal,
+    private route: ActivatedRoute
+  ) {}
 
-  //public kamers :KamerResponse[] = [];
- // public kamers: Kamer[] | undefined = [];
- public kamers: Observable<Kamer[] | undefined> = this.roomservice.getRoom();
-  show: string = "";
+  public kamers: Observable<Kamer[] | undefined> = this.roomservice.getRoom();
   public selectedKamer?: Kamer;
+  private reseveer: null | string  = "";
+  field: string = "";
+  show: string = "";
+
   soortkamer = ["Budget", "Standaard", "Lux"];
   closeResult: string = "";
   showResButton: boolean = false;
   datumvan: string = '';
   datumtot: string = '';
-  private subscriptions: Subscription = new Subscription();
-  constructor(
-    private roomservice: RoomService,
-    private kamerreserveringservice: KamerreserveringenService,
-    private modalService: NgbModal
-  ) {}
-  ngOnInit() {
- //   this.getRoom();
+
+  public clickColumnHandler(event: string): string {
+    this.field = event;
+    return this.field;
   }
 
-  /* getRoom() {
-    //this.roomservice.getRoom().subscribe(result => this.kamers = result);
-    this.roomservice
-      .getRoom()
-      .pipe(
-        take(1),
-        tap(result => (this.kamers = result))
-      )
-      .subscribe();
-  } */
+  ngOnInit() {
+    this.route.paramMap.subscribe(params => {
+      this.reseveer = params.get("reseveer")
+    });
+    if (this.reseveer == "reseveer") {
+      const modalKamerSearch = this.modalService.open(FormKamersbeschikbaarComponent);
+      modalKamerSearch.result.then(searchParameters => {
+          this.datumvan = searchParameters.datumvan;
+          this.datumtot = searchParameters.datumtot;
+          this.roomservice.searchRoom(true, searchParameters.datumvan, searchParameters.datumtot, searchParameters.kamertype)
+        },
+      ).finally(() => this.showResButton = true)
+    }
+  }
+
   onSelect(kamer: Kamer): void {
     this.selectedKamer = kamer;
   }
@@ -61,10 +65,8 @@ export class ManagementPortalKamersComponent implements OnInit {
   deleteRoom(kamer: Kamer) {
     if (this.kamers) {
       this.roomservice.deleteRoom(kamer);
-      //this.kamers = [...this.kamers].filter(item => item !== kamer);
     }
   }
-
 
   openSm(content: NgbModal) {
     this.modalService
@@ -78,6 +80,7 @@ export class ManagementPortalKamersComponent implements OnInit {
         }
       );
   }
+
   openNewFormModal() {
     const modalRef = this.modalService.open(ManagementPortalKamersFormComponent, {
       size: "lg",
@@ -94,6 +97,7 @@ export class ManagementPortalKamersComponent implements OnInit {
       ));
     });
   }
+
   openEditFormModal() {
     const modalRef = this.modalService.open(ManagementPortalKamersFormComponent, {
       size: "lg",
