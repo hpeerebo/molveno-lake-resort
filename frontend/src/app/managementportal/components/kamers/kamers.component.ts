@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import { AfterViewInit, ChangeDetectionStrategy, Component, OnInit} from "@angular/core";
 import { RoomService } from "src/app/services/rooms.service";
 import { Kamer } from "../../../models/kamer";
 import { Observable } from "rxjs";
@@ -12,12 +12,13 @@ import {ActivatedRoute} from "@angular/router";
 
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: "app-kamers",
   templateUrl: "./kamers.component.html",
   styleUrls: ["./kamers.component.scss"]
 })
 
-export class ManagementPortalKamersComponent implements OnInit {
+export class ManagementPortalKamersComponent implements OnInit, AfterViewInit {
 
   constructor(
     private roomservice: RoomService,
@@ -44,18 +45,19 @@ export class ManagementPortalKamersComponent implements OnInit {
   }
 
   ngOnInit() {
+
+  }
+
+  ngAfterViewInit () {
     this.route.paramMap.subscribe(params => {
       this.reseveer = params.get("reseveer")
     });
-    if (this.reseveer == "reseveer") {
-      const modalKamerSearch = this.modalService.open(FormKamersbeschikbaarComponent);
-      modalKamerSearch.result.then(searchParameters => {
-          this.datumvan = searchParameters.datumvan;
-          this.datumtot = searchParameters.datumtot;
-          this.roomservice.searchRoom(true, searchParameters.datumvan, searchParameters.datumtot, searchParameters.kamertype)
-        },
-      ).finally(() => this.showResButton = true)
-    }
+    setTimeout(() => {
+      if (this.reseveer == "reseveer") {
+        this.showAvailableRoomsModal();
+      }
+    });
+
   }
 
   onSelect(kamer: Kamer): void {
