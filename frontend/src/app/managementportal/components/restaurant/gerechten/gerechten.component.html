@@ -15,7 +15,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let gerecht of (gerechtenService.paginatedGerechten$ | async | sortgrid:field)">
-        <td><span class="handCursor" (click)="goToDetails(gerecht)">{{gerecht.naam}}</span></td>
+        <td><span class="handCursor" [routerLink]="[gerecht.id]">{{gerecht.naam}}</span></td>
         <td>{{gerecht.type}}</td>
         <td>{{gerecht.subtype}}</td>
         <td>{{gerecht.prijs | currency: 'EUR'}}</td>
@@ -28,9 +28,10 @@
     </tbody>
   </table>
   <div class="d-flex justify-content-between">
-    <ngb-pagination [collectionSize]="gerechtenService.total$ | async" [(page)]="gerechtenService.page" [pageSize]="gerechtenService.pageSize">
+    <ngb-pagination [collectionSize]="gerechtenService.total$ | async" [(page)]="gerechtenService.page"
+      [pageSize]="gerechtenService.pageSize">
     </ngb-pagination>
-    <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="gerechtenService.pageSize">
+    <select class="custom-select" name="pageSize" [(ngModel)]="gerechtenService.pageSize">
       <option [ngValue]="5">5 per pagina</option>
       <option [ngValue]="10">10 per pagina</option>
       <option [ngValue]="20">20 per pagina</option>
