@@ -15,7 +15,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let gerecht of (gerechtenService.paginatedGerechten$ | async | sortgrid:field)">
-        <td>{{gerecht.naam}}</td>
+        <td><span class="handCursor" (click)="goToDetails(gerecht)">{{gerecht.naam}}</span></td>
         <td>{{gerecht.type}}</td>
         <td>{{gerecht.subtype}}</td>
         <td>{{gerecht.prijs | currency: 'EUR'}}</td>
