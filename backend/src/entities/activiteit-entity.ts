@@ -1,6 +1,6 @@
 import { PrimaryGeneratedColumn, Column, Entity } from 'typeorm';
 
-@Entity()
+@Entity('activiteiten')
 export class ActiviteitEntity {
   @PrimaryGeneratedColumn() public readonly id: number;
   @Column('varchar') public readonly naam: string;

@@ -20,6 +20,9 @@ import { ActiviteitEntity } from './entities/activiteit-entity';
 import { ActiviteitenResController } from './controllers/activiteiten-res/activiteiten-res.controller';
 import { ActiviteitResService } from './services/activiteit-res/activiteit-res.service';
 import { ActiviteitResEntity } from './entities/activiteit-res-entity';
+import { ActiviteitPlanningEntity } from './entities/activiteit-planning-entity';
+import { ActiviteitenPlanningController } from './controllers/activiteiten-planning/activiteiten-planning.controller';
+import { ActiviteitPlanningService } from './services/activiteit-planning/activiteit-planning.service';
 
 @Module({
   imports: [
@@ -44,12 +47,14 @@ import { ActiviteitResEntity } from './entities/activiteit-res-entity';
       TafelreserveringRepoEntity,
       ActiviteitEntity,
       ActiviteitResEntity,
+      ActiviteitPlanningEntity,
     ]),
   ],
   controllers: [
     AppController,
     ActiviteitenController,
     ActiviteitenResController,
+    ActiviteitenPlanningController,
     KamersController,
     RestaurantController,
   ],
@@ -57,6 +62,7 @@ import { ActiviteitResEntity } from './entities/activiteit-res-entity';
     AppService,
     ActiviteitService,
     ActiviteitResService,
+    ActiviteitPlanningService,
     KamerService,
     TafelService,
     IngredientService,

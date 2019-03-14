@@ -1,0 +1,46 @@
+import { Controller, Get, Post, Body } from '@nestjs/common';
+import { ApiOperation, ApiUseTags, ApiResponse } from '@nestjs/swagger';
+import { ActiviteitPlanning } from 'src/models/activiteit-planning';
+import { ActiviteitPlanningService } from 'src/services/activiteit-planning/activiteit-planning.service';
+import { CreateActiviteitPlanningDto } from 'src/dto/create-activiteit-planning-dto';
+import { ActiviteitPlanningEntity } from 'src/entities/activiteit-planning-entity';
+
+@Controller('activiteiten/planning')
+@ApiUseTags('activiteiten')
+export class ActiviteitenPlanningController {
+  constructor(
+    private readonly activiteitenPlanService: ActiviteitPlanningService,
+  ) {}
+
+  @Post()
+  @ApiOperation({ title: 'Maak een nieuw plannings element aan' })
+  @ApiResponse({
+    status: 201,
+    description: 'De planning is succesvol aangemaakt',
+  })
+  @ApiResponse({
+    status: 409,
+    description: 'Een planning met dit kenmerk bestaat al',
+  })
+  public saveActiviteitPlanning(
+    @Body() createActiviteitPlanning: CreateActiviteitPlanningDto,
+  ): void {
+    const activiteitplanning: ActiviteitPlanningEntity = new ActiviteitPlanningEntity(
+      createActiviteitPlanning.planid,
+      createActiviteitPlanning.actid,
+      createActiviteitPlanning.actdate,
+      createActiviteitPlanning.actprijs,
+      createActiviteitPlanning.actcapaciteit,
+    );
+
+    return this.activiteitenPlanService.saveActiviteitPlanning(
+      activiteitplanning,
+    );
+  }
+
+  @Get('')
+  @ApiOperation({ title: 'Maak een lijst van geplande activiteiten' })
+  getActiviteitenPlanning(): Promise<ActiviteitPlanning[]> {
+    return this.activiteitenPlanService.getActiviteitenPlanning();
+  }
+}
