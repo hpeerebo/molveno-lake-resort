@@ -3,8 +3,14 @@
   <br />
 
   <div class="row">
-    <div class=" col-12 d-flex justify-content-start">
+    <div class=" col-6 d-flex justify-content-start">
       <button type="button" class="btn btn-primary" [routerLink]="['/managementportal/kamers/reseveer']" >Resevering toevoegen</button>
+    </div>
+
+    <div class=" col-6 d-flex justify-content-end">
+      <button type="button" class="btn btn-primary" (click)="loadCurrentResevering()" >Huidige reseveringen</button>
+      <div col-1> </div>
+      <button type="button" class="btn btn-primary" (click)="loadHistoriesResevering()" >Historie reseveringen</button>
     </div>
   </div>
   <br />
