@@ -53,4 +53,8 @@ export class ManagementPortalGerechtenComponent {
         console.log(error);
       });
   }
+
+  goToDetails(gerecht: Gerecht): void {
+    console.log(gerecht);
+  }
 }
