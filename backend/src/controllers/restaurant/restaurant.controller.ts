@@ -63,15 +63,16 @@ export class RestaurantController {
     @Get('gerechten')
     @ApiOperation({ title: 'Haal een lijst op van alle gerechten' })
     async getGerechten(): Promise<{ gerechten: Gerecht[] }> {
-        const gerechten = await this.gerechtService.getGerechten();
+        const gerechtEntities = await this.gerechtService.getGerechten();
+        const gerechten = gerechtEntities.map(gerechtEntity => gerechtEntity.mapToGerecht());
         return { gerechten };
     }
 
     @Get('gerechten/:id')
     @ApiOperation({ title: 'Haal de details op van een gerecht' })
-    async getGerecht(@Param('id') id: number): Promise<{ gerecht: GerechtDetails }> {
-        const gerecht = await this.gerechtService.getGerechtDetails(id);
-        return { gerecht };
+    async getGerecht(@Param('id') id: number): Promise<GerechtDetails> {
+        const gerechtRepoEntity = await this.gerechtService.getGerechtDetails(id);
+        return gerechtRepoEntity.mapToGerechtDetails();
     }
 
     @Post('gerechten')

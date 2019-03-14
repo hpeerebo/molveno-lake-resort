@@ -14,21 +14,18 @@ export class GerechtService {
         private readonly gerechtRepository: Repository<GerechtRepoEntity>
     ) { }
 
-    async getGerechten(): Promise<Gerecht[]> {
-        const gerechtenEntities = await this.gerechtRepository.find();
-        const gerechten = gerechtenEntities.map(gerechtEntity => gerechtEntity.mapToGerecht());
-        return gerechten;
+    async getGerechten(): Promise<GerechtRepoEntity[]> {
+        return this.gerechtRepository.find();
     }
 
-    async getGerechtDetails(id: number): Promise<GerechtDetails> {
-        const gerecht = await this.gerechtRepository.findOne(id, { relations: ["ingredienten"] });
-        return gerecht.mapToGerechtDetails();
+    async getGerechtDetails(id: number): Promise<GerechtRepoEntity> {
+        return this.gerechtRepository.findOne(id, { relations: ["ingredienten"] });
     }
 
-    async addIngredientToGerecht(gerechtId: number, ingredientRepoEntity: IngredientRepoEntity): Promise<GerechtRepoEntity> {
+    async addIngredientToGerecht(gerechtId: number, ingredientEntity: IngredientRepoEntity): Promise<GerechtRepoEntity> {
         const gerecht = await this.gerechtRepository.findOne(gerechtId, { relations: ["ingredienten"] });
         if (!gerecht) throw new HttpException('Er bestaat geen gerecht met dit id', HttpStatus.NOT_FOUND);
-        gerecht.addIngredient(ingredientRepoEntity);
+        gerecht.addIngredient(ingredientEntity);
         return this.gerechtRepository.save(gerecht);
     }
 
