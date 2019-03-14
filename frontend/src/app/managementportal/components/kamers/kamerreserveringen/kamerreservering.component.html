@@ -32,11 +32,11 @@
       <tr *ngFor="let kamerreservering of (kamerreserveringen | async |  sortgrid:field)" >
         <td>{{kamerreservering.voornaam}}</td>
         <td>{{kamerreservering.achternaam}}</td>
-        <td>{{kamerreservering.telefoonnummer}}
-        <td>{{kamerreservering.emailadres}}
-        <td>{{kamerreservering.datumvan}}
-        <td>{{kamerreservering.datumtot}}
-        <td>{{kamerreservering.kamernaam}}
+        <td>{{kamerreservering.telefoonnummer}}</td>
+        <td>{{kamerreservering.emailadres}}</td>
+        <td>{{kamerreservering.datumvan}}</td>
+        <td>{{kamerreservering.datumtot}}</td>
+        <td>{{kamerreservering.kamernaam}}</td>
         <td class="text-right">
           <i class="fas fa-edit mr-2" placement="top" ngbTooltip="Toon gegevens" (click)="openFormKamerReserveringDetailsModal(kamerreservering)"></i>
           <i class="fas fa-trash-alt mr-2" placement="top" ngbTooltip="Verwijderen" (click)="onSelect(kamerreservering); openSm(deleteReseveringModal)" ></i>
