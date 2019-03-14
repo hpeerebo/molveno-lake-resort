@@ -23,7 +23,7 @@
       <th (click)="clickColumnHandler('aantalPersonen')">Aantalpersonen</th>
       <th (click)="clickColumnHandler('prijs')">Prijs</th>
       <th></th>
-      <th *ngIf="showResButton"></th>
+      <!--th *ngIf="showResButton"></th-->
 
     </tr>
     </thead>
@@ -35,10 +35,11 @@
         <td>{{ kamer.kamerLigging }}</td>
         <td>{{ kamer.aantalPersonen }}</td>
         <td>{{ kamer.prijs | currency: "EUR" }}</td>
-        <td *ngIf="showResButton">
+        <!--td *ngIf="showResButton">
           <i class="fas fa-marker mr-2" placement="top" ngbTooltip="Reserveren" (click)="openFormKamerReserveringModal(kamer.kamerNaam)"></i>
-        </td>
+        </td-->
         <td class="text-right">
+          <i *ngIf="showResButton" class="fas fa-marker mr-2" placement="top" ngbTooltip="Reserveren" (click)="openFormKamerReserveringModal(kamer.kamerNaam)"></i>
           <i class="fas fa-edit mr-2" placement="top" ngbTooltip="Wijzigen" (click)="onSelect(kamer); openEditFormModal()"></i>
           <i class="fas fa-trash-alt mr-2" placement="top" ngbTooltip="Verwijderen" (click)="onSelect(kamer); openSm(deleteModal)"></i>
         </td>
