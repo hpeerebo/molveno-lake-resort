@@ -1,16 +1,17 @@
 1,Aardappelen,kilo,0.8
-2,Bleekselderij,stuk,1.19
+2,Bleekselderij,kilo,2.1
 3,Broccoli,kilo,1.40
-4,Courgette,stuk,0.65
+4,Courgette,kilo,3
 5,Fazant,kilo,13.50
 6,Forel,kilo,17.20
 7,Jonge Kaas,kilo,6.39
-8,Knoflook,bol,0.50
+8,Knoflook,kilo,16
 9,Krab,kilo,16.50
 10,Linzen,kilo,2.70
 11,Prei,kilo,2.20
 12,Runderhaas,kilo,30.50
-13,Venkel,stuk,1
-14,Ei,stuk,0.37
+13,Venkel,kilo,1.62
+14,Ei,kilo,4
 15,Witte Rijst,kilo,1.37
 16,Wilde Zalm,kilo,28
+17,Varkenshaas,kilo,8
