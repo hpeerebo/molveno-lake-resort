@@ -1,5 +1,5 @@
 <div>
-  <!--pre>{{kamers | json}}</pre-->
+  <!--pre>{{kamerreserveringen | json}}</pre-->
   <br />
 
   <div class="row">
@@ -7,7 +7,7 @@
       <button type="button" class="btn btn-primary" [routerLink]="['/managementportal/kamers']" >Resevering toevoegen</button>
     </div>
   </div>
-
+  <br />
   <div class="table-responsive mt-2">
     <table class="table table-striped table-sm">
       <thead>
@@ -31,7 +31,7 @@
         <td>{{kamerreservering.datumvan}}</td>
         <td>{{kamerreservering.datumtot}} </td>
         <td>{{kamerreservering.kamernaam}}</td>
-        <td style="text-align: right">
+        <td class="text-right">
           <i class="fas fa-edit mr-2" placement="top" ngbTooltip="Toon gegevens" (click)="openFormKamerReserveringDetailsModal(kamerreservering)"></i>
           <i class="fas fa-trash-alt mr-2" placement="top" ngbTooltip="Verwijderen" (click)="onSelect(kamerreservering); openSm(deleteReseveringModal)" ></i>
         </td>
