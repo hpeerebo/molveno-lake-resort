@@ -167,7 +167,11 @@ export class ManagementPortalKamersComponent implements OnInit {
     const modalKamerSearch = this.modalService.open(FormKamersbeschikbaarComponent);
     modalKamerSearch.result.then(
       result => {
-        this.closeResult = `Closed with: ${result}`;
+        //this.closeResult = `Closed with: ${result}`;
+      this.datumvan = result.datumvan;
+      this.datumtot = result.datumtot;
+      this.roomservice.searchRoom(true, result.datumvan, result.datumtot, result.kamertype)
+      this.showResButton = true
       },
       reason => {
         this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
