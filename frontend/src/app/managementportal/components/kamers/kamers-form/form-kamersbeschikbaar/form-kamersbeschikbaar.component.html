@@ -9,7 +9,7 @@
       <div class="container, form-row">
         <div class="form-group col-md-6">
               <label>Aankomst datum</label>
-              <input type="date" class="form-control" [min]="today" formControlName="datumvan" [class.is-invalid]="kamerSearchForm.controls.datumvan.invalid && kamerSearchForm.controls.datumvan.touched" ngbAutofocus />
+              <input type="date" class="form-control" [min]="today" [value]="today" formControlName="datumvan" [class.is-invalid]="kamerSearchForm.controls.datumvan.invalid && kamerSearchForm.controls.datumvan.touched" ngbAutofocus />
               <small class="text-danger" [class.d-none]="kamerSearchForm.controls.datumvan.valid || kamerSearchForm.controls.datumvan.untouched">Vereist</small>
           </div>
           <div class="form-group col-md-6">
