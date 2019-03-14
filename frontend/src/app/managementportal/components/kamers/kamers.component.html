@@ -12,6 +12,7 @@
         <!--a href="/managementportal/kamers-form" class="btn btn-primary" role="button" aria-pressed="true">Add Room</a-->
       </div>
   </div>
+
   <br />
   <table class="table table-striped table-sm">
     <thead>
@@ -22,8 +23,8 @@
       <th (click)="clickColumnHandler('aantalPersonen')">Aantalpersonen</th>
       <th (click)="clickColumnHandler('prijs')">Prijs</th>
       <th></th>
-      <th></th>
-      <th></th>
+      <th *ngIf="showResButton"></th>
+
     </tr>
     </thead>
     <tbody>
@@ -37,7 +38,7 @@
         <td *ngIf="showResButton">
           <i class="fas fa-marker mr-2" placement="top" ngbTooltip="Reserveren" (click)="openFormKamerReserveringModal(kamer.kamerNaam)"></i>
         </td>
-        <td style="text-align: right">
+        <td class="text-right">
           <i class="fas fa-edit mr-2" placement="top" ngbTooltip="Wijzigen" (click)="onSelect(kamer); openEditFormModal()"></i>
           <i class="fas fa-trash-alt mr-2" placement="top" ngbTooltip="Verwijderen" (click)="onSelect(kamer); openSm(deleteModal)"></i>
         </td>
