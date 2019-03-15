@@ -17,6 +17,7 @@ import { FeaturetteComponent } from './shared/components/featurette/featurette.c
 import { RoundedCircleComponent } from './shared/components/rounded-circle/rounded-circle.component';
 import { GastKamerReserveringComponent } from './shared/components/gast-kamerreservering/gast-kamerreservering.component';
 import { ReservationButtonComponent } from './shared/components/reservation-button/reservation-button.component'
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,6 @@ import { ReservationButtonComponent } from './shared/components/reservation-butt
     ReservationButtonComponent,
   ],
   imports: [CommonModule, FrontEndAppRoutingModule, NgbModule, FormsModule, ReactiveFormsModule],
-  entryComponents: [GastKamerReserveringComponent, ]
+  entryComponents: [GastKamerReserveringComponent, LoginComponent]
 })
 export class FrontendModule {}

@@ -46,5 +46,4 @@ export class FrontEndComponent implements OnInit {
   ngOnInit() {
     this.setLanguage('nl')
   }
-
 }
