@@ -26,9 +26,9 @@ import { ActiviteitReserveringenComponent } from './components/activiteiten/acti
 import { FormActiviteitResComponent } from '../shared/components/form-activiteit-res/form-activiteit-res.component';
 import { KamerreserveringComponent } from './components/kamers/kamerreserveringen/kamerreservering.component';
 import { FormKamerreserveringComponent } from './components/kamers/kamers-form/form-kamerreservering/form-kamerreservering.component';
-import {FormKamerreserveringdetailsComponent} from "./components/kamers/kamers-form/form-kamerreserveringdetails/form-kamerreserveringdetails.component";
-import { SortgridPipe } from '../shared/pipes/sortgrid.pipe';
+import { FormKamerreserveringdetailsComponent} from "./components/kamers/kamers-form/form-kamerreserveringdetails/form-kamerreserveringdetails.component";
 import { GerechtenDetailsComponent } from './components/restaurant/gerechten-details/gerechten-details.component';
+import { ApplicationPipesModule } from '../shared/application-pipes/application-pipes.module';
 
 @NgModule({
   declarations: [
@@ -38,7 +38,6 @@ import { GerechtenDetailsComponent } from './components/restaurant/gerechten-det
     ManagementPortalKamersComponent,
     ManagementPortalLoginComponent,
     KamersPipe,
-    SortgridPipe,
     ManagementPortalKamersFormComponent,
     ManagementPortalIngredientenComponent,
     ManagementPortalGerechtenComponent,
@@ -57,7 +56,24 @@ import { GerechtenDetailsComponent } from './components/restaurant/gerechten-det
     FormKamerreserveringdetailsComponent,
     GerechtenDetailsComponent
   ],
-  imports: [CommonModule, ManagementportalRoutingModule, NgbModule, FormsModule, ReactiveFormsModule],
-  entryComponents: [FormTafelComponent, FormTafelreserveringComponent, FormGerechtComponent, FormIngredientComponent, FormActiviteitComponent,  FormActiviteitResComponent, ModalConfirmComponent, FormKamerreserveringComponent, FormKamerreserveringdetailsComponent]
+  imports: [
+    CommonModule,
+    ManagementportalRoutingModule,
+    NgbModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ApplicationPipesModule
+  ],
+  entryComponents: [
+    FormTafelComponent,
+    FormTafelreserveringComponent,
+    FormGerechtComponent,
+    FormIngredientComponent,
+    FormActiviteitComponent,
+    FormActiviteitResComponent,
+    ModalConfirmComponent,
+    FormKamerreserveringComponent,
+    FormKamerreserveringdetailsComponent
+  ]
 })
 export class ManagementportalModule {}
