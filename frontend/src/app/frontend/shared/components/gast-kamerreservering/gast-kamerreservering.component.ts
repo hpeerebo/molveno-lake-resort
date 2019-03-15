@@ -62,7 +62,7 @@ export class GastKamerReserveringComponent implements OnInit {
       this.kamerreserveringForm.value.datumtot,
       this.kamerreserveringForm.value.kamernaam
     ));
-    //location.reload();
+    location.reload();
   }
 
 }
