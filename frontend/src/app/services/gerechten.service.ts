@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Gerecht } from '../models/gerecht';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { map, take, tap } from 'rxjs/operators';
+import { GerechtDetails } from '../models/gerecht-details';
 
 @Injectable({
   providedIn: 'root'
@@ -21,13 +22,17 @@ export class GerechtenService {
     this.getAllGerechten();
   }
 
-  get page() { return this._page; }
+  get page() {
+    return this._page;
+  }
   set page(page: number) {
     this._page = page;
     this.paginateGerechten();
   }
 
-  get pageSize() { return this._pageSize; }
+  get pageSize() {
+    return this._pageSize;
+  }
   set pageSize(pageSize: number) {
     this._pageSize = pageSize;
     this.paginateGerechten();
@@ -41,8 +46,20 @@ export class GerechtenService {
     return new Gerecht(gerecht.naam, gerecht.type, gerecht.subtype, gerecht.prijs, gerecht.id);
   }
 
+  private static gerechtDetailsResponseToGerechtDetailsMapper(gerechtDetailResponse: IGerechtDetailsResponse): GerechtDetails {
+    return new GerechtDetails(
+      gerechtDetailResponse.id,
+      gerechtDetailResponse.naam,
+      gerechtDetailResponse.type,
+      gerechtDetailResponse.subtype,
+      gerechtDetailResponse.prijs,
+      gerechtDetailResponse.ingredienten
+    );
+  }
+
   getAllGerechten(): void {
-    this.http.get<IGerechtenResponse>(this.api)
+    this.http
+      .get<IGerechtenResponse>(this.api)
       .pipe(
         take(1),
         map(GerechtenService.gerechtenResponseToGerechtMapper),
@@ -55,8 +72,16 @@ export class GerechtenService {
       .subscribe();
   }
 
+  getGerechtDetails(id: number): Observable<GerechtDetails> {
+    return this.http
+      .get<IGerechtDetailsResponse>(`${this.api}/${id}`)
+      .pipe(map(GerechtenService.gerechtDetailsResponseToGerechtDetailsMapper));
+  }
+
   paginateGerechten(): void {
-    this.paginatedGerechten$.next(this.gerechten$.getValue().slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize));
+    this.paginatedGerechten$.next(
+      this.gerechten$.getValue().slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize)
+    );
   }
 
   addNewGerecht(gerecht: Gerecht): void {
@@ -100,4 +125,15 @@ interface IGerecht {
   type: string;
   subtype: string;
   prijs: number;
+}
+
+interface IIngredient {
+  id: number;
+  naam: string;
+  eenheid: string;
+  prijs: number;
+}
+
+interface IGerechtDetailsResponse extends IGerecht {
+  ingredienten: IIngredient[];
 }
