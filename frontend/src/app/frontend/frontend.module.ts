@@ -11,6 +11,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RestaurantComponent } from './components/restaurant/restaurant.component';
 import { FrontEndAppRoutingModule } from './frontend-routing.module';
 import { FrontEndComponent } from './frontend.component';
+import { ApplicationPipesModule } from '../shared/application-pipes/application-pipes.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,11 @@ import { FrontEndComponent } from './frontend.component';
     LoginComponent,
     RestaurantComponent
   ],
-  imports: [CommonModule, FrontEndAppRoutingModule, NgbModule]
+  imports: [
+    CommonModule,
+    FrontEndAppRoutingModule,
+    NgbModule,
+    ApplicationPipesModule
+  ]
 })
 export class FrontendModule {}
