@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Put,
+  Delete,
+  Param,
+} from '@nestjs/common';
 import { ApiOperation, ApiUseTags, ApiResponse } from '@nestjs/swagger';
 import { ActiviteitPlanning } from 'src/models/activiteit-planning';
 import { ActiviteitPlanningService } from 'src/services/activiteit-planning/activiteit-planning.service';
@@ -42,5 +50,32 @@ export class ActiviteitenPlanningController {
   @ApiOperation({ title: 'Maak een lijst van geplande activiteiten' })
   getActiviteitenPlanning(): Promise<ActiviteitPlanning[]> {
     return this.activiteitenPlanService.getActiviteitenPlanning();
+  }
+
+  @Put('')
+  @ApiOperation({ title: 'Wijzig een geplande activiteit' })
+  @ApiResponse({
+    status: 201,
+    description: 'De geplande activiteit is succesvol bijgewerkt',
+  })
+  updateActiviteitenPlanning(
+    @Body() createActiviteitPlanning: CreateActiviteitPlanningDto,
+  ): void {
+    const planning: ActiviteitPlanningEntity = new ActiviteitPlanningEntity(
+      createActiviteitPlanning.planid,
+      createActiviteitPlanning.actid,
+      createActiviteitPlanning.actdate,
+      createActiviteitPlanning.actprijs,
+      createActiviteitPlanning.actcapaciteit,
+    );
+    this.activiteitenPlanService.updateActiviteitPlanning(planning);
+  }
+
+  @Delete(':planningsId')
+  @ApiOperation({ title: 'Verwijder een geplande activiteit' })
+  public deleteActiviteitenPlanning(
+    @Param('planningsId') planningsId: number,
+  ): void {
+    this.activiteitenPlanService.deleteActiviteitenPlanning(planningsId);
   }
 }
