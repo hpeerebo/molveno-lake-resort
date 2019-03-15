@@ -11,7 +11,7 @@ import { switchMap } from 'rxjs/operators';
   styleUrls: ['./gerechten-details.component.scss']
 })
 export class GerechtenDetailsComponent implements OnInit {
-  public gerechtDetails$: Observable<GerechtDetails | undefined> = this.route.params
+  public gerechtDetails$: Observable<GerechtDetails> = this.route.params
     .pipe(
       switchMap(params => this.gerechtService.getGerechtDetails(params.id))
     );
