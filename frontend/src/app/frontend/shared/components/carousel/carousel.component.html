@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col-lg-12">
+    <ngb-carousel>
+      <ng-template ngbSlide  *ngFor="let roomdetail of roomlist">
+        <img [src]="roomdetail.carouselimage" alt="Random first slide" style="width:100%; height:100%; background:#777; color:#777;">
+        <div class="carousel-caption">
+          <h3>{{roomdetail.roomtype}}</h3>
+          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+          <frontend-reservation-button-item [roomdetail]="roomdetail"></frontend-reservation-button-item>
+        </div>
+      </ng-template>
+    </ngb-carousel>
+  </div>
+</div>
