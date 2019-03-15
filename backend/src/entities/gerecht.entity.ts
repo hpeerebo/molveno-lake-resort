@@ -26,7 +26,7 @@ export class GerechtRepoEntity {
 		cascade: true
 	})
     
-    @JoinTable()
+    @JoinTable({name: 'gerecht_ingredient'})
     ingredienten: IngredientRepoEntity[];
 
     constructor(
