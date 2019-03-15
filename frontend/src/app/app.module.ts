@@ -11,7 +11,9 @@ import {KamersPipe} from './shared/pipes/kamers.pipe';
 import { FormTafelreserveringComponent } from './shared/components/form-tafelreservering/form-tafelreservering.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -19,7 +21,7 @@ import { FormTafelreserveringComponent } from './shared/components/form-tafelres
     ReactiveFormsModule,
     FrontendModule,
     ManagementportalModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [RoomService],
   bootstrap: [AppComponent]
