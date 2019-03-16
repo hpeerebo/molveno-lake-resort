@@ -23,11 +23,12 @@ export class ReservationButtonComponent implements OnInit {
 
   ngOnInit() {
   }
-  openFormKamerReserveringModal(kamertype: string){
+  openFormKamerReserveringModal(kamerobject: any){
     const modalKamerReservering = this.modalService.open(GastKamerReserveringComponent);
 
-     if (kamertype) {
-      modalKamerReservering.componentInstance.kamertype = kamertype;
+    if (kamerobject) {
+      modalKamerReservering.componentInstance.kamertype = kamerobject.roomtype;
+      modalKamerReservering.componentInstance.kamertypefull = kamerobject.roomtypefull;
     }
     modalKamerReservering.componentInstance.action = "add";
     modalKamerReservering.result.then(resultPromise => {

@@ -28,6 +28,22 @@ export class RoomService {
     }
     return this.kamersCacheSubject;
   }
+
+  searchRoomByType(refreshCache: boolean = false, kamertype: string): Observable<Kamer[] | undefined> {
+    if (this.kamersCacheSubject.getValue() === undefined || refreshCache) {
+      this.http.get<KamerDetails>(`${RoomService.api}/search/${kamertype}`)
+        .pipe(
+          map((data: any) => data.map((kamer: Kamer) => new Kamer(kamer.kamerNaam, kamer.kamerType, kamer.kamerLigging, kamer.aantalPersonen, kamer.prijs))),
+          take(1),
+          tap(kamers => {
+            this.kamersCacheSubject.next(kamers);
+          })
+        ).subscribe();
+    }
+    return this.kamersCacheSubject;
+  }
+
+
   searchRoom(refreshCache: boolean = false, datumvan: string, datumtot: string, kamertype: string): Observable<Kamer[] | undefined> {
     if (this.kamersCacheSubject.getValue() === undefined || refreshCache) {
       this.http.get<KamerDetails>(`${RoomService.api}/search/${kamertype}/${datumvan}/${datumtot}`)

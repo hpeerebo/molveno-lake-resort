@@ -11,7 +11,6 @@ export class GastKamerReserveringenService {
   constructor(private http: HttpClient) {}
 
   saveKamerReservering(gastkamerreservering: GastKamerReservering){
-    console.log(gastkamerreservering);
     this.http.post('/api/kamerreservering', gastkamerreservering)
       .pipe(
         take(1)

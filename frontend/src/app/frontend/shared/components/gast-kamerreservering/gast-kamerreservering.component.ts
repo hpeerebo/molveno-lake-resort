@@ -14,7 +14,9 @@ import { Kamer } from 'src/app/models/kamer'
   styleUrls: ['./gast-kamerreservering.component.scss']
 })
 export class GastKamerReserveringComponent implements OnInit {
-  @Input() public kamertype: string = '';
+  public kamertype: string = '';
+  public kamers: any;
+  refreshCache: boolean = true;
 
   gastkamerreservering: GastKamerReservering | undefined = undefined;
   submitted = false;
@@ -22,9 +24,13 @@ export class GastKamerReserveringComponent implements OnInit {
 
   constructor(public activeModal: NgbActiveModal, private formBuilder: FormBuilder,  private modalService: NgbModal, private roomservice: RoomService,) {}
 
-  public kamers: Observable<Kamer[] | undefined> = this.roomservice.getRoom();
+  showRoomsByType(){
+    return this.roomservice.searchRoomByType(this.refreshCache, this.kamertype)
+  }
 
   ngOnInit() {
+
+    this.kamers = this.showRoomsByType()
 
     if (this.gastkamerreservering) {
       this.kamerreserveringForm.setValue({
@@ -60,7 +66,7 @@ export class GastKamerReserveringComponent implements OnInit {
       this.kamerreserveringForm.value.land,
       this.kamerreserveringForm.value.datumvan,
       this.kamerreserveringForm.value.datumtot,
-      this.kamerreserveringForm.value.kamernaam
+      this.kamerreserveringForm.value.kamernaam,
     ));
     location.reload();
   }
