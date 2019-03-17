@@ -28,6 +28,7 @@ import { KamerreserveringComponent } from "./components/kamers/kamerreserveringe
 import { FormKamerreserveringComponent } from "./components/kamers/kamers-form/form-kamerreservering/form-kamerreservering.component";
 import { FormKamerreserveringdetailsComponent } from "./components/kamers/kamers-form/form-kamerreserveringdetails/form-kamerreserveringdetails.component";
 import { ActiviteitenPlanningComponent } from "./components/activiteiten/activiteiten-planning/activiteiten-planning.component";
+import { FormActiviteitPlanningComponent } from "../shared/components/form-activiteitplanning/form-activiteitplanning.component";
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { ActiviteitenPlanningComponent } from "./components/activiteiten/activit
     FormIngredientComponent,
     FormActiviteitComponent,
     FormActiviteitResComponent,
+    FormActiviteitPlanningComponent,
     ModalConfirmComponent,
     ReserveringenComponent,
     ActiviteitReserveringenComponent,
@@ -69,6 +71,7 @@ import { ActiviteitenPlanningComponent } from "./components/activiteiten/activit
     FormIngredientComponent,
     FormActiviteitComponent,
     FormActiviteitResComponent,
+    FormActiviteitPlanningComponent,
     ModalConfirmComponent,
     FormKamerreserveringComponent,
     FormKamerreserveringdetailsComponent
