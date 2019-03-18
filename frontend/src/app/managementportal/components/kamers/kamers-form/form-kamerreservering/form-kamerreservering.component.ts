@@ -48,7 +48,7 @@ export class FormKamerreserveringComponent implements OnInit {
       this.kamerreserveringForm.value.achternaam,
       this.kamerreserveringForm.value.telefoonnummer,
       this.kamerreserveringForm.value.emailadres,
-      this.kamerreserveringForm.value.identiteitsid,
+      "niet beschikbaar",
       this.kamerreserveringForm.value.postcode,
       this.kamerreserveringForm.value.straat,
       this.kamerreserveringForm.value.huisnummer,
@@ -58,7 +58,7 @@ export class FormKamerreserveringComponent implements OnInit {
       this.datumtot,
       this.kamerreserveringForm.value.kamernaam
     ));
-    location.reload();
+    //location.reload();
     this.router.navigateByUrl('managementportal/kamerreserveringen');
   }
 
