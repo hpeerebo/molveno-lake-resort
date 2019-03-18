@@ -19,54 +19,18 @@ const routes: Routes = [
     path: "",
     component: ManagementportalComponent,
     children: [
-      {
-        path: "managementportal/home",
-        component: ManagementPortalHomeComponent
-      },
-      {
-        path: "managementportal/login",
-        component: ManagementPortalLoginComponent
-      },
-      {
-        path: "managementportal/kamers",
-        component: ManagementPortalKamersComponent
-      },
-      {
-        path: "managementportal/kamerreserveringen",
-        component: KamerreserveringComponent
-      },
-      {
-        path: "managementportal/kamers-form",
-        component: ManagementPortalKamersFormComponent
-      },
-      {
-        path: "managementportal/activiteiten",
-        component: ManagementPortalActiviteitenComponent
-      },
-      {
-        path: "managementportal/activiteiten/activiteit-reserveringen",
-        component: ActiviteitReserveringenComponent
-      },
-      {
-        path: "managementportal/activiteiten/activiteiten-planning",
-        component: ActiviteitenPlanningComponent
-      },
-      {
-        path: "managementportal/restaurant/tafels",
-        component: ManagementPortalTafelsComponent
-      },
-      {
-        path: "managementportal/restaurant/reserveringen",
-        component: ReserveringenComponent
-      },
-      {
-        path: "managementportal/restaurant/ingredienten",
-        component: ManagementPortalIngredientenComponent
-      },
-      {
-        path: "managementportal/restaurant/gerechten",
-        component: ManagementPortalGerechtenComponent
-      }
+      { path: 'managementportal/home', component: ManagementPortalHomeComponent },
+      { path: 'managementportal/login', component: ManagementPortalLoginComponent },
+      { path: 'managementportal/kamers', component: ManagementPortalKamersComponent },
+      { path: 'managementportal/kamers/:param', component: ManagementPortalKamersComponent },
+      { path: 'managementportal/kamerreserveringen', component: KamerreserveringComponent},
+      { path: 'managementportal/kamers-form', component: ManagementPortalKamersFormComponent },
+      { path: 'managementportal/activiteiten', component: ManagementPortalActiviteitenComponent },
+      { path: 'managementportal/activiteiten/activiteit-reserveringen', component: ActiviteitReserveringenComponent },
+      { path: 'managementportal/restaurant/tafels', component: ManagementPortalTafelsComponent },
+      { path: 'managementportal/restaurant/reserveringen', component: ReserveringenComponent },
+      { path: 'managementportal/restaurant/ingredienten', component: ManagementPortalIngredientenComponent },
+      { path: 'managementportal/restaurant/gerechten', component: ManagementPortalGerechtenComponent }
     ]
   }
 ];

@@ -23,10 +23,11 @@ import { ActiviteitResEntity } from './entities/activiteit-res-entity';
 import { ActiviteitPlanningEntity } from './entities/activiteit-planning-entity';
 import { ActiviteitenPlanningController } from './controllers/activiteiten-planning/activiteiten-planning.controller';
 import { ActiviteitPlanningService } from './services/activiteit-planning/activiteit-planning.service';
+import { UsersModule } from './features/users/users.module';
 
 @Module({
-  imports: [
-    KamersModule,
+  imports: [KamersModule,
+    UsersModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',

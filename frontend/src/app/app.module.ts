@@ -9,7 +9,9 @@ import { HttpClientModule } from "@angular/common/http";
 import { RoomService } from "./services/rooms.service";
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -17,7 +19,7 @@ import { RoomService } from "./services/rooms.service";
     ReactiveFormsModule,
     FrontendModule,
     ManagementportalModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [RoomService],
   bootstrap: [AppComponent]
