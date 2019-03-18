@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, Unique } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 import { Tafel } from 'src/models/tafel';
 
 @Entity('tafel')
@@ -18,6 +18,6 @@ export class TafelRepoEntity {
     }
 
     mapToTafel(): Tafel {
-        return new Tafel(this.kenmerk, this.personen);
+        return new Tafel(this.id, this.kenmerk, this.personen);
     }
 }

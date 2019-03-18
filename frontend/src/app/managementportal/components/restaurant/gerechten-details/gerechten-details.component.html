@@ -1,0 +1,27 @@
+<div class="d-flex justify-content-end mt-2">
+  <button class="btn btn-primary">Voeg Toe</button>
+</div>
+
+<div class="table-responsive mt-2">
+  <table class="table table-sm table-hover">
+    <thead>
+      <tr>
+        <th>Naam</th>
+        <th>Hoeveelheid</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Kaas</td>
+        <td>3</td>
+        <td class="text-right">
+          <i class="fas fa-edit mr-2" placement="top" ngbTooltip="Wijzigen"></i>
+          <i class="fas fa-trash-alt mr-2" placement="top" ngbTooltip="Verwijderen"></i>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<pre>{{ gerechtDetails$ | async | json }}</pre>

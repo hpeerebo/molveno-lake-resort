@@ -1,7 +1,9 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable } from 'typeorm';
 import { GerechtType } from 'src/enums/gerechttype';
 import { GerechtSubType } from 'src/enums/gerechtsubtype';
 import { Gerecht } from 'src/models/gerecht';
+import { IngredientRepoEntity } from './ingredient.entity';
+import { GerechtDetails } from 'src/models/gerecht-details';
 
 @Entity('gerecht')
 export class GerechtRepoEntity {
@@ -20,6 +22,13 @@ export class GerechtRepoEntity {
     @Column('numeric')
     public readonly prijs: number;
 
+    @ManyToMany(type => IngredientRepoEntity, ingredient => ingredient.gerechten, {
+		cascade: true
+	})
+    
+    @JoinTable({name: 'gerecht_ingredient'})
+    ingredienten: IngredientRepoEntity[];
+
     constructor(
         naam: string,
         type: GerechtType,
@@ -33,6 +42,14 @@ export class GerechtRepoEntity {
     }
 
     mapToGerecht(): Gerecht {
-        return new Gerecht(this.naam, this.type, this.subtype, this.prijs);
+        return new Gerecht(this.id, this.naam, this.type, this.subtype, this.prijs);
     }
+
+    mapToGerechtDetails(): GerechtDetails {
+        return new GerechtDetails(this.id, this.naam, this.type, this.subtype, this.prijs, this.ingredienten);
+    }
+
+    addIngredient(ingredientRepoEntity: IngredientRepoEntity): void {
+		this.ingredienten = this.ingredienten ? [...this.ingredienten, ingredientRepoEntity] : [ingredientRepoEntity];
+	}
 }

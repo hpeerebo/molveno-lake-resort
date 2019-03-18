@@ -18,7 +18,7 @@ export class FormGerechtComponent implements OnInit {
     prijs: [0, Validators.min(0)]
   });
 
-  constructor(public activeModal: NgbActiveModal, private formBuilder: FormBuilder) {}
+  constructor(public activeModal: NgbActiveModal, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     if (this.gerecht) {
@@ -32,7 +32,22 @@ export class FormGerechtComponent implements OnInit {
   }
 
   submitForm() {
-    this.activeModal.close(this.gerechtForm.value);
+    if (this.gerecht) {
+      this.gerecht.naam = this.gerechtForm.value.naam;
+      this.gerecht.type = this.gerechtForm.value.type;
+      this.gerecht.subtype = this.gerechtForm.value.subtype;
+      this.gerecht.prijs = Number(this.gerechtForm.value.prijs); //Is dit de juiste manier???
+      this.activeModal.close(
+        this.gerecht
+      )
+    } else {
+      this.activeModal.close(new Gerecht(
+        this.gerechtForm.value.naam,
+        this.gerechtForm.value.type,
+        this.gerechtForm.value.subtype,
+        this.gerechtForm.value.prijs
+      ));
+    }
   }
 
   get naam() {
