@@ -54,9 +54,9 @@ export class FormKamerreserveringComponent implements OnInit {
       this.kamerreserveringForm.value.huisnummer,
       this.kamerreserveringForm.value.woonplaats,
       this.kamerreserveringForm.value.land,
-     this.datumvan,
-     this.datumtot,
-     this.kamerreserveringForm.value.kamernaam
+      this.datumvan,
+      this.datumtot,
+      this.kamerreserveringForm.value.kamernaam
     ));
     location.reload();
     this.router.navigateByUrl('managementportal/kamerreserveringen');
