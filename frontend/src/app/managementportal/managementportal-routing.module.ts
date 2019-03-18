@@ -1,21 +1,22 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { ManagementPortalKamersFormComponent } from './components/kamers/kamers-form/kamers-form.component';
-import { ManagementPortalHomeComponent } from './components/home/home.component';
-import { ManagementPortalLoginComponent } from './components/login/login.component';
-import { ManagementPortalKamersComponent } from './components/kamers/kamers.component';
+import { NgModule } from "@angular/core";
+import { Routes, RouterModule } from "@angular/router";
+import { ManagementPortalKamersFormComponent } from "./components/kamers/kamers-form/kamers-form.component";
+import { ManagementPortalHomeComponent } from "./components/home/home.component";
+import { ManagementPortalLoginComponent } from "./components/login/login.component";
+import { ManagementPortalKamersComponent } from "./components/kamers/kamers.component";
 import { ManagementPortalActiviteitenComponent } from "./components/activiteiten/activiteiten.component";
-import { ManagementPortalIngredientenComponent } from './components/restaurant/ingredienten/ingredienten.component';
-import { ManagementPortalGerechtenComponent } from './components/restaurant/gerechten/gerechten.component';
-import { ManagementPortalTafelsComponent } from './components/restaurant/tafels/tafels.component';
-import { ManagementportalComponent } from './managementportal.component';
-import { ReserveringenComponent } from './components/restaurant/reserveringen/reserveringen.component';
-import { ActiviteitReserveringenComponent } from './components/activiteiten/activiteit-reserveringen/activiteit-reserveringen.component';
-import { KamerreserveringComponent } from './components/kamers/kamerreserveringen/kamerreservering.component';
+import { ManagementPortalIngredientenComponent } from "./components/restaurant/ingredienten/ingredienten.component";
+import { ManagementPortalGerechtenComponent } from "./components/restaurant/gerechten/gerechten.component";
+import { ManagementPortalTafelsComponent } from "./components/restaurant/tafels/tafels.component";
+import { ManagementportalComponent } from "./managementportal.component";
+import { ReserveringenComponent } from "./components/restaurant/reserveringen/reserveringen.component";
+import { ActiviteitReserveringenComponent } from "./components/activiteiten/activiteit-reserveringen/activiteit-reserveringen.component";
+import { KamerreserveringComponent } from "./components/kamers/kamerreserveringen/kamerreservering.component";
+import { ActiviteitenPlanningComponent } from "./components/activiteiten/activiteiten-planning/activiteiten-planning.component";
 
 const routes: Routes = [
   {
-    path: '',
+    path: "",
     component: ManagementportalComponent,
     children: [
       { path: 'managementportal/home', component: ManagementPortalHomeComponent },

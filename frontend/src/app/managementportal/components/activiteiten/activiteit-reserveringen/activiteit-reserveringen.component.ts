@@ -1,10 +1,10 @@
 import { Component, OnInit } from "@angular/core";
-import { Reservering } from "src/app/models/activiteit-res";
+import { ActiviteitRes } from "src/app/models/activiteit-res";
 import { Observable } from "rxjs";
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ActiviteitenResService } from 'src/app/services/activiteiten-res.service';
-import { FormActiviteitResComponent } from 'src/app/shared/components/form-activiteit-res/form-activiteit-res.component';
-import { ModalConfirmComponent } from 'src/app/shared/components/modal-confirm/modal-confirm.component';
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { ActiviteitenResService } from "src/app/services/activiteiten-res.service";
+import { FormActiviteitResComponent } from "src/app/shared/components/form-activiteit-res/form-activiteit-res.component";
+import { ModalConfirmComponent } from "src/app/shared/components/modal-confirm/modal-confirm.component";
 
 @Component({
   selector: "app-activiteit-reserveringen",
@@ -12,14 +12,16 @@ import { ModalConfirmComponent } from 'src/app/shared/components/modal-confirm/m
   styleUrls: ["./activiteit-reserveringen.component.scss"]
 })
 export class ActiviteitReserveringenComponent {
-  public reserveringen: Observable<Reservering[] > = this.activiteitenService.getAllActiviteiten();
+  public reserveringen: Observable<
+    ActiviteitRes[]
+  > = this.activiteitenResService.getAllActiviteitenRes();
 
   constructor(
-    private activiteitenService: ActiviteitenResService,
+    private activiteitenResService: ActiviteitenResService,
     private modalService: NgbModal
   ) {}
 
-  openFormActiviteitResModal(reserveringen?: Reservering) {
+  openFormActiviteitResModal(reserveringen?: ActiviteitRes) {
     const modal = this.modalService.open(FormActiviteitResComponent);
 
     if (reserveringen) {
@@ -28,19 +30,20 @@ export class ActiviteitReserveringenComponent {
 
     modal.result
       .then(result => {
-        this.activiteitenService.saveActiviteitRes(result);
+        this.activiteitenResService.saveActiviteitRes(result);
       })
       .catch(error => {
         console.log(error);
       });
   }
 
-  verwijderActiviteitRes(reserveringen: Reservering) {
+  verwijderActiviteitRes(reservering: ActiviteitRes) {
     this.modalService
       .open(ModalConfirmComponent)
       .result.then(result => {
         if (result === "yes") {
-          console.log(reserveringen);
+          console.log(reservering);
+          this.activiteitenResService.deleteActiviteitRes(reservering);
         }
       })
       .catch(error => {

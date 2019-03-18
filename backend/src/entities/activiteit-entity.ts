@@ -1,23 +1,25 @@
 import { PrimaryGeneratedColumn, Column, Entity } from 'typeorm';
 
-@Entity()
+@Entity('activiteiten')
 export class ActiviteitEntity {
   @PrimaryGeneratedColumn() public readonly id: number;
   @Column('varchar') public readonly naam: string;
   @Column('varchar') public readonly beschrijving: string;
   @Column('integer') public readonly capaciteit: number;
-  @Column('integer') public readonly datum: number;
+  @Column('varchar') public readonly datum: string;
   @Column('integer') public readonly prijs: number;
   @Column('varchar') public readonly thumb: string;
 
   constructor(
+    id: number,
     naam: string,
     beschrijving: string,
     capaciteit: number,
-    datum: number,
+    datum: string,
     prijs: number,
     thumb: string,
   ) {
+    this.id = id;
     this.naam = naam;
     this.beschrijving = beschrijving;
     this.capaciteit = capaciteit;

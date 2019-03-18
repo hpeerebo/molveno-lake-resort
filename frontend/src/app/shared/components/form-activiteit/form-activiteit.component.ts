@@ -8,11 +8,11 @@ import { Activiteit } from "src/app/models/activiteit";
   templateUrl: "./form-activiteit.component.html",
   styleUrls: ["./form-activiteit.component.scss"]
 })
-
 export class FormActiviteitComponent implements OnInit {
   @Input() activiteit: Activiteit | undefined = undefined;
 
   public activiteitForm = this.formBuilder.group({
+    id: [0],
     naam: ["", Validators.required],
     beschrijving: ["", Validators.required],
     datum: ["", Validators.required],
@@ -27,14 +27,16 @@ export class FormActiviteitComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log("ngOninit form activiteit component");
     if (this.activiteit) {
       this.activiteitForm.setValue({
+        id: this.activiteit.id,
         naam: this.activiteit.naam,
         beschrijving: this.activiteit.beschrijving,
         datum: this.activiteit.datum,
         capaciteit: this.activiteit.capaciteit,
         prijs: this.activiteit.prijs,
-        thumb: this.activiteit.thumb,
+        thumb: this.activiteit.thumb
       });
     }
   }
