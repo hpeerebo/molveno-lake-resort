@@ -23,11 +23,12 @@ export class ReservationButtonComponent implements OnInit {
 
   ngOnInit() {
   }
-  openFormKamerReserveringModal(kamernaam: string){
+  openFormKamerReserveringModal(kamerobject: any){
     const modalKamerReservering = this.modalService.open(GastKamerReserveringComponent);
 
-     if (kamernaam) {
-      modalKamerReservering.componentInstance.kamernaam = kamernaam;
+    if (kamerobject) {
+      modalKamerReservering.componentInstance.kamertype = kamerobject.roomtype;
+      modalKamerReservering.componentInstance.kamertypefull = kamerobject.roomtypefull;
     }
     modalKamerReservering.componentInstance.action = "add";
     modalKamerReservering.result.then(resultPromise => {
@@ -38,6 +39,7 @@ export class ReservationButtonComponent implements OnInit {
         resultPromise.achternaam,
         resultPromise.telefoonnummer,
         resultPromise.emailadres,
+        resultPromise.identiteitsid,
         resultPromise.postcode,
         resultPromise.straat,
         resultPromise.huisnummer,
@@ -45,7 +47,7 @@ export class ReservationButtonComponent implements OnInit {
         resultPromise.land,
         resultPromise.datumvan,
         resultPromise.datumtot,
-        kamernaam
+        resultPromise.kamernaam,
       ));
     });
   }

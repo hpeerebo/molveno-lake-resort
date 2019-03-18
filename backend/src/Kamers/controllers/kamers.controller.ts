@@ -16,6 +16,13 @@ export class KamersController {
   public getKamers(): Promise<Kamer[]> {
     return this.kamerService.getKamers();
   }
+  
+  @Get('/search/:kamertype')
+  @ApiOperation({ title: 'laat alle kamers zien van een bepaalde type'})
+  public getKamersofType(@Param('kamertype') kamertype: string): Promise<Kamer[]> {
+    return this.kamerService.getKamersofType(kamertype);
+  }
+  
   @Get('/search/:kamertype/:datumvan/:datumtot')
   @ApiOperation({ title: 'Zoek vrije kamers' })
   //public searchFreeRooms(@Param('kamertype') kamerType: string): Promise<Kamer[]> {

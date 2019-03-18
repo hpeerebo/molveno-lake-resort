@@ -15,6 +15,12 @@ export class KamerService {
         .then(kamersEntities => kamersEntities.map(kamerEntity => kamerEntity.mapToKamers()));
     }
 
+    
+    public getKamersofType(roomType: string): Promise<Kamer[]>{
+        return this.kamersepository.find({where: {kamerType: roomType}})
+        .then(kamersEntities => kamersEntities.map(kamerEntity => kamerEntity.mapToKamers()));
+    }
+    
     public async searchFreeRooms(datumvan: string, datumtot: string, kamertype: string): Promise<Kamer[]>{
         return await getRepository(KamerEntity)
             .createQueryBuilder("kamer")

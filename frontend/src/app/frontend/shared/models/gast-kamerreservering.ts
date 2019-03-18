@@ -5,6 +5,7 @@ export class GastKamerReservering{
     public achternaam: string,
     public telefoonnummer: string,
     public emailadres: string,
+    public identiteitsid: string,
     public postcode: string,
     public straat: string,
     public huisnummer: string,
