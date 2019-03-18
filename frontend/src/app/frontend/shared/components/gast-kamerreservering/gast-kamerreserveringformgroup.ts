@@ -6,6 +6,7 @@ export class GastKamerReserveringFormGroup extends FormGroup{
     achternaam: new FormControl('', Validators.required),
     telefoonnummer: new FormControl('', Validators.required),
     emailadres: new FormControl('', Validators.required),
+    identiteitsid: new FormControl('undefined'),
     postcode: new FormControl('', Validators.required),
     straat: new FormControl('', Validators.required),
     huisnummer: new FormControl('', Validators.required),
@@ -13,7 +14,7 @@ export class GastKamerReserveringFormGroup extends FormGroup{
     land: new FormControl('', Validators.required),
     datumvan: new FormControl('', Validators.required),
     datumtot: new FormControl('', Validators.required),
-    kamernaam: new FormControl(undefined),
+    kamernaam: new FormControl('', Validators.required),
   };
   constructor(){
     super(GastKamerReserveringFormGroup.controls);
