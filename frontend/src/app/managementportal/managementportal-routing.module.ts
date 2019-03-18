@@ -12,7 +12,7 @@ import { ManagementportalComponent } from "./managementportal.component";
 import { ReserveringenComponent } from "./components/restaurant/reserveringen/reserveringen.component";
 import { ActiviteitReserveringenComponent } from "./components/activiteiten/activiteit-reserveringen/activiteit-reserveringen.component";
 import { KamerreserveringComponent } from "./components/kamers/kamerreserveringen/kamerreservering.component";
-// import { ActiviteitenPlanningComponent } from "./components/activiteiten/activiteiten-planning/activiteiten-planning.component";
+import { ActiviteitenPlanningComponent } from "./components/activiteiten/activiteiten-planning/activiteiten-planning.component";
 
 const routes: Routes = [
   {
@@ -47,10 +47,10 @@ const routes: Routes = [
         path: "managementportal/activiteiten/activiteit-reserveringen",
         component: ActiviteitReserveringenComponent
       },
-      // {
-      //   path: "managementportal/activiteiten/activiteiten-planning",
-      //   component: ActiviteitenPlanningComponent
-      // },
+      {
+        path: "managementportal/activiteiten/activiteiten-planning",
+        component: ActiviteitenPlanningComponent
+      },
       {
         path: "managementportal/restaurant/tafels",
         component: ManagementPortalTafelsComponent

@@ -47,19 +47,19 @@ export class ActiviteitenPlanningService {
   saveActiviteitPlanning(planning: ActiviteitenPlanning): void {
     this.http.post<IActiviteitPlanning[]>(this.api, planning).subscribe();
     // console.log(planning);
-    location.reload();
+    // location.reload();
   }
 
   updateActiviteitPlanning(planning: ActiviteitenPlanning): void {
     this.http.post<IActiviteitPlanning[]>(this.api, planning).subscribe();
-    location.reload();
+    // location.reload();
   }
 
   deleteActiviteitPlanning(planning: ActiviteitenPlanning): void {
     this.http
       .delete<IActiviteitPlanning[]>(this.api + planning.planid)
       .subscribe();
-    location.reload();
+    // location.reload();
   }
 }
 

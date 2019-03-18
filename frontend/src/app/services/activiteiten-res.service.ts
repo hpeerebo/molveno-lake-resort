@@ -43,12 +43,12 @@ export class ActiviteitenResService {
     /*return*/ this.http
       .post<IActiviteitres[]>(this.api /*+ "savereservering"*/, reservering)
       .subscribe();
-    location.reload();
+    // location.reload();
   }
 
   deleteActiviteitRes(reservering: ActiviteitRes) {
     this.http.delete<IActiviteitres[]>(this.api + reservering.id).subscribe();
-    location.reload();
+    // location.reload();
   }
 }
 interface IActiviteitres {
