@@ -1,0 +1,13 @@
+<div>
+  <img class="rounded-circle ml-2 d-block w-100" src="{{roomdetail.thumbimage}}" margin=auto>
+  <h2 class="text-center h2-kamer">{{roomdetail.roomtype}}</h2>
+  <h5 class="text-center h2-kamer">{{roomdetail.roomprice}}</h5>
+  <p>{{roomdetail.text}}</p>
+  <br>
+  <div class="row">
+    <div class="col-4"></div>
+    <div class="col-8">
+      <frontend-reservation-button-item [roomdetail]="roomdetail"></frontend-reservation-button-item>
+    </div>
+  </div>
+</div>
