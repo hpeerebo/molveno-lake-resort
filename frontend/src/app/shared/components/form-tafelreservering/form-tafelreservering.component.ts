@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Tafelreservering } from 'src/app/models/tafelreservering';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbCalendar, NgbDate, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, Validators } from '@angular/forms';
+import { NgbTime } from '@ng-bootstrap/ng-bootstrap/timepicker/ngb-time';
 
 @Component({
   selector: 'app-form-tafelreservering',
@@ -10,21 +11,28 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class FormTafelreserveringComponent implements OnInit {
 
+  public currentDate: NgbDateStruct = this.calendar.getToday();
+  public currentTime = { hour: 17, minute: 0 };
+
   @Input() tafelreservering: Tafelreservering | undefined = undefined;
 
   public tafelreserveringForm = this.formBuilder.group({
-    aanvangstijd: [0, Validators.required],
+    aanvangsdatum: [this.currentDate, Validators.required],
+    aanvangstijd: [this.currentTime, Validators.required],
     personen: [0, [Validators.min(1), Validators.max(40)]],
     naam: ['', Validators.required],
     telefoon: ['', Validators.required]
   });
 
-  constructor(public activeModal: NgbActiveModal, private formBuilder: FormBuilder) { }
+  constructor(
+    public activeModal: NgbActiveModal,
+    private formBuilder: FormBuilder,
+    private calendar: NgbCalendar,
+  ) { }
 
   ngOnInit() {
     if (this.tafelreservering) {
-      this.tafelreserveringForm.setValue({
-        aanvangstijd: this.tafelreservering.aanvangstijd,
+      this.tafelreserveringForm.patchValue({
         personen: this.tafelreservering.personen,
         naam: this.tafelreservering.naam,
         telefoon: this.tafelreservering.telefoon
@@ -33,12 +41,32 @@ export class FormTafelreserveringComponent implements OnInit {
   }
 
   submitForm() {
-    this.activeModal.close(new Tafelreservering(
-      this.tafelreserveringForm.value.aanvangstijd,
-      this.tafelreserveringForm.value.personen,
-      this.tafelreserveringForm.value.naam,
-      this.tafelreserveringForm.value.telefoon,
-    ));
+    if (this.tafelreservering) {
+      this.tafelreservering.aanvangstijd = this.reservationDate().toISOString();
+      this.tafelreservering.personen = this.tafelreserveringForm.value.personen;
+      this.tafelreservering.naam = this.tafelreserveringForm.value.naam;
+      this.tafelreservering.telefoon = this.tafelreserveringForm.value.telefoon;
+      this.activeModal.close(
+        this.tafelreservering
+      )
+    } else {
+      this.activeModal.close(new Tafelreservering(
+        this.reservationDate().toISOString(),
+        this.tafelreserveringForm.value.personen,
+        this.tafelreserveringForm.value.naam,
+        this.tafelreserveringForm.value.telefoon,
+      ));
+    }
+  }
+
+  reservationDate(): Date {
+    return new Date(
+      Number(this.tafelreserveringForm.value.aanvangsdatum.year),
+      Number(this.tafelreserveringForm.value.aanvangsdatum.month) - 1,
+      Number(this.tafelreserveringForm.value.aanvangsdatum.day),
+      Number(this.tafelreserveringForm.value.aanvangstijd.hour),
+      Number(this.tafelreserveringForm.value.aanvangstijd.minute)
+    );
   }
 
   get aanvangstijd() {

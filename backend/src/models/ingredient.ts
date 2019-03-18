@@ -2,8 +2,9 @@ import { Eenheid } from 'src/enums/eenheid';
 
 export class Ingredient {
     constructor(
-        public naam: string,
-        public eenheid: Eenheid,
-        public prijs: number,
+        public readonly id: number,
+        public readonly naam: string,
+        public readonly eenheid: Eenheid,
+        public readonly prijs: number,
     ) { }
 }

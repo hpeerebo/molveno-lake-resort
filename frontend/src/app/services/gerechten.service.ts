@@ -1,30 +1,117 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Gerecht } from '../models/gerecht';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map, take, tap } from 'rxjs/operators';
+import { GerechtDetails } from '../models/gerecht-details';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GerechtenService {
-  public readonly api: string = '/api/restaurant/gerechten';
+  private readonly api: string = '/api/restaurant/gerechten';
 
-  constructor(private http: HttpClient) { }
+  public readonly gerechten$ = new BehaviorSubject<Gerecht[]>([]);
+  public readonly paginatedGerechten$ = new BehaviorSubject<Gerecht[]>([]);
+  public readonly total$ = new BehaviorSubject<number>(0);
+
+  public _pageSize: number = 10;
+  public _page: number = 1;
+
+  constructor(private http: HttpClient) {
+    this.getAllGerechten();
+  }
+
+  get page() {
+    return this._page;
+  }
+  set page(page: number) {
+    this._page = page;
+    this.paginateGerechten();
+  }
+
+  get pageSize() {
+    return this._pageSize;
+  }
+  set pageSize(pageSize: number) {
+    this._pageSize = pageSize;
+    this.paginateGerechten();
+  }
 
   private static gerechtenResponseToGerechtMapper(gerechtenResponse: IGerechtenResponse): Gerecht[] {
     return gerechtenResponse.gerechten.map(GerechtenService.gerechtToGerechtMapper);
   }
 
   private static gerechtToGerechtMapper(gerecht: IGerecht): Gerecht {
-    return new Gerecht(gerecht.naam, gerecht.type, gerecht.subtype, gerecht.prijs);
+    return new Gerecht(gerecht.naam, gerecht.type, gerecht.subtype, gerecht.prijs, gerecht.id);
   }
 
-  getAllGerechten(): Observable<Gerecht[]> {
-    return this.http.get<IGerechtenResponse>(this.api)
+  private static gerechtDetailsResponseToGerechtDetailsMapper(gerechtDetailResponse: IGerechtDetailsResponse): GerechtDetails {
+    return new GerechtDetails(
+      gerechtDetailResponse.id,
+      gerechtDetailResponse.naam,
+      gerechtDetailResponse.type,
+      gerechtDetailResponse.subtype,
+      gerechtDetailResponse.prijs,
+      gerechtDetailResponse.ingredienten
+    );
+  }
+
+  getAllGerechten(): void {
+    this.http
+      .get<IGerechtenResponse>(this.api)
       .pipe(
-        map(GerechtenService.gerechtenResponseToGerechtMapper)
-      );
+        take(1),
+        map(GerechtenService.gerechtenResponseToGerechtMapper),
+        tap(gerechten => {
+          this.gerechten$.next(gerechten);
+          this.total$.next(gerechten.length);
+          this.paginateGerechten();
+        })
+      )
+      .subscribe();
+  }
+
+  getGerechtDetails(id: number): Observable<GerechtDetails> {
+    return this.http
+      .get<IGerechtDetailsResponse>(`${this.api}/${id}`)
+      .pipe(map(GerechtenService.gerechtDetailsResponseToGerechtDetailsMapper));
+  }
+
+  paginateGerechten(): void {
+    this.paginatedGerechten$.next(
+      this.gerechten$.getValue().slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize)
+    );
+  }
+
+  addNewGerecht(gerecht: Gerecht): void {
+    this.http
+      .post(this.api, gerecht)
+      .pipe(
+        take(1),
+        tap(() => this.getAllGerechten())
+      )
+      .subscribe();
+  }
+
+  updateGerecht(gerecht: Gerecht): void {
+    this.http
+      .put(`${this.api}/${gerecht.id}`, gerecht)
+      .pipe(
+        take(1),
+        tap(() => this.getAllGerechten())
+      )
+      .subscribe();
+  }
+
+  deleteGerecht(gerecht: Gerecht): void {
+    this.http
+      .delete(`${this.api}/${gerecht.id}`)
+      .pipe(
+        take(1),
+        tap(() => this.getAllGerechten())
+      )
+      .subscribe();
   }
 }
 
@@ -33,8 +120,20 @@ interface IGerechtenResponse {
 }
 
 interface IGerecht {
+  id: number;
   naam: string;
   type: string;
   subtype: string;
   prijs: number;
+}
+
+interface IIngredient {
+  id: number;
+  naam: string;
+  eenheid: string;
+  prijs: number;
+}
+
+interface IGerechtDetailsResponse extends IGerecht {
+  ingredienten: IIngredient[];
 }
