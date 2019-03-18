@@ -1,9 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { KamerReservering } from 'src/app/models/kamerreservering';
-import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import { FormBuilder, Validators } from '@angular/forms';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import { KamerReserveringFormGroup } from './kamerreserveringformgroup';
-import {FormKamerreserveringdetailsComponent} from "../form-kamerreserveringdetails/form-kamerreserveringdetails.component";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-kamerreservering',
@@ -13,13 +12,15 @@ import {FormKamerreserveringdetailsComponent} from "../form-kamerreserveringdeta
 export class FormKamerreserveringComponent implements OnInit {
   kamerreservering: KamerReservering | undefined = undefined;
   kamernaam: string = "";
-  submitted = false;
+  datumvan: string = "";
+  datumtot: string = "";
   public kamerreserveringForm = new KamerReserveringFormGroup();
 
-  constructor(public activeModal: NgbActiveModal, private formBuilder: FormBuilder,  private modalService: NgbModal) {}
+  constructor(public activeModal: NgbActiveModal, private router: Router) {}
 
 
   ngOnInit() {
+  //deze code is eigenlijk overbodig. KamerReservering wordt meegegeven vanuit kamerreservering component
     if (this.kamerreservering) {
       this.kamerreserveringForm.setValue({
         voornaam: this.kamerreservering.voornaam,
@@ -40,6 +41,7 @@ export class FormKamerreserveringComponent implements OnInit {
   }
 
   submitForm() {
+    console.log(this.kamerreserveringForm.value.datumvan);
     this.activeModal.close(new KamerReservering(
       this.kamerreserveringForm.value.id,
       this.kamerreserveringForm.value.voornaam,
@@ -52,11 +54,12 @@ export class FormKamerreserveringComponent implements OnInit {
       this.kamerreserveringForm.value.huisnummer,
       this.kamerreserveringForm.value.woonplaats,
       this.kamerreserveringForm.value.land,
-      this.kamerreserveringForm.value.datumvan,
-      this.kamerreserveringForm.value.datumtot,
+      this.datumvan,
+      this.datumtot,
       this.kamerreserveringForm.value.kamernaam
     ));
     location.reload();
+    this.router.navigateByUrl('managementportal/kamerreserveringen');
   }
 
 }

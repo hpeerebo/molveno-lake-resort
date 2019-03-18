@@ -1,47 +1,66 @@
-import {Component, OnInit} from "@angular/core";
+import { AfterViewInit, ChangeDetectionStrategy, Component, OnInit} from "@angular/core";
 import { RoomService } from "src/app/services/rooms.service";
 import { Kamer } from "../../../models/kamer";
-import { Subscription } from "rxjs";
-import { take, tap } from "rxjs/operators";
+import { Observable } from "rxjs";
 import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
 import { ManagementPortalKamersFormComponent } from "./kamers-form/kamers-form.component";
 import { FormKamerreserveringComponent } from './kamers-form/form-kamerreservering/form-kamerreservering.component';
 import { KamerreserveringenService } from 'src/app/services/kamerreserveringen.service';
 import {KamerReservering} from "../../../models/kamerreservering";
+import { FormKamersbeschikbaarComponent } from './kamers-form/form-kamersbeschikbaar/form-kamersbeschikbaar.component';
+import {ActivatedRoute} from "@angular/router";
+
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: "app-kamers",
   templateUrl: "./kamers.component.html",
   styleUrls: ["./kamers.component.scss"]
 })
-//export let kamers:Kamer[] = [];
-export class ManagementPortalKamersComponent implements OnInit {
-  //public kamers :KamerResponse[] = [];
-  public kamers: Kamer[] | undefined = [];
-  show: string = "";
-  public selectedKamer?: Kamer;
-  soortkamer = ["Budget", "Standaard", "Lux"];
-  closeResult: string = "";
-  private subscriptions: Subscription = new Subscription();
+
+export class ManagementPortalKamersComponent implements OnInit, AfterViewInit {
+
   constructor(
     private roomservice: RoomService,
     private kamerreserveringservice: KamerreserveringenService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private route: ActivatedRoute
   ) {}
-  ngOnInit() {
-    this.getRoom();
+
+  public kamers: Observable<Kamer[] | undefined> = this.roomservice.getRoom();
+  public selectedKamer?: Kamer;
+  private param: null | string  = "";
+  field: string = "";
+  show: string = "";
+
+  soortkamer = ["Budget", "Standaard", "Lux"];
+  closeResult: string = "";
+  showResButton: boolean = false;
+  datumvan: string = '';
+  datumtot: string = '';
+
+  public clickColumnHandler(event: string): string {
+    this.field = event;
+    return this.field;
   }
 
-  getRoom() {
-    //this.roomservice.getRoom().subscribe(result => this.kamers = result);
-    this.roomservice
-      .getRoom()
-      .pipe(
-        take(1),
-        tap(result => (this.kamers = result))
-      )
-      .subscribe();
+  ngOnInit() {
+
   }
+
+  ngAfterViewInit () {
+    this.route.paramMap.subscribe(params => {
+      this.param = params.get("param")
+    });
+    setTimeout(() => {
+      if (this.param == "reseveer") {
+        this.showAvailableRoomsModal();
+      }
+
+    });
+
+  }
+
   onSelect(kamer: Kamer): void {
     this.selectedKamer = kamer;
   }
@@ -49,22 +68,9 @@ export class ManagementPortalKamersComponent implements OnInit {
   deleteRoom(kamer: Kamer) {
     if (this.kamers) {
       this.roomservice.deleteRoom(kamer);
-      //this.kamers = [...this.kamers].filter(item => item !== kamer);
     }
   }
 
-  open(content: NgbModal) {
-    this.modalService
-      .open(content, { size: "lg", ariaLabelledBy: "modal-basic-title" })
-      .result.then(
-        result => {
-          this.closeResult = `Closed with: ${result}`;
-        },
-        reason => {
-          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-        }
-      );
-  }
   openSm(content: NgbModal) {
     this.modalService
       .open(content, { ariaLabelledBy: "modal-basic-title" })
@@ -77,6 +83,7 @@ export class ManagementPortalKamersComponent implements OnInit {
         }
       );
   }
+
   openNewFormModal() {
     const modalRef = this.modalService.open(ManagementPortalKamersFormComponent, {
       size: "lg",
@@ -93,6 +100,7 @@ export class ManagementPortalKamersComponent implements OnInit {
       ));
     });
   }
+
   openEditFormModal() {
     const modalRef = this.modalService.open(ManagementPortalKamersFormComponent, {
       size: "lg",
@@ -102,7 +110,7 @@ export class ManagementPortalKamersComponent implements OnInit {
     modalRef.componentInstance.action = "edit";
 
     modalRef.result.then(resultPromise => {
-      this.closeResult = resultPromise;
+      //this.closeResult = resultPromise;
       this.roomservice.updateRoom(new Kamer(
         resultPromise.kamerNaam,
         resultPromise.kamerType,
@@ -130,7 +138,12 @@ export class ManagementPortalKamersComponent implements OnInit {
      if (kamernaam) {
       modalKamerReservering.componentInstance.kamernaam = kamernaam;
     }
-    modalKamerReservering.componentInstance.action = "add";
+    if (this.datumvan) {
+      modalKamerReservering.componentInstance.datumvan = this.datumvan;
+    }
+    if (this.datumtot) {
+      modalKamerReservering.componentInstance.datumtot = this.datumtot;
+    }
     modalKamerReservering.result.then(resultPromise => {
       this.closeResult = resultPromise;
       this.kamerreserveringservice.saveKamerReservering(new KamerReservering(
@@ -151,5 +164,27 @@ export class ManagementPortalKamersComponent implements OnInit {
       ));
     });
 
+  }
+
+  showAvailableRoomsModal(){
+    const modalKamerSearch = this.modalService.open(FormKamersbeschikbaarComponent);
+    modalKamerSearch.result.then(
+      result => {
+        //this.closeResult = `Closed with: ${result}`;
+      this.datumvan = result.datumvan;
+      this.datumtot = result.datumtot;
+      this.roomservice.searchRoom(true, result.datumvan, result.datumtot, result.kamertype)
+      this.showResButton = true
+      },
+      reason => {
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      }
+    );
+    /* modalKamerSearch.result.then(searchParameters => {
+      this.datumvan = searchParameters.datumvan;
+      this.datumtot = searchParameters.datumtot;
+      this.roomservice.searchRoom(true, searchParameters.datumvan, searchParameters.datumtot, searchParameters.kamertype)
+    },
+    ).finally(() => this.showResButton = true) */
   }
 }

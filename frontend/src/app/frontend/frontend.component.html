@@ -3,13 +3,16 @@
   <img class="mr-md-3" src="assets/img/logo-64.png" alt="Logo">
   <h1 class="my-0 mr-md-auto font-weight-normal brush">Molveno Lake Resort</h1>
   <nav class="my-2 my-md-0 mr-md-3">
-    <a class="p-2 text-dark" [routerLink]="['/home']" routerLinkActive="active" >Hotel</a>
-    <a class="p-2 text-dark" [routerLink]="['/kamers']" routerLinkActive="active" >Kamers</a>
-    <a class="p-2 text-dark" [routerLink]="['/restaurant']" routerLinkActive="active" >Restaurant</a>
-    <a class="p-2 text-dark" [routerLink]="['/activiteiten']" routerLinkActive="active" >Activiteiten</a>
-    <a class="p-2 text-dark" [routerLink]="['/contact']" routerLinkActive="active" >Contact</a>
+    <a class="p-2 text-dark" [routerLink]="['/home']" routerLinkActive="active" >{{ siteLanguage.hotel }}</a>
+    <a class="p-2 text-dark" [routerLink]="['/kamers']" routerLinkActive="active" >{{ siteLanguage.rooms }}</a>
+    <a class="p-2 text-dark" [routerLink]="['/restaurant']" routerLinkActive="active" >{{ siteLanguage.restaurant }}</a>
+    <a class="p-2 text-dark" [routerLink]="['/activiteiten']" routerLinkActive="active" >{{ siteLanguage.activities }}</a>
+    <a class="p-2 text-dark" [routerLink]="['/contact']" routerLinkActive="active" >{{ siteLanguage.contact }}</a>
   </nav>
-  <a class="btn btn-outline-primary" [routerLink]="['/login']" routerLinkActive="active" >Login</a>
+  <input type="image" class="mr-md-3" src="assets/img/nederlands.png" alt="Nederlands" title="Nederlands" (click)="setLanguage('nl')">
+  <input type="image" class="mr-md-3" src="assets/img/english.png" alt="English" title="English" (click)="setLanguage('en')">
+  <input type="image" class="mr-md-3" src="assets/img/italiano.png" alt="Italiano" title="Italiano" (click)="setLanguage('it')">
+  <span class="btn btn-outline-primary" [routerLink]="['/login']" routerLinkActive="active">{{ siteLanguage.login }}</span>
 </header>
 
 <router-outlet></router-outlet>
