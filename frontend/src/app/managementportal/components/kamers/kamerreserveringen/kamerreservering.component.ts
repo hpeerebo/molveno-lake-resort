@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { KamerreserveringenService } from 'src/app/services/kamerreserveringen.service';
-import { take, tap } from 'rxjs/operators';
 import { KamerReservering } from 'src/app/models/kamerreservering';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import {FormKamerreserveringdetailsComponent} from "../kamers-form/form-kamerreserveringdetails/form-kamerreserveringdetails.component";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-kamerreservering',
@@ -12,19 +12,20 @@ import {FormKamerreserveringdetailsComponent} from "../kamers-form/form-kamerres
   styleUrls: ['./kamerreservering.component.scss']
 })
 export class KamerreserveringComponent implements OnInit {
-  kamerreserveringen: KamerReservering[] | undefined = [];
-  constructor(private readonly kamerreserveringservice: KamerreserveringenService, private readonly modalService: NgbModal, private router: Router) { }
 
-  getKamerReserveringen(){
-    this.kamerreserveringservice.getKamerReserveringen()
-    .pipe(
-    take(1),
-    tap(result => (this.kamerreserveringen = result)))
-    .subscribe();
+  constructor(private readonly kamerreserveringservice: KamerreserveringenService, private readonly modalService: NgbModal, private router: Router) { }
+  public kamerreserveringen: Observable<KamerReservering[] | undefined> = this.kamerreserveringservice.getKamerToekomstReserveringen();
+  public selectedResevering?: KamerReservering;
+  closeResult: string = "";
+
+  field: string = "";
+  public clickColumnHandler(event: string): string {
+    this.field = event;
+    return this.field;
   }
 
   ngOnInit() {
-    this.getKamerReserveringen();
+
   }
 
   openFormKamerReserveringDetailsModal(kamerReservering: KamerReservering){
@@ -33,11 +34,48 @@ export class KamerreserveringComponent implements OnInit {
       modalKamerReservering.componentInstance.kamerReservering = kamerReservering;
     }
   }
-  deleteRoom(kamerdata: KamerReservering) {
+
+  loadCurrentResevering() {
+    this.kamerreserveringservice.getKamerToekomstReserveringen( true);
+  }
+
+  loadHistoriesResevering() {
+    this.kamerreserveringservice.getKamerVerledenReserveringen( true);
+  }
+
+  onSelect(kamerresevering: KamerReservering): void {
+    this.selectedResevering = kamerresevering;
+  }
+
+
+  openSm(content: NgbModal) {
+    this.modalService
+      .open(content, { ariaLabelledBy: "modal-basic-title" })
+      .result.then(
+      result => {
+        this.closeResult = `Closed with: ${result}`;
+      },
+      reason => {
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      }
+    );
+  }
+
+  deleteResevering(kamerdata: KamerReservering) {
     if (kamerdata) {
       this.kamerreserveringservice.deleteKamerReservering(kamerdata);
-      //this.kamers = [...this.kamers].filter(item => item !== kamer);
     }
   }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return "by pressing ESC";
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return "by clicking on a backdrop";
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
 
 }

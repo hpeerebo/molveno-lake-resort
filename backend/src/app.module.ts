@@ -20,9 +20,14 @@ import { ActiviteitEntity } from './entities/activiteit-entity';
 import { ActiviteitenResController } from './controllers/activiteiten-res/activiteiten-res.controller';
 import { ActiviteitResService } from './services/activiteit-res/activiteit-res.service';
 import { ActiviteitResEntity } from './entities/activiteit-res-entity';
+import { ActiviteitPlanningEntity } from './entities/activiteit-planning-entity';
+import { ActiviteitenPlanningController } from './controllers/activiteiten-planning/activiteiten-planning.controller';
+import { ActiviteitPlanningService } from './services/activiteit-planning/activiteit-planning.service';
+import { UsersModule } from './features/users/users.module';
 
 @Module({
   imports: [KamersModule,
+    UsersModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
@@ -30,15 +35,27 @@ import { ActiviteitResEntity } from './entities/activiteit-res-entity';
       username: 'postgres',
       password: 'root',
       database: 'molveno',
-      entities: [__dirname + '/**/*-entity{.ts,.js}', __dirname + '/**/*.entity{.ts,.js}'],
+      entities: [
+        __dirname + '/**/*-entity{.ts,.js}',
+        __dirname + '/**/*.entity{.ts,.js}',
+      ],
       synchronize: true,
     }),
-    TypeOrmModule.forFeature([TafelRepoEntity, GerechtRepoEntity, IngredientRepoEntity, TafelreserveringRepoEntity, ActiviteitEntity, ActiviteitResEntity]),
+    TypeOrmModule.forFeature([
+      TafelRepoEntity,
+      GerechtRepoEntity,
+      IngredientRepoEntity,
+      TafelreserveringRepoEntity,
+      ActiviteitEntity,
+      ActiviteitResEntity,
+      ActiviteitPlanningEntity,
+    ]),
   ],
   controllers: [
     AppController,
     ActiviteitenController,
     ActiviteitenResController,
+    ActiviteitenPlanningController,
     KamersController,
     RestaurantController,
   ],
@@ -46,6 +63,7 @@ import { ActiviteitResEntity } from './entities/activiteit-res-entity';
     AppService,
     ActiviteitService,
     ActiviteitResService,
+    ActiviteitPlanningService,
     KamerService,
     TafelService,
     IngredientService,
@@ -53,4 +71,4 @@ import { ActiviteitResEntity } from './entities/activiteit-res-entity';
     TafelreserveringService,
   ],
 })
-export class AppModule { }
+export class AppModule {}

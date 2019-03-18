@@ -9,8 +9,11 @@ import {HttpClientModule} from '@angular/common/http';
 import {RoomService} from './services/rooms.service';
 import { SortGridService } from './shared/services/sort-grid.service';
 
+
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -18,7 +21,7 @@ import { SortGridService } from './shared/services/sort-grid.service';
     ReactiveFormsModule,
     FrontendModule,
     ManagementportalModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [RoomService, SortGridService],
   bootstrap: [AppComponent]

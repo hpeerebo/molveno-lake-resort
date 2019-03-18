@@ -8,14 +8,14 @@ import { map } from "rxjs/operators";
   providedIn: "root"
 })
 export class ActiviteitenService {
-  public readonly api: string = "http://localhost:4200/api/activiteiten/";
+  public readonly api: string = `/api/activiteiten/`;
 
   constructor(private http: HttpClient) {}
 
   private static activiteitenResponseToActiviteitMapper(
     activiteitenResponse: IActiviteit[]
   ): Activiteit[] {
-    console.log(activiteitenResponse);
+    // console.log(activiteitenResponse);
     return activiteitenResponse.map(
       ActiviteitenService.activiteitToActiviteitMapper
     );
@@ -25,13 +25,13 @@ export class ActiviteitenService {
     activiteit: IActiviteit
   ): Activiteit {
     return new Activiteit(
+      activiteit.id,
       activiteit.naam,
       activiteit.beschrijving,
       activiteit.datum,
       activiteit.capaciteit,
       activiteit.prijs,
-      activiteit.thumb,
-      activiteit.id
+      activiteit.thumb
     );
   }
 
@@ -41,25 +41,29 @@ export class ActiviteitenService {
       .pipe(map(ActiviteitenService.activiteitenResponseToActiviteitMapper));
   }
 
-  saveActiviteit(activiteit: Activiteit) {
-    return this.http
-      .post<IActiviteit[]>(this.api + "saveactiviteit", activiteit)
-      .subscribe();
+  saveActiviteit(activiteit: Activiteit): void {
+    this.http.post<IActiviteit[]>(this.api, activiteit).subscribe();
+    // console.log(activiteit);
+    // location.reload();
   }
 
-  deleteActiviteit(activiteit: Activiteit){
-    this.http
-    .delete<IActiviteit[]>(this.api + activiteit.id)
-    .subscribe();
+  updateActiviteit(activiteit: Activiteit): void {
+    this.http.post<IActiviteit[]>(this.api, activiteit).subscribe();
+    // location.reload();
+  }
+
+  deleteActiviteit(activiteit: Activiteit): void {
+    this.http.delete<IActiviteit[]>(this.api + activiteit.id).subscribe();
+    // location.reload();
   }
 }
 
 interface IActiviteit {
+  id: number;
   naam: string;
   beschrijving: string;
-  datum: number;
+  datum: Date;
   capaciteit: number;
   prijs: number;
   thumb: string;
-  id: number;
 }

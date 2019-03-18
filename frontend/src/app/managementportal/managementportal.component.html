@@ -1,60 +1,141 @@
 <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-  <a class="navbar-brand col-sm-3 col-md-2 mr-0" [routerLink]="['/managementportal/home']">Molveno Lake Resort</a>
-  <ul class="navbar-nav px-3">
-    <li class="nav-item text-nowrap">
-      <a class="nav-link" [routerLink]="['/home']">Sign out</a>
-    </li>
-  </ul>
+    <a
+        class="navbar-brand col-sm-3 col-md-2 mr-0"
+        [routerLink]="['/managementportal/home']"
+    >
+        Molveno Lake Resort
+    </a>
+    <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+            <a
+                class="nav-link"
+                [routerLink]="['/home']"
+            >
+                Sign out
+            </a>
+        </li>
+    </ul>
 </nav>
 
-<div class="container-fluid">
-  <div class="row">
-    <nav class="col-md-3 col-lg-2 d-none d-md-block bg-light sidebar">
-      <div class="sidebar-sticky">
-        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-          <span>HOTEL</span>
-        </h6>
-        <ul class="nav flex-column mb-2">
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/managementportal/kamers']" routerLinkActive="active">Kamers</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/managementportal/kamerreserveringen']" routerLinkActive="active">Reserveringen</a>
-          </li>
-        </ul>
-        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-          <span>RESTAURANT</span>
-        </h6>
-        <ul class="nav flex-column mb-2">
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/managementportal/restaurant/tafels']" routerLinkActive="active">Tafels</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/managementportal/restaurant/reserveringen']" routerLinkActive="active">Reserveringen</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/managementportal/restaurant/gerechten']" routerLinkActive="active">Gerechten</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/managementportal/restaurant/ingredienten']" routerLinkActive="active">Ingredienten</a>
-          </li>
-        </ul>
-        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-          <span>ACTIVITEITEN</span>
-        </h6>
-        <ul class="nav flex-column mb-2">
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/managementportal/activiteiten']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" >Activiteiten</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/managementportal/activiteiten/activiteit-reserveringen']" routerLinkActive="active" >Reserveringen</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
 
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-      <router-outlet></router-outlet>
-    </main>
-  </div>
+
+
+
+
+<div class="container-fluid">
+    <div class="row">
+        <nav class="col-md-3 col-lg-2 d-none d-md-block bg-light sidebar">
+            <div class="sidebar-sticky">
+                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                    <span>HOTEL</span>
+                </h6>
+                <ul class="nav flex-column mb-2">
+                    <li class="nav-item">
+                        <a
+                            class="nav-link"
+                            [routerLink]="['/managementportal/kamers']"
+                            routerLinkActive="active"
+                        >
+                            Kamers
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a
+                            class="nav-link"
+                            [routerLink]="['/managementportal/kamerreserveringen']"
+                            routerLinkActive="active"
+                        >
+                            Reserveringen
+                        </a>
+                    </li>
+                </ul>
+                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                    <span>RESTAURANT</span>
+                </h6>
+                <ul class="nav flex-column mb-2">
+                    <li class="nav-item">
+                        <a
+                            class="nav-link"
+                            [routerLink]="['/managementportal/restaurant/tafels']"
+                            routerLinkActive="active"
+                        >
+                            Tafels
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a
+                            class="nav-link"
+                            [routerLink]="['/managementportal/restaurant/reserveringen']"
+                            routerLinkActive="active"
+                        >
+                            Reserveringen
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a
+                            class="nav-link"
+                            [routerLink]="['/managementportal/restaurant/gerechten']"
+                            routerLinkActive="active"
+                        >
+                            Gerechten
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a
+                            class="nav-link"
+                            [routerLink]="['/managementportal/restaurant/ingredienten']"
+                            routerLinkActive="active"
+                        >
+                            Ingredienten
+                        </a>
+                    </li>
+                </ul>
+                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                    <span>ACTIVITEITEN</span>
+                </h6>
+                <ul class="nav flex-column mb-2">
+                    <li class="nav-item">
+                        <a
+                            class="nav-link"
+                            [routerLink]="['/managementportal/activiteiten']"
+                            routerLinkActive="active"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                        >
+                            Activiteiten
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a
+                            class="nav-link"
+                            [routerLink]="['/managementportal/activiteiten/activiteiten-planning']"
+                            routerLinkActive="active"
+                        >
+                            Planning
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a
+                            class="nav-link"
+                            [routerLink]="['/managementportal/activiteiten/activiteit-reserveringen']"
+                            routerLinkActive="active"
+                        >
+                            Reserveringen
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+
+
+
+
+
+        <main
+            role="main"
+            class="col-md-9 ml-sm-auto col-lg-10 px-4"
+        >
+            <router-outlet></router-outlet>
+        </main>
+    </div>
 </div>

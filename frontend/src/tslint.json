@@ -1,4 +1,3 @@
-/*
 {
     "extends": "../tslint.json",
     "rules": {
@@ -16,4 +15,3 @@
         ]
     }
 }
-*/

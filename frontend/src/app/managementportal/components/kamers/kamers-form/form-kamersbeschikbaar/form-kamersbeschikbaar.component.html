@@ -1,0 +1,39 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Vul de gegevens in</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('cancel')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="kamerSearchForm">
+      <div class="container, form-row">
+        <div class="form-group col-md-6">
+              <label>Aankomst datum</label>
+              <input type="date" class="form-control" [min]="today" [value]="today" formControlName="datumvan"  />
+
+          </div>
+          <div class="form-group col-md-6">
+
+              <label>Vertrek datum</label>
+              <input type="date" class="form-control" [min]="kamerSearchForm.controls.datumvan.value" [value]="tomorrow" formControlName="datumtot" ngbAutofocus/>
+
+
+          </div>
+        </div>
+        <div class="container, form-row">
+          <div class="form-group col-md-12">
+          <label>Type kamer</label>
+          <select class="form-control" formControlName="kamertype" [class.is-invalid]="kamerSearchForm.controls.kamertype.invalid && kamerSearchForm.controls.kamertype.touched" ngbAutofocus >
+            <option *ngFor="let type of kamerSoort" [value]="type">{{
+              type
+            }}</option>
+          </select>
+          <!--input type="text" class="form-control" formControlName="kamertype" [class.is-invalid]="kamerSearchForm.controls.kamertype.invalid && kamerSearchForm.controls.kamertype.touched" ngbAutofocus /-->
+          <small class="text-danger" [class.d-none]="kamerSearchForm.controls.kamertype.valid || kamerSearchForm.controls.kamertype.untouched">Vereist</small>
+        </div>
+      </div>
+    </form>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-success" (click)="submitForm()" [disabled]="kamerSearchForm.invalid">Zoeken</button>
+    </div>
+  </div>
