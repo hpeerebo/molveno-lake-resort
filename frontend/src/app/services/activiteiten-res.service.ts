@@ -40,14 +40,15 @@ export class ActiviteitenResService {
   }
 
   saveActiviteitRes(reservering: ActiviteitRes) {
-    return this.http
+    /*return*/ this.http
       .post<IActiviteitres[]>(this.api /*+ "savereservering"*/, reservering)
       .subscribe();
+    location.reload();
   }
 
   deleteActiviteitRes(reservering: ActiviteitRes) {
     this.http.delete<IActiviteitres[]>(this.api + reservering.id).subscribe();
-    // location.reload();
+    location.reload();
   }
 }
 interface IActiviteitres {
