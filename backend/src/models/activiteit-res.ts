@@ -1,8 +1,7 @@
 export class ActiviteitRes {
   constructor(
-    public id: number,
-    public naamActiviteit: string,
-    public datum: string,
+    public resid: number,
+    public planid: number,
     public emailGast: string,
     public aantalPersonen: number,
   ) {}

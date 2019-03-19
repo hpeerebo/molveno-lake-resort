@@ -2,22 +2,19 @@ import { Column, PrimaryGeneratedColumn, Entity } from 'typeorm';
 
 @Entity('activiteitenreserveringen')
 export class ActiviteitResEntity {
-  @PrimaryGeneratedColumn() public readonly id: number;
-  @Column('varchar') public readonly naamActiviteit: string;
-  @Column('varchar') public readonly datum: string;
+  @PrimaryGeneratedColumn() public readonly resid: number;
+  @Column('integer') public readonly planid: number;
   @Column('varchar') public readonly emailGast: string;
   @Column('integer') public readonly aantalPersonen: number;
 
   constructor(
-    id: number,
-    naamActiviteit: string,
-    datum: string,
+    resid: number,
+    planid: number,
     emailGast: string,
     aantalPersonen: number,
   ) {
-    this.id = id;
-    this.naamActiviteit = naamActiviteit;
-    this.datum = datum;
+    this.resid = resid;
+    this.planid = planid;
     this.emailGast = emailGast;
     this.aantalPersonen = aantalPersonen;
   }

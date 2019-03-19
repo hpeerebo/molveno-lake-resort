@@ -4,15 +4,11 @@ import { ApiModelProperty } from '@nestjs/swagger';
 export class CreateActiviteitResDto {
   @IsNumber()
   @ApiModelProperty()
-  public readonly id: number;
+  public readonly resid: number;
 
-  @IsString()
+  @IsNumber()
   @ApiModelProperty()
-  public readonly naamActiviteit: string;
-
-  @IsString()
-  @ApiModelProperty()
-  public readonly datum: string;
+  public readonly planid: number;
 
   @IsString()
   @ApiModelProperty()

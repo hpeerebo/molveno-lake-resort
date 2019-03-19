@@ -32,9 +32,8 @@ export class ActiviteitenResController {
     @Body() createReservering: CreateActiviteitResDto,
   ): void {
     const reservering: ActiviteitResEntity = new ActiviteitResEntity(
-      createReservering.id,
-      createReservering.naamActiviteit,
-      createReservering.datum,
+      createReservering.resid,
+      createReservering.planid,
       createReservering.emailGast,
       createReservering.aantalPersonen,
     );
@@ -57,9 +56,8 @@ export class ActiviteitenResController {
     @Body() createResActiviteit: CreateActiviteitResDto,
   ): void {
     const reservering: ActiviteitResEntity = new ActiviteitResEntity(
-      createResActiviteit.id,
-      createResActiviteit.naamActiviteit,
-      createResActiviteit.datum,
+      createResActiviteit.resid,
+      createResActiviteit.planid,
       createResActiviteit.emailGast,
       createResActiviteit.aantalPersonen,
     );

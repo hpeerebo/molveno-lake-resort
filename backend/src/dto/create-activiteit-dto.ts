@@ -4,7 +4,7 @@ import { IsNumber, IsString, IsDate } from 'class-validator';
 export class CreateActiviteitDto {
   @IsNumber()
   @ApiModelProperty()
-  public readonly id: number;
+  public readonly actid: number;
 
   @IsString()
   @ApiModelProperty()
@@ -13,18 +13,6 @@ export class CreateActiviteitDto {
   @IsString()
   @ApiModelProperty()
   public readonly beschrijving: string;
-
-  @IsNumber()
-  @ApiModelProperty()
-  public readonly capaciteit: number;
-
-  @IsString()
-  @ApiModelProperty()
-  public readonly datum: string;
-
-  @IsNumber()
-  @ApiModelProperty()
-  public readonly prijs: number;
 
   @IsString()
   @ApiModelProperty()

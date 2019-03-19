@@ -25,11 +25,9 @@ export class ActiviteitResService {
 
   public updateReservering(reservering: CreateActiviteitResDto): void {
     this.activiteitResRepository.update(
-      { id: reservering.id },
+      { resid: reservering.resid },
       {
-        id: reservering.id,
-        naamActiviteit: reservering.naamActiviteit,
-        datum: reservering.datum,
+        planid: reservering.planid,
         emailGast: reservering.emailGast,
         aantalPersonen: reservering.aantalPersonen,
       },
@@ -37,6 +35,6 @@ export class ActiviteitResService {
   }
 
   public deleteReservering(reserveringId: number) {
-    this.activiteitResRepository.delete({ id: reserveringId });
+    this.activiteitResRepository.delete({ resid: reserveringId });
   }
 }
