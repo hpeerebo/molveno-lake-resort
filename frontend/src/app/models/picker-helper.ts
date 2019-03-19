@@ -15,9 +15,8 @@ export class PickerHelper {
     };
   }
 
-  public static toISOString(dateObject: IDateObject, timeObject: ITimeObject): string {
-    const date = new Date(dateObject.year, dateObject.month - 1, dateObject.day, timeObject.hour, timeObject.minute);
-    return date.toISOString();
+  public static toDate(dateObject: IDateObject, timeObject: ITimeObject): Date {
+    return new Date(dateObject.year, dateObject.month - 1, dateObject.day, timeObject.hour, timeObject.minute);
   }
 }
 

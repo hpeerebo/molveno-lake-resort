@@ -32,8 +32,8 @@ export class FormTafelreserveringComponent implements OnInit {
   ngOnInit() {
     if (this.tafelreservering) {
       this.tafelreserveringForm.setValue({
-        aanvangsdatum: PickerHelper.dateObject(new Date(this.tafelreservering.aanvangstijd)),
-        aanvangstijd: PickerHelper.timeObject(new Date(this.tafelreservering.aanvangstijd)),
+        aanvangsdatum: PickerHelper.dateObject(this.tafelreservering.aanvangstijd),
+        aanvangstijd: PickerHelper.timeObject(this.tafelreservering.aanvangstijd),
         personen: this.tafelreservering.personen,
         naam: this.tafelreservering.naam,
         telefoon: this.tafelreservering.telefoon
@@ -43,7 +43,7 @@ export class FormTafelreserveringComponent implements OnInit {
 
   submitForm() {
     if (this.tafelreservering) {
-      this.tafelreservering.aanvangstijd = PickerHelper.toISOString(this.tafelreserveringForm.value.aanvangsdatum, this.tafelreserveringForm.value.aanvangstijd);
+      this.tafelreservering.aanvangstijd = PickerHelper.toDate(this.tafelreserveringForm.value.aanvangsdatum, this.tafelreserveringForm.value.aanvangstijd);
       this.tafelreservering.personen = this.tafelreserveringForm.value.personen;
       this.tafelreservering.naam = this.tafelreserveringForm.value.naam;
       this.tafelreservering.telefoon = this.tafelreserveringForm.value.telefoon;
@@ -51,7 +51,7 @@ export class FormTafelreserveringComponent implements OnInit {
 
     } else {
       this.activeModal.close(new Tafelreservering(
-        PickerHelper.toISOString(this.tafelreserveringForm.value.aanvangsdatum, this.tafelreserveringForm.value.aanvangstijd),
+        PickerHelper.toDate(this.tafelreserveringForm.value.aanvangsdatum, this.tafelreserveringForm.value.aanvangstijd),
         this.tafelreserveringForm.value.personen,
         this.tafelreserveringForm.value.naam,
         this.tafelreserveringForm.value.telefoon
