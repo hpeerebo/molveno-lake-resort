@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, ValidatorFn, FormGroup, AbstractControl } from '@angular/forms';
 import { Alert } from 'selenium-webdriver';
 
 @Component({
@@ -43,13 +43,17 @@ export class FormKamersbeschikbaarComponent implements OnInit {
   ngOnInit() {
   }
   submitForm() {
+
     this.activeModal.close(this.kamerSearchForm.value);
   }
-  checkDates(){
-    if (this.kamerSearchForm.value.datumtot < this.kamerSearchForm.value.datumvan){
-      console.log ('datumtot kleiner dan datumvan');
-      this.kamerSearchForm.setErrors(new Validators());
+  dateValidationFormGroup(): ValidatorFn{
+    return (control: AbstractControl): { [key: string]: any } => {
+      const formGroup = control as FormGroup;
+      if (this.kamerSearchForm.controls.datumvan.value < this.today){
+        return "datum ligt in het verleden";
     }
+    else return null;
   }
+}
 
 }
