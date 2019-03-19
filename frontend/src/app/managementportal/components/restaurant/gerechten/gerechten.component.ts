@@ -19,7 +19,9 @@ export class ManagementPortalGerechtenComponent {
     return console.log(this.field), this.field;
   }
 
-  constructor(public gerechtenService: GerechtenService, private modalService: NgbModal) {}
+  gerechten$: Observable<Gerecht[]> = this.gerechtenService.gerechten$;
+
+  constructor(private gerechtenService: GerechtenService, private modalService: NgbModal) {}
 
   openFormGerechtModal(gerecht?: Gerecht) {
     const modal = this.modalService.open(FormGerechtComponent);
