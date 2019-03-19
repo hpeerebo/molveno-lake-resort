@@ -30,12 +30,14 @@ export class ActiviteitenPlanningController {
     status: 409,
     description: 'Een planning met dit kenmerk bestaat al',
   })
+  @Param(':activiteitid')
   public saveActiviteitPlanning(
     @Body() createActiviteitPlanning: CreateActiviteitPlanningDto,
-  ): void {
+    @Param('activiteitid') activiteitid: number,
+  ) {
     const activiteitplanning: ActiviteitPlanningEntity = new ActiviteitPlanningEntity(
       createActiviteitPlanning.planid,
-      createActiviteitPlanning.actid,
+      // createActiviteitPlanning.actid,
       createActiviteitPlanning.actdate,
       createActiviteitPlanning.actprijs,
       createActiviteitPlanning.actcapaciteit,
@@ -43,6 +45,7 @@ export class ActiviteitenPlanningController {
 
     return this.activiteitenPlanService.saveActiviteitPlanning(
       activiteitplanning,
+      activiteitid,
     );
   }
 
@@ -60,15 +63,19 @@ export class ActiviteitenPlanningController {
   })
   updateActiviteitenPlanning(
     @Body() createActiviteitPlanning: CreateActiviteitPlanningDto,
+    @Param('activiteitid') activiteitid: number,
   ): void {
     const planning: ActiviteitPlanningEntity = new ActiviteitPlanningEntity(
       createActiviteitPlanning.planid,
-      createActiviteitPlanning.actid,
+      // createActiviteitPlanning.actid,
       createActiviteitPlanning.actdate,
       createActiviteitPlanning.actprijs,
       createActiviteitPlanning.actcapaciteit,
     );
-    this.activiteitenPlanService.updateActiviteitPlanning(planning);
+    this.activiteitenPlanService.updateActiviteitPlanning(
+      planning,
+      activiteitid,
+    );
   }
 
   @Delete(':planningsId')

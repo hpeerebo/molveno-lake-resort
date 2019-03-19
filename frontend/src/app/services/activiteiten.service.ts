@@ -25,12 +25,9 @@ export class ActiviteitenService {
     activiteit: IActiviteit
   ): Activiteit {
     return new Activiteit(
-      activiteit.id,
+      activiteit.actid,
       activiteit.naam,
       activiteit.beschrijving,
-      activiteit.datum,
-      activiteit.capaciteit,
-      activiteit.prijs,
       activiteit.thumb
     );
   }
@@ -53,17 +50,14 @@ export class ActiviteitenService {
   }
 
   deleteActiviteit(activiteit: Activiteit): void {
-    this.http.delete<IActiviteit[]>(this.api + activiteit.id).subscribe();
+    this.http.delete<IActiviteit[]>(this.api + activiteit.actid).subscribe();
     // location.reload();
   }
 }
 
 interface IActiviteit {
-  id: number;
+  actid: number;
   naam: string;
   beschrijving: string;
-  datum: Date;
-  capaciteit: number;
-  prijs: number;
   thumb: string;
 }

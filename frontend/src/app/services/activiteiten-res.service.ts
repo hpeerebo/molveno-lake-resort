@@ -25,9 +25,8 @@ export class ActiviteitenResService {
     reservering: IActiviteitres
   ): ActiviteitRes {
     return new ActiviteitRes(
-      reservering.id,
-      reservering.naamActiviteit,
-      reservering.datum,
+      reservering.resid,
+      reservering.planid,
       reservering.emailGast,
       reservering.aantalPersonen
     );
@@ -47,14 +46,15 @@ export class ActiviteitenResService {
   }
 
   deleteActiviteitRes(reservering: ActiviteitRes) {
-    this.http.delete<IActiviteitres[]>(this.api + reservering.id).subscribe();
+    this.http
+      .delete<IActiviteitres[]>(this.api + reservering.resid)
+      .subscribe();
     // location.reload();
   }
 }
 interface IActiviteitres {
-  id: number;
-  naamActiviteit: string;
-  datum: string;
+  resid: number;
+  planid: number;
   emailGast: string;
   aantalPersonen: number;
 }
