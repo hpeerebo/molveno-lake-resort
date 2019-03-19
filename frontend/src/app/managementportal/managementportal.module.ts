@@ -31,6 +31,7 @@ import { ApplicationPipesModule } from '../shared/application-pipes/application-
 import { FormKamersbeschikbaarComponent } from './components/kamers/kamers-form/form-kamersbeschikbaar/form-kamersbeschikbaar.component';
 import { ActiviteitenPlanningComponent } from './components/activiteiten/activiteiten-planning/activiteiten-planning.component';
 import { FormActiviteitPlanningComponent } from '../shared/components/form-activiteitplanning/form-activiteitplanning.component';
+import { PaginatePipe } from '../shared/pipes/paginate.pipe';
 
 
 @NgModule({
@@ -61,7 +62,8 @@ import { FormActiviteitPlanningComponent } from '../shared/components/form-activ
     GerechtenDetailsComponent,
     SortgridPipe,
     ActiviteitenPlanningComponent,
-    FormKamersbeschikbaarComponent
+    FormKamersbeschikbaarComponent,
+    PaginatePipe
   ],
   imports: [CommonModule, ManagementportalRoutingModule, NgbModule, FormsModule, ReactiveFormsModule, ApplicationPipesModule],
   entryComponents: [FormTafelComponent, FormTafelreserveringComponent, FormGerechtComponent, FormIngredientComponent, FormActiviteitComponent,  FormActiviteitResComponent, FormActiviteitPlanningComponent, ModalConfirmComponent, FormKamerreserveringComponent, FormKamerreserveringdetailsComponent, FormKamersbeschikbaarComponent]

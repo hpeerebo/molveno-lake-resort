@@ -6,15 +6,15 @@
   <table class="table table-sm table-hover">
     <thead>
       <tr>
-        <th class="handCursor" (click)="clickColumnHandler('naam')">Naam</th>
-        <th class="handCursor" (click)="clickColumnHandler('type')">Type</th>
-        <th class="handCursor" (click)="clickColumnHandler('subtype')">SubType</th>
-        <th class="handCursor" (click)="clickColumnHandler('prijs')">Prijs</th>
+        <th sortable="name" (sort)="onSort($event)">Naam</th>
+        <th sortable="name" (sort)="onSort($event)">Type</th>
+        <th sortable="name" (sort)="onSort($event)">SubType</th>
+        <th sortable="name" (sort)="onSort($event)">Prijs</th>
         <th></th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let gerecht of (gerechtenService.paginatedGerechten$ | async | sortgrid:field)">
+      <tr *ngFor="let gerecht of gerechten$ | async | paginate:page:pageSize:sortColumn:'asc'">
         <td><span class="handCursor" [routerLink]="[gerecht.id]">{{gerecht.naam}}</span></td>
         <td>{{gerecht.type}}</td>
         <td>{{gerecht.subtype}}</td>
@@ -28,10 +28,9 @@
     </tbody>
   </table>
   <div class="d-flex justify-content-between">
-    <ngb-pagination [collectionSize]="gerechtenService.total$ | async" [(page)]="gerechtenService.page"
-      [pageSize]="gerechtenService.pageSize">
+    <ngb-pagination [collectionSize]="count$ | async" [(page)]="page" [pageSize]="pageSize">
     </ngb-pagination>
-    <select class="custom-select" name="pageSize" [(ngModel)]="gerechtenService.pageSize">
+    <select class="custom-select" name="pageSize" [(ngModel)]="pageSize">
       <option [ngValue]="5">5 per pagina</option>
       <option [ngValue]="10">10 per pagina</option>
       <option [ngValue]="20">20 per pagina</option>

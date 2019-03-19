@@ -12,7 +12,7 @@ import { SortGridService } from './shared/services/sort-grid.service';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
