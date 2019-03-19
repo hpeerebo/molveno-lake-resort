@@ -19,7 +19,6 @@ import { RoundedCircleComponent } from './shared/components/rounded-circle/round
 import { GastKamerReserveringComponent } from './shared/components/gast-kamerreservering/gast-kamerreservering.component';
 import { ReservationButtonComponent } from './shared/components/reservation-button/reservation-button.component'
 
-
 @NgModule({
   declarations: [
     FrontEndComponent,
