@@ -48,6 +48,11 @@ export class ReservationButtonComponent implements OnInit {
         resultPromise.datumvan,
         resultPromise.datumtot,
         resultPromise.kamernaam,
+        resultPromise.inchecken,
+        resultPromise.uitchecken,
+        resultPromise.personen,
+        resultPromise.prijs,
+        resultPromise.reserveringsnummer
       ));
     });
   }
