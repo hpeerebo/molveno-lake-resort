@@ -64,6 +64,9 @@ export class ManagementPortalKamersComponent implements OnInit, AfterViewInit {
   onSelect(kamer: Kamer): void {
     this.selectedKamer = kamer;
   }
+  onSelectRoom(kamer: Kamer): void {
+    console.log(kamer);
+  }
 
   deleteRoom(kamer: Kamer) {
     if (this.kamers) {
