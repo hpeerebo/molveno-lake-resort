@@ -20,7 +20,7 @@ export class ActiviteitenPlanningController {
     private readonly activiteitenPlanService: ActiviteitPlanningService,
   ) {}
 
-  @Post()
+  @Post(':activiteitid')
   @ApiOperation({ title: 'Maak een nieuw plannings element aan' })
   @ApiResponse({
     status: 201,
@@ -30,7 +30,6 @@ export class ActiviteitenPlanningController {
     status: 409,
     description: 'Een planning met dit kenmerk bestaat al',
   })
-  @Param(':activiteitid')
   public saveActiviteitPlanning(
     @Body() createActiviteitPlanning: CreateActiviteitPlanningDto,
     @Param('activiteitid') activiteitid: number,
