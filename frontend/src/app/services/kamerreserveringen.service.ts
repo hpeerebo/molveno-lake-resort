@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
-import { KamerReservering } from '../models/kamerreservering';
+import {KamerReservering} from '../models/kamerreservering';
 import {map, take, tap} from 'rxjs/operators';
 
 @Injectable({
@@ -11,16 +11,33 @@ export class KamerreserveringenService {
   private kamerReseveringCacheSubject = new BehaviorSubject<KamerReservering[] | undefined>(undefined);
   private static api = `/api/kamerreservering`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   getKamerReserveringen(refreshCache: boolean = false): Observable<KamerReservering[] | undefined> {
     if (this.kamerReseveringCacheSubject.getValue() === undefined || refreshCache) {
       this.http.get<IKamerReservering>(`${KamerreserveringenService.api}`)
         .pipe(
-          map((data: any) => data.map((kamerreservering: KamerReservering) =>new KamerReservering(kamerreservering.id,
-            kamerreservering.voornaam, kamerreservering.achternaam, kamerreservering.telefoonnummer, kamerreservering.emailadres,
-            kamerreservering.identiteitsid, kamerreservering.postcode, kamerreservering.straat, kamerreservering.huisnummer,
-            kamerreservering.woonplaats, kamerreservering.land, kamerreservering.datumvan, kamerreservering.datumtot, kamerreservering.kamernaam))),
+          map((data: any) => data.map((kamerreservering: KamerReservering) => new KamerReservering(
+            kamerreservering.id,
+            kamerreservering.voornaam,
+            kamerreservering.achternaam,
+            kamerreservering.telefoonnummer,
+            kamerreservering.emailadres,
+            kamerreservering.identiteitsid,
+            kamerreservering.postcode,
+            kamerreservering.straat,
+            kamerreservering.huisnummer,
+            kamerreservering.woonplaats,
+            kamerreservering.land,
+            kamerreservering.datumvan,
+            kamerreservering.datumtot,
+            kamerreservering.kamernaam,
+            kamerreservering.inchecken,
+            kamerreservering.uitchecken,
+            kamerreservering.personen,
+            kamerreservering.prijs,
+            kamerreservering.reserveringsnummer))),
           take(1),
           tap(kamerreservering => {
             this.kamerReseveringCacheSubject.next(kamerreservering);
@@ -35,10 +52,27 @@ export class KamerreserveringenService {
     if (this.kamerReseveringCacheSubject.getValue() === undefined || refreshCache) {
       this.http.get<IKamerReservering>(`${KamerreserveringenService.api}/actief/${this.getCurrentDate()}`)
         .pipe(
-          map((data: any) => data.map((kamerreservering: KamerReservering) =>new KamerReservering(kamerreservering.id,
-            kamerreservering.voornaam, kamerreservering.achternaam, kamerreservering.telefoonnummer, kamerreservering.emailadres,
-            kamerreservering.identiteitsid, kamerreservering.postcode, kamerreservering.straat, kamerreservering.huisnummer,
-            kamerreservering.woonplaats, kamerreservering.land, kamerreservering.datumvan, kamerreservering.datumtot, kamerreservering.kamernaam))),
+          map((data: any) => data.map((kamerreservering: KamerReservering) => new KamerReservering(
+            kamerreservering.id,
+            kamerreservering.voornaam,
+            kamerreservering.achternaam,
+            kamerreservering.telefoonnummer,
+            kamerreservering.emailadres,
+            kamerreservering.identiteitsid,
+            kamerreservering.postcode,
+            kamerreservering.straat,
+            kamerreservering.huisnummer,
+            kamerreservering.woonplaats,
+            kamerreservering.land,
+            kamerreservering.datumvan,
+            kamerreservering.datumtot,
+            kamerreservering.kamernaam,
+            kamerreservering.inchecken,
+            kamerreservering.uitchecken,
+            kamerreservering.personen,
+            kamerreservering.prijs,
+            kamerreservering.reserveringsnummer
+          ))),
           take(1),
           tap(kamerreservering => {
             this.kamerReseveringCacheSubject.next(kamerreservering);
@@ -52,10 +86,27 @@ export class KamerreserveringenService {
     if (this.kamerReseveringCacheSubject.getValue() === undefined || refreshCache) {
       this.http.get<IKamerReservering>(`${KamerreserveringenService.api}/inactief/${this.getCurrentDate()}`)
         .pipe(
-          map((data: any) => data.map((kamerreservering: KamerReservering) =>new KamerReservering(kamerreservering.id,
-            kamerreservering.voornaam, kamerreservering.achternaam, kamerreservering.telefoonnummer, kamerreservering.emailadres,
-            kamerreservering.identiteitsid, kamerreservering.postcode, kamerreservering.straat, kamerreservering.huisnummer,
-            kamerreservering.woonplaats, kamerreservering.land, kamerreservering.datumvan, kamerreservering.datumtot, kamerreservering.kamernaam))),
+          map((data: any) => data.map((kamerreservering: KamerReservering) => new KamerReservering(
+            kamerreservering.id,
+            kamerreservering.voornaam,
+            kamerreservering.achternaam,
+            kamerreservering.telefoonnummer,
+            kamerreservering.emailadres,
+            kamerreservering.identiteitsid,
+            kamerreservering.postcode,
+            kamerreservering.straat,
+            kamerreservering.huisnummer,
+            kamerreservering.woonplaats,
+            kamerreservering.land,
+            kamerreservering.datumvan,
+            kamerreservering.datumtot,
+            kamerreservering.kamernaam,
+            kamerreservering.inchecken,
+            kamerreservering.uitchecken,
+            kamerreservering.personen,
+            kamerreservering.prijs,
+            kamerreservering.reserveringsnummer
+          ))),
           take(1),
           tap(kamerreservering => {
             this.kamerReseveringCacheSubject.next(kamerreservering);
@@ -64,14 +115,16 @@ export class KamerreserveringenService {
     }
     return this.kamerReseveringCacheSubject;
   }
-  saveKamerReservering(kamerreservering: KamerReservering){
+
+  saveKamerReservering(kamerreservering: KamerReservering) {
     this.http.post(`${KamerreserveringenService.api}`, kamerreservering)
       .pipe(
         take(1),
         tap(() => this.getKamerReserveringen(true))
       ).subscribe()
   }
-  deleteKamerReservering(kamerdata: KamerReservering){
+
+  deleteKamerReservering(kamerdata: KamerReservering) {
     console.log(kamerdata);
     this.http.delete(`${KamerreserveringenService.api}/${kamerdata.id}`)
       .pipe(
@@ -80,19 +133,19 @@ export class KamerreserveringenService {
       ).subscribe();
   }
 
-  getCurrentDate(): string{
-    const currentDate:Date = new Date();
+  getCurrentDate(): string {
+    const currentDate: Date = new Date();
     let today: string = "";
-    let dd:any = currentDate.getDate();
-    let mm:any = currentDate.getMonth()+1;
-    let yyyy:any = currentDate.getFullYear();
+    let dd: any = currentDate.getDate();
+    let mm: any = currentDate.getMonth() + 1;
+    let yyyy: any = currentDate.getFullYear();
 
-    if(dd<10) {
-      dd = '0'+dd
+    if (dd < 10) {
+      dd = '0' + dd
     }
 
-    if(mm<10) {
-      mm = '0'+mm
+    if (mm < 10) {
+      mm = '0' + mm
     }
     today = (yyyy + '-' + mm + '-' + dd);
     return today;
@@ -101,18 +154,23 @@ export class KamerreserveringenService {
 }
 
 export interface IKamerReservering {
-     id: number,
-     voornaam: string,
-     achternaam: string,
-     telefoonnummer: string,
-     emailadres: string,
-     identiteitsid: string,
-     postcode: string,
-     straat: string,
-     huisnummer: string,
-     woonplaats: string,
-     land: string,
-     datumvan: string,
-     datumtot: string,
-     kamernaam: string
+  id: number,
+  voornaam: string,
+  achternaam: string,
+  telefoonnummer: string,
+  emailadres: string,
+  identiteitsid: string,
+  postcode: string,
+  straat: string,
+  huisnummer: string,
+  woonplaats: string,
+  land: string,
+  datumvan: string,
+  datumtot: string,
+  kamernaam: string,
+  inchecken: string,
+  uitchecken: string,
+  personen: number,
+  prijs: number,
+  reserveringsnummer: string,
 }

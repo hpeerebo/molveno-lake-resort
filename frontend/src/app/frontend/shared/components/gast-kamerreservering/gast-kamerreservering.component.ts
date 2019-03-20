@@ -3,10 +3,8 @@ import { GastKamerReservering } from '../../models/gast-kamerreservering';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder } from '@angular/forms';
 import { GastKamerReserveringFormGroup } from './gast-kamerreserveringformgroup';
-import { Observable } from 'rxjs';
-import { RoomService } from 'src/app/services/rooms.service';
 
-import { Kamer } from 'src/app/models/kamer'
+import { RoomService } from 'src/app/services/rooms.service';
 
 @Component({
   selector: 'app-gast-kamerreservering',
@@ -30,7 +28,7 @@ export class GastKamerReserveringComponent implements OnInit {
 
   ngOnInit() {
 
-    this.kamers = this.showRoomsByType()
+    this.kamers = this.showRoomsByType();
 
     if (this.gastkamerreservering) {
       this.kamerreserveringForm.setValue({
@@ -46,7 +44,12 @@ export class GastKamerReserveringComponent implements OnInit {
         land: this.gastkamerreservering.land,
         datumvan: this.gastkamerreservering.datumvan,
         datumtot: this.gastkamerreservering.datumtot,
-        kamernaam: this.gastkamerreservering.kamernaam
+        kamernaam: this.gastkamerreservering.kamernaam,
+        inchecken: this.gastkamerreservering.inchecken,
+        uitchecken: this.gastkamerreservering.uitchecken,
+        personen: this.gastkamerreservering.personen,
+        prijs: this.gastkamerreservering.prijs,
+        reserveringsnummer: this.gastkamerreservering.reserveringsnummer
       });
     }
   }
@@ -67,6 +70,11 @@ export class GastKamerReserveringComponent implements OnInit {
       this.kamerreserveringForm.value.datumvan,
       this.kamerreserveringForm.value.datumtot,
       this.kamerreserveringForm.value.kamernaam,
+      this.kamerreserveringForm.value.inchecken,
+      this.kamerreserveringForm.value.uitchecken,
+      this.kamerreserveringForm.value.personen,
+      this.kamerreserveringForm.value.prijs,
+      this.kamerreserveringForm.value.reserveringsnummer
     ));
     location.reload();
   }
