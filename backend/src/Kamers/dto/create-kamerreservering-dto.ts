@@ -19,7 +19,7 @@ export class CreateKamerreserveringDto {
   @ApiModelProperty()
   public readonly emailadres: string;
 
-  @IsString()
+//@IsString()
   @ApiModelProperty()
   public readonly identiteitsid: string;
 
