@@ -36,10 +36,8 @@ export class TafelreserveringService {
     }
 
     async check(tijd: Date): Promise<TafelreserveringRepoEntity[]> {
-        let x: Date = new Date(tijd);
-        let y: Date = new Date(tijd);
-        const start = new Date(x.setHours(x.getHours() - 3));
-        const stop = new Date(y.setHours(y.getHours() + 3));
+        const start = new Date(new Date(tijd).setHours(new Date(tijd).getHours() - 3));
+        const stop = new Date(new Date(tijd).setHours(new Date(tijd).getHours() + 3));
         return this.tafelreserveringRepository.find({
             where: {
                 aanvangstijd: Between(start, stop)
