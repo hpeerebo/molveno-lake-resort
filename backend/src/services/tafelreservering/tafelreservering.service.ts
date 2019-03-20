@@ -1,9 +1,8 @@
 import { Injectable, HttpStatus, HttpException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { TafelreserveringRepoEntity } from 'src/entities/tafelreservering.entity';
-import { Repository, DeleteResult, UpdateResult, MoreThanOrEqual, LessThanOrEqual, Between } from 'typeorm';
+import { Repository, DeleteResult, UpdateResult, Between } from 'typeorm';
 import { Tafelreservering } from 'src/models/tafelreservering';
-import { Tafel } from 'dist/models/tafel';
 
 @Injectable()
 export class TafelreserveringService {
@@ -48,17 +47,3 @@ export class TafelreserveringService {
         });
     }
 }
-
-// async check(tijd: Date): Promise<TafelreserveringRepoEntity[]> {
-//     return this.tafelreserveringRepository.find({where: {
-//         aanvangstijd: MoreThanOrEqual(tijd.setHours(tijd.getHours()-3)),
-//         aanvangstijd: LessThanOrEqual(tijd.setHours(tijd.getHours()+3)),
-//      }});
-// }
-
-
-
-// async check(tijd: Date): Promise<TafelreserveringRepoEntity[]> {
-//     console.log(new Date(tijd.setHours( tijd.getHours() + 2 )));
-//     return this.tafelreserveringRepository.find();
-// }
