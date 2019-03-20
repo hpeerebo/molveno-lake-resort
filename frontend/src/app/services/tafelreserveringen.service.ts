@@ -67,9 +67,12 @@ export class TafelreserveringenService {
   }
 
   checkReservation(reservationDate: Date): Observable<ICheckReservation> {
-    const body = {aanvangstijd: reservationDate}
-    return this.http.post<ICheckReservation>(`${this.api}/check`, body).pipe(take(1));
-
+    const body = { aanvangstijd: reservationDate }
+    return this.http
+      .post<ICheckReservation>(`${this.api}/check`, body)
+      .pipe(
+        take(1)
+      );
   }
 }
 
