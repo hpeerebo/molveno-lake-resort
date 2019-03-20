@@ -17,7 +17,7 @@ export class FormTafelreserveringComponent implements OnInit {
 
   public tafelreserveringForm = this.formBuilder.group({
     aanvangsdatum: [PickerHelper.dateObject(new Date()), Validators.required],
-    aanvangstijd: [PickerHelper.timeObject(new Date()), Validators.required],
+    aanvangstijd: [{ hour: 17, minute:0 }, Validators.required],
     personen: [0, [Validators.min(1), Validators.max(40)]],
     naam: ['', Validators.required],
     telefoon: ['', Validators.required]
