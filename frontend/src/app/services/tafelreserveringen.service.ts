@@ -22,7 +22,7 @@ export class TafelreserveringenService {
   }
 
   private static reserveringenToReserveringMapper(reservering: IReservering): Tafelreservering {
-    return new Tafelreservering(reservering.aanvangstijd, reservering.personen, reservering.naam, reservering.telefoon, reservering.id);
+    return new Tafelreservering(new Date(reservering.aanvangstijd), reservering.personen, reservering.naam, reservering.telefoon, reservering.id);
   }
 
   getAllReserveringen(): void {
