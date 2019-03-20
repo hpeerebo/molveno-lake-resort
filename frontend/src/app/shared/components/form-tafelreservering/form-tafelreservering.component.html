@@ -22,7 +22,10 @@
           <ngb-timepicker formControlName="aanvangstijd" [minuteStep]="15"></ngb-timepicker>
         </div>
       </div>
-      <small class="text-danger" [class.d-none]="aanvangsdatum?.valid || aanvangsdatum?.untouched">Voer een geldige datum in</small>
+      <div><small [class.d-none]="!beschikbaar || aanvangsdatum?.invalid"><i>Er is op dit tijdstip nog plaats voor {{beschikbaar}}
+            personen</i></small></div>
+      <div><small class="text-danger" [class.d-none]="aanvangsdatum?.valid || aanvangsdatum?.untouched">Voer een geldige
+          datum in</small></div>
     </div>
     <div class="form-group">
       <label>Aantal Personen</label>

@@ -1,23 +1,28 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Tafelreservering } from 'src/app/models/tafelreservering';
-import { NgbActiveModal, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, Validators } from '@angular/forms';
 import { PickerHelper } from 'src/app/models/picker-helper';
+import { debounceTime, tap, take } from 'rxjs/operators';
+import { TafelreserveringenService } from 'src/app/services/tafelreserveringen.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-form-tafelreservering',
   templateUrl: './form-tafelreservering.component.html',
   styleUrls: ['./form-tafelreservering.component.scss']
 })
-export class FormTafelreserveringComponent implements OnInit {
-
-  minDate = PickerHelper.dateObject(new Date());
+export class FormTafelreserveringComponent implements OnInit, OnDestroy {
 
   @Input() tafelreservering: Tafelreservering | undefined = undefined;
 
+  public minDate = PickerHelper.dateObject(new Date());
+  public beschikbaar: number | undefined = undefined;
+  private subscriptions = new Subscription();
+
   public tafelreserveringForm = this.formBuilder.group({
     aanvangsdatum: [PickerHelper.dateObject(new Date()), Validators.required],
-    aanvangstijd: [{ hour: 17, minute:0 }, Validators.required],
+    aanvangstijd: [{ hour: 17, minute: 0 }, Validators.required],
     personen: [0, [Validators.min(1), Validators.max(40)]],
     naam: ['', Validators.required],
     telefoon: ['', Validators.required]
@@ -26,7 +31,7 @@ export class FormTafelreserveringComponent implements OnInit {
   constructor(
     public activeModal: NgbActiveModal,
     private formBuilder: FormBuilder,
-    private calendar: NgbCalendar,
+    private tafelreserveringenService: TafelreserveringenService
   ) { }
 
   ngOnInit() {
@@ -39,6 +44,27 @@ export class FormTafelreserveringComponent implements OnInit {
         telefoon: this.tafelreservering.telefoon
       });
     }
+
+    this.subscriptions.add(this.tafelreserveringForm.valueChanges
+      .pipe(
+        debounceTime(1000),
+        tap(value => this.handleReservationDateChanges(PickerHelper.toDate(value.aanvangsdatum, value.aanvangstijd)))
+      )
+      .subscribe()
+    );
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
+  }
+
+  handleReservationDateChanges(reservationDate: Date): void {
+    this.tafelreserveringenService.checkReservation(reservationDate)
+      .pipe(
+        take(1),
+        tap(data => this.beschikbaar = data.beschikbaar)
+      )
+      .subscribe()
   }
 
   submitForm() {
