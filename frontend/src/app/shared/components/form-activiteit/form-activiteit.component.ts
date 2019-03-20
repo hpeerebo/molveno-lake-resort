@@ -15,9 +15,6 @@ export class FormActiviteitComponent implements OnInit {
     id: [0],
     naam: ["", Validators.required],
     beschrijving: ["", Validators.required],
-    datum: ["", Validators.required],
-    capaciteit: [0, [Validators.required, Validators.min(0)]],
-    prijs: [0, [Validators.required, Validators.min(0)]],
     thumb: [""]
   });
 
@@ -30,12 +27,9 @@ export class FormActiviteitComponent implements OnInit {
     console.log("ngOninit form activiteit component");
     if (this.activiteit) {
       this.activiteitForm.setValue({
-        id: this.activiteit.id,
+        actid: this.activiteit.actid,
         naam: this.activiteit.naam,
         beschrijving: this.activiteit.beschrijving,
-        datum: this.activiteit.datum,
-        capaciteit: this.activiteit.capaciteit,
-        prijs: this.activiteit.prijs,
         thumb: this.activiteit.thumb
       });
     }
@@ -49,15 +43,6 @@ export class FormActiviteitComponent implements OnInit {
   }
   get beschrijving() {
     return this.activiteitForm.get("beschrijving");
-  }
-  get datum() {
-    return this.activiteitForm.get("datum");
-  }
-  get capaciteit() {
-    return this.activiteitForm.get("capaciteit");
-  }
-  get prijs() {
-    return this.activiteitForm.get("prijs");
   }
   get thumb() {
     return this.activiteitForm.get("thumb");

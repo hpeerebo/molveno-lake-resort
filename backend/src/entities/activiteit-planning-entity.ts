@@ -2,8 +2,8 @@ import {
   PrimaryGeneratedColumn,
   Column,
   Entity,
-  OneToOne,
   JoinColumn,
+  ManyToOne,
 } from 'typeorm';
 import { ActiviteitEntity } from './activiteit-entity';
 
@@ -14,7 +14,7 @@ export class ActiviteitPlanningEntity {
   @Column('integer') public readonly actprijs: number;
   @Column('integer') public readonly actcapaciteit: number;
 
-  @OneToOne(type => ActiviteitEntity, { cascade: true })
+  @ManyToOne(type => ActiviteitEntity, { cascade: true })
   @JoinColumn()
   activiteit: ActiviteitEntity;
 

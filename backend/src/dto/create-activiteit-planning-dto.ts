@@ -6,9 +6,9 @@ export class CreateActiviteitPlanningDto {
   @ApiModelProperty()
   public readonly planid: number;
 
-  @IsNumber()
-  @ApiModelProperty()
-  public readonly actid: number;
+  // @IsNumber()
+  // @ApiModelProperty()
+  // public readonly actid: number;
 
   @IsString()
   @ApiModelProperty()

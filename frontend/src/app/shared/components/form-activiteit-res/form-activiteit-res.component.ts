@@ -12,9 +12,8 @@ export class FormActiviteitResComponent implements OnInit {
   @Input() reserveringen: ActiviteitRes | undefined = undefined;
 
   public activiteitResForm = this.formBuilder.group({
-    id: [0, Validators.required],
-    naamActiviteit: ["", Validators.required],
-    datum: ["", Validators.required],
+    resid: [0, Validators.required],
+    planid: [0, Validators.required],
     emailGast: ["", Validators.required],
     aantalPersonen: [1, [Validators.required, Validators.min(1)]]
   });
@@ -27,9 +26,8 @@ export class FormActiviteitResComponent implements OnInit {
   ngOnInit() {
     if (this.reserveringen) {
       this.activiteitResForm.setValue({
-        id: this.reserveringen.id,
-        naamActiviteit: this.reserveringen.naamActiviteit,
-        datum: this.reserveringen.datum,
+        resid: this.reserveringen.resid,
+        planid: this.reserveringen.planid,
         emailGast: this.reserveringen.emailGast,
         aantalPersonen: this.reserveringen.aantalPersonen
       });
