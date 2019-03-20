@@ -1,6 +1,6 @@
 export class Tafelreservering {
   constructor(
-    public aanvangstijd: string,
+    public aanvangstijd: Date,
     public personen: number,
     public naam: string,
     public telefoon: string,
