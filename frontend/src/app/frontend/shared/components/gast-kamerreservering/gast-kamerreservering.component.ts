@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { RoomService } from 'src/app/services/rooms.service';
 
 import { Kamer } from 'src/app/models/kamer'
+import { count } from 'rxjs/operators';
 
 @Component({
   selector: 'app-gast-kamerreservering',
@@ -15,7 +16,11 @@ import { Kamer } from 'src/app/models/kamer'
 })
 export class GastKamerReserveringComponent implements OnInit {
   public kamertype: string = '';
-  public kamers: any;
+  // public capacity: number | undefined = undefined;
+  //public kamers: any;
+  public roomsOfTwo: any;
+  public roomsOfThree: any;
+  public roomsOfFour: any;
   refreshCache: boolean = true;
 
   gastkamerreservering: GastKamerReservering | undefined = undefined;
@@ -24,13 +29,20 @@ export class GastKamerReserveringComponent implements OnInit {
 
   constructor(public activeModal: NgbActiveModal, private formBuilder: FormBuilder,  private modalService: NgbModal, private roomservice: RoomService,) {}
 
-  showRoomsByType(){
-    return this.roomservice.searchRoomByType(this.refreshCache, this.kamertype)
+  showRoomsByCapacity(capacity: number){
+    return this.roomservice.searchRoomByCapacity(this.refreshCache, capacity)
+  }
+
+  showRoomsByDateAndCapacity(datumvan: string, datumtot: string, capacity: number){
+    return this.roomservice.searchRoomByDateAndCapacity(this.refreshCache, datumvan, datumtot, capacity)
   }
 
   ngOnInit() {
 
-    this.kamers = this.showRoomsByType()
+    this.roomsOfTwo = this.showRoomsByCapacity(2);
+    this.roomsOfThree = this.showRoomsByCapacity(3);
+    this.roomsOfFour = this.showRoomsByCapacity(4);
+
 
     if (this.gastkamerreservering) {
       this.kamerreserveringForm.setValue({

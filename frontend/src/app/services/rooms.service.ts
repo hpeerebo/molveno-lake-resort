@@ -29,9 +29,9 @@ export class RoomService {
     return this.kamersCacheSubject;
   }
 
-  searchRoomByType(refreshCache: boolean = false, kamertype: string): Observable<Kamer[] | undefined> {
+  searchRoomByCapacity(refreshCache: boolean = false, capacity: number): Observable<Kamer[] | undefined> {
     if (this.kamersCacheSubject.getValue() === undefined || refreshCache) {
-      this.http.get<KamerDetails>(`${RoomService.api}/search/${kamertype}`)
+      this.http.get<KamerDetails>(`${RoomService.api}/search/${capacity}`)
         .pipe(
           map((data: any) => data.map((kamer: Kamer) => new Kamer(kamer.kamerNaam, kamer.kamerType, kamer.kamerLigging, kamer.aantalPersonen, kamer.prijs))),
           take(1),
@@ -43,6 +43,19 @@ export class RoomService {
     return this.kamersCacheSubject;
   }
 
+  searchRoomByDateAndCapacity(refreshCache: boolean = false, datumvan: string, datumtot: string, capacity: number): Observable<Kamer[] | undefined> {
+    if (this.kamersCacheSubject.getValue() === undefined || refreshCache) {
+      this.http.get<KamerDetails>(`${RoomService.api}/search/${capacity}/${datumvan}/${datumtot}`)
+        .pipe(
+          map((data: any) => data.map((kamer: Kamer) => new Kamer(kamer.kamerNaam, kamer.kamerType, kamer.kamerLigging, kamer.aantalPersonen, kamer.prijs))),
+          take(1),
+          tap(kamers => {
+            this.kamersCacheSubject.next(kamers);
+          })
+        ).subscribe();
+    }
+    return this.kamersCacheSubject;
+  }
 
   searchRoom(refreshCache: boolean = false, datumvan: string, datumtot: string, kamertype: string): Observable<Kamer[] | undefined> {
     if (this.kamersCacheSubject.getValue() === undefined || refreshCache) {
@@ -57,6 +70,7 @@ export class RoomService {
     }
     return this.kamersCacheSubject;
   }
+
   saveRoom(room: Kamer){
     this.http.post(`${RoomService.api}`, room)
     .pipe(
