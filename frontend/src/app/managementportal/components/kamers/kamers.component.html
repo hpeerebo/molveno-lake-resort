@@ -32,7 +32,9 @@
     <ng-template #welkamers>
     <tr *ngFor="let kamer of (kamers | async | kamersfilter: show | sortgrid:field)">
         <td *ngIf="showResButton">
-            <input type="checkbox" (click)="onSelectRoom(kamer)" data-toggle="toggle" data-size="small">
+            <!--input type="checkbox" [checked]="onSelectRoom(kamer)" data-toggle="toggle" data-size="small"-->
+            <!--input type="checkbox" [(ngModel)]="theCheckbox"  data-md-icheck (change)="toggleVisibility($event)"/-->
+            <input [formControl]="myCheckbox" type="checkbox" (change)="onSelectRoom(kamer)"/>
           <!--div class="checkbox">
             <label><input type="checkbox" value=""></label>
           </div-->
@@ -58,6 +60,40 @@
       </ng-template>
     </tbody>
   </table>
+
+  </div>
+  <div *ngIf="showResButton && reserverRooms.length > 0" class="room-bucket">
+      <div>Voor de periode:  </div>
+      <h6>{{datumvan}} tot {{datumtot}} </h6>
+      <div>Aantal nachten: <h6>{{numberOfDays }} nacht(en)</h6>  </div>
+      <div>hebt u de volgende kamers geselecteerd:</div>
+
+      <hr class="bg-light">
+      <div class="row">
+          <div class="col-8 text-info">kamer</div>
+          <div class="col-2 text-info">Prijs/nacht</div>
+          <div class="col-2"></div>
+      </div>
+      <div *ngFor="let room of reserverRooms" class="row" [routerLink]="'/film-details/' + room.kamerNaam">
+          <div class="col-8">{{room.kamerNaam}}</div>
+          <div class="col-2">{{room.prijs}}</div>
+          <div class="col-2" hidden>{{numberOfDays}} * {{room.prijs}}</div>
+          <!--div class="col-2">
+              <button class="btn btn-outline-info">X</button>
+          </div-->
+      </div>
+      <hr class="bg-light">
+      <div class="row">
+          <div class="col-8 text-danger">Totale prijs ({{numberOfDays}} nacht(en))</div>
+          <div class="col-2 text-danger">{{totalPrice | currency: "EUR" }} </div>
+          <!--div class="col-2"></div-->
+      </div>
+      <div  class="row ">
+          <div class=" col-6 d-flex justify-content-start">
+              <button type="button" class="btn btn-outline-secondary" (click)= "showAvailableRoomsModal()">Reserveer</button>
+          </div>
+      </div>
+
 </div>
 <!-- Modal to confirm deleting room-->
 <ng-template #deleteModal let-modal>

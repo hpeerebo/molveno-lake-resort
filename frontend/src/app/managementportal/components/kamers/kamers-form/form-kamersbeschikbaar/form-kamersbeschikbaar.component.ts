@@ -56,6 +56,7 @@ export class FormKamersbeschikbaarComponent implements OnInit {
   }
   submitForm() {
     this.activeModal.close(this.kamerSearchForm.value);
+
   }
   dateValidationFormGroup(): ValidatorFn{
     return (control: AbstractControl) => {

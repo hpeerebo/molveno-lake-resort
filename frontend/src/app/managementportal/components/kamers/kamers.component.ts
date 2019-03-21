@@ -9,6 +9,7 @@ import { KamerreserveringenService } from 'src/app/services/kamerreserveringen.s
 import {KamerReservering} from "../../../models/kamerreservering";
 import { FormKamersbeschikbaarComponent } from './kamers-form/form-kamersbeschikbaar/form-kamersbeschikbaar.component';
 import {ActivatedRoute} from "@angular/router";
+import { FormControl } from '@angular/forms';
 
 
 @Component({
@@ -38,6 +39,12 @@ export class ManagementPortalKamersComponent implements OnInit, AfterViewInit {
   showResButton: boolean = false;
   datumvan: string = '';
   datumtot: string = '';
+  numberOfDays: number = 0;
+  totalPrice: number = 0;
+  myCheckbox: FormControl = new FormControl();
+  reserverRooms: Kamer[] = [];
+  //marked = false;
+  //theCheckbox = false;
 
   public clickColumnHandler(event: string): string {
     this.field = event;
@@ -56,17 +63,28 @@ export class ManagementPortalKamersComponent implements OnInit, AfterViewInit {
       if (this.param == "reseveer") {
         this.showAvailableRoomsModal();
       }
-
     });
-
   }
 
   onSelect(kamer: Kamer): void {
     this.selectedKamer = kamer;
   }
   onSelectRoom(kamer: Kamer): void {
-    console.log(kamer);
+    if (this.myCheckbox.value){
+      this.reserverRooms = [...this.reserverRooms, kamer];
+      this.totalPrice = this.totalPrice + (this.numberOfDays * kamer.prijs);
+    }
+    if (!this.myCheckbox.value){
+      this.reserverRooms = this.reserverRooms.filter(element => kamer.kamerNaam !== element.kamerNaam);
+      this.totalPrice = this.totalPrice - (this.numberOfDays * kamer.prijs);
+    }
+
   }
+  /* toggleVisibility(event:any){
+    this.marked= event.target.checked;
+    console.log(this.marked);
+    console.log(this.theCheckbox);
+  } */
 
   deleteRoom(kamer: Kamer) {
     if (this.kamers) {
@@ -181,6 +199,7 @@ export class ManagementPortalKamersComponent implements OnInit, AfterViewInit {
         //this.closeResult = `Closed with: ${result}`;
       this.datumvan = result.datumvan;
       this.datumtot = result.datumtot;
+      this.calculateNumberofDays(this.datumvan, this.datumtot)
       this.roomservice.searchRoom(true, result.datumvan, result.datumtot, result.kamertype);
       this.showResButton = true
       },
@@ -188,5 +207,31 @@ export class ManagementPortalKamersComponent implements OnInit, AfterViewInit {
         this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
       }
     );
+  }
+  calculateNumberofDays(datumvan: string, datumtot: string){
+
+    const date1 = this.convertDate(new Date(datumvan));
+    const date2 = this.convertDate(new Date(datumtot));
+
+    this.numberOfDays = parseInt(date2)- parseInt(date1)
+    if(this.numberOfDays === 0){
+      this.numberOfDays = 1;
+    }
+    //console.log(`${date1.getFullYear()} + ${date1.getMonth()} + ${date1.getDay()}`);
+
+  }
+  convertDate(date: Date): string{
+    let dd:any = date.getDate();
+    let mm:any = date.getMonth()+1;
+    let yyyy:any = date.getFullYear();
+
+    if(dd<10) {
+      dd = '0'+dd
+    }
+
+  if(mm<10) {
+      mm = '0'+mm
+  }
+  return yyyy+mm+dd;
   }
 }
