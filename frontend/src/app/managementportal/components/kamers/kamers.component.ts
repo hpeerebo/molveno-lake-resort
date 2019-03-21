@@ -232,6 +232,8 @@ export class ManagementPortalKamersComponent implements OnInit, AfterViewInit {
   }
 
   showAvailableRoomsModal(){
+    //reset the bucket and selected rooms
+    this.resetInitialValues();
     const modalKamerSearch = this.modalService.open(FormKamersbeschikbaarComponent);
     modalKamerSearch.result.then(
       result => {
@@ -272,5 +274,11 @@ export class ManagementPortalKamersComponent implements OnInit, AfterViewInit {
       mm = '0'+mm
   }
   return yyyy+mm+dd;
+  }
+  resetInitialValues(){
+    this.reserverRooms = [];
+    this.numberOfDays = 0;
+    this.myCheckbox.setValue(false);
+    this.totalPrice = 0;
   }
 }

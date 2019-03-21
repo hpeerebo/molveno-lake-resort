@@ -8,15 +8,15 @@
       <button type="button" class="btn btn-outline-primary btn-sm" (click)="openNewFormModal()">Kamer toevoegen</button>
   </div>
   <br />
-  <div class="infotext" *ngIf="showResButton">Selecteer de kamer(s) die u wilt reserveren</div>
+  <!--div class="infotext" *ngIf="showResButton">Selecteer de kamer(s) die u wilt reserveren</div-->
   <table class="table table-striped table-sm">
     <thead>
     <tr>
       <th *ngIf="showResButton">Select</th>
       <th (click)="clickColumnHandler('kamerNaam')">Kamernaam<i class="fa fa-fw fa-sort"></i></th>
-      <th (click)="clickColumnHandler('kamerType')">Kamertype<i class="fa fa-fw fa-sort"></i></th>
-      <th (click)="clickColumnHandler('kamerLigging')">Kamerligging<i class="fa fa-fw fa-sort"></i></th>
-      <th (click)="clickColumnHandler('aantalPersonen')">Aantalpersonen<i class="fa fa-fw fa-sort"></i></th>
+      <th (click)="clickColumnHandler('kamerType')">Kamer type<i class="fa fa-fw fa-sort"></i></th>
+      <th (click)="clickColumnHandler('kamerLigging')">Uitizcht<i class="fa fa-fw fa-sort"></i></th>
+      <th (click)="clickColumnHandler('aantalPersonen')">Aantal personen<i class="fa fa-fw fa-sort"></i></th>
       <th (click)="clickColumnHandler('prijs')">Prijs<i class="fa fa-fw fa-sort"></i></th>
       <th></th>
       <!--th *ngIf="showResButton"></th-->
@@ -55,10 +55,12 @@
       </ng-template>
     </tbody>
   </table>
-
+  <div class="infotext" *ngIf="showResButton">Selecteer de kamer(s) die u wilt reserveren</div>
   </div>
   <div *ngIf="showResButton && reserverRooms.length > 0" class="room-bucket">
-
+      <!--div _ngcontent-c3="">
+          <button _ngcontent-c3="" aria-label="Close" class="close" type="button" (click)="resetInitialValues()"><span _ngcontent-c3="" aria-hidden="true">×</span></button>
+      </div-->
       <div>Voor de periode:  </div>
       <h6>{{datumvan}} tot {{datumtot}} </h6>
       <div>Aantal nachten: <h6>{{numberOfDays }} nacht(en)</h6>  </div>
@@ -71,13 +73,15 @@
           <div class="col-2"></div>
       </div>
       <div *ngFor="let room of reserverRooms" class="row" [routerLink]="'/film-details/' + room.kamerNaam">
-          <div class="col-8">{{room.kamerNaam}}</div>
+          <div class="col-8">{{room.kamerNaam}} ({{room.kamerType}})</div>
           <div class="col-2">{{room.prijs}}</div>
           <div class="col-2" hidden>{{numberOfDays}} * {{room.prijs}}</div>
           <div class="col-2">
-              <button class="btn-sm btn-outline-info" (click)="deleteRoomFromBucket(room)">X</button>
-          </div>
+              <button class="btn-xs btn-outline-info" placement="top" ngbTooltip="Verwijderen" (click)="deleteRoomFromBucket(room)">X</button>
+              <!--button  _ngcontent-c3="" aria-label="Close" class="close" placement="top" ngbTooltip="Verwijderen" (click)="deleteRoomFromBucket(room)">x</button-->
+            </div>
       </div>
+
       <hr class="bg-light">
       <div class="row">
           <div class="col-8 text-danger">Totale prijs ({{numberOfDays}} nacht(en))</div>
@@ -87,7 +91,7 @@
       <hr class="bg-light">
       <div  class="row">
           <div class="d-flex justify-content-start">
-              <button type="button" class="btn btn-outline-secondary" (click)= "openFormKamerToReserveMultipleRooms(reserverRooms)">Reserveer</button>
+              <button type="button" class="btn btn-primary" (click)= "openFormKamerToReserveMultipleRooms(reserverRooms)">Reserveer</button>
           </div>
       </div>
 
