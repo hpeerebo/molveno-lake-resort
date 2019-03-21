@@ -28,6 +28,7 @@ export class ActiviteitenResService {
       reservering.resid,
       reservering.planid,
       reservering.emailGast,
+      reservering.phoneGast,
       reservering.aantalPersonen
     );
   }
@@ -56,5 +57,6 @@ interface IActiviteitres {
   resid: number;
   planid: number;
   emailGast: string;
+  phoneGast: string;
   aantalPersonen: number;
 }

@@ -20,13 +20,11 @@ export class ActiviteitPlanningEntity {
 
   constructor(
     planid: number,
-    // actid: number,
     actdate: string,
     actprijs: number,
     actcapaciteit: number,
   ) {
     this.planid = planid;
-    // this.actid = actid;
     this.actdate = actdate;
     this.actprijs = actprijs;
     this.actcapaciteit = actcapaciteit;

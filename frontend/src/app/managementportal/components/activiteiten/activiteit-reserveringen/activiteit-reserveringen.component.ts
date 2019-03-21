@@ -21,7 +21,7 @@ export class ActiviteitReserveringenComponent {
   constructor(
     private activiteitenResService: ActiviteitenResService,
     private activiteitenPlanningService: ActiviteitenPlanningService,
-    // private activiteitenService: ActiviteitenService,
+    private activiteitenService: ActiviteitenService,
     private modalService: NgbModal
   ) {}
 

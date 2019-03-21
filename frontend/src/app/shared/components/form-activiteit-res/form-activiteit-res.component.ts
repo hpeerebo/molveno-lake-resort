@@ -27,8 +27,9 @@ export class FormActiviteitResComponent implements OnInit {
     if (this.reserveringen) {
       this.activiteitResForm.setValue({
         resid: this.reserveringen.resid,
-        planid: this.reserveringen.planid,
+        // planid: this.reserveringen.planid,
         emailGast: this.reserveringen.emailGast,
+        phoneGast: this.reserveringen.phoneGast,
         aantalPersonen: this.reserveringen.aantalPersonen
       });
     }
@@ -45,6 +46,9 @@ export class FormActiviteitResComponent implements OnInit {
   }
   get emailGast() {
     return this.activiteitResForm.get("emailGast");
+  }
+  get phoneGast() {
+    return this.activiteitResForm.get("phoneGast");
   }
   get aantalPersonen() {
     return this.activiteitResForm.get("aantalPersonen");
