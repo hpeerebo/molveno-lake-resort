@@ -58,7 +58,6 @@ export class ManagementPortalKamersComponent implements OnInit, AfterViewInit {
       }
 
     });
-
   }
 
   onSelect(kamer: Kamer): void {
