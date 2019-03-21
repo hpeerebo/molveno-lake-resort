@@ -6,13 +6,17 @@ export class CreateActiviteitResDto {
   @ApiModelProperty()
   public readonly resid: number;
 
-  @IsNumber()
-  @ApiModelProperty()
-  public readonly planid: number;
+  // @IsNumber()
+  // @ApiModelProperty()
+  // public readonly planid: number;
 
   @IsString()
   @ApiModelProperty()
   public readonly emailGast: string;
+
+  @IsString()
+  @ApiModelProperty()
+  public readonly phoneGast: string;
 
   @IsNumber()
   @ApiModelProperty()

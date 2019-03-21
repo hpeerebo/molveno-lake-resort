@@ -33,8 +33,9 @@ export class ActiviteitenResController {
   ): void {
     const reservering: ActiviteitResEntity = new ActiviteitResEntity(
       createReservering.resid,
-      createReservering.planid,
+      // createReservering.planid,
       createReservering.emailGast,
+      createReservering.phoneGast,
       createReservering.aantalPersonen,
     );
 
