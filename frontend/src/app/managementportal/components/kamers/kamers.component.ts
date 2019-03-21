@@ -78,6 +78,12 @@ export class ManagementPortalKamersComponent implements OnInit, AfterViewInit {
       this.reserverRooms = this.reserverRooms.filter(element => kamer.kamerNaam !== element.kamerNaam);
       this.totalPrice = this.totalPrice - (this.numberOfDays * kamer.prijs);
     }
+  }
+  deleteRoomFromBucket(kamer: Kamer){
+    this.reserverRooms = this.reserverRooms.filter(element => kamer.kamerNaam !== element.kamerNaam);
+    this.myCheckbox.setValue(false);
+    this.onSelectRoom(kamer);
+
 
   }
   /* toggleVisibility(event:any){
@@ -152,7 +158,40 @@ export class ManagementPortalKamersComponent implements OnInit, AfterViewInit {
       return `with: ${reason}`;
     }
   }
+  openFormKamerToReserveMultipleRooms(kamers: Kamer[]){
+    const modalKamerReservering = this.modalService.open(FormKamerreserveringComponent);
+    if (this.datumvan) {
+      modalKamerReservering.componentInstance.datumvan = this.datumvan;
+    }
+    if (this.datumtot) {
+      modalKamerReservering.componentInstance.datumtot = this.datumtot;
+    }
+    modalKamerReservering.result.then(resultPromise => {
+      kamers.forEach(kamer => {
+      this.kamerreserveringservice.saveKamerReservering(new KamerReservering(
+        resultPromise.id,
+        resultPromise.voornaam,
+        resultPromise.achternaam,
+        resultPromise.telefoonnummer,
+        resultPromise.emailadres,
+        resultPromise.identiteitsid,
+        resultPromise.postcode,
+        resultPromise.straat,
+        resultPromise.huisnummer,
+        resultPromise.woonplaats,
+        resultPromise.land,
+        resultPromise.datumvan,
+        resultPromise.datumtot,
+        kamer.kamerNaam,
+        resultPromise.inchecken,
+        resultPromise.uitchecken,
+        resultPromise.personen,
+        resultPromise.prijs,
+        resultPromise.reserveringsnummer
+      ))});
+    });
 
+  }
   openFormKamerReserveringModal(kamernaam: string){
     const modalKamerReservering = this.modalService.open(FormKamerreserveringComponent);
 

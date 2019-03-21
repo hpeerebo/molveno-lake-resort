@@ -63,6 +63,7 @@
 
   </div>
   <div *ngIf="showResButton && reserverRooms.length > 0" class="room-bucket">
+
       <div>Voor de periode:  </div>
       <h6>{{datumvan}} tot {{datumtot}} </h6>
       <div>Aantal nachten: <h6>{{numberOfDays }} nacht(en)</h6>  </div>
@@ -78,9 +79,9 @@
           <div class="col-8">{{room.kamerNaam}}</div>
           <div class="col-2">{{room.prijs}}</div>
           <div class="col-2" hidden>{{numberOfDays}} * {{room.prijs}}</div>
-          <!--div class="col-2">
-              <button class="btn btn-outline-info">X</button>
-          </div-->
+          <div class="col-2">
+              <button class="btn-sm btn-outline-info" (click)="deleteRoomFromBucket(room)">X</button>
+          </div>
       </div>
       <hr class="bg-light">
       <div class="row">
@@ -88,9 +89,10 @@
           <div class="col-2 text-danger">{{totalPrice | currency: "EUR" }} </div>
           <!--div class="col-2"></div-->
       </div>
-      <div  class="row ">
-          <div class=" col-6 d-flex justify-content-start">
-              <button type="button" class="btn btn-outline-secondary" (click)= "showAvailableRoomsModal()">Reserveer</button>
+      <hr class="bg-light">
+      <div  class="row">
+          <div class="d-flex justify-content-start">
+              <button type="button" class="btn btn-outline-secondary" (click)= "openFormKamerToReserveMultipleRooms(reserverRooms)">Reserveer</button>
           </div>
       </div>
 
