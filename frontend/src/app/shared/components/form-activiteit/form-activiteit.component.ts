@@ -12,7 +12,7 @@ export class FormActiviteitComponent implements OnInit {
   @Input() activiteit: Activiteit | undefined = undefined;
 
   public activiteitForm = this.formBuilder.group({
-    id: [0],
+    actid: [0],
     naam: ["", Validators.required],
     beschrijving: ["", Validators.required],
     thumb: [""]

@@ -1,4 +1,11 @@
-import { Column, PrimaryGeneratedColumn, Entity, ManyToMany, JoinColumn } from 'typeorm';
+import {
+  Column,
+  PrimaryGeneratedColumn,
+  Entity,
+  ManyToMany,
+  JoinColumn,
+  ManyToOne,
+} from 'typeorm';
 import { ActiviteitPlanningEntity } from './activiteit-planning-entity';
 
 @Entity('activiteitenreserveringen')
@@ -9,9 +16,9 @@ export class ActiviteitResEntity {
   @Column('varchar') public readonly phoneGast: string;
   @Column('integer') public readonly aantalPersonen: number;
 
-  @ManyToMany(type => ActiviteitPlanningEntity, { cascade: true })
+  @ManyToOne(type => ActiviteitPlanningEntity, { cascade: true })
   @JoinColumn()
-  activiteit: ActiviteitPlanningEntity;
+  planning: ActiviteitPlanningEntity;
 
   constructor(
     resid: number,

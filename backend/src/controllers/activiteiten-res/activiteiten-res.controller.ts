@@ -18,7 +18,7 @@ import { ApiUseTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 export class ActiviteitenResController {
   constructor(private readonly activiteitenResService: ActiviteitResService) {}
 
-  @Post('')
+  @Post(':planningid')
   @ApiOperation({ title: 'Maak een nieuwe reservering aan' })
   @ApiResponse({
     status: 201,
@@ -30,7 +30,8 @@ export class ActiviteitenResController {
   })
   public saveReservering(
     @Body() createReservering: CreateActiviteitResDto,
-  ): void {
+    @Param('planningid') planningid: number,
+  ) {
     const reservering: ActiviteitResEntity = new ActiviteitResEntity(
       createReservering.resid,
       // createReservering.planid,
@@ -38,9 +39,9 @@ export class ActiviteitenResController {
       createReservering.phoneGast,
       createReservering.aantalPersonen,
     );
-
-    return this.activiteitenResService.saveReservering(reservering);
+    return this.activiteitenResService.saveReservering(reservering, planningid);
   }
+
   @Get('')
   @ApiOperation({ title: 'Maak een lijst van reserveringen' })
   getReservering(): Promise<ActiviteitRes[]> {
@@ -55,6 +56,7 @@ export class ActiviteitenResController {
   })
   public updateReservering(
     @Body() createResActiviteit: CreateActiviteitResDto,
+    @Param('reserveringid') reserveringid: number,
   ): void {
     const reservering: ActiviteitResEntity = new ActiviteitResEntity(
       createResActiviteit.resid,
@@ -63,7 +65,7 @@ export class ActiviteitenResController {
       createResActiviteit.phoneGast,
       createResActiviteit.aantalPersonen,
     );
-    this.activiteitenResService.updateReservering(reservering);
+    this.activiteitenResService.updateReservering(reservering, reserveringid);
   }
 
   @Delete(':reserveringId')
