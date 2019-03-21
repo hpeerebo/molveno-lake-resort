@@ -3,14 +3,9 @@
   <br />
 
   <div class="row">
-      <div class=" col-6 d-flex justify-content-start">
-          <button type="button" class="btn btn-primary" (click)= "showAvailableRoomsModal()">Beschikbare kamers</button>
-          <!--a href="/managementportal/kamers-form" class="btn btn-primary" role="button" aria-pressed="true">Add Room</a-->
-        </div>
-    <div class=" col-6 d-flex justify-content-end">
-        <button type="button" class="btn btn-primary" (click)="openNewFormModal()">Kamer toevoegen</button>
-        <!--a href="/managementportal/kamers-form" class="btn btn-primary" role="button" aria-pressed="true">Add Room</a-->
-      </div>
+    <div class=" col-12 d-flex text-sm-right">
+      <button type="button" class="btn btn-outline-primary btn-sm" (click)= "showAvailableRoomsModal()">Beschikbare kamers</button>
+      <button type="button" class="btn btn-outline-primary btn-sm" (click)="openNewFormModal()">Kamer toevoegen</button>
   </div>
   <br />
   <div class="infotext" *ngIf="showResButton">Selecteer de kamer(s) die u wilt reserveren</div>
