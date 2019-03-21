@@ -1,0 +1,79 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">Kamerreseveringdetails- <i>{{kamerReservering?.kamernaam}}</i></h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('cancel')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="kamerreserveringdetailsForm">
+    <div class="container, form-row">
+      <div class="form-group col-md-3">
+        <label>Aankomst datum</label>
+        <input readonly type="date" class="form-control" formControlName="datumvan" value="{{kamerReservering?.datumvan}}"/>
+      </div>
+      <div class="form-group col-md-3">
+        <label>Vertrek datum</label>
+        <input readonly type="date" class="form-control" formControlName="datumtot" value="{{kamerReservering?.datumtot}}"/>
+      </div>
+    </div>
+    <div class="container, form-row">
+      <div class="form-group col-md-6">
+        <label>Voornaam</label>
+        <input type="text" class="form-control" formControlName="voornaam" value="{{kamerReservering?.voornaam}}" [class.is-invalid]="kamerreserveringdetailsForm.controls.voornaam.invalid && kamerreserveringdetailsForm.controls.voornaam.touched" ngbAutofocus />
+        <small class="text-danger" [class.d-none]="kamerreserveringdetailsForm.controls.voornaam.valid || kamerreserveringdetailsForm.controls.voornaam.untouched">Vereist</small>
+      </div>
+      <div class="form-group col-md-6">
+        <label>Achternaam</label>
+        <input type="text" class="form-control" formControlName="achternaam" value="{{kamerReservering?.achternaam}}"/>
+        <small class="text-danger" [class.d-none]="kamerreserveringdetailsForm.controls.achternaam.valid || kamerreserveringdetailsForm.controls.achternaam.untouched">Vereist</small>
+      </div>
+    </div>
+    <div class="container, form-row">
+      <div class="form-group col-md-6">
+        <label>Telefoonnummer</label>
+        <input type="text" class="form-control" formControlName="telefoonnummer" value="{{kamerReservering?.telefoonnummer}}"/>
+        <small class="text-danger" [class.d-none]="kamerreserveringdetailsForm.controls.telefoonnummer.valid || kamerreserveringdetailsForm.controls.telefoonnummer.untouched">Vereist</small>
+      </div>
+      <div class="form-group col-md-6">
+        <label>E-mailadres</label>
+        <input type="text" class="form-control" formControlName="emailadres" value="{{kamerReservering?.emailadres}}"/>
+        <small class="text-danger" [class.d-none]="kamerreserveringdetailsForm.controls.emailadres.valid || kamerreserveringdetailsForm.controls.emailadres.untouched">Vereist</small>
+      </div>
+    </div>
+    <div class="container, form-row">
+      <div class="form-group col-md-9">
+        <label>Straat</label>
+        <input type="text" class="form-control" formControlName="straat" value="{{kamerReservering?.straat}}"/>
+        <small class="text-danger" [class.d-none]="kamerreserveringdetailsForm.controls.straat.valid || kamerreserveringdetailsForm.controls.straat.untouched">Vereist</small>
+      </div>
+      <div class="form-group col-md-3">
+        <label>Nummer</label>
+        <input type="text" class="form-control" formControlName="huisnummer" value="{{kamerReservering?.huisnummer}}"/>
+        <small class="text-danger" [class.d-none]="kamerreserveringdetailsForm.controls.huisnummer.valid || kamerreserveringdetailsForm.controls.huisnummer.untouched">Vereist</small>
+      </div>
+
+    </div>
+    <div class="container, form-row">
+      <div class="form-group col-md-4">
+        <label>Postcode</label>
+        <input type="text" class="form-control" formControlName="postcode" value="{{kamerReservering?.postcode}}"/>
+        <small class="text-danger" [class.d-none]="kamerreserveringdetailsForm.controls.postcode.valid || kamerreserveringdetailsForm.controls.postcode.untouched">Vereist</small>
+      </div>
+      <div class="form-group col-md-8">
+        <label>Woonplaats</label>
+        <input type="text" class="form-control" formControlName="woonplaats" value="{{kamerReservering?.woonplaats}}"/>
+        <small class="text-danger" [class.d-none]="kamerreserveringdetailsForm.controls.woonplaats.valid || kamerreserveringdetailsForm.controls.woonplaats.untouched">Vereist</small>
+      </div>
+    </div>
+    <div class="container, form-row">
+      <div class="form-group col-md-12">
+        <label>Land</label>
+        <input type="text" class="form-control"  formControlName="land" value="{{kamerReservering?.land}}"/>
+        <small class="text-danger" [class.d-none]="kamerreserveringdetailsForm.controls.land.valid || kamerreserveringdetailsForm.controls.land.untouched">Vereist</small>
+      </div>
+    </div>
+  </form>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" (click)="submitForm()" [disabled]="kamerreserveringdetailsForm.invalid">Opslaan</button>
+  </div>
+</div>

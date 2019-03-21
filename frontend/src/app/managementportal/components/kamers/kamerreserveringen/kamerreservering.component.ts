@@ -3,8 +3,8 @@ import { KamerreserveringenService } from 'src/app/services/kamerreserveringen.s
 import { KamerReservering } from 'src/app/models/kamerreservering';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
-import {FormKamerreserveringdetailsComponent} from "../kamers-form/form-kamerreserveringdetails/form-kamerreserveringdetails.component";
 import {Observable} from "rxjs";
+import {ManagementPortalKamersFormComponent} from "../kamers-form/kamers-form.component";
 
 @Component({
   selector: 'app-kamerreservering',
@@ -29,12 +29,8 @@ export class KamerreserveringComponent implements OnInit {
   }
 
   openFormKamerReserveringDetailsModal(kamerReservering: KamerReservering){
-    const modalKamerReservering = this.modalService.open(FormKamerreserveringdetailsComponent);
-    if (kamerReservering) {
-      modalKamerReservering.componentInstance.kamerReservering = kamerReservering;
-    }
-  }
 
+  }
   loadCurrentResevering() {
     this.kamerreserveringservice.getKamerToekomstReserveringen( true);
   }
