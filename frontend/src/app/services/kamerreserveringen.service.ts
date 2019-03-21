@@ -3,117 +3,73 @@ import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {KamerReservering} from '../models/kamerreservering';
 import {map, take, tap} from 'rxjs/operators';
+import {DateFunctions} from "../shared/services/date-functions";
 
 @Injectable({
   providedIn: 'root'
 })
 export class KamerreserveringenService {
   private kamerReseveringCacheSubject = new BehaviorSubject<KamerReservering[] | undefined>(undefined);
+  private kamerReseveringDetailsCacheSubject = new BehaviorSubject<KamerReservering[] | undefined>(undefined);
+
   private static api = `/api/kamerreservering`;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private datefunctions: DateFunctions) {
   }
 
   getKamerReserveringen(refreshCache: boolean = false): Observable<KamerReservering[] | undefined> {
     if (this.kamerReseveringCacheSubject.getValue() === undefined || refreshCache) {
-      this.http.get<IKamerReservering>(`${KamerreserveringenService.api}`)
+      this.http.get<IKamerReserveringenResponse>(`${KamerreserveringenService.api}`)
         .pipe(
-          map((data: any) => data.map((kamerreservering: KamerReservering) => new KamerReservering(
-            kamerreservering.id,
-            kamerreservering.voornaam,
-            kamerreservering.achternaam,
-            kamerreservering.telefoonnummer,
-            kamerreservering.emailadres,
-            kamerreservering.identiteitsid,
-            kamerreservering.postcode,
-            kamerreservering.straat,
-            kamerreservering.huisnummer,
-            kamerreservering.woonplaats,
-            kamerreservering.land,
-            kamerreservering.datumvan,
-            kamerreservering.datumtot,
-            kamerreservering.kamernaam,
-            kamerreservering.inchecken,
-            kamerreservering.uitchecken,
-            kamerreservering.personen,
-            kamerreservering.prijs,
-            kamerreservering.reserveringsnummer))),
+          map(KamerreserveringenService.kamerResponseToReserveringMapper),
           take(1),
-          tap(kamerreservering => {
-            this.kamerReseveringCacheSubject.next(kamerreservering);
+          tap(kamerreserveringen => {
+            this.kamerReseveringCacheSubject.next(kamerreserveringen);
           })
-        ).subscribe()
+        ).subscribe();
     }
     return this.kamerReseveringCacheSubject;
   }
 
   getKamerToekomstReserveringen(refreshCache: boolean = false): Observable<KamerReservering[] | undefined> {
-    console.log(this.getCurrentDate());
     if (this.kamerReseveringCacheSubject.getValue() === undefined || refreshCache) {
-      this.http.get<IKamerReservering>(`${KamerreserveringenService.api}/actief/${this.getCurrentDate()}`)
+      this.http.get<IKamerReserveringenResponse>(`${KamerreserveringenService.api}/actief/${this.datefunctions.getCurrentDate()}`)
         .pipe(
-          map((data: any) => data.map((kamerreservering: KamerReservering) => new KamerReservering(
-            kamerreservering.id,
-            kamerreservering.voornaam,
-            kamerreservering.achternaam,
-            kamerreservering.telefoonnummer,
-            kamerreservering.emailadres,
-            kamerreservering.identiteitsid,
-            kamerreservering.postcode,
-            kamerreservering.straat,
-            kamerreservering.huisnummer,
-            kamerreservering.woonplaats,
-            kamerreservering.land,
-            kamerreservering.datumvan,
-            kamerreservering.datumtot,
-            kamerreservering.kamernaam,
-            kamerreservering.inchecken,
-            kamerreservering.uitchecken,
-            kamerreservering.personen,
-            kamerreservering.prijs,
-            kamerreservering.reserveringsnummer
-          ))),
+          map(KamerreserveringenService.kamerResponseToReserveringMapper),
           take(1),
-          tap(kamerreservering => {
-            this.kamerReseveringCacheSubject.next(kamerreservering);
+          tap(kamerreserveringen => {
+            this.kamerReseveringCacheSubject.next(kamerreserveringen);
           })
-        ).subscribe()
+        ).subscribe();
     }
     return this.kamerReseveringCacheSubject;
   }
 
   getKamerVerledenReserveringen(refreshCache: boolean = false): Observable<KamerReservering[] | undefined> {
     if (this.kamerReseveringCacheSubject.getValue() === undefined || refreshCache) {
-      this.http.get<IKamerReservering>(`${KamerreserveringenService.api}/inactief/${this.getCurrentDate()}`)
+      this.http.get<IKamerReserveringenResponse>(`${KamerreserveringenService.api}/inactief/${this.datefunctions.getCurrentDate()}`)
         .pipe(
-          map((data: any) => data.map((kamerreservering: KamerReservering) => new KamerReservering(
-            kamerreservering.id,
-            kamerreservering.voornaam,
-            kamerreservering.achternaam,
-            kamerreservering.telefoonnummer,
-            kamerreservering.emailadres,
-            kamerreservering.identiteitsid,
-            kamerreservering.postcode,
-            kamerreservering.straat,
-            kamerreservering.huisnummer,
-            kamerreservering.woonplaats,
-            kamerreservering.land,
-            kamerreservering.datumvan,
-            kamerreservering.datumtot,
-            kamerreservering.kamernaam,
-            kamerreservering.inchecken,
-            kamerreservering.uitchecken,
-            kamerreservering.personen,
-            kamerreservering.prijs,
-            kamerreservering.reserveringsnummer
-          ))),
+          map(KamerreserveringenService.kamerResponseToReserveringMapper),
           take(1),
-          tap(kamerreservering => {
-            this.kamerReseveringCacheSubject.next(kamerreservering);
+          tap(kamerreserveringen => {
+            this.kamerReseveringCacheSubject.next(kamerreserveringen);
           })
-        ).subscribe()
+        ).subscribe();
     }
     return this.kamerReseveringCacheSubject;
+  }
+
+  getKamerReseveringById(id: number): Observable<KamerReservering[] | undefined> {
+    this.http.get<IKamerReserveringenResponse>(`${KamerreserveringenService.api}/id/${id}`)
+      .pipe(
+        map(KamerreserveringenService.kamerResponseToReserveringMapper),
+        take(1),
+        tap(kamerreserveringen => {
+          this.kamerReseveringDetailsCacheSubject.next(kamerreserveringen);
+        })
+      ).subscribe();
+    return this.kamerReseveringDetailsCacheSubject;
   }
 
   saveKamerReservering(kamerreservering: KamerReservering) {
@@ -121,7 +77,7 @@ export class KamerreserveringenService {
       .pipe(
         take(1),
         tap(() => this.getKamerReserveringen(true))
-      ).subscribe()
+      ).subscribe();
   }
 
   deleteKamerReservering(kamerdata: KamerReservering) {
@@ -133,24 +89,36 @@ export class KamerreserveringenService {
       ).subscribe();
   }
 
-  getCurrentDate(): string {
-    const currentDate: Date = new Date();
-    let today: string = "";
-    let dd: any = currentDate.getDate();
-    let mm: any = currentDate.getMonth() + 1;
-    let yyyy: any = currentDate.getFullYear();
-
-    if (dd < 10) {
-      dd = '0' + dd
-    }
-
-    if (mm < 10) {
-      mm = '0' + mm
-    }
-    today = (yyyy + '-' + mm + '-' + dd);
-    return today;
+  private static kamerResponseToReserveringMapper(kamerreserveringenResponse: IKamerReserveringenResponse): KamerReservering[] {
+    return kamerreserveringenResponse.kamerreserveringen.map(KamerreserveringenService.kamerToReserveringMapper);
   }
 
+  private static kamerToReserveringMapper(kamerreservering: IKamerReservering): KamerReservering {
+    return new KamerReservering(
+      kamerreservering.id,
+      kamerreservering.voornaam,
+      kamerreservering.achternaam,
+      kamerreservering.telefoonnummer,
+      kamerreservering.emailadres,
+      kamerreservering.identiteitsid,
+      kamerreservering.postcode,
+      kamerreservering.straat,
+      kamerreservering.huisnummer,
+      kamerreservering.woonplaats,
+      kamerreservering.land,
+      kamerreservering.datumvan,
+      kamerreservering.datumtot,
+      kamerreservering.kamernaam,
+      kamerreservering.inchecken,
+      kamerreservering.uitchecken,
+      kamerreservering.personen,
+      kamerreservering.prijs,
+      kamerreservering.reserveringsnummer);
+  }
+
+}
+interface IKamerReserveringenResponse {
+  kamerreserveringen: IKamerReservering[];
 }
 
 export interface IKamerReservering {

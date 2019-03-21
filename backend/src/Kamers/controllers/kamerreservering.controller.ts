@@ -3,6 +3,7 @@ import { KamerReservering } from '../models/kamerReservering';
 import { CreateKamerreserveringDto } from '../dto/create-kamerreservering-dto';
 import { KamerreserveringService } from '../services/kamerreservering.service';
 import {ApiUseTags, ApiOperation, ApiResponse} from '@nestjs/swagger';
+import {Tafelreservering} from "../../models/tafelreservering";
 
 @ApiUseTags('kamerreservering')
 @Controller('kamerreservering')
@@ -11,20 +12,30 @@ export class KamerreserveringController {
 
     @Get('')
     @ApiOperation({ title: 'Laat alle gemaakte kamerreseveringen zien' })
-    public getKamerReserveringen(): Promise<KamerReservering[]> {
-        return this.kamerreserveringservice.getKamerReserveringen();
+    async getKamerReserveringen(): Promise<{ kamerreserveringen: KamerReservering[] }>  {
+        const kamerreserveringen = await this.kamerreserveringservice.getKamerReserveringen();
+        return  { kamerreserveringen };
+    }
+
+    @Get('id/:id')
+    @ApiOperation({ title: 'Laat geselecteerder kamerreseveringen zien' })
+    async getKamerReserveringenById(@Param('id') id: number): Promise<{kamerreserveringen: KamerReservering[] }> {
+        const kamerreserveringen = await this.kamerreserveringservice.getKamerReserveringenById(id);
+        return { kamerreserveringen };
     }
 
     @Get('actief/:datum')
     @ApiOperation({ title: 'Laat actieve kamerreseveringen zien' })
-    public getKamerToekomstReserveringen(@Param('datum') datum: string): Promise<KamerReservering[]> {
-        return this.kamerreserveringservice.getKamerToekomstReserveringen(datum);
+    async getKamerToekomstReserveringen(@Param('datum') datum: string): Promise<{kamerreserveringen: KamerReservering[] }>  {
+        const kamerreserveringen = await this.kamerreserveringservice.getKamerToekomstReserveringen(datum);
+        return  { kamerreserveringen };
     }
 
     @Get('inactief/:datum')
     @ApiOperation({ title: 'Laat histories kamerreseveringen zien' })
-    public getKamerVerledenReserveringen(@Param('datum') datum: string): Promise<KamerReservering[]> {
-        return this.kamerreserveringservice.getKamerVerledenReserveringen(datum);
+    async getKamerVerledenReserveringen(@Param('datum') datum: string): Promise<{kamerreserveringen:KamerReservering [] }>  {
+        const kamerreserveringen = await this.kamerreserveringservice.getKamerVerledenReserveringen(datum);
+        return  { kamerreserveringen };
     }
 
     @Post('')
