@@ -2,11 +2,11 @@ import { Component, OnInit } from "@angular/core";
 import { ActiviteitRes } from "src/app/models/activiteit-res";
 import { Observable } from "rxjs";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { ActiviteitenResService } from "src/app/services/activiteiten-res.service";
 import { FormActiviteitResComponent } from "src/app/shared/components/form-activiteit-res/form-activiteit-res.component";
 import { ModalConfirmComponent } from "src/app/shared/components/modal-confirm/modal-confirm.component";
-import { ActiviteitenPlanningService } from "src/app/services/activiteiten-planning.service";
 import { ActiviteitenService } from "src/app/services/activiteiten.service";
+import { ActiviteitenPlanningService } from "src/app/services/activiteiten-planning.service";
+import { ActiviteitenResService } from "src/app/services/activiteiten-res.service";
 
 @Component({
   selector: "app-activiteit-reserveringen",
@@ -21,7 +21,7 @@ export class ActiviteitReserveringenComponent {
   constructor(
     private activiteitenResService: ActiviteitenResService,
     private activiteitenPlanningService: ActiviteitenPlanningService,
-    private activiteitenService: ActiviteitenService,
+    // private activiteitenService: ActiviteitenService,
     private modalService: NgbModal
   ) {}
 

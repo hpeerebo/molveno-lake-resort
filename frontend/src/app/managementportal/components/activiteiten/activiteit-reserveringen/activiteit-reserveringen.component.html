@@ -12,7 +12,7 @@
             <tr>
                 <th>Activiteit</th>
                 <th>Datum</th>
-                <th>Emailadres gast</th>
+                <th>Contactgegevens gast</th>
                 <th>Aantal Personen</th>
                 <th></th>
             </tr>
@@ -20,11 +20,9 @@
         <tbody>
             <tr *ngFor="let reservering of (reserveringen | async)">
                 <td>
-                    <!-- {{reservering.planning.activiteit.naam}} -->
+                    {{reservering.planning.activiteit.naam }}
                 </td>
-                <td>
-                    <!-- {{reservering.planning.actdate}} -->
-                </td>
+                <td>{{reservering.planning.actdate}}</td>
                 <td>
                     {{reservering.emailGast}}/{{reservering.phoneGast}}
                 </td>

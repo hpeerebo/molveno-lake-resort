@@ -16,9 +16,11 @@ export class ActiviteitenResService {
   private static activiteitResToActiviteitResMapper(
     reservering: IActiviteitres[]
   ): ActiviteitRes[] {
-    return reservering.map(
-      ActiviteitenResService.activiteitResToActiviteitMapper
-    );
+    console.log(reservering);
+    return reservering;
+    // return reservering.map(
+    //   ActiviteitenResService.activiteitResToActiviteitMapper
+    // );
   }
 
   private static activiteitResToActiviteitMapper(
@@ -26,7 +28,7 @@ export class ActiviteitenResService {
   ): ActiviteitRes {
     return new ActiviteitRes(
       reservering.resid,
-      reservering.planid,
+      // reservering.planid,
       reservering.emailGast,
       reservering.phoneGast,
       reservering.aantalPersonen
@@ -55,7 +57,7 @@ export class ActiviteitenResService {
 }
 interface IActiviteitres {
   resid: number;
-  planid: number;
+  // planid: number;
   emailGast: string;
   phoneGast: string;
   aantalPersonen: number;

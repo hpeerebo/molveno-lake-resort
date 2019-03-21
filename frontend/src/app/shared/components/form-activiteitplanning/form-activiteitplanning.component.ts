@@ -14,7 +14,7 @@ export class FormActiviteitPlanningComponent implements OnInit {
 
   public activiteitenPlanningForm = this.formBuilder.group({
     planid: [0, Validators.required],
-    actid: [0, Validators.required],
+    // actid: [0, Validators.required],
     actdate: ["", Validators.required],
     actprijs: [0, [Validators.required, Validators.min(1)]],
     actcapaciteit: [0, [Validators.required, Validators.min(1)]]
@@ -31,7 +31,7 @@ export class FormActiviteitPlanningComponent implements OnInit {
     if (this.activiteitenplanning) {
       this.activiteitenPlanningForm.setValue({
         planid: this.activiteitenplanning.planid,
-        actid: this.activiteitenplanning.actid,
+        // actid: this.activiteitenplanning.actid,
         actdate: this.activiteitenplanning.actdate,
         actprijs: this.activiteitenplanning.actprijs,
         actcapaciteit: this.activiteitenplanning.actcapaciteit
@@ -42,9 +42,9 @@ export class FormActiviteitPlanningComponent implements OnInit {
   submitForm() {
     this.activeModal.close(this.activiteitenPlanningForm.value);
   }
-  get actid() {
-    return this.activiteitenPlanningForm.get("actid");
-  }
+  // get actid() {
+  //   return this.activiteitenPlanningForm.get("actid");
+  // }
   get actdate() {
     return this.activiteitenPlanningForm.get("actdate");
   }

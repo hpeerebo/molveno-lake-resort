@@ -27,7 +27,7 @@ export class ActiviteitenPlanningService {
   ): ActiviteitenPlanning {
     return new ActiviteitenPlanning(
       activiteitplanning.planid,
-      activiteitplanning.actid,
+      // activiteitplanning.actid,
       activiteitplanning.actdate,
       activiteitplanning.actprijs,
       activiteitplanning.actcapaciteit
@@ -65,7 +65,7 @@ export class ActiviteitenPlanningService {
 
 interface IActiviteitPlanning {
   planid: number;
-  actid: number;
+  // actid: number;
   actdate: string;
   actprijs: number;
   actcapaciteit: number;
