@@ -14,7 +14,7 @@ import {ManagementPortalKamersFormComponent} from "../kamers-form/kamers-form.co
 export class KamerreserveringComponent implements OnInit {
 
   constructor(private readonly kamerreserveringservice: KamerreserveringenService, private readonly modalService: NgbModal, private router: Router) { }
-  public kamerreserveringen: Observable<KamerReservering[] | undefined> = this.kamerreserveringservice.getKamerToekomstReserveringen();
+  public kamerreserveringen: Observable<KamerReservering[] | undefined> = this.kamerreserveringservice.getKamerReserveringen();
   public selectedResevering?: KamerReservering;
   closeResult: string = "";
 
@@ -28,8 +28,8 @@ export class KamerreserveringComponent implements OnInit {
 
   }
 
-  openFormKamerReserveringDetailsModal(kamerReservering: KamerReservering){
-
+  openKamerreserveringdetailsComponent(kamerReservering: KamerReservering){
+    this.router.navigateByUrl(`managementportal/kamerreserveringen/${kamerReservering.id}`);
   }
   loadCurrentResevering() {
     this.kamerreserveringservice.getKamerToekomstReserveringen( true);
@@ -42,7 +42,6 @@ export class KamerreserveringComponent implements OnInit {
   onSelect(kamerresevering: KamerReservering): void {
     this.selectedResevering = kamerresevering;
   }
-
 
   openSm(content: NgbModal) {
     this.modalService
