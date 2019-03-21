@@ -19,10 +19,6 @@
         </thead>
         <tbody>
             <tr *ngFor="let activiteitplanning of (activiteitenPlanning | async)">
-                <!-- <td *ngFor="let activiteit of (activiteiten | async)"> -->
-                <!-- {{ id: activiteitplanning.planid }} -->
-                <!-- {{ activiteit.naam }} {{ activiteitplanning.actdate}} {{ activiteitplanning.actprijs | currency: "EUR" }} -->
-                <!-- </td> -->
                 <td>
                     {{ activiteitplanning.activiteit.naam }}
                 </td>

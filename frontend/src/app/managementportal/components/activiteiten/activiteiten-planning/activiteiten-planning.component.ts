@@ -42,7 +42,7 @@ export class ActiviteitenPlanningComponent {
     }
     modal.result
       .then(result => {
-        // this.activiteitenPlanningService.saveActiviteitPlanning(result);
+        this.activiteitenPlanningService.saveActiviteitPlanning(result);
       })
       .catch(error => {
         console.log(error);
@@ -55,7 +55,7 @@ export class ActiviteitenPlanningComponent {
       .result.then(result => {
         if (result === "yes") {
           console.log(planning);
-          // this.activiteitenPlanningService.deleteActiviteitPlanning(planning);
+          this.activiteitenPlanningService.deleteActiviteitPlanning(planning);
         }
       })
       .catch(error => {
