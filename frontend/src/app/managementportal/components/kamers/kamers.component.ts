@@ -64,6 +64,9 @@ export class ManagementPortalKamersComponent implements OnInit, AfterViewInit {
   onSelect(kamer: Kamer): void {
     this.selectedKamer = kamer;
   }
+  onSelectRoom(kamer: Kamer): void {
+    console.log(kamer);
+  }
 
   deleteRoom(kamer: Kamer) {
     if (this.kamers) {
@@ -160,7 +163,12 @@ export class ManagementPortalKamersComponent implements OnInit, AfterViewInit {
         resultPromise.land,
         resultPromise.datumvan,
         resultPromise.datumtot,
-        kamernaam
+        kamernaam,
+        resultPromise.inchecken,
+        resultPromise.uitchecken,
+        resultPromise.personen,
+        resultPromise.prijs,
+        resultPromise.reserveringsnummer
       ));
     });
 
@@ -173,18 +181,12 @@ export class ManagementPortalKamersComponent implements OnInit, AfterViewInit {
         //this.closeResult = `Closed with: ${result}`;
       this.datumvan = result.datumvan;
       this.datumtot = result.datumtot;
-      this.roomservice.searchRoom(true, result.datumvan, result.datumtot, result.kamertype)
+      this.roomservice.searchRoom(true, result.datumvan, result.datumtot, result.kamertype);
       this.showResButton = true
       },
       reason => {
         this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
       }
     );
-    /* modalKamerSearch.result.then(searchParameters => {
-      this.datumvan = searchParameters.datumvan;
-      this.datumtot = searchParameters.datumtot;
-      this.roomservice.searchRoom(true, searchParameters.datumvan, searchParameters.datumtot, searchParameters.kamertype)
-    },
-    ).finally(() => this.showResButton = true) */
   }
 }

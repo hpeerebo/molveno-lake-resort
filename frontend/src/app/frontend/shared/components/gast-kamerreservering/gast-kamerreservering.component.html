@@ -18,21 +18,131 @@
         <small class="text-danger" [class.d-none]="kamerreserveringForm.controls.datumtot.valid || kamerreserveringForm.controls.datumtot.untouched">Vereist</small>
       </div>
     </div>
+
     <div class="container, form-row">
-      <div class="form-group col-md-12">
+      <div class="form-group col-md-6">
+        <label>Aantal personen</label>
+        <select class="form-control" formControlName="aantalpersonen" [class.is-invalid]="kamerreserveringForm.controls.aantalpersonen.invalid && kamerreserveringForm.controls.aantalpersonen.touched" ngbAutofocus >
+          <option *ngFor="let aantal of ([1,2,3,4,5,6,7,8])" [value]="aantal">{{aantal}}</option>
+        </select>
+        <small class="text-danger" [class.d-none]="kamerreserveringForm.controls.aantalpersonen.valid || kamerreserveringForm.controls.aantalpersonen.untouched">Vereist</small>
+      </div>
+    </div>
+
+    <div class="container, form-row" *ngIf="kamerreserveringForm.controls.aantalpersonen.value === '1'">
+      <div class="form-group col-md-6">
         <label>Selecteer een kamer</label>
         <select class="form-control" formControlName="kamernaam" [class.is-invalid]="kamerreserveringForm.controls.kamernaam.invalid && kamerreserveringForm.controls.kamernaam.touched" ngbAutofocus >
-          <option *ngFor="let kamer of (kamers | async)" [value]="kamer.kamerNaam">{{kamer.kamerNaam}} - {{kamer.kamerLigging}} ({{kamer.aantalPersonen}} personen, € {{kamer.prijs}},-)</option>
+          <option *ngFor="let kamer of (roomsForTwo | async)" [value]="kamer.kamernaam">{{kamer.kamerType}}</option>
         </select>
         <small class="text-danger" [class.d-none]="kamerreserveringForm.controls.kamernaam.valid || kamerreserveringForm.controls.kamernaam.untouched">Vereist</small>
       </div>
     </div>
+
+    <div class="container, form-row" *ngIf="kamerreserveringForm.controls.aantalpersonen.value === '2'">
+      <div class="form-group col-md-6">
+        <label>Selecteer een kamer</label>
+        <select class="form-control" formControlName="kamernaam" [class.is-invalid]="kamerreserveringForm.controls.kamernaam.invalid && kamerreserveringForm.controls.kamernaam.touched" ngbAutofocus >
+            <option *ngFor="let kamer of (roomsForTwo | async)" [value]="kamer.kamernaam">{{kamer.kamerType}}</option>
+        </select>
+        <small class="text-danger" [class.d-none]="kamerreserveringForm.controls.kamernaam.valid || kamerreserveringForm.controls.kamernaam.untouched">Vereist</small>
+      </div>
+    </div>
+      
+    <div class="container, form-row" *ngIf="kamerreserveringForm.controls.aantalpersonen.value === '3'">
+      <div class="form-group col-md-6">
+        <label>Selecteer een kamer</label>
+        <select class="form-control" formControlName="kamernaam" [class.is-invalid]="kamerreserveringForm.controls.kamernaam.invalid && kamerreserveringForm.controls.kamernaam.touched" ngbAutofocus >
+          <option *ngFor="let kamer of (roomsForThree | async)" [value]="kamer.kamernaam">{{kamer.kamerType}}</option>
+        </select>
+        <small class="text-danger" [class.d-none]="kamerreserveringForm.controls.kamernaam.valid || kamerreserveringForm.controls.kamernaam.untouched">Vereist</small>
+      </div>
+    </div>
+
+    <div class="container, form-row" *ngIf="kamerreserveringForm.controls.aantalpersonen.value === '4'">
+      <div class="form-group col-md-6">
+        <label>Selecteer een kamer</label>
+        <select class="form-control" formControlName="kamernaam" [class.is-invalid]="kamerreserveringForm.controls.kamernaam.invalid && kamerreserveringForm.controls.kamernaam.touched" ngbAutofocus >
+          <option *ngFor="let kamer of (roomsForFour | async)" [value]="kamer.kamernaam">{{kamer.kamerType}}</option>
+        </select>
+        <small class="text-danger" [class.d-none]="kamerreserveringForm.controls.kamernaam.valid || kamerreserveringForm.controls.kamernaam.untouched">Vereist</small>
+      </div>
+    </div>
+
+    <div class="container, form-row" *ngIf="kamerreserveringForm.controls.aantalpersonen.value === '5'">
+      <div class="form-group col-md-6">
+        <label>Selecteer kamer 1</label>
+        <select class="form-control" formControlName="kamernaam" [class.is-invalid]="kamerreserveringForm.controls.kamernaam.invalid && kamerreserveringForm.controls.kamernaam.touched" ngbAutofocus >
+          <option *ngFor="let kamer of (roomsForTwo | async)" [value]="kamer.kamernaam">{{kamer.kamerType}}</option>
+        </select>
+        <small class="text-danger" [class.d-none]="kamerreserveringForm.controls.kamernaam.valid || kamerreserveringForm.controls.kamernaam.untouched">Vereist</small>
+      </div>
+      <div class="form-group col-md-6">
+        <label>Selecteer kamer 2</label>
+        <select class="form-control" formControlName="kamernaam" [class.is-invalid]="kamerreserveringForm.controls.kamernaam.invalid && kamerreserveringForm.controls.kamernaam.touched" ngbAutofocus >
+          <option *ngFor="let kamer of (roomsForThree | async)" [value]="kamer.kamernaam">{{kamer.kamerType}}</option>
+        </select>
+        <small class="text-danger" [class.d-none]="kamerreserveringForm.controls.kamernaam.valid || kamerreserveringForm.controls.kamernaam.untouched">Vereist</small>
+      </div>
+    </div>
+      
+    <div class="container, form-row" *ngIf="kamerreserveringForm.controls.aantalpersonen.value === '6'">
+      <div class="form-group col-md-6">
+        <label>Selecteer kamer 1</label>
+        <select class="form-control" formControlName="kamernaam" [class.is-invalid]="kamerreserveringForm.controls.kamernaam.invalid && kamerreserveringForm.controls.kamernaam.touched" ngbAutofocus >
+          <option *ngFor="let kamer of (roomsForThree | async)" [value]="kamer.kamernaam">{{kamer.kamerType}}</option>
+        </select>
+        <small class="text-danger" [class.d-none]="kamerreserveringForm.controls.kamernaam.valid || kamerreserveringForm.controls.kamernaam.untouched">Vereist</small>
+      </div>
+      <div class="form-group col-md-6">
+        <label>Selecteer kamer 2</label>
+        <select class="form-control" formControlName="kamernaam" [class.is-invalid]="kamerreserveringForm.controls.kamernaam.invalid && kamerreserveringForm.controls.kamernaam.touched" ngbAutofocus >
+          <option *ngFor="let kamer of (roomsForThree | async)" [value]="kamer.kamernaam">{{kamer.kamerType}}</option>
+        </select>
+        <small class="text-danger" [class.d-none]="kamerreserveringForm.controls.kamernaam.valid || kamerreserveringForm.controls.kamernaam.untouched">Vereist</small>
+        </div>
+    </div>
+
+    <div class="container, form-row" *ngIf="kamerreserveringForm.controls.aantalpersonen.value === '7'">
+      <div class="form-group col-md-6">
+        <label>Selecteer kamer 1</label>
+        <select class="form-control" formControlName="kamernaam" [class.is-invalid]="kamerreserveringForm.controls.kamernaam.invalid && kamerreserveringForm.controls.kamernaam.touched" ngbAutofocus >
+          <option *ngFor="let kamer of (roomsForThree | async)" [value]="kamer.kamernaam">{{kamer.kamerType}}</option>
+        </select>
+        <small class="text-danger" [class.d-none]="kamerreserveringForm.controls.kamernaam.valid || kamerreserveringForm.controls.kamernaam.untouched">Vereist</small>
+      </div>
+      <div class="form-group col-md-6">
+        <label>Selecteer kamer 2</label>
+        <select class="form-control" formControlName="kamernaam" [class.is-invalid]="kamerreserveringForm.controls.kamernaam.invalid && kamerreserveringForm.controls.kamernaam.touched" ngbAutofocus >
+          <option *ngFor="let kamer of (roomsForFour | async)" [value]="kamer.kamernaam">{{kamer.kamerType}}</option>
+        </select>
+        <small class="text-danger" [class.d-none]="kamerreserveringForm.controls.kamernaam.valid || kamerreserveringForm.controls.kamernaam.untouched">Vereist</small>
+      </div>
+    </div> 
+
+    <div class="container, form-row" *ngIf="kamerreserveringForm.controls.aantalpersonen.value === '8'">
+      <div class="form-group col-md-6">
+        <label>Selecteer kamer 1</label>
+        <select class="form-control" formControlName="kamernaam" [class.is-invalid]="kamerreserveringForm.controls.kamernaam.invalid && kamerreserveringForm.controls.kamernaam.touched" ngbAutofocus >
+          <option *ngFor="let kamer of (roomsForFour | async)" [value]="kamer.kamernaam">{{kamer.kamerType}}</option>
+        </select>
+        <small class="text-danger" [class.d-none]="kamerreserveringForm.controls.kamernaam.valid || kamerreserveringForm.controls.kamernaam.untouched">Vereist</small>
+      </div>
+      <div class="form-group col-md-6">
+        <label>Selecteer kamer 2</label>
+        <select class="form-control" formControlName="kamernaam" [class.is-invalid]="kamerreserveringForm.controls.kamernaam.invalid && kamerreserveringForm.controls.kamernaam.touched" ngbAutofocus >
+          <option *ngFor="let kamer of (roomsForFour | async)" [value]="kamer.kamernaam">{{kamer.kamerType}}</option>
+        </select>
+        <small class="text-danger" [class.d-none]="kamerreserveringForm.controls.kamernaam.valid || kamerreserveringForm.controls.kamernaam.untouched">Vereist</small>
+      </div>
+    </div>
+
     <div class="container, form-row">
       <div class="form-group col-md-6">
         <label>Voornaam</label>
         <input type="text" class="form-control" formControlName="voornaam" [class.is-invalid]="kamerreserveringForm.controls.voornaam.invalid && kamerreserveringForm.controls.voornaam.touched" ngbAutofocus />
         <small class="text-danger" [class.d-none]="kamerreserveringForm.controls.voornaam.valid || kamerreserveringForm.controls.voornaam.untouched">Vereist</small>
-      </div>
+     </div>
       <div class="form-group col-md-6">
         <label>Achternaam</label>
         <input type="text" class="form-control" formControlName="achternaam" [class.is-invalid]="kamerreserveringForm.controls.achternaam.invalid && kamerreserveringForm.controls.achternaam.touched" ngbAutofocus />

@@ -7,6 +7,7 @@ export class GastKamerReserveringFormGroup extends FormGroup{
     telefoonnummer: new FormControl('', Validators.required),
     emailadres: new FormControl('', Validators.required),
     identiteitsid: new FormControl('undefined'),
+    aantalpersonen: new FormControl('', Validators.required),
     postcode: new FormControl('', Validators.required),
     straat: new FormControl('', Validators.required),
     huisnummer: new FormControl('', Validators.required),

@@ -19,7 +19,7 @@ export class CreateKamerreserveringDto {
   @ApiModelProperty()
   public readonly emailadres: string;
 
-  @IsString()
+//@IsString()
   @ApiModelProperty()
   public readonly identiteitsid: string;
 
@@ -55,21 +55,46 @@ export class CreateKamerreserveringDto {
   @ApiModelProperty()
   public readonly kamernaam: string;
 
+  //@IsString()
+  @ApiModelProperty()
+  public readonly inchecken: string;
+
+  //@IsString()
+  @ApiModelProperty()
+  public readonly uitchecken: string;
+
+  //@IsNumber()
+  @ApiModelProperty()
+  public readonly personen: number;
+
+  //@IsNumber()
+  @ApiModelProperty()
+  public readonly prijs: number;
+
+  //@IsString()
+  @ApiModelProperty()
+  public readonly reserveringsnummer: string;
+
   kamerReserveringEntity() {
     return new KamerReserveringEntity(
-      this.voornaam,
-      this.achternaam,
-      this.telefoonnummer,
-      this.emailadres,
-      this.identiteitsid,
-      this.postcode,
-      this.straat,
-      this.huisnummer,
-      this.woonplaats,
-      this.land,
-      this.datumvan,
-      this.datumtot,
-      this.kamernaam,
+        this.voornaam,
+        this.achternaam,
+        this.telefoonnummer,
+        this.emailadres,
+        this.identiteitsid,
+        this.postcode,
+        this.straat,
+        this.huisnummer,
+        this.woonplaats,
+        this.land,
+        this.datumvan,
+        this.datumtot,
+        this.kamernaam,
+        this.inchecken,
+        this.uitchecken,
+        this.personen,
+        this.prijs,
+        this.reserveringsnummer,
     );
   }
 }

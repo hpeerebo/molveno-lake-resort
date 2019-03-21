@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, ValidatorFn, FormGroup, AbstractControl, FormControl } from '@angular/forms';
 import { Alert } from 'selenium-webdriver';
 
 @Component({
@@ -12,11 +12,21 @@ export class FormKamersbeschikbaarComponent implements OnInit {
   kamerSoort = ['Budget', 'Standaard','Lux'];
   public today: string = "";
   public tomorrow: string = "";
+
+  public readonly kamerSearchForm = new FormGroup({
+    datumvan: new FormControl(undefined,[ Validators.required]),
+    datumtot: new FormControl(undefined,[Validators.required]),
+    kamertype: new FormControl(undefined,[ Validators.required])
+  }, this.dateValidationFormGroup());
+
+  /*
   public kamerSearchForm = this.formBuilder.group({
     datumvan: ['undefined'],
+    //datumvan: [undefined, Validators.required, this.dateValidationFormGroup],
     datumtot: ['unidefind'],
     kamertype: ['', Validators.required]
   });
+  */
 
   constructor(public activeModal: NgbActiveModal, private formBuilder: FormBuilder) {
     const currentDate:Date = new Date();
@@ -41,15 +51,26 @@ export class FormKamersbeschikbaarComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.kamerSearchForm.controls.datumvan.setValue(this.today);
+    this.kamerSearchForm.controls.datumtot.setValue(this.tomorrow);
   }
   submitForm() {
     this.activeModal.close(this.kamerSearchForm.value);
   }
-  checkDates(){
-    if (this.kamerSearchForm.value.datumtot < this.kamerSearchForm.value.datumvan){
-      console.log ('datumtot kleiner dan datumvan');
-      this.kamerSearchForm.setErrors(new Validators());
-    }
+  dateValidationFormGroup(): ValidatorFn{
+    return (control: AbstractControl) => {
+      const formGroup = control as FormGroup;
+      if (formGroup.controls.datumvan.value < this.today){
+         return {dateFromIsInThePastError: "Datum mag niet in het verleden liggen"}
+      }
+      if (formGroup.controls.datumtot.value < this.today){
+        return {dateToIsInThePastError: "Datum mag niet in het verleden liggen"}
+     }
+     if (formGroup.controls.datumtot.value < formGroup.controls.datumvan.value){
+      return {dateToIsInThePastError: "Vertrek datum moet hoger zijn dan aankomstdatum"}
+     }
+      else return null;
   }
+}
 
 }

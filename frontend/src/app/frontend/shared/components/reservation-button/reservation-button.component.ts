@@ -40,6 +40,7 @@ export class ReservationButtonComponent implements OnInit {
         resultPromise.telefoonnummer,
         resultPromise.emailadres,
         resultPromise.identiteitsid,
+        resultPromise.aantalpersonen,
         resultPromise.postcode,
         resultPromise.straat,
         resultPromise.huisnummer,
@@ -48,6 +49,11 @@ export class ReservationButtonComponent implements OnInit {
         resultPromise.datumvan,
         resultPromise.datumtot,
         resultPromise.kamernaam,
+        resultPromise.inchecken,
+        resultPromise.uitchecken,
+        resultPromise.personen,
+        resultPromise.prijs,
+        resultPromise.reserveringsnummer
       ));
     });
   }
