@@ -23,7 +23,9 @@
                 <!-- {{ id: activiteitplanning.planid }} -->
                 <!-- {{ activiteit.naam }} {{ activiteitplanning.actdate}} {{ activiteitplanning.actprijs | currency: "EUR" }} -->
                 <!-- </td> -->
-                <td>{{ activiteitplanning.actid }}</td>
+                <td>
+                    {{ activiteitplanning.activiteit.naam }}
+                </td>
                 <td>{{ activiteitplanning.actdate }}</td>
                 <td>
                     {{ activiteitplanning.actprijs | currency: "EUR" }}

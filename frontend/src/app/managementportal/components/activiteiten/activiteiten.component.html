@@ -14,9 +14,6 @@
             <tr>
                 <th>Naam</th>
                 <th>Beschrijving</th>
-                <!-- <th>Datum</th>
-                <th>Capaciteit</th>
-                <th>Prijs</th> -->
                 <th></th>
             </tr>
         </thead>
@@ -24,11 +21,6 @@
             <tr *ngFor="let activiteit of (activiteiten | async)">
                 <td>{{ activiteit.naam }}</td>
                 <td>{{ activiteit.beschrijving }}</td>
-                <!-- <td>{{ activiteit.datum }}</td>
-                <td>{{ activiteit.capaciteit }}</td>
-                <td>
-                    {{ activiteit.prijs | currency: "EUR" }}
-                </td> -->
                 <td class="text-align: right">
                     <i
                         class="fas fa-edit mr-2"
