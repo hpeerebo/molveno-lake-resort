@@ -10,7 +10,7 @@ export class CreateTafelreserveringDto {
     @ApiModelProperty()
     @IsInt()
     @Min(1)
-    @Max(40)
+    @Max(100)
     public readonly personen: number;
 
     @ApiModelProperty()

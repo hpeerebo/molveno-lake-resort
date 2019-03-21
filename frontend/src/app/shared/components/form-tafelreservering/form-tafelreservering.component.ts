@@ -23,9 +23,9 @@ export class FormTafelreserveringComponent implements OnInit, OnDestroy {
   public tafelreserveringForm = this.formBuilder.group({
     aanvangsdatum: [PickerHelper.dateObject(new Date()), Validators.required],
     aanvangstijd: [{ hour: 17, minute: 0 }, Validators.required],
-    personen: [0, [Validators.min(1), Validators.max(40)]],
-    naam: ['', Validators.required],
-    telefoon: ['', Validators.required]
+    personen: [undefined, [Validators.min(1), Validators.max(0)]],
+    naam: [undefined, Validators.required],
+    telefoon: [undefined, Validators.required]
   });
 
   constructor(
@@ -47,7 +47,7 @@ export class FormTafelreserveringComponent implements OnInit, OnDestroy {
 
     this.subscriptions.add(this.tafelreserveringForm.valueChanges
       .pipe(
-        debounceTime(1000),
+        debounceTime(500),
         tap(value => this.handleReservationDateChanges(PickerHelper.toDate(value.aanvangsdatum, value.aanvangstijd)))
       )
       .subscribe()
@@ -62,7 +62,8 @@ export class FormTafelreserveringComponent implements OnInit, OnDestroy {
     this.tafelreserveringenService.checkReservation(reservationDate)
       .pipe(
         take(1),
-        tap(data => this.beschikbaar = data.beschikbaar)
+        tap(data => this.beschikbaar = data.beschikbaar),
+        tap(data => this.tafelreserveringForm.controls.personen.setValidators([Validators.min(1), Validators.max(data.beschikbaar)]))
       )
       .subscribe()
   }
