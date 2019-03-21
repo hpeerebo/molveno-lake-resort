@@ -27,8 +27,9 @@ export class ActiviteitResService {
     this.activiteitResRepository.update(
       { resid: reservering.resid },
       {
-        planid: reservering.planid,
+        // planid: reservering.planid,
         emailGast: reservering.emailGast,
+        phoneGast: reservering.phoneGast,
         aantalPersonen: reservering.aantalPersonen,
       },
     );

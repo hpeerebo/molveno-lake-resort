@@ -58,8 +58,9 @@ export class ActiviteitenResController {
   ): void {
     const reservering: ActiviteitResEntity = new ActiviteitResEntity(
       createResActiviteit.resid,
-      createResActiviteit.planid,
+      // createResActiviteit.planid,
       createResActiviteit.emailGast,
+      createResActiviteit.phoneGast,
       createResActiviteit.aantalPersonen,
     );
     this.activiteitenResService.updateReservering(reservering);
