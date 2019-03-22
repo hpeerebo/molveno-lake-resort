@@ -15,7 +15,8 @@ export class AuthService {
 		const userExists: boolean = !!await this.usersService.findUserByCredentials(userLoginDto);
 		if (userExists) return this.jwtService.sign({
 				email: userLoginDto.userName,
-				duration: 3600
+				duration: 3600,
+				role: 'admin'
 				
 			});
 		else throw new HttpException("invalid credentials", HttpStatus.UNAUTHORIZED);

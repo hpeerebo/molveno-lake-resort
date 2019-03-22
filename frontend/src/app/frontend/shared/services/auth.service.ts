@@ -2,19 +2,38 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IUserLogin } from '../../../../../../shared/interfaces/user-login-interface';
 import { Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { take, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private static readonly api = "api/auth/login";
+  public static readonly api = "api/auth/login";
+	//public token = "732863"
 
 	constructor(private http: HttpClient) {
 	}
 
 	public login(userLogin: IUserLogin): Observable<any> {
-		return this.http.post(AuthService.api, userLogin).pipe(take(1));
+		return this.http.post<Tokenresponse>(AuthService.api, userLogin)
+			.pipe(
+				tap(data => localStorage.setItem("token", data.token)),
+				take(1)
+			);
 	}
+
+	public token(): string{
+		return localStorage.getItem("token") as string;
+	}
+	public validateUser(): boolean{
+		if (this.token()){
+			return true;
+		}
+		else return false
+	}
+
+}
+interface Tokenresponse {
+	token: string;
 }

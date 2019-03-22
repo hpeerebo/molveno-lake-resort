@@ -31,6 +31,7 @@ import { FormKamersbeschikbaarComponent } from './components/kamers/kamers-form/
 import { ActiviteitenPlanningComponent } from './components/activiteiten/activiteiten-planning/activiteiten-planning.component';
 import { FormActiviteitPlanningComponent } from '../shared/components/form-activiteitplanning/form-activiteitplanning.component';
 import {KamerreserveringdetailsComponent} from './components/kamers/kamerreserveringdetails/kamerreserveringdetails.component';
+import { Router } from '@angular/router';
 
 
 @NgModule({
@@ -66,4 +67,13 @@ import {KamerreserveringdetailsComponent} from './components/kamers/kamerreserve
   imports: [CommonModule, ManagementportalRoutingModule, NgbModule, FormsModule, ReactiveFormsModule, ApplicationPipesModule],
   entryComponents: [FormTafelComponent, FormTafelreserveringComponent, FormGerechtComponent, FormIngredientComponent, FormActiviteitComponent,  FormActiviteitResComponent, FormActiviteitPlanningComponent, ModalConfirmComponent, FormKamerreserveringComponent, KamerreserveringdetailsComponent, FormKamersbeschikbaarComponent]
 })
-export class ManagementportalModule {}
+export class ManagementportalModule {
+  constructor(private router: Router){}
+
+  logout(){
+    localStorage.removeItem('token');
+    this.router.navigate(['login']);
+
+  }
+
+}
