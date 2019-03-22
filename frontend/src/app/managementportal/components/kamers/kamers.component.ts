@@ -86,11 +86,6 @@ export class ManagementPortalKamersComponent implements OnInit, AfterViewInit {
 
 
   }
-  /* toggleVisibility(event:any){
-    this.marked= event.target.checked;
-    console.log(this.marked);
-    console.log(this.theCheckbox);
-  } */
 
   deleteRoom(kamer: Kamer) {
     if (this.kamers) {
