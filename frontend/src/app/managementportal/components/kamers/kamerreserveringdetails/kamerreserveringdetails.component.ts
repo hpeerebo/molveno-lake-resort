@@ -3,6 +3,8 @@ import {KamerreserveringenService} from "../../../../services/kamerreserveringen
 import {ActivatedRoute} from "@angular/router";
 import {Observable} from "rxjs";
 import {KamerReservering} from "../../../../models/kamerreservering";
+import {KamerReserveringDetailsFormGroup} from "./kamerreserveringdetailsormgroup";
+
 
 @Component({
   selector: 'app-kamerreserveringdetails',
@@ -12,11 +14,15 @@ import {KamerReservering} from "../../../../models/kamerreservering";
 export class KamerreserveringdetailsComponent implements OnInit {
 
   constructor(private kamerreserveringenservice: KamerreserveringenService,
-              private route : ActivatedRoute) {}
+              private route : ActivatedRoute) {};
+
   public kamerreserveringen: Observable<KamerReservering[] | undefined> = this.kamerreserveringenservice.getKamerReseveringById(this.getReseveringBasedOnId());
-  private id: null | string  = "";
+  public kamerreserveringdetailsormgroup = new KamerReserveringDetailsFormGroup();
+
+  private reserveringsnummer: null | string  = "";
 
   ngOnInit() {
+
 
       }
 
@@ -24,12 +30,13 @@ export class KamerreserveringdetailsComponent implements OnInit {
 
   }
 
-  getReseveringBasedOnId(): number{
+
+  getReseveringBasedOnId(): string{
     this.route.paramMap.subscribe(params => {
-      this.id = params.get("id")
+      this.reserveringsnummer = params.get("reserveringsnummer")
     });
     // @ts-ignore
-    return parseInt(this.id);
+    return this.reserveringsnummer;
   }
 
 }

@@ -10,6 +10,7 @@ import {KamerReservering} from "../../../models/kamerreservering";
 import { FormKamersbeschikbaarComponent } from './kamers-form/form-kamersbeschikbaar/form-kamersbeschikbaar.component';
 import {ActivatedRoute} from "@angular/router";
 import { FormControl } from '@angular/forms';
+import {DateFunctions} from "../../../shared/services/date-functions";
 
 
 @Component({
@@ -25,7 +26,8 @@ export class ManagementPortalKamersComponent implements OnInit, AfterViewInit {
     private roomservice: RoomService,
     private kamerreserveringservice: KamerreserveringenService,
     private modalService: NgbModal,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private datetime: DateFunctions,
   ) {}
 
   public kamers: Observable<Kamer[] | undefined> = this.roomservice.getRoom();
@@ -162,6 +164,8 @@ export class ManagementPortalKamersComponent implements OnInit, AfterViewInit {
       modalKamerReservering.componentInstance.datumtot = this.datumtot;
     }
     modalKamerReservering.result.then(resultPromise => {
+      const reserveringsnummer = `MO-${this.datetime.getCurrentDateTime()}-1`;
+
       kamers.forEach(kamer => {
       this.kamerreserveringservice.saveKamerReservering(new KamerReservering(
         resultPromise.id,
@@ -180,16 +184,16 @@ export class ManagementPortalKamersComponent implements OnInit, AfterViewInit {
         kamer.kamerNaam,
         resultPromise.inchecken,
         resultPromise.uitchecken,
-        resultPromise.personen,
-        resultPromise.prijs,
-        resultPromise.reserveringsnummer
+        kamer.aantalPersonen,
+        kamer.prijs,
+        reserveringsnummer
       ))});
     });
 
   }
   openFormKamerReserveringModal(kamernaam: string){
     const modalKamerReservering = this.modalService.open(FormKamerreserveringComponent);
-
+    const reserveringsnummer = `MO-${this.datetime.getCurrentDateTime()}-1`;
      if (kamernaam) {
       modalKamerReservering.componentInstance.kamernaam = kamernaam;
     }
@@ -220,7 +224,7 @@ export class ManagementPortalKamersComponent implements OnInit, AfterViewInit {
         resultPromise.uitchecken,
         resultPromise.personen,
         resultPromise.prijs,
-        resultPromise.reserveringsnummer
+        reserveringsnummer
       ));
     });
 
@@ -235,7 +239,7 @@ export class ManagementPortalKamersComponent implements OnInit, AfterViewInit {
         //this.closeResult = `Closed with: ${result}`;
       this.datumvan = result.datumvan;
       this.datumtot = result.datumtot;
-      this.calculateNumberofDays(this.datumvan, this.datumtot)
+      this.calculateNumberofDays(this.datumvan, this.datumtot);
       this.roomservice.searchRoom(true, result.datumvan, result.datumtot, result.kamertype);
       this.showResButton = true
       },
@@ -249,7 +253,7 @@ export class ManagementPortalKamersComponent implements OnInit, AfterViewInit {
     const date1 = this.convertDate(new Date(datumvan));
     const date2 = this.convertDate(new Date(datumtot));
 
-    this.numberOfDays = parseInt(date2)- parseInt(date1)
+    this.numberOfDays = parseInt(date2)- parseInt(date1);
     if(this.numberOfDays === 0){
       this.numberOfDays = 1;
     }
