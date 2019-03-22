@@ -26,7 +26,7 @@ const routes: Routes = [
       { path: 'managementportal/kamers', component: ManagementPortalKamersComponent },
       { path: 'managementportal/kamers/:param', component: ManagementPortalKamersComponent },
       { path: 'managementportal/kamerreserveringen', component: KamerreserveringComponent},
-      { path: 'managementportal/kamerreserveringen/:details', component: KamerreserveringdetailsComponent},
+      { path: 'managementportal/kamerreserveringen/:id', component: KamerreserveringdetailsComponent},
       { path: 'managementportal/kamers-form', component: ManagementPortalKamersFormComponent },
       { path: 'managementportal/activiteiten', component: ManagementPortalActiviteitenComponent },
       { path: 'managementportal/activiteiten/activiteiten-planning', component: ActiviteitenPlanningComponent },
