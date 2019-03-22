@@ -27,22 +27,13 @@
     <ng-template #welkamers>
     <tr *ngFor="let kamer of (kamers | async | kamersfilter: show | sortgrid:field)">
         <td *ngIf="showResButton">
-            <!--input type="checkbox" [checked]="onSelectRoom(kamer)" data-toggle="toggle" data-size="small"-->
-            <!--input type="checkbox" [(ngModel)]="theCheckbox"  data-md-icheck (change)="toggleVisibility($event)"/-->
             <input [formControl]="myCheckbox" type="checkbox" (change)="onSelectRoom(kamer)"/>
-          <!--div class="checkbox">
-            <label><input type="checkbox" value=""></label>
-          </div-->
        </td>
         <td>{{ kamer.kamerNaam }}</td>
         <td>{{ kamer.kamerType }}</td>
         <td>{{ kamer.kamerLigging }}</td>
         <td>{{ kamer.aantalPersonen }}</td>
         <td>{{ kamer.prijs | currency: "EUR" }}</td>
-
-        <!--td *ngIf="showResButton">
-          <i class="fas fa-marker mr-2" placement="top" ngbTooltip="Reserveren" (click)="openFormKamerReserveringModal(kamer.kamerNaam)"></i>
-        </td-->
         <td class="text-right">
           <i *ngIf="showResButton" class="fas fa-marker mr-2" placement="top" ngbTooltip="Reserveren" (click)="openFormKamerReserveringModal(kamer.kamerNaam)"></i>
           <i class="fas fa-edit mr-2" placement="top" ngbTooltip="Wijzigen" (click)="onSelect(kamer); openEditFormModal()"></i>
@@ -58,9 +49,6 @@
   <div class="infotext" *ngIf="showResButton">Selecteer de kamer(s) die u wilt reserveren</div>
   </div>
   <div *ngIf="showResButton && reserverRooms.length > 0" class="room-bucket">
-      <!--div _ngcontent-c3="">
-          <button _ngcontent-c3="" aria-label="Close" class="close" type="button" (click)="resetInitialValues()"><span _ngcontent-c3="" aria-hidden="true">×</span></button>
-      </div-->
       <div>Voor de periode:  </div>
       <h6>{{datumvan}} tot {{datumtot}} </h6>
       <div>Aantal nachten: <h6>{{numberOfDays }} nacht(en)</h6>  </div>
@@ -78,7 +66,6 @@
           <div class="col-2" hidden>{{numberOfDays}} * {{room.prijs}}</div>
           <div class="col-2">
               <button class="btn-xs btn-outline-info" placement="top" ngbTooltip="Verwijderen" (click)="deleteRoomFromBucket(room)">X</button>
-              <!--button  _ngcontent-c3="" aria-label="Close" class="close" placement="top" ngbTooltip="Verwijderen" (click)="deleteRoomFromBucket(room)">x</button-->
             </div>
       </div>
 
@@ -86,7 +73,6 @@
       <div class="row">
           <div class="col-8 text-danger">Totale prijs ({{numberOfDays}} nacht(en))</div>
           <div class="col-2 text-danger">{{totalPrice | currency: "EUR" }} </div>
-          <!--div class="col-2"></div-->
       </div>
       <hr class="bg-light">
       <div  class="row">

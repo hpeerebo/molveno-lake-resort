@@ -4,7 +4,6 @@ import { KamerReservering } from 'src/app/models/kamerreservering';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import {Observable} from "rxjs";
-import {ManagementPortalKamersFormComponent} from "../kamers-form/kamers-form.component";
 
 @Component({
   selector: 'app-kamerreservering',
@@ -29,7 +28,7 @@ export class KamerreserveringComponent implements OnInit {
   }
 
   openKamerreserveringdetailsComponent(kamerReservering: KamerReservering){
-    this.router.navigateByUrl(`managementportal/kamerreserveringen/${kamerReservering.id}`);
+    this.router.navigateByUrl(`managementportal/kamerreserveringen/${kamerReservering.reserveringsnummer}`);
   }
   loadCurrentResevering() {
     this.kamerreserveringservice.getKamerToekomstReserveringen( true);

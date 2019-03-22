@@ -60,8 +60,9 @@ export class KamerreserveringenService {
     return this.kamerReseveringCacheSubject;
   }
 
-  getKamerReseveringById(id: number): Observable<KamerReservering[] | undefined> {
-    this.http.get<IKamerReserveringenResponse>(`${KamerreserveringenService.api}/id/${id}`)
+  getKamerReseveringById(reserveringsnummer: string): Observable<KamerReservering[] | undefined> {
+    console.log(reserveringsnummer);
+    this.http.get<IKamerReserveringenResponse>(`${KamerreserveringenService.api}/id/${reserveringsnummer}`)
       .pipe(
         map(KamerreserveringenService.kamerResponseToReserveringMapper),
         take(1),

@@ -17,10 +17,10 @@ export class KamerreserveringController {
         return  { kamerreserveringen };
     }
 
-    @Get('id/:id')
-    @ApiOperation({ title: 'Laat geselecteerder kamerreseveringen zien' })
-    async getKamerReserveringenById(@Param('id') id: number): Promise<{kamerreserveringen: KamerReservering[] }> {
-        const kamerreserveringen = await this.kamerreserveringservice.getKamerReserveringenById(id);
+    @Get('id/:reserveringsnummer')
+    @ApiOperation({ title: 'Laat geselecteerder resevering zien' })
+    async getKamerReserveringenById(@Param('reserveringsnummer') reserveringsnummer: string): Promise<{kamerreserveringen: KamerReservering[] }> {
+        const kamerreserveringen = await this.kamerreserveringservice.getKamerReserveringenById(reserveringsnummer);
         return { kamerreserveringen };
     }
 
