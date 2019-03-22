@@ -15,8 +15,8 @@ export class KamerreserveringService {
             .then(kamerreserveringEntities => kamerreserveringEntities.map(kamerreserveringEntities => kamerreserveringEntities.mapToKamersReserving()));
     }
 
-    public async getKamerReserveringenById(id: number): Promise<KamerReservering[]>{
-        return this.kamerreserveringepository.find({where: {id: id}})
+    public async getKamerReserveringenById(reserveringsnummer: string): Promise<KamerReservering[]>{
+        return this.kamerreserveringepository.find({where: {reserveringsnummer: reserveringsnummer}})
             .then(kamerreserveringEntities => kamerreserveringEntities.map(kamerreserveringEntities => kamerreserveringEntities.mapToKamersReserving()));
     }
 
