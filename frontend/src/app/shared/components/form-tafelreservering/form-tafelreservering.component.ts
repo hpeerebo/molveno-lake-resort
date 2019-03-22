@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, OnDestroy } from "@angular/core";
 import { Tafelreservering } from "src/app/models/tafelreservering";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
-import { FormBuilder, Validators, FormControl, ValidatorFn, AbstractControl } from "@angular/forms";
+import { FormBuilder, Validators, ValidatorFn, AbstractControl } from "@angular/forms";
 import { PickerHelper } from "src/app/models/picker-helper";
 import { debounceTime, tap, take } from "rxjs/operators";
 import { TafelreserveringenService } from "src/app/services/tafelreserveringen.service";
@@ -130,6 +130,10 @@ export class FormTafelreserveringComponent implements OnInit, OnDestroy {
 
   get aanvangsdatum() {
     return this.tafelreserveringForm.get("aanvangsdatum");
+  }
+
+  get aanvangstijd() {
+    return this.tafelreserveringForm.get("aanvangstijd");
   }
 
   get personen() {

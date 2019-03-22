@@ -1,6 +1,11 @@
 <div class="modal-header">
   <h4 class="modal-title" id="modal-basic-title">Tafelreservering</h4>
-  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('cancel')">
+  <button
+    type="button"
+    class="close"
+    aria-label="Close"
+    (click)="activeModal.dismiss('cancel')"
+  >
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
@@ -11,45 +16,106 @@
       <div class="row d-flex align-items-center">
         <div class="col">
           <div class="input-group">
-            <input class="form-control" placeholder="yyyy-mm-dd" name="dp" formControlName="aanvangsdatum" ngbDatepicker
-              #d="ngbDatepicker" ngbAutofocus [minDate]="minDate" [maxDate]="maxDate">
+            <input
+              class="form-control"
+              placeholder="yyyy-mm-dd"
+              name="dp"
+              formControlName="aanvangsdatum"
+              ngbDatepicker
+              #d="ngbDatepicker"
+              ngbAutofocus
+              [minDate]="minDate"
+              [maxDate]="maxDate"
+            />
             <div class="input-group-append">
-              <button class="btn btn-outline-secondary far fa-calendar-alt" (click)="d.toggle()" type="button"></button>
+              <button
+                class="btn btn-outline-secondary far fa-calendar-alt"
+                (click)="d.toggle()"
+                type="button"
+              ></button>
             </div>
           </div>
         </div>
         <div class="col">
-          <ngb-timepicker formControlName="aanvangstijd" [minuteStep]="15"></ngb-timepicker>
+          <ngb-timepicker
+            formControlName="aanvangstijd"
+            [minuteStep]="15"
+          ></ngb-timepicker>
         </div>
       </div>
-      <div><small [class.d-none]="!beschikbaar || aanvangsdatum?.invalid"><i>Er is op dit tijdstip nog plaats voor
-            {{beschikbaar}}
-            personen</i></small></div>
-      <div><small class="text-danger" [class.d-none]="aanvangsdatum?.valid || aanvangsdatum?.untouched">Voer een geldige
-          datum in</small></div>
+      <div>
+        <small [class.d-none]="!beschikbaar || aanvangsdatum?.invalid || aanvangstijd?.invalid"
+          ><i
+            >Er is op dit tijdstip nog plaats voor
+            {{ beschikbaar }}
+            personen</i
+          ></small
+        >
+      </div>
+      <div>
+        <small
+          class="text-danger"
+          [class.d-none]="aanvangsdatum?.valid || aanvangsdatum?.untouched"
+          >Voer een geldige datum in</small
+        >
+      </div>
+      <div>
+        <small
+          class="text-danger"
+          [class.d-none]="aanvangstijd?.valid"
+          >De openingstijden van de keuken zijn van 13:00 tot 21:00. Selecteer a.u.b. een tijd die binnen deze openingtijden valt.</small
+        >
+      </div>
     </div>
     <div class="form-group">
       <label>Aantal Personen</label>
-      <input type="number" class="form-control" formControlName="personen"
-        [class.is-invalid]="personen?.invalid && personen?.touched" />
-      <small class="text-danger" [class.d-none]="personen?.valid || personen?.untouched">minimaal 1 en maximaal
-        {{beschikbaar}}</small>
+      <input
+        type="number"
+        class="form-control"
+        formControlName="personen"
+        [class.is-invalid]="personen?.invalid && personen?.touched"
+      />
+      <small
+        class="text-danger"
+        [class.d-none]="personen?.valid || personen?.untouched"
+        >minimaal 1 en maximaal {{ beschikbaar }}</small
+      >
     </div>
     <div class="form-group">
       <label>Naam</label>
-      <input type="text" class="form-control" formControlName="naam"
-        [class.is-invalid]="naam?.invalid && naam?.touched" />
-      <small class="text-danger" [class.d-none]="naam?.valid || naam?.untouched">Vereist</small>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="naam"
+        [class.is-invalid]="naam?.invalid && naam?.touched"
+      />
+      <small class="text-danger" [class.d-none]="naam?.valid || naam?.untouched"
+        >Vereist</small
+      >
     </div>
     <div class="form-group">
       <label>Telefoon</label>
-      <input type="text" class="form-control" formControlName="telefoon"
-        [class.is-invalid]="telefoon?.invalid && telefoon?.touched" />
-      <small class="text-danger" [class.d-none]="telefoon?.valid || telefoon?.untouched">Vereist</small>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="telefoon"
+        [class.is-invalid]="telefoon?.invalid && telefoon?.touched"
+      />
+      <small
+        class="text-danger"
+        [class.d-none]="telefoon?.valid || telefoon?.untouched"
+        >Vereist</small
+      >
     </div>
   </form>
   <div class="modal-footer">
-    <button type="button" class="btn btn-success" (click)="submitForm()"
-      [disabled]="tafelreserveringForm.invalid">Save</button>
+    <button
+      type="button"
+      class="btn btn-success"
+      (click)="submitForm()"
+      [disabled]="tafelreserveringForm.invalid"
+    >
+      Save
+    </button>
   </div>
 </div>
