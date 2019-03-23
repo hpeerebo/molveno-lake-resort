@@ -24,6 +24,7 @@ import { ActiviteitPlanningEntity } from './entities/activiteit-planning-entity'
 import { ActiviteitenPlanningController } from './controllers/activiteiten-planning/activiteiten-planning.controller';
 import { ActiviteitPlanningService } from './services/activiteit-planning/activiteit-planning.service';
 import { UsersModule } from './features/users/users.module';
+import { UsersController } from './controllers/users/users.controller';
 
 @Module({
   imports: [KamersModule,
@@ -58,6 +59,7 @@ import { UsersModule } from './features/users/users.module';
     ActiviteitenPlanningController,
     KamersController,
     RestaurantController,
+    UsersController,
   ],
   providers: [
     AppService,

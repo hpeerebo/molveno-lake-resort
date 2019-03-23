@@ -3,16 +3,10 @@
   <br />
 
   <div class="row">
-    <div class=" col-8 d-flex text-sm-left">
-      <button type="button" class="btn btn-primary" [routerLink]="['/managementportal/kamers/reseveer']" >Resevering toevoegen</button>
-    </div>
-    <div class=" col-2 d-flex text-sm-right">
-      <button type="button" class="btn btn-primary" (click)="loadHistoriesResevering()" >Historie reseveringen</button>
-    </div>
-
-    <div class=" col-2 d-flex text-sm-right">
-      <button type="button" class="btn btn-primary" (click)="loadCurrentResevering()" >Huidige reseveringen</button>
-    </div>
+    <div class="col-12 d-flex text-sm-center">
+      <button type="button" class="btn btn-outline-primary btn-sm" [routerLink]="['/managementportal/kamers/reseveer']" >Resevering toevoegen</button>
+      <button type="button" class="btn btn-outline-primary btn-sm" (click)="loadHistoriesResevering()" >Historie reseveringen</button>
+      <button type="button" class="btn btn-outline-primary btn-sm" (click)="loadCurrentResevering()" >Huidige reseveringen</button>
   </div>
   <br />
   <div class="table-responsive mt-2">
@@ -39,7 +33,7 @@
         <td>{{kamerreservering.datumtot}}</td>
         <td>{{kamerreservering.kamernaam}}</td>
         <td class="text-right">
-          <i class="fas fa-edit mr-2" placement="top" ngbTooltip="Toon gegevens" (click)="openFormKamerReserveringDetailsModal(kamerreservering)"></i>
+          <i class="fas fa-edit mr-2" placement="top" ngbTooltip="Bewerken" (click)="openKamerreserveringdetailsComponent(kamerreservering)"></i>
           <i class="fas fa-trash-alt mr-2" placement="top" ngbTooltip="Verwijderen" (click)="onSelect(kamerreservering); openSm(deleteReseveringModal)" ></i>
         </td>
       </tr>

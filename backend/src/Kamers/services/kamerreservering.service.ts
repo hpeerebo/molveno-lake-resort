@@ -4,6 +4,7 @@ import {getRepository, Repository} from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { KamerReservering } from '../models/kamerReservering';
 import { CreateKamerreserveringDto } from '../dto/create-kamerreservering-dto';
+import {Tafelreservering} from "../../../../frontend/src/app/models/tafelreservering";
 
 @Injectable()
 export class KamerreserveringService {
@@ -11,6 +12,11 @@ export class KamerreserveringService {
 
     public getKamerReserveringen(): Promise<KamerReservering[]>{
         return this.kamerreserveringepository.find()
+            .then(kamerreserveringEntities => kamerreserveringEntities.map(kamerreserveringEntities => kamerreserveringEntities.mapToKamersReserving()));
+    }
+
+    public async getKamerReserveringenById(reserveringsnummer: string): Promise<KamerReservering[]>{
+        return this.kamerreserveringepository.find({where: {reserveringsnummer: reserveringsnummer}})
             .then(kamerreserveringEntities => kamerreserveringEntities.map(kamerreserveringEntities => kamerreserveringEntities.mapToKamersReserving()));
     }
 
@@ -37,4 +43,6 @@ export class KamerreserveringService {
     public deleteKamerReservering(kamerid: number){
         this.kamerreserveringepository.delete({id: kamerid});
     }
+    
 }
+

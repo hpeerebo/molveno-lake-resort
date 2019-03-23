@@ -3,7 +3,6 @@ import { KamerreserveringenService } from 'src/app/services/kamerreserveringen.s
 import { KamerReservering } from 'src/app/models/kamerreservering';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
-import {FormKamerreserveringdetailsComponent} from "../kamers-form/form-kamerreserveringdetails/form-kamerreserveringdetails.component";
 import {Observable} from "rxjs";
 
 @Component({
@@ -14,7 +13,7 @@ import {Observable} from "rxjs";
 export class KamerreserveringComponent implements OnInit {
 
   constructor(private readonly kamerreserveringservice: KamerreserveringenService, private readonly modalService: NgbModal, private router: Router) { }
-  public kamerreserveringen: Observable<KamerReservering[] | undefined> = this.kamerreserveringservice.getKamerToekomstReserveringen();
+  public kamerreserveringen: Observable<KamerReservering[] | undefined> = this.kamerreserveringservice.getKamerReserveringen();
   public selectedResevering?: KamerReservering;
   closeResult: string = "";
 
@@ -28,13 +27,9 @@ export class KamerreserveringComponent implements OnInit {
 
   }
 
-  openFormKamerReserveringDetailsModal(kamerReservering: KamerReservering){
-    const modalKamerReservering = this.modalService.open(FormKamerreserveringdetailsComponent);
-    if (kamerReservering) {
-      modalKamerReservering.componentInstance.kamerReservering = kamerReservering;
-    }
+  openKamerreserveringdetailsComponent(kamerReservering: KamerReservering){
+    this.router.navigateByUrl(`managementportal/kamerreserveringen/${kamerReservering.reserveringsnummer}`);
   }
-
   loadCurrentResevering() {
     this.kamerreserveringservice.getKamerToekomstReserveringen( true);
   }
@@ -46,7 +41,6 @@ export class KamerreserveringComponent implements OnInit {
   onSelect(kamerresevering: KamerReservering): void {
     this.selectedResevering = kamerresevering;
   }
-
 
   openSm(content: NgbModal) {
     this.modalService

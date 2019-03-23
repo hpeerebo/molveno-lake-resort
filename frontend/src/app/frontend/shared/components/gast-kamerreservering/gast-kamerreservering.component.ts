@@ -320,6 +320,6 @@ export class GastKamerReserveringComponent implements OnInit {
     }
 
     this.activeModal.close(this.reservationlist);
-    //location.reload();
+    location.reload();
   }
 }

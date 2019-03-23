@@ -19,15 +19,6 @@ export class FormKamersbeschikbaarComponent implements OnInit {
     kamertype: new FormControl(undefined,[ Validators.required])
   }, this.dateValidationFormGroup());
 
-  /*
-  public kamerSearchForm = this.formBuilder.group({
-    datumvan: ['undefined'],
-    //datumvan: [undefined, Validators.required, this.dateValidationFormGroup],
-    datumtot: ['unidefind'],
-    kamertype: ['', Validators.required]
-  });
-  */
-
   constructor(public activeModal: NgbActiveModal, private formBuilder: FormBuilder) {
     const currentDate:Date = new Date();
     let dd:any = currentDate.getDate();
@@ -56,6 +47,7 @@ export class FormKamersbeschikbaarComponent implements OnInit {
   }
   submitForm() {
     this.activeModal.close(this.kamerSearchForm.value);
+
   }
   dateValidationFormGroup(): ValidatorFn{
     return (control: AbstractControl) => {
