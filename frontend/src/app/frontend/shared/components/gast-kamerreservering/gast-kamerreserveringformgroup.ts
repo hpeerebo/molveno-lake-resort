@@ -15,7 +15,8 @@ export class GastKamerReserveringFormGroup extends FormGroup{
     land: new FormControl('', Validators.required),
     datumvan: new FormControl('', Validators.required),
     datumtot: new FormControl('', Validators.required),
-    kamernaam: new FormControl('', Validators.required),
+    kamernaam1: new FormControl('', Validators.required),
+    kamernaam2: new FormControl('',)
   };
   constructor(){
     super(GastKamerReserveringFormGroup.controls);

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 // FrontEnd imports
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -35,7 +35,7 @@ import { ReservationButtonComponent } from './shared/components/reservation-butt
     ReservationButtonComponent,
   ],
   imports: [CommonModule, FrontEndAppRoutingModule, NgbModule, FormsModule, ReactiveFormsModule, ApplicationPipesModule],
-  entryComponents: [GastKamerReserveringComponent, LoginComponent]
-
+  entryComponents: [GastKamerReserveringComponent, LoginComponent],
+  providers: [DatePipe],
 })
 export class FrontendModule {}
