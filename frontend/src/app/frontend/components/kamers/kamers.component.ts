@@ -13,7 +13,7 @@ export class KamersComponent implements OnInit {
   
   public readonly roomlist = [
     { roomtypefull: 'Budget kamer', roomtype: 'Budget',  roomprice: 'Vanaf € 35,-', image: 'assets/img/room_budget.jpg', thumbimage: 'assets/img/thumb_room_budget.jpg',  carouselimage: 'assets/img/carousel_room_budget.jpg', alignText: `col-md-7 ${this.alignLeft}`, alignImage: `col-md-5 ${this.alignRight}`,
-      text: 'Een warme en stijlvolle hotelkamer met eigen balkon. De kamer beschikt over een bureau, flatscreen televisie en een radio. De badkamer is ingericht met een douche in bad, toilet en föhn.' },
+      text: 'Een warme en stijlvolle ingericht hotelkamer met eigen balkon. De kamer beschikt over een bureau, flatscreen televisie en een radio. De badkamer is ingericht met een douche in bad, toilet en föhn.' },
     { roomtypefull: 'Standaard kamer', roomtype: 'Standaard', roomprice: 'Vanaf € 50,-', image: 'assets/img/room_standard.jpg', thumbimage: 'assets/img/thumb_room_standard.jpg',  carouselimage: 'assets/img/carousel_room_standard.jpg', alignText: `col-md-7 ${this.alignRight}`, alignImage: `col-md-5 ${this.alignLeft}`,
       text: 'De ruime suite beschikt over een apart zitgedeelte en balkon met uitzicht op het bos. De hotelkamer beschikt over koffie- en theefaciliteiten, een badkamer met douche in bad en toilet.' },
     { roomtypefull: 'Luxe kamer', roomtype: 'Lux', roomprice: 'Vanaf € 65,-', image: 'assets/img/room_luxury.jpg', thumbimage: 'assets/img/thumb_room_luxury.jpg',  carouselimage: 'assets/img/carousel_room_luxury.jpg', alignText: `col-md-7 ${this.alignLeft}`, alignImage: `col-md-5 ${this.alignRight}`,
