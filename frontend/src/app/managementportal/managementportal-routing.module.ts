@@ -15,6 +15,7 @@ import { KamerreserveringComponent } from "./components/kamers/kamerreserveringe
 import { GerechtenDetailsComponent } from './components/restaurant/gerechten-details/gerechten-details.component';
 import { ActiviteitenPlanningComponent } from "./components/activiteiten/activiteiten-planning/activiteiten-planning.component";
 import {KamerreserveringdetailsComponent} from "./components/kamers/kamerreserveringdetails/kamerreserveringdetails.component";
+import { AuthGuard } from '../frontend/guard/auth.guard';
 
 const routes: Routes = [
   {

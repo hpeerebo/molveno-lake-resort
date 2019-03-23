@@ -14,8 +14,7 @@ export class KamerreserveringenService {
 
   private static api = `/api/kamerreservering`;
 
-  constructor(private http: HttpClient,
-              private datefunctions: DateFunctions) {
+  constructor(private http: HttpClient, private datefunctions: DateFunctions) {
   }
 
   getKamerReserveringen(refreshCache: boolean = false): Observable<KamerReservering[] | undefined> {

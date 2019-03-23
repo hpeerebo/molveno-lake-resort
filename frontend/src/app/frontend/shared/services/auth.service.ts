@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { IUserLogin } from '../../../../../../shared/interfaces/user-login-interface';
 import { Observable } from 'rxjs';
 import { take, tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -12,13 +13,16 @@ export class AuthService {
   public static readonly api = "api/auth/login";
 	//public token = "732863"
 
-	constructor(private http: HttpClient) {
+	constructor(private http: HttpClient, private router: Router) {
 	}
 
 	public login(userLogin: IUserLogin): Observable<any> {
 		return this.http.post<Tokenresponse>(AuthService.api, userLogin)
 			.pipe(
-				tap(data => localStorage.setItem("token", data.token)),
+				tap(data => {
+          localStorage.setItem("token", data.token),
+          this.router.navigate(['managementportal/home'])
+        }),
 				take(1)
 			);
 	}

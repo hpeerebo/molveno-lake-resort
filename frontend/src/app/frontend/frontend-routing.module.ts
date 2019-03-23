@@ -22,15 +22,15 @@ const routes: Routes = [
     children: [
       { path: 'home', component: HomeComponent },
       { path: 'contact', component: ContactComponent },
-      { path: 'kamers', component: KamersComponent, canActivate: [AuthGuard] },
-      { path: 'activiteiten', component: ActiviteitenComponent, canActivate: [AuthGuard] },
-      { path: 'restaurant', component: RestaurantComponent, canActivate: [AuthGuard] },
+      { path: 'kamers', component: KamersComponent},
+      { path: 'activiteiten', component: ActiviteitenComponent},
+      { path: 'restaurant', component: RestaurantComponent },
       { path: 'login', component: LoginComponent },
       { path: 'carousel', component: CarouselComponent },
       { path: 'featurette', component: FeaturetteComponent },
       { path: 'rounded-circle', component: RoundedCircleComponent },
-      { path: 'kamerreserveringsservice', component: KamerreserveringenService, canActivate: [AuthGuard]},
-      { path: 'gast-kamerreservering', component: GastKamerReserveringComponent, canActivate: [AuthGuard]},
+      { path: 'kamerreserveringsservice', component: KamerreserveringenService},
+      { path: 'gast-kamerreservering', component: GastKamerReserveringComponent},
     ]
   },
 
