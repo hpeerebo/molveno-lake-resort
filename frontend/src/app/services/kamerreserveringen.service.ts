@@ -32,6 +32,20 @@ export class KamerreserveringenService {
     return this.kamerReseveringCacheSubject;
   }
 
+  getKamerReseveringById(refreshCache: boolean = false, reserveringsnummer: string): Observable<KamerReservering[] | undefined> {
+    if (this.kamerReseveringDetailsCacheSubject.getValue() === undefined || refreshCache) {
+      this.http.get<IKamerReserveringenResponse>(`${KamerreserveringenService.api}/id/${reserveringsnummer}`)
+        .pipe(
+          map(KamerreserveringenService.kamerResponseToReserveringMapper),
+          take(1),
+          tap(kamerreserveringen => {
+            this.kamerReseveringDetailsCacheSubject.next(kamerreserveringen);
+          })
+        ).subscribe();
+    }
+    return this.kamerReseveringDetailsCacheSubject;
+  }
+
   getKamerToekomstReserveringen(refreshCache: boolean = false): Observable<KamerReservering[] | undefined> {
     if (this.kamerReseveringCacheSubject.getValue() === undefined || refreshCache) {
       this.http.get<IKamerReserveringenResponse>(`${KamerreserveringenService.api}/actief/${this.datefunctions.getCurrentDate()}`)
@@ -58,19 +72,6 @@ export class KamerreserveringenService {
         ).subscribe();
     }
     return this.kamerReseveringCacheSubject;
-  }
-
-  getKamerReseveringById(reserveringsnummer: string): Observable<KamerReservering[] | undefined> {
-    console.log(reserveringsnummer);
-    this.http.get<IKamerReserveringenResponse>(`${KamerreserveringenService.api}/id/${reserveringsnummer}`)
-      .pipe(
-        map(KamerreserveringenService.kamerResponseToReserveringMapper),
-        take(1),
-        tap(kamerreserveringen => {
-          this.kamerReseveringDetailsCacheSubject.next(kamerreserveringen);
-        })
-      ).subscribe();
-    return this.kamerReseveringDetailsCacheSubject;
   }
 
   saveKamerReservering(kamerreservering: KamerReservering) {
