@@ -14,10 +14,12 @@ import { DatePipe } from '@angular/common';
 })
 export class GastKamerReserveringComponent implements OnInit {
   public temp: any = this.datepipe.transform(new Date(), "yyyy-MM-dd");
+  public tempresnum: any = this.datepipe.transform(new Date(), "yyyyMMddhhmmss");
   public today = new Date(new Date(this.temp).getTime())
   public tomorrow: Date = new Date();
-  public aantalpersonenarray: Array<string> = ['1','2','3','4','5','6','7','8'];
-
+  public aantalpersonenarray: Array<number> = [1,2,3,4,5,6,7,8];
+  public reserveringsnummer = `MO-${this.tempresnum}-1`;
+  
   public kamersgereserveerd: Array<string> = [];
   public gastkamerreservering: GastKamerReservering | undefined = undefined;
   public reservationroom1: GastKamerReservering | undefined = undefined;
@@ -287,9 +289,9 @@ export class GastKamerReserveringComponent implements OnInit {
       kamer1.split(',')[0],
       this.kamerreserveringForm.value.inchecken,
       this.kamerreserveringForm.value.uitchecken,
-      this.kamerreserveringForm.value.personen,
-      this.kamerreserveringForm.value.prijs,
-      this.kamerreserveringForm.value.reserveringsnummer
+      this.kamerreserveringForm.value.aantalpersonen,
+      kamer1.split(',')[1],
+      this.reserveringsnummer
     )
 
     if (kamer2 !== '') {
@@ -311,9 +313,9 @@ export class GastKamerReserveringComponent implements OnInit {
         kamer2.split(',')[0],
         this.kamerreserveringForm.value.inchecken,
         this.kamerreserveringForm.value.uitchecken,
-        this.kamerreserveringForm.value.personen,
-        this.kamerreserveringForm.value.prijs,
-        this.kamerreserveringForm.value.reserveringsnummer
+        this.kamerreserveringForm.value.aantalpersonen,
+        kamer1.split(',')[1],
+        this.reserveringsnummer
       )
       this.reservationlist = [this.reservationroom1, this.reservationroom2]
     } else {
