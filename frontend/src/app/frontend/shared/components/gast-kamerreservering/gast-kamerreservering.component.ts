@@ -118,15 +118,15 @@ export class GastKamerReserveringComponent implements OnInit {
       this.leavedate = new Date(new Date(this.kamerreserveringForm.controls.datumtot.value).getTime());
     }
 
-    this.aantalnachten = (new Date(this.leavedate).getTime() - new Date(this.arrivedate).getTime())/(1000 * 60 * 60 * 24)
-    this.totalprice = (this.roomprice1 + this.roomprice2) * this.aantalnachten
-
     if(datumtot && this.kamerreserveringForm.controls.aantalpersonen.value) {
       this.roomsForTwo = this.roomservice.searchRoomByDateAndCapacity(this.arrivedate, this.leavedate, 2);
       this.roomsForThree = this.roomservice.searchRoomByDateAndCapacity(this.arrivedate, this.leavedate, 3);
       this.roomsForFour = this.roomservice.searchRoomByDateAndCapacity(this.arrivedate, this.leavedate, 4);
       this.showselectpeople = true;
     }
+
+    this.aantalnachten = (new Date(this.leavedate).getTime() - new Date(this.arrivedate).getTime())/(1000 * 60 * 60 * 24)
+    this.totalprice = (this.roomprice1 + this.roomprice2) * this.aantalnachten
 
   }
 
@@ -139,18 +139,19 @@ export class GastKamerReserveringComponent implements OnInit {
     if(this.leavedate <= this.arrivedate) {
       this.minleavedate = new Date(new Date(this.arrivedate).getTime() + (1000 * 60 * 60 * 24) )
       this.kamerreserveringForm.controls.datumtot.setValue(this.datepipe.transform(this.minleavedate, "yyyy-MM-dd"));
+      this.leavedate = this.minleavedate;
       this.leavedatecheck = false;
     }
 
-    this.aantalnachten = (new Date(this.leavedate).getTime() - new Date(this.arrivedate).getTime())/(1000 * 60 * 60 * 24)
-    this.totalprice = (this.roomprice1 + this.roomprice2) * this.aantalnachten
-  
     if(datumvan && this.kamerreserveringForm.controls.aantalpersonen.value) {
       this.roomsForTwo = this.roomservice.searchRoomByDateAndCapacity(this.arrivedate, this.leavedate, 2);
       this.roomsForThree = this.roomservice.searchRoomByDateAndCapacity(this.arrivedate, this.leavedate, 3);
       this.roomsForFour = this.roomservice.searchRoomByDateAndCapacity(this.arrivedate, this.leavedate, 4);
       this.showselectpeople = true;
     }
+
+    this.aantalnachten = (new Date(this.leavedate).getTime() - new Date(this.arrivedate).getTime())/(1000 * 60 * 60 * 24)
+    this.totalprice = (this.roomprice1 + this.roomprice2) * this.aantalnachten
   }
 
   aantalPersonenChanged(aantalpersonen: string) {
