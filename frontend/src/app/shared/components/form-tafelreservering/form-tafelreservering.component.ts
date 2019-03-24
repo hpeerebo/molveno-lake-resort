@@ -1,7 +1,12 @@
 import { Component, OnInit, Input, OnDestroy } from "@angular/core";
 import { Tafelreservering } from "src/app/models/tafelreservering";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
-import { FormBuilder, Validators, FormControl, ValidatorFn, AbstractControl } from "@angular/forms";
+import {
+  FormBuilder,
+  Validators,
+  ValidatorFn,
+  AbstractControl
+} from "@angular/forms";
 import { PickerHelper } from "src/app/models/picker-helper";
 import { debounceTime, tap, take } from "rxjs/operators";
 import { TafelreserveringenService } from "src/app/services/tafelreserveringen.service";
@@ -26,28 +31,29 @@ export class FormTafelreserveringComponent implements OnInit, OnDestroy {
 
   public tafelreserveringForm = this.formBuilder.group({
     aanvangsdatum: [PickerHelper.dateObject(new Date()), Validators.required],
-    aanvangstijd: [{ hour: 17, minute: 0 }, [FormTafelreserveringComponent.timeValidator(),  Validators.required]],
+    aanvangstijd: [
+      { hour: 17, minute: 0 },
+      [FormTafelreserveringComponent.timeValidator(), Validators.required]
+    ],
     personen: [undefined, [Validators.min(1), Validators.max(0)]],
     naam: [undefined, Validators.required],
     telefoon: [undefined, Validators.required]
   });
 
-// Begin code Maurice
+  // Begin code Maurice
   private static timeValidator(): ValidatorFn {
     return (control: AbstractControl) => {
       console.log(control.value);
       if (control.value.hour > 21 || control.value.hour < 13) {
-        console.log('invalid')
         return {
-          message:"keuken is gesloten"
-        }
-      }
-      else {
+          message: "keuken is gesloten"
+        };
+      } else {
         return null;
       }
-    }
+    };
   }
-// End code Maurice
+  // End code Maurice
   constructor(
     public activeModal: NgbActiveModal,
     private formBuilder: FormBuilder,
@@ -130,6 +136,10 @@ export class FormTafelreserveringComponent implements OnInit, OnDestroy {
 
   get aanvangsdatum() {
     return this.tafelreserveringForm.get("aanvangsdatum");
+  }
+
+  get aanvangstijd() {
+    return this.tafelreserveringForm.get("aanvangstijd");
   }
 
   get personen() {
