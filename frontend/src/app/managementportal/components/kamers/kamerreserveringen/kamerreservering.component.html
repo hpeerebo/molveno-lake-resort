@@ -20,6 +20,7 @@
         <th (click)="clickColumnHandler('datumvan')">Aankomst<i class="fa fa-fw fa-sort"></i></th>
         <th (click)="clickColumnHandler('datumtot')">Vertrek<i class="fa fa-fw fa-sort"></i></th>
         <th (click)="clickColumnHandler('kamernaam')">Kamer<i class="fa fa-fw fa-sort"></i></th>
+        <th (click)="clickColumnHandler('ingecheckt')">Ingecheckt<i class="fa fa-fw fa-sort"></i></th>
         <th></th>
       </tr>
       </thead>
@@ -32,6 +33,7 @@
         <td>{{kamerreservering.datumvan}}</td>
         <td>{{kamerreservering.datumtot}}</td>
         <td>{{kamerreservering.kamernaam}}</td>
+        <td>{{kamerreservering.inchecken}}</td>
         <td class="text-right">
           <i class="fas fa-edit mr-2" placement="top" ngbTooltip="Bewerken" (click)="openKamerreserveringdetailsComponent(kamerreservering)"></i>
           <i class="fas fa-trash-alt mr-2" placement="top" ngbTooltip="Verwijderen" (click)="onSelect(kamerreservering); openSm(deleteReseveringModal)" ></i>
