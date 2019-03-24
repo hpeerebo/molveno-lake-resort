@@ -5,6 +5,11 @@ import {Observable} from "rxjs";
 import {KamerReservering} from "../../../../models/kamerreservering";
 import {KamerReserveringDetailsFormGroup} from "./kamerreserveringdetailsormgroup";
 import {DateFunctions} from "../../../../shared/services/date-functions";
+import {FormKamerreserveringComponent} from "../kamers-form/form-kamerreservering/form-kamerreservering.component";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {ManagementPortalKamersFormComponent} from "../kamers-form/kamers-form.component";
+import {FormPrintKamerreseveringComponent} from "../kamers-form/form-print-kamerresevering/form-print-kamerresevering.component";
+import {FormEmailKamerreseveringComponent} from '../kamers-form/form-email-kamerresevering/form-email-kamerresevering.component';
 
 @Component({
   //changeDetection: ChangeDetectionStrategy.OnPush,
@@ -17,9 +22,11 @@ export class KamerreserveringdetailsComponent implements OnInit {
   constructor(private kamerreserveringenservice: KamerreserveringenService,
               private route : ActivatedRoute,
               private router: Router,
-              private dateservice: DateFunctions) {};
+              private dateservice: DateFunctions,
+              private modalService: NgbModal,) {};
 
-  public kamerreserveringen$: Observable<KamerReservering[] | undefined> = this.kamerreserveringenservice.getKamerReseveringById(true, this.getReseveringBasedOnId());
+  //public kamerreserveringen$: Observable<KamerReservering[] | undefined> = this.kamerreserveringenservice.getKamerReseveringById(true, this.getReseveringBasedOnId());
+  public kamerreserveringen$: Promise<KamerReservering[]> = this.kamerreserveringenservice.getKamerReseveringById2(this.getReseveringBasedOnId());
   public booking: KamerReservering[] | undefined = undefined;
 
   private storagePrice: number[] = [];
@@ -39,10 +46,13 @@ export class KamerreserveringdetailsComponent implements OnInit {
   async ngOnInit() {
 
     if(!this.reserveringsnummer) {
-      this.kamerreserveringen$.pipe().subscribe(data => console.log(data));
-      this.kamerreserveringen$.subscribe({
-        next: value => this.booking = value
+
+      this.kamerreserveringen$.then(values => {
+        this.booking = values
       });
+     // this.kamerreserveringen$.subscribe({
+     //   next: value => this.booking = value
+     // });
 
       setTimeout(() => {
         if(this.booking) {
@@ -142,6 +152,60 @@ export class KamerreserveringdetailsComponent implements OnInit {
     this.router.navigateByUrl('managementportal/kamerreserveringen');
   }
 
+  openBookingPrintingForm(){
+    const modalPrintBooking = this.modalService.open(FormPrintKamerreseveringComponent, {
+      size: "lg",
+      ariaLabelledBy: "modal-basic-title"
+    });
+    modalPrintBooking.componentInstance.action = "edit";
+    modalPrintBooking.componentInstance.numberOfDays = this.numberOfDays;
+    modalPrintBooking.componentInstance.totalPrice = this.totalPrice;
+    modalPrintBooking.componentInstance.todayDate = this.todayDate;
+    modalPrintBooking.componentInstance.voornaam = this.kamerreserveringdetailsormgroup.value.voornaam;
+    modalPrintBooking.componentInstance.achternaam = this.kamerreserveringdetailsormgroup.value.achternaam;
+    modalPrintBooking.componentInstance.telefoonnummer = this.kamerreserveringdetailsormgroup.value.telefoonnummer;
+    modalPrintBooking.componentInstance.emailadres = this.kamerreserveringdetailsormgroup.value.emailadres;
+    modalPrintBooking.componentInstance.identiteitsid = this.kamerreserveringdetailsormgroup.value.identiteitsid;
+    modalPrintBooking.componentInstance.postcode = this.kamerreserveringdetailsormgroup.value.postcode;
+    modalPrintBooking.componentInstance.straat = this.kamerreserveringdetailsormgroup.value.straat;
+    modalPrintBooking.componentInstance.huisnummer = this.kamerreserveringdetailsormgroup.value.huisnummer;
+    modalPrintBooking.componentInstance.woonplaats = this.kamerreserveringdetailsormgroup.value.woonplaats;
+    modalPrintBooking.componentInstance.land = this.kamerreserveringdetailsormgroup.value.land;
+    modalPrintBooking.componentInstance.inchecken = this.kamerreserveringdetailsormgroup.value.inchecken || this.incheckdatum;
+    modalPrintBooking.componentInstance.uitchecken = this.kamerreserveringdetailsormgroup.value.uitchecken || this.uitcheckdatum;
+    modalPrintBooking.componentInstance.reserveringsnummer = this.kamerreserveringdetailsormgroup.value.reserveringsnummer;
+    modalPrintBooking.componentInstance.datumvan = this.datumvan;
+    modalPrintBooking.componentInstance.datumtot = this.datumtot;
+    modalPrintBooking.componentInstance.kamers = this.booking;
+  }
+
+  openBookingEmailForm(){
+    const modalPrintBooking = this.modalService.open(FormEmailKamerreseveringComponent, {
+      size: "lg",
+      ariaLabelledBy: "modal-basic-title"
+    });
+    modalPrintBooking.componentInstance.action = "edit";
+    modalPrintBooking.componentInstance.numberOfDays = this.numberOfDays;
+    modalPrintBooking.componentInstance.totalPrice = this.totalPrice;
+    modalPrintBooking.componentInstance.todayDate = this.todayDate;
+    modalPrintBooking.componentInstance.voornaam = this.kamerreserveringdetailsormgroup.value.voornaam;
+    modalPrintBooking.componentInstance.achternaam = this.kamerreserveringdetailsormgroup.value.achternaam;
+    modalPrintBooking.componentInstance.telefoonnummer = this.kamerreserveringdetailsormgroup.value.telefoonnummer;
+    modalPrintBooking.componentInstance.emailadres = this.kamerreserveringdetailsormgroup.value.emailadres;
+    modalPrintBooking.componentInstance.identiteitsid = this.kamerreserveringdetailsormgroup.value.identiteitsid;
+    modalPrintBooking.componentInstance.postcode = this.kamerreserveringdetailsormgroup.value.postcode;
+    modalPrintBooking.componentInstance.straat = this.kamerreserveringdetailsormgroup.value.straat;
+    modalPrintBooking.componentInstance.huisnummer = this.kamerreserveringdetailsormgroup.value.huisnummer;
+    modalPrintBooking.componentInstance.woonplaats = this.kamerreserveringdetailsormgroup.value.woonplaats;
+    modalPrintBooking.componentInstance.land = this.kamerreserveringdetailsormgroup.value.land;
+    modalPrintBooking.componentInstance.inchecken = this.kamerreserveringdetailsormgroup.value.inchecken || this.incheckdatum;
+    modalPrintBooking.componentInstance.uitchecken = this.kamerreserveringdetailsormgroup.value.uitchecken || this.uitcheckdatum;
+    modalPrintBooking.componentInstance.reserveringsnummer = this.kamerreserveringdetailsormgroup.value.reserveringsnummer;
+    modalPrintBooking.componentInstance.datumvan = this.datumvan;
+    modalPrintBooking.componentInstance.datumtot = this.datumtot;
+    modalPrintBooking.componentInstance.kamers = this.booking;
+  }
+
   calculateNumberofDays(datumvan: string, datumtot: string){
     const date1 = this.convertDate(new Date(datumvan));
     const date2 = this.convertDate(new Date(datumtot));
@@ -176,4 +240,5 @@ export class KamerreserveringdetailsComponent implements OnInit {
 
     return numbers.reduce((a: number,b: number) => a + b, 0);
   }
+
 }
