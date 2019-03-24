@@ -1,11 +1,9 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {KamerreserveringenService} from "../../../../services/kamerreserveringen.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {Observable} from "rxjs";
 import {KamerReservering} from "../../../../models/kamerreservering";
 import {KamerReserveringDetailsFormGroup} from "./kamerreserveringdetailsormgroup";
 import {DateFunctions} from "../../../../shared/services/date-functions";
-import {FormKamerreserveringComponent} from "../kamers-form/form-kamerreservering/form-kamerreservering.component";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ManagementPortalKamersFormComponent} from "../kamers-form/kamers-form.component";
 import {FormPrintKamerreseveringComponent} from "../kamers-form/form-print-kamerresevering/form-print-kamerresevering.component";
