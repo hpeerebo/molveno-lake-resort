@@ -15,17 +15,26 @@ export class KamerService {
         .then(kamersEntities => kamersEntities.map(kamerEntity => kamerEntity.mapToKamers()));
     }
 
-    
     public getKamersOfCapacity(capacity: number): Promise<Kamer[]>{
         return this.kamersepository.find({where: {aantalPersonen: capacity}})
         .then(kamersEntities => kamersEntities.map(kamerEntity => kamerEntity.mapToKamers()));
     }
+
 
     public async searchFreeRoomsOfCapacity(datumvan: string, datumtot: string, capacity: number): Promise<Kamer[]>{
         return await getRepository(KamerEntity)
             .createQueryBuilder("kamer")
             .where(`kamer.kamerNaam NOT IN (select kamernaam from kamer_reservering_entity where datumvan >= '${datumvan}' 
                     AND datumtot <= '${datumtot}') AND kamer.aantalPersonen='${capacity}'`)
+            .getMany()
+            .then(kamersEntities => kamersEntities.map(kamerEntity => kamerEntity.mapToKamers()));
+    }
+ 
+    public async searchFreeRoomsOfCapacityAndType(datumvan: string, datumtot: string, capacity: number, type: string): Promise<Kamer[]>{
+        return await getRepository(KamerEntity)
+            .createQueryBuilder("kamer")
+            .where(`kamer.kamerNaam NOT IN (select kamernaam from kamer_reservering_entity where datumvan >= '${datumvan}' 
+                    AND datumtot <= '${datumtot}') AND kamer.aantalPersonen='${capacity}' AND kamer.kamerType='${type}'`)
             .getMany()
             .then(kamersEntities => kamersEntities.map(kamerEntity => kamerEntity.mapToKamers()));
     }
