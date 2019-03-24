@@ -5,6 +5,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { KamerReservering } from '../models/kamerReservering';
 import { CreateKamerreserveringDto } from '../dto/create-kamerreservering-dto';
 import {Tafelreservering} from "../../../../frontend/src/app/models/tafelreservering";
+import {UpdateKamerDto} from "../dto/update-kamer-dto";
+import {UpdateKamerreserveringDto} from "../dto/update-kamerreservering-dto";
 
 @Injectable()
 export class KamerreserveringService {
@@ -37,9 +39,31 @@ export class KamerreserveringService {
     }
 
     public saveCreateKamerReserveringDTO(kamerreservering: CreateKamerreserveringDto) {
-        console.log('kamerreservering: '+ kamerreservering);
         this.kamerreserveringepository.save(kamerreservering.kamerReserveringEntity());
     }
+
+    public updateResevering(updateKamerreserveringDto: UpdateKamerreserveringDto) {
+        this.kamerreserveringepository.update({id: updateKamerreserveringDto.id}, { voornaam: updateKamerreserveringDto.voornaam,
+            achternaam: updateKamerreserveringDto.achternaam,
+            telefoonnummer: updateKamerreserveringDto.telefoonnummer,
+            emailadres: updateKamerreserveringDto.emailadres,
+            identiteitsid: updateKamerreserveringDto.identiteitsid,
+            postcode: updateKamerreserveringDto.postcode,
+            straat: updateKamerreserveringDto.straat,
+            huisnummer: updateKamerreserveringDto.huisnummer,
+            woonplaats: updateKamerreserveringDto.woonplaats,
+            land: updateKamerreserveringDto.land,
+            datumvan: updateKamerreserveringDto.datumvan,
+            datumtot: updateKamerreserveringDto.datumtot,
+            kamernaam: updateKamerreserveringDto.kamernaam,
+            inchecken: updateKamerreserveringDto.inchecken,
+            uitchecken: updateKamerreserveringDto.uitchecken,
+            personen: updateKamerreserveringDto.personen,
+            prijs: updateKamerreserveringDto.prijs,
+            reserveringsnummer: updateKamerreserveringDto.reserveringsnummer
+        });
+    }
+
     public deleteKamerReservering(kamerid: number){
         this.kamerreserveringepository.delete({id: kamerid});
     }

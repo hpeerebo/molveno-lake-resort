@@ -1,9 +1,11 @@
-import { Controller, Get, Post, Body, Delete, Param } from '@nestjs/common';
+import {Controller, Get, Post, Body, Delete, Param, Put} from '@nestjs/common';
 import { KamerReservering } from '../models/kamerReservering';
 import { CreateKamerreserveringDto } from '../dto/create-kamerreservering-dto';
 import { KamerreserveringService } from '../services/kamerreservering.service';
 import {ApiUseTags, ApiOperation, ApiResponse} from '@nestjs/swagger';
 import {Tafelreservering} from "../../models/tafelreservering";
+import {CreateKamerDto} from "../dto/create-kamer-dto";
+import {UpdateKamerreserveringDto} from "../dto/update-kamerreservering-dto";
 
 @ApiUseTags('kamerreservering')
 @Controller('kamerreservering')
@@ -44,6 +46,13 @@ export class KamerreserveringController {
     @ApiResponse({ status: 409, description: 'Een kamerresevering met dit kenmerk bestaat al' })
     public saveKamerReservering(@Body() createKamerreserveringDto: CreateKamerreserveringDto): void {
         this.kamerreserveringservice.saveCreateKamerReserveringDTO(createKamerreserveringDto);
+    }
+
+    @Put('/kamerresevering')
+    @ApiOperation({ title: 'Bijwerken van een resevering' })
+    @ApiResponse({ status: 201, description: 'De resevering is succesvol bijgewerkt' })
+    public updateResevering(@Body() updateKamerreserveringDto: UpdateKamerreserveringDto): void {
+        this.kamerreserveringservice.updateResevering(updateKamerreserveringDto);
     }
 
     @Delete(':id')

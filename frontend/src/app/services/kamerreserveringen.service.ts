@@ -4,6 +4,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {KamerReservering} from '../models/kamerreservering';
 import {map, take, tap} from 'rxjs/operators';
 import {DateFunctions} from "../shared/services/date-functions";
+import {Tafel} from "../models/tafel";
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ import {DateFunctions} from "../shared/services/date-functions";
 export class KamerreserveringenService {
   private kamerReseveringCacheSubject = new BehaviorSubject<KamerReservering[] | undefined>(undefined);
   private kamerReseveringDetailsCacheSubject = new BehaviorSubject<KamerReservering[] | undefined>(undefined);
+  private readonly dataStore = new BehaviorSubject<KamerReservering[]>([]);
 
   private static api = `/api/kamerreservering`;
 
@@ -81,8 +83,15 @@ export class KamerreserveringenService {
       ).subscribe();
   }
 
+  updateReservering(kamerreservering: KamerReservering) {
+    this.http.put(`${KamerreserveringenService.api}/kamerresevering`, kamerreservering)
+      .pipe(
+        take(1),
+        tap(() => this.getKamerReserveringen(true))
+      ).subscribe();
+  }
+
   deleteKamerReservering(kamerdata: KamerReservering) {
-    console.log(kamerdata);
     this.http.delete(`${KamerreserveringenService.api}/${kamerdata.id}`)
       .pipe(
         take(1),
