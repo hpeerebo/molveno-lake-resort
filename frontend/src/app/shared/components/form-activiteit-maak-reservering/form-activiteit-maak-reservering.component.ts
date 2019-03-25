@@ -1,8 +1,7 @@
-import {Component, Input, OnInit} from "@angular/core";
-import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
-import {FormBuilder, Validators} from "@angular/forms";
-import {ActiviteitenPlanning} from "src/app/models/activiteit-planning";
-
+import { Component, Input, OnInit } from "@angular/core";
+import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
+import { FormBuilder, Validators } from "@angular/forms";
+import { ActiviteitenPlanning } from "src/app/models/activiteit-planning";
 
 @Component({
   selector: "app-form-activiteit-maak-reservering",
@@ -17,26 +16,34 @@ export class FormActiviteitMaakReserveringComponent implements OnInit {
     actDate: [undefined],
     actGastMail: [undefined, [Validators.required, Validators.email]],
     actGastPhone: [undefined],
-    actGastAantal: [1, [Validators.required, Validators.min(1)]]
+    actGastAantal: [1, [Validators.required, Validators.min(1)]],
+    actPlanId: [undefined]
   });
 
   constructor(
     public activeModal: NgbActiveModal,
     private formBuilder: FormBuilder
-  ) {
-  }
+  ) {}
 
   ngOnInit() {
     if (this.planning) {
       console.log("PLANNING", this.planning);
       console.log("PLANNING DATE", this.planning.actdate);
       console.log("PLANNING NAME", this.planning.activiteit.naam);
-      this.activiteitMaakResForm.controls.actDate.setValue(this.planning.actdate);
-      this.activiteitMaakResForm.controls.actNaam.setValue(this.planning.activiteit.naam);
+      this.activiteitMaakResForm.controls.actDate.setValue(
+        this.planning.actdate
+      );
+      this.activiteitMaakResForm.controls.actNaam.setValue(
+        this.planning.activiteit.naam
+      );
+      this.activiteitMaakResForm.controls.actPlanId.setValue(
+        this.planning.planid
+      );
     }
   }
 
   submitForm() {
+    console.log("submitForm", this.activiteitMaakResForm.value);
     this.activeModal.close(this.activiteitMaakResForm.value);
   }
 

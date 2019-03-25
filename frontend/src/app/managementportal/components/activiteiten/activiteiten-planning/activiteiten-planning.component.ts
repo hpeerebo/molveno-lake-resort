@@ -7,7 +7,7 @@ import { ActiviteitenPlanningService } from "src/app/services/activiteiten-plann
 import { ActiviteitenService } from "src/app/services/activiteiten.service";
 import { FormActiviteitPlanningComponent } from "src/app/shared/components/form-activiteitplanning/form-activiteitplanning.component";
 import { FormActiviteitMaakReserveringComponent } from "src/app/shared/components/form-activiteit-maak-reservering/form-activiteit-maak-reservering.component";
-import {map} from 'rxjs/operators';
+import { ActiviteitenResService } from "src/app/services/activiteiten-res.service";
 
 @Component({
   selector: "app-activiteiten-planning",
@@ -21,7 +21,7 @@ export class ActiviteitenPlanningComponent {
 
   constructor(
     private activiteitenPlanningService: ActiviteitenPlanningService,
-    private activiteitenService: ActiviteitenService,
+    private activiteitenResService: ActiviteitenResService,
     private modalService: NgbModal
   ) {}
 
@@ -34,7 +34,10 @@ export class ActiviteitenPlanningComponent {
 
     modal.result
       .then(result => {
-        console.log(result);
+        this.activiteitenResService.saveActiviteitRes(
+          result,
+          activiteitenPlanning.planid
+        );
       })
       .catch(error => {
         console.log(error);

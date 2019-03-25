@@ -25,7 +25,10 @@ export class ActiviteitReserveringenComponent {
     private modalService: NgbModal
   ) {}
 
-  openFormActiviteitResModal(reserveringen?: ActiviteitRes) {
+  openFormActiviteitResModal(
+    planningId: number,
+    reserveringen?: ActiviteitRes
+  ) {
     const modal = this.modalService.open(FormActiviteitResComponent);
 
     if (reserveringen) {
@@ -34,7 +37,8 @@ export class ActiviteitReserveringenComponent {
 
     modal.result
       .then(result => {
-        this.activiteitenResService.saveActiviteitRes(result);
+        console.log("Result", result);
+        this.activiteitenResService.saveActiviteitRes(result, planningId);
       })
       .catch(error => {
         console.log(error);

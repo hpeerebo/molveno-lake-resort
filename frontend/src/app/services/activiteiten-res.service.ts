@@ -41,9 +41,13 @@ export class ActiviteitenResService {
       .pipe(map(ActiviteitenResService.activiteitResToActiviteitResMapper));
   }
 
-  saveActiviteitRes(reservering: ActiviteitRes) {
+  saveActiviteitRes(reservering: ActiviteitRes, planningId: number) {
+    console.log("saveActiviteitRes", reservering);
     /*return*/ this.http
-      .post<IActiviteitres[]>(this.api /*+ "savereservering"*/, reservering)
+      .post<IActiviteitres[]>(
+        this.api /*+ "savereservering"*/ + planningId,
+        reservering
+      )
       .subscribe();
     // location.reload();
   }
