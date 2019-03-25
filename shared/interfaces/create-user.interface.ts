@@ -1,5 +1,5 @@
 export interface ICreateUser {
 	userName: string;
-	age: number;
+	role: string;
 	password: string;
 }

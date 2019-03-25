@@ -16,7 +16,9 @@ export class FormKamersbeschikbaarComponent implements OnInit {
   public readonly kamerSearchForm = new FormGroup({
     datumvan: new FormControl(undefined,[ Validators.required]),
     datumtot: new FormControl(undefined,[Validators.required]),
-    kamertype: new FormControl(undefined,[ Validators.required])
+    //kamertype: new FormControl(undefined,[ Validators.required]),
+    kamertype: new FormControl('undefined'),
+    zoekopkamertype: new FormControl('')
   }, this.dateValidationFormGroup());
 
   constructor(public activeModal: NgbActiveModal, private formBuilder: FormBuilder) {
@@ -44,6 +46,7 @@ export class FormKamersbeschikbaarComponent implements OnInit {
   ngOnInit() {
     this.kamerSearchForm.controls.datumvan.setValue(this.today);
     this.kamerSearchForm.controls.datumtot.setValue(this.tomorrow);
+    //this.kamerSearchForm.valueChanges.subscribe(console.log);
   }
   submitForm() {
     this.activeModal.close(this.kamerSearchForm.value);

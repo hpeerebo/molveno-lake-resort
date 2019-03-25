@@ -50,9 +50,20 @@
           {{kamerSearchForm.errors?.dateToIsInThePastError }}
         </div>
       </div>
-
     </div>
-    <div class="container, form-row">
+    <div class="form-group row">
+
+        <div class="col-sm-10">
+          <div class="form-check">
+            <input class="form-check-input" [formControl]="kamerSearchForm.controls.zoekopkamertype" type="checkbox" id="zoekopkamertype">
+            <label class="form-check-label" for="zoekopkamertype">
+              Zoeken op type kamer
+            </label>
+          </div>
+        </div>
+      </div>
+
+    <div *ngIf="kamerSearchForm.controls.zoekopkamertype.value" class="container, form-row">
       <div class="form-group col-md-12">
         <label>Type kamer</label>
         <select
