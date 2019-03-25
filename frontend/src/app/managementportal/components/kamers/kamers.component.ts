@@ -254,15 +254,6 @@ export class ManagementPortalKamersComponent implements OnInit, AfterViewInit {
     if(this.numberOfDays === 0){
       this.numberOfDays = 1;
     }
-    /* const DateDiff = require('date-diff')
-    const diff = new DateDiff(new Date(datumtot), new Date(datumvan));
-    if(diff.days() === 0){
-      this.numberOfDays = 1;
-    }
-    else{
-      this.numberOfDays = diff.days();
-    } */
-
   }
 
   resetInitialValues(){
