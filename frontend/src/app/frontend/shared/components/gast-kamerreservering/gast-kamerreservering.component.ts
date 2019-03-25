@@ -68,6 +68,8 @@ export class GastKamerReserveringComponent implements OnInit {
 
   ngOnInit() {
 
+
+    // Remember: Lodash <======================================
     this.tomorrow.setDate(this.today.getDate() + 1)
     
     this.minarrivedate = this.datepipe.transform(this.today, "yyyy-MM-dd")
