@@ -7,6 +7,7 @@ import { ActiviteitenPlanningService } from "src/app/services/activiteiten-plann
 import { ActiviteitenService } from "src/app/services/activiteiten.service";
 import { FormActiviteitPlanningComponent } from "src/app/shared/components/form-activiteitplanning/form-activiteitplanning.component";
 import { FormActiviteitMaakReserveringComponent } from "src/app/shared/components/form-activiteit-maak-reservering/form-activiteit-maak-reservering.component";
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: "app-activiteiten-planning",
@@ -14,7 +15,7 @@ import { FormActiviteitMaakReserveringComponent } from "src/app/shared/component
   styleUrls: ["./activiteiten-planning.component.scss"]
 })
 export class ActiviteitenPlanningComponent {
-  public activiteitenPlanning: Observable<
+  public activiteitenPlanningen: Observable<
     ActiviteitenPlanning[]
   > = this.activiteitenPlanningService.getAllActiviteitenPlanning();
 
@@ -24,12 +25,13 @@ export class ActiviteitenPlanningComponent {
     private modalService: NgbModal
   ) {}
 
-  openCreateReserveringModal(reservering: ActiviteitenPlanning) {
-    console.log("openCreateReserveringModal", reservering);
+  openCreateReserveringModal(activiteitenPlanning: ActiviteitenPlanning) {
+    console.log("openCreateReserveringModal", activiteitenPlanning);
     const modal = this.modalService.open(
       FormActiviteitMaakReserveringComponent
     );
-    modal.componentInstance.reservering = reservering;
+    modal.componentInstance.planning = activiteitenPlanning;
+
     modal.result
       .then(result => {
         console.log(result);

@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { ActiviteitenPlanning } from "../models/activiteit-planning";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
+import {IActiviteit} from './activiteiten.service';
 
 @Injectable({
   providedIn: "root"
@@ -30,7 +31,8 @@ export class ActiviteitenPlanningService {
       // activiteitplanning.actid,
       activiteitplanning.actdate,
       activiteitplanning.actprijs,
-      activiteitplanning.actcapaciteit
+      activiteitplanning.actcapaciteit,
+      activiteitplanning.activiteit
     );
   }
 
@@ -69,4 +71,5 @@ interface IActiviteitPlanning {
   actdate: string;
   actprijs: number;
   actcapaciteit: number;
+  activiteit: IActiviteit;
 }

@@ -57,7 +57,7 @@ export class ActiviteitenService {
   }
 }
 
-interface IActiviteit {
+export interface IActiviteit {
   actid: number;
   naam: string;
   beschrijving: string;
