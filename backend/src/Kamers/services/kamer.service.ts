@@ -15,11 +15,11 @@ export class KamerService {
         .then(kamersEntities => kamersEntities.map(kamerEntity => kamerEntity.mapToKamers()));
     }
 
-    
     public getKamersOfCapacity(capacity: number): Promise<Kamer[]>{
         return this.kamersepository.find({where: {aantalPersonen: capacity}})
         .then(kamersEntities => kamersEntities.map(kamerEntity => kamerEntity.mapToKamers()));
     }
+
 
     public async searchFreeRoomsOfCapacity(datumvan: string, datumtot: string, capacity: number): Promise<Kamer[]>{
         return await getRepository(KamerEntity)
@@ -29,7 +29,7 @@ export class KamerService {
             .getMany()
             .then(kamersEntities => kamersEntities.map(kamerEntity => kamerEntity.mapToKamers()));
     }
-    
+ 
     public async searchFreeRooms(datumvan: string, datumtot: string, kamertype: string): Promise<Kamer[]>{
         if(kamertype != 'undefined'){
             return await getRepository(KamerEntity)

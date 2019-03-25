@@ -23,14 +23,12 @@ export class KamersController {
     return this.kamerService.getKamersOfCapacity(capacity);
   }
 
-  
   @Get('/search/capacity/:capacity/:datumvan/:datumtot')
   @ApiOperation({ title: 'Zoek vrije kamers van capaciteit' })
     public searchFreeRoomsOfCapacity(@Param('capacity') capacity: number, @Param('datumvan') datumVan: string, @Param('datumtot') datumTot: string): Promise<Kamer[]> {
     return this.kamerService.searchFreeRoomsOfCapacity(datumVan, datumTot, capacity);
   }
   
-
   @Get('/search/:kamertype/:datumvan/:datumtot')
   @ApiOperation({ title: 'Zoek vrije kamers' })
   //public searchFreeRooms(@Param('kamertype') kamerType: string): Promise<Kamer[]> {
