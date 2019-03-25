@@ -4,6 +4,7 @@ import { IUserLogin } from '../../../../../../shared/interfaces/user-login-inter
 import { Observable } from 'rxjs';
 import { take, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { error } from 'util';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,9 @@ export class AuthService {
 				tap(data => {
           localStorage.setItem("token", data.token),
           this.router.navigate(['managementportal/home'])
+        },
+        error =>{
+          alert('de gebruikersnaam of wachtwoord is niet correct')
         }),
 				take(1)
 			);

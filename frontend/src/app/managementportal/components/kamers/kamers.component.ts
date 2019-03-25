@@ -11,7 +11,7 @@ import { FormKamersbeschikbaarComponent } from './kamers-form/form-kamersbeschik
 import {ActivatedRoute} from "@angular/router";
 import { FormControl } from '@angular/forms';
 import {DateFunctions} from "../../../shared/services/date-functions";
-//import * from DateDiff as 'date-diff';
+//import * as DateDiff from 'date-diff';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -244,19 +244,24 @@ export class ManagementPortalKamersComponent implements OnInit, AfterViewInit {
       this.showResButton = true
       },
       reason => {
-        //this.calculateNumberofDays(this.datumvan, this.datumtot);
+        this.calculateNumberofDays(this.datumvan, this.datumtot);
         this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
       }
     );
   }
   calculateNumberofDays(datumvan: string, datumtot: string){
-    const date = new Date(datumtot).getTime() - new Date(datumvan).getTime();
-    if(new Date(date).getDay() === 0){
+    this.numberOfDays = (new Date(this.datumtot).getTime() - new Date(this.datumvan).getTime())/(1000 * 60 * 60 * 24)
+    if(this.numberOfDays === 0){
+      this.numberOfDays = 1;
+    }
+    /* const DateDiff = require('date-diff')
+    const diff = new DateDiff(new Date(datumtot), new Date(datumvan));
+    if(diff.days() === 0){
       this.numberOfDays = 1;
     }
     else{
-      this.numberOfDays = new Date(date).getDay();
-    }
+      this.numberOfDays = diff.days();
+    } */
 
   }
 
