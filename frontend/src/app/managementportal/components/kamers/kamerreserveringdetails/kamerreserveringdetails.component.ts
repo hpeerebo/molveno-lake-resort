@@ -1,13 +1,13 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import {KamerreserveringenService} from "../../../../services/kamerreserveringen.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {KamerReservering} from "../../../../models/kamerreservering";
 import {KamerReserveringDetailsFormGroup} from "./kamerreserveringdetailsormgroup";
 import {DateFunctions} from "../../../../shared/services/date-functions";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {ManagementPortalKamersFormComponent} from "../kamers-form/kamers-form.component";
 import {FormPrintKamerreseveringComponent} from "../kamers-form/form-print-kamerresevering/form-print-kamerresevering.component";
 import {FormEmailKamerreseveringComponent} from '../kamers-form/form-email-kamerresevering/form-email-kamerresevering.component';
+import {Observable} from "rxjs";
 
 @Component({
   //changeDetection: ChangeDetectionStrategy.OnPush,
@@ -23,9 +23,10 @@ export class KamerreserveringdetailsComponent implements OnInit {
               private dateservice: DateFunctions,
               private modalService: NgbModal,) {};
 
-  //public kamerreserveringen$: Observable<KamerReservering[] | undefined> = this.kamerreserveringenservice.getKamerReseveringById(true, this.getReseveringBasedOnId());
-  public kamerreserveringen$: Promise<KamerReservering[]> = this.kamerreserveringenservice.getKamerReseveringById2(this.getReseveringBasedOnId());
+  public kamerreserveringen$: Observable<KamerReservering[] | undefined> = this.kamerreserveringenservice.getKamerReseveringById(true, this.getReseveringBasedOnId());
+  //public kamerreserveringen$: Promise<KamerReservering[]> = this.kamerreserveringenservice.getKamerReseveringById2(this.getReseveringBasedOnId());
   public booking: KamerReservering[] | undefined = undefined;
+  public booking2: Observable<KamerReservering[] | undefined> = this.kamerreserveringen$;
 
   private storagePrice: number[] = [];
   private numberOfDays: number = 0;
@@ -45,16 +46,15 @@ export class KamerreserveringdetailsComponent implements OnInit {
 
     if(!this.reserveringsnummer) {
 
-      this.kamerreserveringen$.then(values => {
-        this.booking = values
+      //this.kamerreserveringen$.then(values => {
+        //this.booking = values
+      //});
+      this.kamerreserveringen$.subscribe({
+        next: value => this.booking = value
       });
-     // this.kamerreserveringen$.subscribe({
-     //   next: value => this.booking = value
-     // });
 
       setTimeout(() => {
         if(this.booking) {
-
           this.datumtot = this.booking[0].datumtot;
           this.datumvan = this.booking[0].datumvan;
           this.numberOfDays = this.calculateNumberofDays(this.datumvan, this.datumtot);
