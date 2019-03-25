@@ -45,6 +45,8 @@ export class ManagementPortalKamersComponent implements OnInit, AfterViewInit {
   totalPrice: number = 0;
   myCheckbox: FormControl = new FormControl();
   reserverRooms: Kamer[] = [];
+  selectedRow: number = 0;
+  roomSelected: boolean[] = [false];
   //marked = false;
   //theCheckbox = false;
 
@@ -67,14 +69,34 @@ export class ManagementPortalKamersComponent implements OnInit, AfterViewInit {
       }
     });
   }
+  setClickedRow(index: number, kamer: Kamer){
+    //this.selectedRow = index;
+    this.roomSelected[index] = !this.roomSelected[index];
+    if (this.roomSelected[index]){
+      this.reserverRooms = [...this.reserverRooms, kamer];
+      this.totalPrice = this.totalPrice + (this.numberOfDays * kamer.prijs);
+      console.log(this.reserverRooms);
+    }
+    if (!this.roomSelected[index]){
+      this.reserverRooms = this.reserverRooms.filter(element => kamer.kamerNaam !== element.kamerNaam);
+      this.totalPrice = this.totalPrice - (this.numberOfDays * kamer.prijs);
+    }
 
+    //this.myCheckbox.setValue(true);
+    //this.onSelectRoom(kamer);
+    //this.roomSelected = !this.roomSelected
+}
   onSelect(kamer: Kamer): void {
+    //this.roomSelected = !this.roomSelected
     this.selectedKamer = kamer;
+    this.myCheckbox.setValue(true);
+    this.onSelectRoom(kamer);
   }
   onSelectRoom(kamer: Kamer): void {
     if (this.myCheckbox.value){
       this.reserverRooms = [...this.reserverRooms, kamer];
       this.totalPrice = this.totalPrice + (this.numberOfDays * kamer.prijs);
+      console.log(this.reserverRooms);
     }
     if (!this.myCheckbox.value){
       this.reserverRooms = this.reserverRooms.filter(element => kamer.kamerNaam !== element.kamerNaam);

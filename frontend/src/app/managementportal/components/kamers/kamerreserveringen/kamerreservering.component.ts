@@ -13,7 +13,7 @@ import {Observable} from "rxjs";
 export class KamerreserveringComponent implements OnInit {
 
   constructor(private readonly kamerreserveringservice: KamerreserveringenService, private readonly modalService: NgbModal, private router: Router) { }
-  public kamerreserveringen: Observable<KamerReservering[] | undefined> = this.kamerreserveringservice.getKamerReserveringen();
+  public kamerreserveringen: Observable<KamerReservering[] | undefined> = this.kamerreserveringservice.getKamerToekomstReserveringen( true);
   public selectedResevering?: KamerReservering;
   closeResult: string = "";
 
