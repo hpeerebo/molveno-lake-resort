@@ -41,12 +41,14 @@ export class KamerreserveringdetailsComponent implements OnInit {
 
   public kamerreserveringdetailsormgroup = new KamerReserveringDetailsFormGroup();
 
-  ngOnInit() {
+  async ngOnInit() {
+    //console.log(this.kamerreserveringen$);
+    //console.log(this.booking$);
 
-    if(!this.reserveringsnummer) {
-
-      this.booking$.pipe(
-        tap( booking => {
+    if(this.getReseveringBasedOnId()) {
+      console.log(this.getReseveringBasedOnId());
+       this.booking$.subscribe(
+        booking => {
           if(booking) {
             this.datumtot = booking[0].datumtot;
             this.datumvan = booking[0].datumvan;
@@ -88,7 +90,6 @@ export class KamerreserveringdetailsComponent implements OnInit {
             });
           }
         })
-      )
     }
   }
 
