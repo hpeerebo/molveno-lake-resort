@@ -15,7 +15,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let reservering of (reserveringen$ | async | sortgrid:field)">
-      <td>{{ reservering.aanvangstijd.slice(0, 16) }}</td>
+      <td>{{ reservering.aanvangstijd | date:'dd-MM-yyyy HH:mm'}}</td>
       <td>{{ reservering.personen }}</td>
       <td>{{ reservering.naam }}</td>
       <td>{{ reservering.telefoon }}</td>

@@ -15,6 +15,7 @@ import { CreateTafelreserveringDto } from 'src/dto/create-tafelreservering-dto';
 import { DeleteResult, UpdateResult } from 'typeorm';
 import { GerechtDetails } from 'src/models/gerecht-details';
 import { AddIngredientDto } from 'src/dto/add-ingredient-dto';
+import { CheckTafelreserveringDto } from 'src/dto/check-tafelreservering-dto';
 
 @ApiUseTags('restaurant')
 @Controller('restaurant')
@@ -30,7 +31,8 @@ export class RestaurantController {
     @Get('tafels')
     @ApiOperation({ title: 'Haal een lijst op van alle tafels' })
     async getTafels(): Promise<{ tafels: Tafel[] }> {
-        const tafels = await this.tafelService.getTafels();
+        const tafelEntities = await this.tafelService.getTafels();
+        const tafels = tafelEntities.map(tafelEntity => tafelEntity.mapToTafel())
         return { tafels };
     }
 
@@ -156,6 +158,18 @@ export class RestaurantController {
     async createReservering(@Body() tafelreserveringDto: CreateTafelreserveringDto): Promise<Tafelreservering> {
         const reserveringEntity = await this.tafelreserveringService.createReservering(tafelreserveringDto.mapToTafelreserveringEntity());
         return reserveringEntity.mapToTafelreservering();
+    }
+
+    @Post('reserveringen/check')
+    @ApiOperation({ title: 'Controleer of er plek is in het restaurant' })
+    @ApiResponse({ status: 201, description: 'Resultaat van de controle' })
+    async check(@Body() checkTafelreserveringDto: CheckTafelreserveringDto): Promise<{ bezetting: number, capaciteit: number, beschikbaar: number }> {
+        const reserveringEntities = await this.tafelreserveringService.check(new Date(checkTafelreserveringDto.aanvangstijd));
+        const tafelEntities = await this.tafelService.getTafels();
+        const bezetting = reserveringEntities.reduce((prev, curr) => prev + curr.personen, 0);
+        const capaciteit = tafelEntities.reduce((prev, curr) => prev + curr.personen, 0);
+        const beschikbaar = capaciteit - bezetting;
+        return { bezetting, capaciteit, beschikbaar };
     }
 
     @Put('reserveringen/:id')
