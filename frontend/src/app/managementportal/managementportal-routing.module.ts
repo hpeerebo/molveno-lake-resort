@@ -27,7 +27,7 @@ const routes: Routes = [
       { path: 'managementportal/home', component: ManagementPortalHomeComponent,},
       { path: 'managementportal/login', component: ManagementPortalLoginComponent },
       { path: 'managementportal/signup', component: SignupComponent },
-      { path: 'managementportal/kamers', component: ManagementPortalKamersComponent, canActivate: [AuthGuard]},
+      { path: 'managementportal/kamers', component: ManagementPortalKamersComponent/* , canActivate: [AuthGuard] */},
       { path: 'managementportal/kamers/:param', component: ManagementPortalKamersComponent},
       { path: 'managementportal/kamerreserveringen', component: KamerreserveringComponent},
       { path: 'managementportal/kamerreserveringen/:reserveringsnummer', component: KamerreserveringdetailsComponent},
@@ -43,7 +43,6 @@ const routes: Routes = [
     ]
   }
 ];
-
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
