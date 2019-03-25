@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {KamerreserveringenService} from "../../../../services/kamerreserveringen.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {KamerReservering} from "../../../../models/kamerreservering";
@@ -16,7 +16,7 @@ import {tap} from "rxjs/operators";
   templateUrl: './kamerreserveringdetails.component.html',
   styleUrls: ['./kamerreserveringdetails.component.scss']
 })
-export class KamerreserveringdetailsComponent implements OnInit {
+export class KamerreserveringdetailsComponent implements OnInit, OnDestroy {
 
   constructor(private kamerreserveringenservice: KamerreserveringenService,
               private route : ActivatedRoute,
@@ -219,8 +219,6 @@ export class KamerreserveringdetailsComponent implements OnInit {
     return this.numberOfDays;
   }
 
-
-
   private resetInitialValues() {
     this.storagePrice.length = 0;
   }
@@ -230,8 +228,11 @@ export class KamerreserveringdetailsComponent implements OnInit {
   }
 
   public sumAll(numbers: number[]): number {
-
     return numbers.reduce((a: number,b: number) => a + b, 0);
+  }
+
+  ngOnDestroy(): void {
+
   }
 
 }
