@@ -29,6 +29,12 @@
                 <td>{{ activiteitplanning.actcapaciteit }}</td>
                 <td class="text-align: right">
                     <i
+                        class="fas fa-pen-alt mr-2"
+                        placement="top"
+                        ngbTooltip="Reserveren"
+                        (click)="openCreateReserveringModal(activiteitplanning)"
+                    ></i>
+                    <i
                         class="fas fa-edit mr-2"
                         placement="top"
                         ngbTooltip="Wijzigen"

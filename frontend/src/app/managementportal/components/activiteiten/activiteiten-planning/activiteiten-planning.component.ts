@@ -6,6 +6,7 @@ import { ModalConfirmComponent } from "src/app/shared/components/modal-confirm/m
 import { ActiviteitenPlanningService } from "src/app/services/activiteiten-planning.service";
 import { ActiviteitenService } from "src/app/services/activiteiten.service";
 import { FormActiviteitPlanningComponent } from "src/app/shared/components/form-activiteitplanning/form-activiteitplanning.component";
+import { FormActiviteitMaakReserveringComponent } from "src/app/shared/components/form-activiteit-maak-reservering/form-activiteit-maak-reservering.component";
 
 @Component({
   selector: "app-activiteiten-planning",
@@ -22,6 +23,21 @@ export class ActiviteitenPlanningComponent {
     private activiteitenService: ActiviteitenService,
     private modalService: NgbModal
   ) {}
+
+  openCreateReserveringModal(reservering: ActiviteitenPlanning) {
+    console.log("openCreateReserveringModal", reservering);
+    const modal = this.modalService.open(
+      FormActiviteitMaakReserveringComponent
+    );
+    modal.componentInstance.reservering = reservering;
+    modal.result
+      .then(result => {
+        console.log(result);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
 
   openEditFormActiviteitPlanningModal(planning: ActiviteitenPlanning) {
     const modal = this.modalService.open(FormActiviteitPlanningComponent);

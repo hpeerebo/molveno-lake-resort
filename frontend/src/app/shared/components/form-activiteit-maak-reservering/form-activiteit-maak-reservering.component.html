@@ -1,0 +1,106 @@
+<div class="modal-header">
+    <h4
+        class="modal-title"
+        id="modal-basic-title"
+    >
+        Reserveren activiteit
+    </h4>
+    <button
+        type="button"
+        class="close"
+        aria-label="Close"
+        (click)="activeModal.dismiss('cancel')"
+    >
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="activiteitMaakResForm">
+        <div class="form-group">
+            <label>Activiteit</label>
+            <input
+                type="string"
+                class="form-control"
+                formControlName="actNaam"
+                [class.is-invalid]="actNaam?.invalid && actNaam?.touched"
+                ngbAutofocus
+            >
+            <small
+                class="text-danger"
+                [class.d-none]="actNaam?.valid || actNaam?.untouched"
+            >
+                Activiteit
+            </small>
+        </div>
+        <div class="form-group">
+            <label>Datum</label>
+            <input
+                type="string"
+                class="form-control"
+                formControlName="actDate"
+                [class.is-invalid]="actDate?.invalid && actDate?.touched"
+            >
+            <small
+                class="text-danger"
+                [class.d-none]="actDate?.valid || actDate?.untouched"
+            >
+                Datum.
+            </small>
+        </div>
+        <div class="form-group">
+            <label>E-mail gast</label>
+            <input
+                type="string"
+                class="form-control"
+                formControlName="actGastMail"
+                [class.is-invalid]="actGastMail?.invalid && actGastMail?.touched"
+            >
+            <small
+                class="text-danger"
+                [class.d-none]="actGastMail?.valid || actGastMail?.untouched"
+            >
+                E-mail adres is verplicht.
+            </small>
+        </div>
+        <div class="form-group">
+            <label>Telefoonnummer gast</label>
+            <input
+                type="string"
+                class="form-control"
+                formControlName="actGastPhone"
+                [class.is-invalid]="actGastPhone?.invalid && actGastPhone?.touched"
+            >
+            <small
+                class="text-danger"
+                [class.d-none]="actGastPhone?.valid || actGastPhone?.untouched"
+            >
+                Optioneel telefonnummer.
+            </small>
+        </div>
+        <div class="form-group">
+            <label>Aantal personen</label>
+            <input
+                type="number"
+                class="form-control"
+                formControlName="actGastAantal"
+                [class.is-invalid]="actGastAantal?.invalid && actGastAantal?.touched"
+            >
+            <small
+                class="text-danger"
+                [class.d-none]="actGastAantal?.valid || actGastAantal?.untouched"
+            >
+                Minimaal voor één persoon reserveren.
+            </small>
+        </div>
+    </form>
+    <div class="modal-footer">
+        <button
+            type="button"
+            class="btn btn-success"
+            (click)="submitForm()"
+            [disabled]="activiteitResForm.invalid"
+        >
+            Save
+        </button>
+    </div>
+</div>

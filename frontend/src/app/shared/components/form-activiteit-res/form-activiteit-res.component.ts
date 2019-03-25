@@ -13,8 +13,8 @@ export class FormActiviteitResComponent implements OnInit {
 
   public activiteitResForm = this.formBuilder.group({
     resid: [0, Validators.required],
-    planid: [0, Validators.required],
     emailGast: ["", Validators.required],
+    phoneGast: ["" /*, Validators.required*/],
     aantalPersonen: [1, [Validators.required, Validators.min(1)]]
   });
 
@@ -24,10 +24,10 @@ export class FormActiviteitResComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log("FormActiviteitResComponent", this.reserveringen);
     if (this.reserveringen) {
       this.activiteitResForm.setValue({
         resid: this.reserveringen.resid,
-        // planid: this.reserveringen.planid,
         emailGast: this.reserveringen.emailGast,
         phoneGast: this.reserveringen.phoneGast,
         aantalPersonen: this.reserveringen.aantalPersonen
