@@ -18,7 +18,7 @@
         <td><span class="handCursor" [routerLink]="[gerecht.id]">{{gerecht.naam}}</span></td>
         <td>{{gerecht.type}}</td>
         <td>{{gerecht.subtype}}</td>
-        <td>{{gerecht.prijs | currency: 'EUR'}}</td>
+        <td>{{gerecht.prijs | currency:'EUR'}}</td>
         <td class="text-right">
           <i class="fas fa-edit mr-2" placement="top" ngbTooltip="Wijzigen" (click)="openFormGerechtModal(gerecht)"></i>
           <i class="fas fa-trash-alt mr-2" placement="top" ngbTooltip="Verwijderen"
