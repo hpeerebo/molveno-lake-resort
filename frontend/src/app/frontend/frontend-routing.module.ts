@@ -12,6 +12,9 @@ import { FeaturetteComponent } from './shared/components/featurette/featurette.c
 import { RoundedCircleComponent } from './shared/components/rounded-circle/rounded-circle.component';
 import { KamerreserveringenService } from '../services/kamerreserveringen.service';
 import { GastKamerReserveringComponent } from './shared/components/gast-kamerreservering/gast-kamerreservering.component';
+import { AuthGuard } from './guard/auth.guard';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtTokenInterceptor } from './interceptors/jwt-token-interceptor.service';
 
 const routes: Routes = [
   {
@@ -19,8 +22,8 @@ const routes: Routes = [
     children: [
       { path: 'home', component: HomeComponent },
       { path: 'contact', component: ContactComponent },
-      { path: 'kamers', component: KamersComponent },
-      { path: 'activiteiten', component: ActiviteitenComponent },
+      { path: 'kamers', component: KamersComponent},
+      { path: 'activiteiten', component: ActiviteitenComponent},
       { path: 'restaurant', component: RestaurantComponent },
       { path: 'login', component: LoginComponent },
       { path: 'carousel', component: CarouselComponent },
@@ -35,7 +38,14 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [
+		{
+		  provide: HTTP_INTERCEPTORS,
+		  useClass: JwtTokenInterceptor,
+		  multi: true
+		}
+	  ],
 })
 export class FrontEndAppRoutingModule {
 }

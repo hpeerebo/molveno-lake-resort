@@ -25,13 +25,15 @@ import { ActiviteitReserveringenComponent } from './components/activiteiten/acti
 import { FormActiviteitResComponent } from '../shared/components/form-activiteit-res/form-activiteit-res.component';
 import { KamerreserveringComponent } from './components/kamers/kamerreserveringen/kamerreservering.component';
 import { FormKamerreserveringComponent } from './components/kamers/kamers-form/form-kamerreservering/form-kamerreservering.component';
-import { FormKamerreserveringdetailsComponent} from "./components/kamers/kamers-form/form-kamerreserveringdetails/form-kamerreserveringdetails.component";
 import { GerechtenDetailsComponent } from './components/restaurant/gerechten-details/gerechten-details.component';
 import { ApplicationPipesModule } from '../shared/application-pipes/application-pipes.module';
 import { FormKamersbeschikbaarComponent } from './components/kamers/kamers-form/form-kamersbeschikbaar/form-kamersbeschikbaar.component';
 import { ActiviteitenPlanningComponent } from './components/activiteiten/activiteiten-planning/activiteiten-planning.component';
 import { FormActiviteitPlanningComponent } from '../shared/components/form-activiteitplanning/form-activiteitplanning.component';
-
+import {KamerreserveringdetailsComponent} from './components/kamers/kamerreserveringdetails/kamerreserveringdetails.component';
+import { SignupComponent } from '../shared/components/form-signup/signup.component';
+import { FormPrintKamerreseveringComponent } from './components/kamers/kamers-form/form-print-kamerresevering/form-print-kamerresevering.component';
+import { FormEmailKamerreseveringComponent } from './components/kamers/kamers-form/form-email-kamerresevering/form-email-kamerresevering.component';
 
 @NgModule({
   declarations: [
@@ -57,13 +59,21 @@ import { FormActiviteitPlanningComponent } from '../shared/components/form-activ
     ActiviteitReserveringenComponent,
     KamerreserveringComponent,
     FormKamerreserveringComponent,
-    FormKamerreserveringdetailsComponent,
+    KamerreserveringdetailsComponent,
     GerechtenDetailsComponent,
     SortgridPipe,
     ActiviteitenPlanningComponent,
-    FormKamersbeschikbaarComponent
+    FormKamersbeschikbaarComponent,
+    SignupComponent,
+    FormPrintKamerreseveringComponent,
+    FormEmailKamerreseveringComponent
   ],
   imports: [CommonModule, ManagementportalRoutingModule, NgbModule, FormsModule, ReactiveFormsModule, ApplicationPipesModule],
-  entryComponents: [FormTafelComponent, FormTafelreserveringComponent, FormGerechtComponent, FormIngredientComponent, FormActiviteitComponent,  FormActiviteitResComponent, FormActiviteitPlanningComponent, ModalConfirmComponent, FormKamerreserveringComponent, FormKamerreserveringdetailsComponent, FormKamersbeschikbaarComponent]
+  entryComponents: [FormTafelComponent, FormTafelreserveringComponent, FormGerechtComponent, FormIngredientComponent, FormActiviteitComponent,  FormActiviteitResComponent, FormActiviteitPlanningComponent, ModalConfirmComponent, FormKamerreserveringComponent, KamerreserveringdetailsComponent, FormKamersbeschikbaarComponent, FormPrintKamerreseveringComponent, FormEmailKamerreseveringComponent, SignupComponent]
+
 })
-export class ManagementportalModule {}
+export class ManagementportalModule {
+
+  }
+
+

@@ -10,19 +10,18 @@ import { GastKamerReservering } from '../../models/gast-kamerreservering';
   templateUrl: './reservation-button.component.html',
   styleUrls: ['./reservation-button.component.scss']
 })
-export class ReservationButtonComponent implements OnInit {
+export class ReservationButtonComponent {
 
   @Input() public roomdetail = {};
   @Input() public siteLanguage: any | undefined = undefined;
+  
   closeResult: string = "";
   constructor(
     public activatedRoute: ActivatedRoute,
     private modalService: NgbModal,
     private gastkamerreserveringservice: GastKamerReserveringenService,
-    ) { }
+    ) {}
 
-  ngOnInit() {
-  }
   openFormKamerReserveringModal(kamerobject: any){
     const modalKamerReservering = this.modalService.open(GastKamerReserveringComponent);
 
@@ -33,22 +32,30 @@ export class ReservationButtonComponent implements OnInit {
     modalKamerReservering.componentInstance.action = "add";
     modalKamerReservering.result.then(resultPromise => {
       this.closeResult = resultPromise;
-      this.gastkamerreserveringservice.saveKamerReservering(new GastKamerReservering(
-        resultPromise.id,
-        resultPromise.voornaam,
-        resultPromise.achternaam,
-        resultPromise.telefoonnummer,
-        resultPromise.emailadres,
-        resultPromise.identiteitsid,
-        resultPromise.postcode,
-        resultPromise.straat,
-        resultPromise.huisnummer,
-        resultPromise.woonplaats,
-        resultPromise.land,
-        resultPromise.datumvan,
-        resultPromise.datumtot,
-        resultPromise.kamernaam,
-      ));
+      resultPromise.forEach((reservering: GastKamerReservering) => {
+        this.gastkamerreserveringservice.saveKamerReservering(new GastKamerReservering(
+          reservering.id,
+          reservering.voornaam,
+          reservering.achternaam,
+          reservering.telefoonnummer,
+          reservering.emailadres,
+          reservering.identiteitsid,
+          reservering.aantalpersonen,
+          reservering.postcode,
+          reservering.straat,
+          reservering.huisnummer,
+          reservering.woonplaats,
+          reservering.land,
+          reservering.datumvan,
+          reservering.datumtot,
+          reservering.kamernaam,
+          reservering.inchecken,
+          reservering.uitchecken,
+          reservering.personen,
+          reservering.prijs,
+          reservering.reserveringsnummer
+        ));
+      });
     });
   }
 }

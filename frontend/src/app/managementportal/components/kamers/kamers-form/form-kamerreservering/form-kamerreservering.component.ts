@@ -35,7 +35,12 @@ export class FormKamerreserveringComponent implements OnInit {
         land: this.kamerreservering.land,
         datumvan: this.kamerreservering.datumvan,
         datumtot: this.kamerreservering.datumtot,
-        kamernaam: this.kamerreservering.kamernaam
+        kamernaam: this.kamerreservering.kamernaam,
+        inchecken: this.kamerreservering.inchecken,
+        uitchecken: this.kamerreservering.uitchecken,
+        personen: this.kamerreservering.personen,
+        prijs: this.kamerreservering.prijs,
+        reserveringsnummer: this.kamerreservering.reserveringsnummer
       });
     }
   }
@@ -48,7 +53,7 @@ export class FormKamerreserveringComponent implements OnInit {
       this.kamerreserveringForm.value.achternaam,
       this.kamerreserveringForm.value.telefoonnummer,
       this.kamerreserveringForm.value.emailadres,
-      "niet beschikbaar",
+      this.kamerreserveringForm.value.identiteitsid,
       this.kamerreserveringForm.value.postcode,
       this.kamerreserveringForm.value.straat,
       this.kamerreserveringForm.value.huisnummer,
@@ -56,9 +61,14 @@ export class FormKamerreserveringComponent implements OnInit {
       this.kamerreserveringForm.value.land,
       this.datumvan,
       this.datumtot,
-      this.kamerreserveringForm.value.kamernaam
+      this.kamerreserveringForm.value.kamernaam,
+      this.kamerreserveringForm.value.inchecken,
+      this.kamerreserveringForm.value.uitchecken,
+      this.kamerreserveringForm.value.personen,
+      this.kamerreserveringForm.value.prijs,
+      this.kamerreserveringForm.value.reserveringsnummer,
     ));
-    //location.reload();
+    this.kamerreserveringForm.reset();
     this.router.navigateByUrl('managementportal/kamerreserveringen');
   }
 

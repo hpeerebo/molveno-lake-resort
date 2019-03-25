@@ -1,0 +1,65 @@
+<div class="signup mx-auto">
+<form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label for="signup-form-email">Email address</label>
+        <!--we added binding using the "formControl directive-->
+        <input type="email"
+               [formControl]="signUpForm.controls.userName"
+               class="form-control"
+               id="signup-form-email"
+               aria-describedby="signup-form-email-help"
+               placeholder="Enter username">
+        <!--here a conditional error message is shown that activates when the control is invalid and has been interacted with-->
+        <div class="text-danger" *ngIf="signUpForm.controls.userName.invalid  && !signUpForm.controls.userName.pristine">
+            Please provide a valid email address
+        </div>
+
+        <label for="signup-form-email-verification">Email address</label>
+        <input type="email"
+               [formControl]="signUpForm.controls.userNameVerification"
+               class="form-control"
+               id="signup-form-email-verification"
+               aria-describedby="signup-form-email-verification-help"
+               placeholder="re enter your username">
+        <div class="text-danger" *ngIf="signUpForm.errors?.emailIsNotTheSameError && !signUpForm.controls.userNameVerification.pristine">
+            {{signUpForm.errors?.emailIsNotTheSameError}}
+        </div>
+    </div>
+
+    <div class="form-text">
+        <label for="signup-form-rol">Rol</label>
+
+        <select type="text"
+               [formControl]="signUpForm.controls.role"
+               class="form-control"
+               id="signup-form-rol"
+               aria-describedby="signup-form-role-help"
+               placeholder="rol">
+               <option>Administrator</option>
+              <option>Kok</option>
+              <option>Receptie</option>
+            </select>
+            <div class="text-danger" *ngIf="signUpForm.controls.role.invalid  && !signUpForm.controls.role.pristine">
+            Please select the role of the user
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="signup-form-password">Password</label>
+        <!--we added binding using the "formControl directive-->
+        <input type="password"
+               [formControl]="signUpForm.controls.password"
+               class="form-control"
+               id="signup-form-password"
+               aria-describedby="signup-form-password-help"
+               placeholder="Password">
+        <!--here a conditional error message is shown that activates when the control is invalid and has been interacted with-->
+        <div class="text-danger" *ngIf="signUpForm.controls.password.invalid && !signUpForm.controls.password.pristine">
+            Please provide a safe password. (one special character, capital and a minimum of 8 digits)
+        </div>
+
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="signUpForm.invalid">sign me up!</button>
+</form>
+</div>

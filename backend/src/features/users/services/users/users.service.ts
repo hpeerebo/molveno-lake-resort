@@ -49,7 +49,11 @@ export class UsersService {
 
 	public async findUserByCredentials(userCredentials: UserLoginDto): Promise<boolean> {
 		const user = await this.userRepository.findOne({where: {userName: userCredentials.userName}});
-		return (user && Bcrypt.compareSync(userCredentials.passWord, user.password))
+		return (user && Bcrypt.compareSync(userCredentials.password, user.password))
 			
+	}
+	public async userIsValid(userCredentials: UserLoginDto): Promise<boolean> {
+		const user = await this.userRepository.findOne({where:{userName: userCredentials.userName}});
+		return !!(user && await Bcrypt.compare(userCredentials.password, user.password));
 	}
 }
