@@ -28,12 +28,13 @@
   background-color: lightgoldenrodyellow;
   margin-left: 400px;
 }
-.table-striped {
-  //width: 800px;
-//    margin: auto;
-}
+
 .table-small{
   width: 800px;
+}
+ .table tr.active td {
+  background-color:lightgreen;
+  color: white;
 }
 
 
