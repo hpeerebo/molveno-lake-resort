@@ -27,7 +27,7 @@ export class KamersController {
   @ApiOperation({ title: 'Zoek vrije kamers' })
   //public searchFreeRooms(@Param('kamertype') kamerType: string): Promise<Kamer[]> {
     public searchFreeRooms(@Param('kamertype') kamerType: string, @Param('datumvan') datumVan: string, @Param('datumtot') datumTot: string): Promise<Kamer[]> {
-    return this.kamerService.searchFreeRooms(datumVan, datumTot ,kamerType);
+      return this.kamerService.searchFreeRooms(datumVan, datumTot,kamerType);
   }
   @Post('')
   @ApiOperation({ title: 'Maak een nieuwe kamer aan' })

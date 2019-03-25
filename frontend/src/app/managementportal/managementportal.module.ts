@@ -31,6 +31,8 @@ import { FormKamersbeschikbaarComponent } from './components/kamers/kamers-form/
 import { ActiviteitenPlanningComponent } from './components/activiteiten/activiteiten-planning/activiteiten-planning.component';
 import { FormActiviteitPlanningComponent } from '../shared/components/form-activiteitplanning/form-activiteitplanning.component';
 import {KamerreserveringdetailsComponent} from './components/kamers/kamerreserveringdetails/kamerreserveringdetails.component';
+import { SignupComponent } from '../shared/components/form-signup/signup.component';
+
 
 
 @NgModule({
@@ -61,10 +63,11 @@ import {KamerreserveringdetailsComponent} from './components/kamers/kamerreserve
     GerechtenDetailsComponent,
     SortgridPipe,
     ActiviteitenPlanningComponent,
-    FormKamersbeschikbaarComponent
+    FormKamersbeschikbaarComponent,
+    SignupComponent
   ],
   imports: [CommonModule, ManagementportalRoutingModule, NgbModule, FormsModule, ReactiveFormsModule, ApplicationPipesModule],
-  entryComponents: [FormTafelComponent, FormTafelreserveringComponent, FormGerechtComponent, FormIngredientComponent, FormActiviteitComponent,  FormActiviteitResComponent, FormActiviteitPlanningComponent, ModalConfirmComponent, FormKamerreserveringComponent, KamerreserveringdetailsComponent, FormKamersbeschikbaarComponent]
+  entryComponents: [FormTafelComponent, FormTafelreserveringComponent, FormGerechtComponent, FormIngredientComponent, FormActiviteitComponent,  FormActiviteitResComponent, FormActiviteitPlanningComponent, ModalConfirmComponent, FormKamerreserveringComponent, KamerreserveringdetailsComponent, FormKamersbeschikbaarComponent, SignupComponent]
 })
 export class ManagementportalModule {
 

@@ -9,7 +9,7 @@
   </div>
   <br />
   <!--div class="infotext" *ngIf="showResButton">Selecteer de kamer(s) die u wilt reserveren</div-->
-  <table class="table table-striped table-sm">
+  <table class="table table-striped table-sm" [class.table-small]="showResButton">
     <thead>
     <tr>
       <th *ngIf="showResButton">Select</th>
@@ -27,7 +27,8 @@
     <ng-template #welkamers>
     <tr *ngFor="let kamer of (kamers | async | kamersfilter: show | sortgrid:field)">
         <td *ngIf="showResButton">
-            <input [formControl]="myCheckbox" type="checkbox" (change)="onSelectRoom(kamer)"/>
+            <input  [formControl]="myCheckbox" type="checkbox" (change)="onSelectRoom(kamer)"/>
+
        </td>
         <td>{{ kamer.kamerNaam }}</td>
         <td>{{ kamer.kamerType }}</td>
@@ -46,8 +47,9 @@
       </ng-template>
     </tbody>
   </table>
+  <!--div class="infotext d-flex justify-content-start" *ngIf="showResButton">Selecteer de kamer(s) die u wilt reserveren</div-->
   <div class="infotext" *ngIf="showResButton">Selecteer de kamer(s) die u wilt reserveren</div>
-  </div>
+</div>
   <div *ngIf="showResButton && reserverRooms.length > 0" class="room-bucket">
       <div>Voor de periode:  </div>
       <h6>{{datumvan}} tot {{datumtot}} </h6>

@@ -22,12 +22,25 @@ export class KamerService {
     }
     
     public async searchFreeRooms(datumvan: string, datumtot: string, kamertype: string): Promise<Kamer[]>{
-        return await getRepository(KamerEntity)
+        if(kamertype != 'undefined'){
+            console.log("kamertype is not empty")
+            return await getRepository(KamerEntity)
             .createQueryBuilder("kamer")
             .where(`kamer.kamerNaam NOT IN (select kamernaam from kamer_reservering_entity where datumvan >= '${datumvan}' 
                     AND datumtot <= '${datumtot}') AND kamer.kamerType='${kamertype}'`)
             .getMany()
             .then(kamersEntities => kamersEntities.map(kamerEntity => kamerEntity.mapToKamers()));
+        }
+        else{
+            console.log("kamertype is  empty")
+            return await getRepository(KamerEntity)
+            .createQueryBuilder("kamer")
+            .where(`kamer.kamerNaam NOT IN (select kamernaam from kamer_reservering_entity where datumvan >= '${datumvan}' 
+                    AND datumtot <= '${datumtot}')`)
+            .getMany()
+            .then(kamersEntities => kamersEntities.map(kamerEntity => kamerEntity.mapToKamers()));
+        }
+        
     }
 
     public saveKamer(createkamerdto: CreateKamerDto) {
