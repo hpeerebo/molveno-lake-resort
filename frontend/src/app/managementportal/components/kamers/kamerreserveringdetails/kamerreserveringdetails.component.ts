@@ -38,13 +38,15 @@ export class KamerreserveringdetailsComponent implements OnInit, OnDestroy {
   private uitchecken: boolean = false;
   private todayDate: string = this.dateservice.getCurrentDate();
   private reserveringsnummer: null | string  = "";
+  private showSpinnerOnLoad: boolean = false;
+  private incheckenToegestaan: boolean = false;
 
   public kamerreserveringdetailsormgroup = new KamerReserveringDetailsFormGroup();
 
   async ngOnInit() {
+    this.inchecken = false;
 
     if(this.getReseveringBasedOnId()) {
-      console.log(this.getReseveringBasedOnId());
        this.booking$.pipe(
         tap( booking => {
           if(booking) {
@@ -89,6 +91,13 @@ export class KamerreserveringdetailsComponent implements OnInit, OnDestroy {
           }
         })
       ).subscribe();
+
+       this.delay(2000).then( () => {
+         if(this.datumvan <= this.dateservice.getCurrentDate()){
+           this.incheckenToegestaan = true;
+         }
+         this.showSpinnerOnLoad = true;
+       })
     }
   }
 
@@ -144,6 +153,7 @@ export class KamerreserveringdetailsComponent implements OnInit, OnDestroy {
         }
       })
     ).subscribe();
+    this.resetInitialValues();
     this.router.navigateByUrl('managementportal/kamerreserveringen');
   }
 
@@ -221,6 +231,16 @@ export class KamerreserveringdetailsComponent implements OnInit, OnDestroy {
 
   private resetInitialValues() {
     this.storagePrice.length = 0;
+    this.numberOfDays = 0;
+    this.totalPrice = 0;
+    this.datumvan = '';
+    this.datumtot ='';
+    this.inchecken = false;
+    this.incheckdatum = '';
+    this.uitcheckdatum = '';
+    this.uitchecken = false;
+    this.showSpinnerOnLoad = false;
+    this.incheckenToegestaan = false;
   }
 
   private addToStorage(result: number) {
@@ -231,8 +251,22 @@ export class KamerreserveringdetailsComponent implements OnInit, OnDestroy {
     return numbers.reduce((a: number,b: number) => a + b, 0);
   }
 
-  ngOnDestroy(): void {
+  async delay(ms: number) {
+    await new Promise(resolve => setTimeout(()=>resolve(), ms));
+  }
 
+  ngOnDestroy(): void {
+    this.showSpinnerOnLoad = false ;
+    this.numberOfDays = 0;
+    this.totalPrice = 0;
+    this.datumvan = '';
+    this.datumtot ='';
+    this.inchecken = false;
+    this.incheckdatum = '';
+    this.uitcheckdatum = '';
+    this.uitchecken = false;
+    this.showSpinnerOnLoad = false;
+    this.incheckenToegestaan = false;
   }
 
 }
