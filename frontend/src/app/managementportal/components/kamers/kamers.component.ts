@@ -11,7 +11,7 @@ import { FormKamersbeschikbaarComponent } from './kamers-form/form-kamersbeschik
 import {ActivatedRoute} from "@angular/router";
 import { FormControl } from '@angular/forms';
 import {DateFunctions} from "../../../shared/services/date-functions";
-
+//import {DateDiff} from 'date-diff';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -244,23 +244,31 @@ export class ManagementPortalKamersComponent implements OnInit, AfterViewInit {
       this.showResButton = true
       },
       reason => {
+        this.calculateNumberofDays(this.datumvan, this.datumtot);
         this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
       }
     );
   }
   calculateNumberofDays(datumvan: string, datumtot: string){
+    const DateDiff = require('date-diff')
+    const diff = new DateDiff(new Date(datumtot), new Date(datumvan));
+    if(diff.days() === 0){
+      this.numberOfDays = 1;
+    }
+    else{
+      this.numberOfDays = diff.days();
+    }
 
-    const date1 = this.convertDate(new Date(datumvan));
+    /* const date1 = this.convertDate(new Date(datumvan));
     const date2 = this.convertDate(new Date(datumtot));
-
     this.numberOfDays = parseInt(date2)- parseInt(date1);
     if(this.numberOfDays === 0){
       this.numberOfDays = 1;
-    }
+    } */
     //console.log(`${date1.getFullYear()} + ${date1.getMonth()} + ${date1.getDay()}`);
 
   }
-  convertDate(date: Date): string{
+   /* convertDate(date: Date): string{
     let dd:any = date.getDate();
     let mm:any = date.getMonth()+1;
     let yyyy:any = date.getFullYear();
@@ -273,7 +281,7 @@ export class ManagementPortalKamersComponent implements OnInit, AfterViewInit {
       mm = '0'+mm
   }
   return yyyy+mm+dd;
-  }
+  } */
   resetInitialValues(){
     this.reserverRooms = [];
     this.numberOfDays = 0;

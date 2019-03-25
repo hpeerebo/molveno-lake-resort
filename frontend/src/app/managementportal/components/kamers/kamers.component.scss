@@ -19,12 +19,21 @@
   width: 400px;
   //position: relative;
   //left:500px;
-  bottom: 0;
-  right: 0;
+ position: fixed;
+  top:135px;
+ // bottom: 0;
+  right: 60px;
   border-radius: 4px;
   overflow-y: auto;
   background-color: lightgoldenrodyellow;
   margin-left: 400px;
+}
+.table-striped {
+  //width: 800px;
+//    margin: auto;
+}
+.table-small{
+  width: 800px;
 }
 
 /* .table-striped>tbody>tr:nth-child(odd)>td,

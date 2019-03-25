@@ -5,6 +5,7 @@
     >
         Molveno Lake Resort
     </a>
+
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
             <a
@@ -12,6 +13,17 @@
                 (click)="logout()"
             >
                 Sign out
+            </a>
+        </li>
+
+    </ul>
+    <ul class="navbar-nav ">
+        <li class="nav-item text-nowrap">
+            <a
+                class="nav-link"
+                [routerLink]="['/managementportal/signup']"
+            >
+                Add user
             </a>
         </li>
     </ul>

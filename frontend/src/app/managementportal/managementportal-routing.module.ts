@@ -16,16 +16,19 @@ import { GerechtenDetailsComponent } from './components/restaurant/gerechten-det
 import { ActiviteitenPlanningComponent } from "./components/activiteiten/activiteiten-planning/activiteiten-planning.component";
 import {KamerreserveringdetailsComponent} from "./components/kamers/kamerreserveringdetails/kamerreserveringdetails.component";
 import { AuthGuard } from '../frontend/guard/auth.guard';
+import { SignupComponent } from '../shared/components/form-signup/signup.component';
+
 
 const routes: Routes = [
   {
     path: "",
     component: ManagementportalComponent,
     children: [
-      { path: 'managementportal/home', component: ManagementPortalHomeComponent },
+      { path: 'managementportal/home', component: ManagementPortalHomeComponent,},
       { path: 'managementportal/login', component: ManagementPortalLoginComponent },
-      { path: 'managementportal/kamers', component: ManagementPortalKamersComponent },
-      { path: 'managementportal/kamers/:param', component: ManagementPortalKamersComponent },
+      { path: 'managementportal/signup', component: SignupComponent },
+      { path: 'managementportal/kamers', component: ManagementPortalKamersComponent, canActivate: [AuthGuard]},
+      { path: 'managementportal/kamers/:param', component: ManagementPortalKamersComponent},
       { path: 'managementportal/kamerreserveringen', component: KamerreserveringComponent},
       { path: 'managementportal/kamerreserveringen/:reserveringsnummer', component: KamerreserveringdetailsComponent},
       { path: 'managementportal/kamers-form', component: ManagementPortalKamersFormComponent },

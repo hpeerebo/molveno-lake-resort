@@ -6,25 +6,26 @@ import { UserEntity } from '../entities/user-entity';
 import {ICreateUser} from '../../../../../shared/interfaces/create-user.interface'
 
 export class CreateUserDto implements ICreateUser{
+	rol: string;
 	@IsEmail()
 	@ApiModelProperty()
 	userName: string;
 
-	@IsNumber()
+	@IsString()
 	@ApiModelProperty()
-	age: number;
+	role: string;
 
 	@IsString()
 	@ApiModelProperty()
 	password: string;
 
-	constructor(userName: string, age: number, passWord: string) {
+	constructor(userName: string, role: string, passWord: string) {
 		this.userName = userName;
-		this.age = age;
+		this.role = role;
 		this.password = passWord;
 	}
 
 	public userEntity(): UserEntity {
-		return new UserEntity(this.userName, this.age, Bcrypt.hashSync(this.password, 1));
+		return new UserEntity(this.userName, this.role, Bcrypt.hashSync(this.password, 1));
 	}
 }
