@@ -9,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 export class FrontEndComponent implements OnInit {
 
   constructor(public activatedRoute: ActivatedRoute) {}
+  multilanguage: boolean = false;
   nl = { language: 'nl', hotel: 'Hotel', rooms: 'Kamers', restaurant: 'Restaurant', activities: 'Activiteiten', contact: 'Contact', login: 'Log in' };
   en = { language: 'en', hotel: 'Hotel', rooms: 'Rooms', restaurant: 'Restaurant', activities: 'Activities', contact: 'Contact', login: 'Login' };
   it = { language: 'it', hotel: 'Albergo', rooms: 'Camere', restaurant: 'Ristorante', activities: 'Attività', contact: 'Contatto', login: 'Accesso' };
@@ -37,13 +38,13 @@ export class FrontEndComponent implements OnInit {
         break;
       }
       default: {
-        this.siteLanguage = this.nl;
+        this.siteLanguage = this.en;
         break;
       }
     }
   }
 
   ngOnInit() {
-    this.setLanguage('nl')
+    this.setLanguage('en')
   }
 }
