@@ -128,7 +128,7 @@
   </div>
   
   </form>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-success" (click)="submitForm(kamerreserveringForm.controls.kamernaam1.value, kamerreserveringForm.controls.kamernaam2.value)" [disabled]="kamerreserveringForm.invalid">Save</button>
+  <div *ngIf="showfillinfo" class="modal-footer">
+    <button type="button" class="btn btn-success" (click)="submitForm(kamerreserveringForm.controls.kamernaam1.value, kamerreserveringForm.controls.kamernaam2.value)" [disabled]="kamerreserveringForm.invalid">Bevestigen</button>
   </div>
 </div>
