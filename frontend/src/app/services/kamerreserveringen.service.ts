@@ -4,6 +4,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {KamerReservering} from '../models/kamerreservering';
 import {map, take, tap} from 'rxjs/operators';
 import {DateFunctions} from "../shared/services/date-functions";
+import {Tafel} from "../models/tafel";
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +12,11 @@ import {DateFunctions} from "../shared/services/date-functions";
 export class KamerreserveringenService {
   private kamerReseveringCacheSubject = new BehaviorSubject<KamerReservering[] | undefined>(undefined);
   private kamerReseveringDetailsCacheSubject = new BehaviorSubject<KamerReservering[] | undefined>(undefined);
+  private readonly dataStore = new BehaviorSubject<KamerReservering[]>([]);
 
   private static api = `/api/kamerreservering`;
 
-  constructor(private http: HttpClient,
-              private datefunctions: DateFunctions) {
+  constructor(private http: HttpClient, private datefunctions: DateFunctions) {
   }
 
   getKamerReserveringen(refreshCache: boolean = false): Observable<KamerReservering[] | undefined> {
@@ -30,6 +31,20 @@ export class KamerreserveringenService {
         ).subscribe();
     }
     return this.kamerReseveringCacheSubject;
+  }
+
+  getKamerReseveringById(refreshCache: boolean = false, reserveringsnummer: string): Observable<KamerReservering[] | undefined> {
+    if (this.kamerReseveringDetailsCacheSubject.getValue() === undefined || refreshCache) {
+      this.http.get<IKamerReserveringenResponse>(`${KamerreserveringenService.api}/id/${reserveringsnummer}`)
+        .pipe(
+          map(KamerreserveringenService.kamerResponseToReserveringMapper),
+          take(1),
+          tap(kamerreserveringen => {
+            this.kamerReseveringDetailsCacheSubject.next(kamerreserveringen);
+          })
+        ).subscribe();
+    }
+    return this.kamerReseveringDetailsCacheSubject;
   }
 
   getKamerToekomstReserveringen(refreshCache: boolean = false): Observable<KamerReservering[] | undefined> {
@@ -60,19 +75,6 @@ export class KamerreserveringenService {
     return this.kamerReseveringCacheSubject;
   }
 
-  getKamerReseveringById(reserveringsnummer: string): Observable<KamerReservering[] | undefined> {
-    console.log(reserveringsnummer);
-    this.http.get<IKamerReserveringenResponse>(`${KamerreserveringenService.api}/id/${reserveringsnummer}`)
-      .pipe(
-        map(KamerreserveringenService.kamerResponseToReserveringMapper),
-        take(1),
-        tap(kamerreserveringen => {
-          this.kamerReseveringDetailsCacheSubject.next(kamerreserveringen);
-        })
-      ).subscribe();
-    return this.kamerReseveringDetailsCacheSubject;
-  }
-
   saveKamerReservering(kamerreservering: KamerReservering) {
     this.http.post(`${KamerreserveringenService.api}`, kamerreservering)
       .pipe(
@@ -81,13 +83,38 @@ export class KamerreserveringenService {
       ).subscribe();
   }
 
+  updateReservering(kamerreservering: KamerReservering) {
+    this.http.put(`${KamerreserveringenService.api}/kamerresevering`, kamerreservering)
+      .pipe(
+        take(1),
+        tap(() => this.getKamerReserveringen(true))
+      ).subscribe();
+  }
+
   deleteKamerReservering(kamerdata: KamerReservering) {
-    console.log(kamerdata);
     this.http.delete(`${KamerreserveringenService.api}/${kamerdata.id}`)
       .pipe(
         take(1),
         tap(() => this.getKamerReserveringen(true))
       ).subscribe();
+  }
+
+  getKamerReseveringById2(reserveringsnummer: string): Promise<any> {
+    return this.http
+      .get<IKamerReserveringenResponse>(`${KamerreserveringenService.api}/id/${reserveringsnummer}`)
+      .toPromise()
+      .then(this.extractData)
+      .catch(this.handleError);
+  }
+
+  private extractData(res: IKamerReserveringenResponse) {
+    let body = res.kamerreserveringen;
+    return body || {};
+  }
+
+  private handleError(error: any): Promise<any> {
+    console.error('An error occurred', error);
+    return Promise.reject(error.message || error);
   }
 
   private static kamerResponseToReserveringMapper(kamerreserveringenResponse: IKamerReserveringenResponse): KamerReservering[] {
