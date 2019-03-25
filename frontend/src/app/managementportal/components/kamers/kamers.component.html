@@ -15,7 +15,7 @@
       <th *ngIf="showResButton">Select</th>
       <th (click)="clickColumnHandler('kamerNaam')">Kamernaam<i class="fa fa-fw fa-sort"></i></th>
       <th (click)="clickColumnHandler('kamerType')">Kamer type<i class="fa fa-fw fa-sort"></i></th>
-      <th (click)="clickColumnHandler('kamerLigging')">Uitizcht<i class="fa fa-fw fa-sort"></i></th>
+      <th (click)="clickColumnHandler('kamerLigging')">Uitzicht<i class="fa fa-fw fa-sort"></i></th>
       <th (click)="clickColumnHandler('aantalPersonen')">Aantal personen<i class="fa fa-fw fa-sort"></i></th>
       <th (click)="clickColumnHandler('prijs')">Prijs<i class="fa fa-fw fa-sort"></i></th>
       <th></th>
@@ -25,10 +25,9 @@
     <tbody>
     <div *ngIf="(kamers| async)?.length>0, then welkamers else geenKamers"></div>
     <ng-template #welkamers>
-    <tr *ngFor="let kamer of (kamers | async | kamersfilter: show | sortgrid:field)">
+    <tr *ngFor="let kamer of (kamers | async | kamersfilter: show | sortgrid:field)" >
         <td *ngIf="showResButton">
             <input  [formControl]="myCheckbox" type="checkbox" (change)="onSelectRoom(kamer)"/>
-
        </td>
         <td>{{ kamer.kamerNaam }}</td>
         <td>{{ kamer.kamerType }}</td>
