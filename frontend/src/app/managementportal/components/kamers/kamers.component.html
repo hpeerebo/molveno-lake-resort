@@ -25,10 +25,9 @@
     <tbody>
     <div *ngIf="(kamers| async)?.length>0, then welkamers else geenKamers"></div>
     <ng-template #welkamers>
-    <tr *ngFor="let kamer of (kamers | async | kamersfilter: show | sortgrid:field)">
+    <tr *ngFor="let kamer of (kamers | async | kamersfilter: show | sortgrid:field)" >
         <td *ngIf="showResButton">
             <input  [formControl]="myCheckbox" type="checkbox" (change)="onSelectRoom(kamer)"/>
-
        </td>
         <td>{{ kamer.kamerNaam }}</td>
         <td>{{ kamer.kamerType }}</td>

@@ -45,6 +45,7 @@ export class ManagementPortalKamersComponent implements OnInit, AfterViewInit {
   totalPrice: number = 0;
   myCheckbox: FormControl = new FormControl();
   reserverRooms: Kamer[] = [];
+  roomSelected: boolean = false;
   //marked = false;
   //theCheckbox = false;
 
@@ -69,7 +70,10 @@ export class ManagementPortalKamersComponent implements OnInit, AfterViewInit {
   }
 
   onSelect(kamer: Kamer): void {
+    //this.roomSelected = !this.roomSelected
     this.selectedKamer = kamer;
+    this.myCheckbox.setValue(true);
+    this.onSelectRoom(kamer);
   }
   onSelectRoom(kamer: Kamer): void {
     if (this.myCheckbox.value){
