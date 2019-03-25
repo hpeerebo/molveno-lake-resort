@@ -8,6 +8,7 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {FormPrintKamerreseveringComponent} from "../kamers-form/form-print-kamerresevering/form-print-kamerresevering.component";
 import {FormEmailKamerreseveringComponent} from '../kamers-form/form-email-kamerresevering/form-email-kamerresevering.component';
 import {Observable} from "rxjs";
+import {tap} from "rxjs/operators";
 
 @Component({
   //changeDetection: ChangeDetectionStrategy.OnPush,
@@ -24,9 +25,7 @@ export class KamerreserveringdetailsComponent implements OnInit {
               private modalService: NgbModal,) {};
 
   public kamerreserveringen$: Observable<KamerReservering[] | undefined> = this.kamerreserveringenservice.getKamerReseveringById(true, this.getReseveringBasedOnId());
-  //public kamerreserveringen$: Promise<KamerReservering[]> = this.kamerreserveringenservice.getKamerReseveringById2(this.getReseveringBasedOnId());
-  public booking: KamerReservering[] | undefined = undefined;
-  public booking2: Observable<KamerReservering[] | undefined> = this.kamerreserveringen$;
+  public booking$: Observable<KamerReservering[] | undefined> = this.kamerreserveringen$;
 
   private storagePrice: number[] = [];
   private numberOfDays: number = 0;
@@ -42,59 +41,54 @@ export class KamerreserveringdetailsComponent implements OnInit {
 
   public kamerreserveringdetailsormgroup = new KamerReserveringDetailsFormGroup();
 
-  async ngOnInit() {
+  ngOnInit() {
 
     if(!this.reserveringsnummer) {
 
-      //this.kamerreserveringen$.then(values => {
-        //this.booking = values
-      //});
-      this.kamerreserveringen$.subscribe({
-        next: value => this.booking = value
-      });
+      this.booking$.pipe(
+        tap( booking => {
+          if(booking) {
+            this.datumtot = booking[0].datumtot;
+            this.datumvan = booking[0].datumvan;
+            this.numberOfDays = this.calculateNumberofDays(this.datumvan, this.datumtot);
 
-      setTimeout(() => {
-        if(this.booking) {
-          this.datumtot = this.booking[0].datumtot;
-          this.datumvan = this.booking[0].datumvan;
-          this.numberOfDays = this.calculateNumberofDays(this.datumvan, this.datumtot);
+            if(booking[0].inchecken){
+              this.inchecken = true;
+            }
 
-          if(this.booking[0].inchecken){
-            this.inchecken = true;
+            if(booking[0].uitchecken){
+              this.uitchecken = true;
+            }
+
+            booking.forEach(prijs => {
+              this.storagePrice = this.addToStorage(prijs.prijs * this.numberOfDays);
+            });
+
+            this.totalPrice = this.sumAll(this.storagePrice);
+
+            this.kamerreserveringdetailsormgroup.setValue({
+              voornaam: booking[0].voornaam,
+              achternaam: booking[0].achternaam,
+              telefoonnummer: booking[0].telefoonnummer,
+              emailadres: booking[0].emailadres,
+              identiteitsid: booking[0].identiteitsid,
+              postcode: booking[0].postcode,
+              straat: booking[0].straat,
+              huisnummer: booking[0].huisnummer,
+              woonplaats: booking[0].woonplaats,
+              land: booking[0].land,
+              datumvan: booking[0].datumvan,
+              datumtot: booking[0].datumtot,
+              kamernaam: booking[0].kamernaam,
+              inchecken: booking[0].inchecken,
+              uitchecken: booking[0].uitchecken,
+              personen: booking[0].personen,
+              prijs: booking[0].prijs,
+              reserveringsnummer: booking[0].reserveringsnummer,
+            });
           }
-
-          if(this.booking[0].uitchecken){
-            this.uitchecken = true;
-          }
-
-          this.booking.forEach(prijs => {
-            this.storagePrice = this.addToStorage(prijs.prijs * this.numberOfDays);
-          });
-
-          this.totalPrice = this.sumAll(this.storagePrice);
-
-          this.kamerreserveringdetailsormgroup.setValue({
-            voornaam: this.booking[0].voornaam,
-            achternaam: this.booking[0].achternaam,
-            telefoonnummer: this.booking[0].telefoonnummer,
-            emailadres: this.booking[0].emailadres,
-            identiteitsid: this.booking[0].identiteitsid,
-            postcode: this.booking[0].postcode,
-            straat: this.booking[0].straat,
-            huisnummer: this.booking[0].huisnummer,
-            woonplaats: this.booking[0].woonplaats,
-            land: this.booking[0].land,
-            datumvan: this.booking[0].datumvan,
-            datumtot: this.booking[0].datumtot,
-            kamernaam: this.booking[0].kamernaam,
-            inchecken: this.booking[0].inchecken,
-            uitchecken: this.booking[0].uitchecken,
-            personen: this.booking[0].personen,
-            prijs: this.booking[0].prijs,
-            reserveringsnummer: this.booking[0].reserveringsnummer,
-          });
-        }
-      });
+        })
+      )
     }
   }
 
@@ -112,41 +106,44 @@ export class KamerreserveringdetailsComponent implements OnInit {
   }
 
   saveChangesToBooking(){
-    if(this.booking) {
+    this.booking$.pipe(
+      tap(booking => {
+        if(booking) {
 
-      if (this.inchecken) {
-        this.incheckdatum = this.todayDate;
-      }
+          if (this.inchecken) {
+            this.incheckdatum = this.todayDate;
+          }
 
-      if (this.uitchecken) {
-        this.uitcheckdatum = this.todayDate;
-      }
+          if (this.uitchecken) {
+            this.uitcheckdatum = this.todayDate;
+          }
 
-      this.booking.forEach( kamer => {
-        this.kamerreserveringenservice.updateReservering(new KamerReservering(
-          kamer.id,
-          this.kamerreserveringdetailsormgroup.value.voornaam,
-          this.kamerreserveringdetailsormgroup.value.achternaam,
-          this.kamerreserveringdetailsormgroup.value.telefoonnummer,
-          this.kamerreserveringdetailsormgroup.value.emailadres,
-          this.kamerreserveringdetailsormgroup.value.identiteitsid,
-          this.kamerreserveringdetailsormgroup.value.postcode,
-          this.kamerreserveringdetailsormgroup.value.straat,
-          this.kamerreserveringdetailsormgroup.value.huisnummer,
-          this.kamerreserveringdetailsormgroup.value.woonplaats,
-          this.kamerreserveringdetailsormgroup.value.land,
-          kamer.datumvan,
-          kamer.datumtot,
-          kamer.kamernaam,
-          this.kamerreserveringdetailsormgroup.value.inchecken || this.incheckdatum,
-          this.kamerreserveringdetailsormgroup.value.uitchecken ||this.uitcheckdatum,
-          kamer.personen,
-          kamer.prijs,
-          this.kamerreserveringdetailsormgroup.value.reserveringsnummer,
-        ));
-      });
-    }
-
+          booking.forEach( kamer => {
+            this.kamerreserveringenservice.updateReservering(new KamerReservering(
+              kamer.id,
+              this.kamerreserveringdetailsormgroup.value.voornaam,
+              this.kamerreserveringdetailsormgroup.value.achternaam,
+              this.kamerreserveringdetailsormgroup.value.telefoonnummer,
+              this.kamerreserveringdetailsormgroup.value.emailadres,
+              this.kamerreserveringdetailsormgroup.value.identiteitsid,
+              this.kamerreserveringdetailsormgroup.value.postcode,
+              this.kamerreserveringdetailsormgroup.value.straat,
+              this.kamerreserveringdetailsormgroup.value.huisnummer,
+              this.kamerreserveringdetailsormgroup.value.woonplaats,
+              this.kamerreserveringdetailsormgroup.value.land,
+              kamer.datumvan,
+              kamer.datumtot,
+              kamer.kamernaam,
+              this.kamerreserveringdetailsormgroup.value.inchecken || this.incheckdatum,
+              this.kamerreserveringdetailsormgroup.value.uitchecken ||this.uitcheckdatum,
+              kamer.personen,
+              kamer.prijs,
+              this.kamerreserveringdetailsormgroup.value.reserveringsnummer,
+            ));
+          });
+        }
+      })
+    );
     this.router.navigateByUrl('managementportal/kamerreserveringen');
   }
 
@@ -174,7 +171,7 @@ export class KamerreserveringdetailsComponent implements OnInit {
     modalPrintBooking.componentInstance.reserveringsnummer = this.kamerreserveringdetailsormgroup.value.reserveringsnummer;
     modalPrintBooking.componentInstance.datumvan = this.datumvan;
     modalPrintBooking.componentInstance.datumtot = this.datumtot;
-    modalPrintBooking.componentInstance.kamers = this.booking;
+    //modalPrintBooking.componentInstance.kamers = booking;
   }
 
   openBookingEmailForm(){
@@ -201,7 +198,7 @@ export class KamerreserveringdetailsComponent implements OnInit {
     modalPrintBooking.componentInstance.reserveringsnummer = this.kamerreserveringdetailsormgroup.value.reserveringsnummer;
     modalPrintBooking.componentInstance.datumvan = this.datumvan;
     modalPrintBooking.componentInstance.datumtot = this.datumtot;
-    modalPrintBooking.componentInstance.kamers = this.booking;
+    //modalPrintBooking.componentInstance.kamers = this.booking;
   }
 
   calculateNumberofDays(datumvan: string, datumtot: string){
