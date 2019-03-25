@@ -32,6 +32,9 @@
 .table-small{
   width: 800px;
 }
+.table-small>tbody>tr{
+  cursor: pointer;
+}
  .table tr.active td {
   background-color:lightgreen;
   color: white;
