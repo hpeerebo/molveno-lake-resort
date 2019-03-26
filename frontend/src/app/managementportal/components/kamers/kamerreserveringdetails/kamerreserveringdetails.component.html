@@ -155,8 +155,10 @@
                 </div>
                 <div class="form-group col-sm-5">
                   <div *ngIf="incheckenToegestaan">
-                    <br/>
-                    <div>op: {{ kamerreserveringdetailsormgroup.value.inchecken || todayDate}}</div>
+                    <div *ngIf="inchecken">
+                      <br/>
+                      <div>op: {{ kamerreserveringdetailsormgroup.value.inchecken || todayDate}}</div>
+                    </div>
                   </div>
                 </div>
               </div>
