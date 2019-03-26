@@ -34,6 +34,8 @@ import {KamerreserveringdetailsComponent} from './components/kamers/kamerreserve
 import { SignupComponent } from '../shared/components/form-signup/signup.component';
 import { FormPrintKamerreseveringComponent } from './components/kamers/kamers-form/form-print-kamerresevering/form-print-kamerresevering.component';
 import { FormEmailKamerreseveringComponent } from './components/kamers/kamers-form/form-email-kamerresevering/form-email-kamerresevering.component';
+import { FormDownloadKamerreseveringComponent } from './components/kamers/kamers-form/form-download-kamerresevering/form-download-kamerresevering.component';
+import {PDFExportModule} from "@progress/kendo-angular-pdf-export";
 
 @NgModule({
   declarations: [
@@ -65,10 +67,11 @@ import { FormEmailKamerreseveringComponent } from './components/kamers/kamers-fo
     FormKamersbeschikbaarComponent,
     SignupComponent,
     FormPrintKamerreseveringComponent,
-    FormEmailKamerreseveringComponent
+    FormEmailKamerreseveringComponent,
+    FormDownloadKamerreseveringComponent
   ],
-  imports: [CommonModule, ManagementportalRoutingModule, NgbModule, FormsModule, ReactiveFormsModule, ApplicationPipesModule],
-  entryComponents: [FormTafelComponent, FormTafelreserveringComponent, FormGerechtComponent, FormIngredientComponent, FormActiviteitComponent,  FormActiviteitResComponent, FormActiviteitPlanningComponent, ModalConfirmComponent, FormKamerreserveringComponent, KamerreserveringdetailsComponent, FormKamersbeschikbaarComponent, FormPrintKamerreseveringComponent, FormEmailKamerreseveringComponent, SignupComponent]
+  imports: [CommonModule, ManagementportalRoutingModule, NgbModule, FormsModule, ReactiveFormsModule, ApplicationPipesModule, PDFExportModule],
+  entryComponents: [FormTafelComponent, FormTafelreserveringComponent, FormGerechtComponent, FormIngredientComponent, FormActiviteitComponent,  FormActiviteitResComponent, FormActiviteitPlanningComponent, ModalConfirmComponent, FormKamerreserveringComponent, KamerreserveringdetailsComponent, FormKamersbeschikbaarComponent, FormPrintKamerreseveringComponent, FormEmailKamerreseveringComponent, SignupComponent, FormDownloadKamerreseveringComponent]
 
 })
 export class ManagementportalModule {
