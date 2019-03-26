@@ -6,6 +6,7 @@ import { Kamer } from 'src/app/models/kamer'
 import { RoomService } from 'src/app/services/rooms.service';
 import { Observable, Subscription } from 'rxjs';
 import { DatePipe } from '@angular/common';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-gast-kamerreservering',
@@ -39,9 +40,6 @@ export class GastKamerReserveringComponent implements OnInit {
   public personen1: string = ''
   public personen2: string = ''
 
-  public room1: any | undefined = undefined;
-  public room2: any | undefined = undefined;
-
   public room1Array: Array<Kamer> = [];
   public room2Array: Array<Kamer> = [];
 
@@ -64,10 +62,6 @@ export class GastKamerReserveringComponent implements OnInit {
 
   constructor(public activeModal: NgbActiveModal, private roomservice: RoomService, private datepipe: DatePipe) {}
 
-  // showRoomsByDateAndCapacity(datumvan: Date, datumtot: Date, capacity: number){
-  //   return this.roomservice.searchRoomByDateAndCapacity(datumvan, datumtot, capacity).subscribe();
-  // };
-
   public roomsForTwo: Observable<Kamer[] | undefined> | undefined = undefined;
   public roomsForThree: Observable<Kamer[] | undefined> | undefined = undefined;
   public roomsForFour: Observable<Kamer[] | undefined> | undefined = undefined;
@@ -75,9 +69,6 @@ export class GastKamerReserveringComponent implements OnInit {
   private subscription: Subscription = new Subscription();
 
   ngOnInit() {
-
-
-    // Remember: Lodash <======================================
     this.tomorrow.setDate(this.today.getDate() + 1)
     
     this.minarrivedate = this.datepipe.transform(this.today, "yyyy-MM-dd")
@@ -195,7 +186,7 @@ export class GastKamerReserveringComponent implements OnInit {
       switch (aantalpersonen) {
         case '1': {
           this.vacantyRoom1 = false;
-          this.fillRoomList1(this.roomsForTwo)
+          this.fillRoomList1(this.roomsForTwo.pipe(filter(filterNullsAndUndefined)))
           this.room1Array = []
           this.showroom2 = false;
           this.personen1 = '2 pers. kamer';
@@ -203,21 +194,21 @@ export class GastKamerReserveringComponent implements OnInit {
         }
         case '2': {
           this.vacantyRoom1 = false;
-          this.fillRoomList1(this.roomsForTwo)
+          this.fillRoomList1(this.roomsForTwo.pipe(filter(filterNullsAndUndefined)))
           this.showroom2 = false;
           this.personen1 = '2 pers. kamer';
           break;
         }
         case '3': {
           this.vacantyRoom1 = false;
-          this.fillRoomList1(this.roomsForThree)
+          this.fillRoomList1(this.roomsForThree.pipe(filter(filterNullsAndUndefined)))
           this.personen1 = '3 pers. kamer';
           this.showroom2 = false;
           break;
         }
         case '4': {
           this.vacantyRoom1 = false;
-          this.fillRoomList1(this.roomsForFour)
+          this.fillRoomList1(this.roomsForFour.pipe(filter(filterNullsAndUndefined)))
           this.showroom2 = false;
           this.personen1 = '4 pers. kamer';
           break;
@@ -225,8 +216,8 @@ export class GastKamerReserveringComponent implements OnInit {
         case '5': {
           this.vacantyRoom1 = false;
           this.vacantyRoom2 = false;
-          this.fillRoomList1(this.roomsForTwo)
-          this.fillRoomList2(this.roomsForThree)
+          this.fillRoomList1(this.roomsForTwo.pipe(filter(filterNullsAndUndefined)))
+          this.fillRoomList2(this.roomsForThree.pipe(filter(filterNullsAndUndefined)))
 
           this.showroom2 = true;
           this.personen1 = '2 personen';
@@ -236,8 +227,8 @@ export class GastKamerReserveringComponent implements OnInit {
         case '6': {
           this.vacantyRoom1 = false;
           this.vacantyRoom2 = false;
-          this.fillRoomList1(this.roomsForThree)
-          this.fillRoomList2(this.roomsForThree)
+          this.fillRoomList1(this.roomsForThree.pipe(filter(filterNullsAndUndefined)))
+          this.fillRoomList2(this.roomsForThree.pipe(filter(filterNullsAndUndefined)))
 
           this.showroom2 = true;
           this.personen1 = '3 personon';
@@ -247,8 +238,8 @@ export class GastKamerReserveringComponent implements OnInit {
         case '7': {
           this.vacantyRoom1 = false;
           this.vacantyRoom2 = false;
-          this.fillRoomList1(this.roomsForThree)
-          this.fillRoomList2(this.roomsForThree)
+          this.fillRoomList1(this.roomsForThree.pipe(filter(filterNullsAndUndefined)))
+          this.fillRoomList2(this.roomsForFour.pipe(filter(filterNullsAndUndefined)))
 
           this.showroom2 = true;
           this.personen1 = '3 personon';
@@ -258,8 +249,8 @@ export class GastKamerReserveringComponent implements OnInit {
         case '8': {
           this.vacantyRoom1 = false;
           this.vacantyRoom2 = false;
-          this.fillRoomList1(this.roomsForFour)
-          this.fillRoomList2(this.roomsForFour)
+          this.fillRoomList1(this.roomsForFour.pipe(filter(filterNullsAndUndefined)))
+          this.fillRoomList2(this.roomsForFour.pipe(filter(filterNullsAndUndefined)))
 
           this.showroom2 = true;
           this.personen1 = '4 personon';
@@ -369,13 +360,13 @@ export class GastKamerReserveringComponent implements OnInit {
     this.room1Array = []
     roomsForX.subscribe(
       response => { 
-        this.room1 = response;
+        let room1 = response;
         
         let room1Budget: boolean = false;
         let room1Standaard: boolean = false;
         let room1Luxe: boolean = false;
 
-        this.room1.forEach((element:any) => {
+        room1.forEach((element:any) => {
           if(element.kamerType === 'Budget' && room1Budget === false) {
             this.room1Array = [...this.room1Array, element]
             room1Budget = true
@@ -400,7 +391,7 @@ export class GastKamerReserveringComponent implements OnInit {
     this.room2Array = []
     roomsForX.subscribe(
       response => { 
-        this.room2 = response;
+        let room2 = response;
            
         let room2Budget: boolean = false;
         let room2Standaard: boolean = false;
@@ -409,7 +400,7 @@ export class GastKamerReserveringComponent implements OnInit {
         let room2StandaardSecond: boolean = false;
         let room2LuxeSecond: boolean = false; 
 
-        this.room2.forEach((element:any) => {
+        room2.forEach((element:any) => {
           if(element.kamerType === 'Budget' && room2Budget === false && room2BudgetSecond === true) {
             this.room2Array = [...this.room2Array, element];
             this.vacantyRoom2 = true;
@@ -439,3 +430,5 @@ export class GastKamerReserveringComponent implements OnInit {
     );
   };
 }
+
+export const filterNullsAndUndefined = <T>(el: T | undefined | null): el is T => !!el;
