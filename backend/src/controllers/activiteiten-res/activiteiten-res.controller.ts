@@ -33,8 +33,6 @@ export class ActiviteitenResController {
     @Param('planningid') planningid: number,
   ) {
     const reservering: ActiviteitResEntity = new ActiviteitResEntity(
-      createReservering.resid,
-      // createReservering.planid,
       createReservering.emailGast,
       createReservering.phoneGast,
       createReservering.aantalPersonen,
@@ -59,8 +57,6 @@ export class ActiviteitenResController {
     @Param('reserveringid') reserveringid: number,
   ): void {
     const reservering: ActiviteitResEntity = new ActiviteitResEntity(
-      createResActiviteit.resid,
-      // createResActiviteit.planid,
       createResActiviteit.emailGast,
       createResActiviteit.phoneGast,
       createResActiviteit.aantalPersonen,

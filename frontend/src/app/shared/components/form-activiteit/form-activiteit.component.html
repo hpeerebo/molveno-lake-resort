@@ -26,10 +26,10 @@
                 ngbAutofocus
             >
             <small
-                class="text-danger"
-                [class.d-none]="naam?.valid || naam?.untouched"
+            class="text-danger d-none"
+            [class.d-block]="activiteitForm.controls.naam?.invalid && activiteitForm.controls.naam?.touched"
             >
-                Verplicht
+                Naam is verplicht
             </small>
         </div>
         <div class="form-group">
@@ -41,75 +41,20 @@
                 [class.is-invalid]="beschrijving?.invalid && beschrijving?.touched"
             >
             <small
-                class="text-danger"
-                [class.d-none]="beschrijving?.valid || beschrijving?.untouched"
+            class="text-danger d-none"
+            [class.d-block]="activiteitForm.controls.beschrijving?.invalid && activiteitForm.controls.beschrijving?.touched"
             >
-                Geef een korte beschrijving van de activiteit.
+                Aantal personen is verplicht
             </small>
         </div>
-        <!-- <div class="form-group">
-            <label for="inputDateFrom">Datum activiteit</label>
-            <div class="form-group">
-                <div
-                    class="input-group date"
-                    id="datetimepicker6"
-                >
-                    <input
-                        type="date"
-                        class="form-control"
-                        formControlName="datum"
-                        [class.is-invalid]="datum?.invalid && datum?.touched"
-                    >
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label>Capaciteit</label>
-            <input
-                type="number"
-                class="form-control"
-                formControlName="capaciteit"
-                [class.is-invalid]="capaciteit?.invalid && capaciteit?.touched"
-            >
-            <small
-                class="text-danger"
-                [class.d-none]="capaciteit?.valid || capaciteit?.untouched"
-            >
-                Maximum aantal deelnemers.
-            </small>
-        </div>
-        <div class="form-group">
-            <label>Prijs</label>
-            <input
-                type="number"
-                class="form-control"
-                formControlName="prijs"
-                [class.is-invalid]="prijs?.invalid && prijs?.touched"
-            >
-            <small
-                class="text-danger"
-                [class.d-none]="prijs?.valid || prijs?.untouched"
-            >
-                Prijs per persoon.
-            </small>
-        </div> -->
+
         <div class="form-group">
             <label>Foto</label>
             <input
                 type="string"
                 class="form-control"
                 formControlName="thumb"
-                [class.is-invalid]="thumb?.invalid && thumb?.touched"
             >
-            <small
-                class="text-danger"
-                [class.d-none]="thumb?.valid || thumb?.untouched"
-            >
-                Fotonaam (als bekend).
-            </small>
         </div>
     </form>
     <div class="modal-footer">

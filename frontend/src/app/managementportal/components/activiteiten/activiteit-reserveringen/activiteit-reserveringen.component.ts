@@ -27,12 +27,12 @@ export class ActiviteitReserveringenComponent {
 
   openFormActiviteitResModal(
     planningId: number,
-    reserveringen?: CreateActiviteitReservering
+    reservering?: ActiviteitReservering
   ) {
     const modal = this.modalService.open(FormActiviteitResComponent);
-
-    if (reserveringen) {
-      modal.componentInstance.reserveringen = reserveringen;
+console.log(reservering)
+    if (reservering) {
+      modal.componentInstance.reservering = reservering;
     }
 
     modal.result

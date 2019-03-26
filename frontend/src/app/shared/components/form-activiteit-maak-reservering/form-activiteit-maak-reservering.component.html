@@ -41,13 +41,13 @@
                 type="string"
                 class="form-control"
                 formControlName="emailGast"
-                [class.is-invalid]="emailGast?.invalid && emailGast?.touched"
+                [class.is-invalid]="activiteitMaakResForm.controls.emailGast?.invalid && activiteitMaakResForm.controls.emailGast?.touched"
             >
             <small
-                class="text-danger"
-                [class.d-none]="emailGast?.valid || emailGast?.untouched"
+            class="text-danger d-none"
+            [class.d-block]="activiteitMaakResForm.controls.emailGast?.invalid && activiteitMaakResForm.controls.emailGast?.touched"
             >
-                E-mail adres is verplicht.
+                Email adres is verplicht
             </small>
         </div>
         <div class="form-group">
@@ -56,13 +56,13 @@
                 type="string"
                 class="form-control"
                 formControlName="phoneGast"
-                [class.is-invalid]="phoneGast?.invalid && phoneGast?.touched"
+                [class.is-invalid]="activiteitMaakResForm.controls.phoneGast?.invalid && activiteitMaakResForm.controls.phoneGast?.touched"
             >
             <small
-                class="text-danger"
-                [class.d-none]="phoneGast?.valid || phoneGast?.untouched"
+            class="text-danger d-none"
+            [class.d-block]="activiteitMaakResForm.controls.phoneGast?.invalid && activiteitMaakResForm.controls.phoneGast?.touched"
             >
-                Optioneel telefonnummer.
+                Telefoonnummer is verplicht
             </small>
         </div>
         <div class="form-group">
@@ -71,13 +71,13 @@
                 type="number"
                 class="form-control"
                 formControlName="aantalPersonen"
-                [class.is-invalid]="aantalPersonen?.invalid && aantalPersonen?.touched"
+                [class.is-invalid]="activiteitMaakResForm.controls.aantalPersonen?.invalid && activiteitMaakResForm.controls.aantalPersonen?.touched"
             >
             <small
-                class="text-danger"
-                [class.d-none]="aantalPersonen?.valid || aantalPersonen?.untouched"
+            class="text-danger d-none"
+            [class.d-block]="activiteitMaakResForm.controls.aantalPersonen?.invalid && activiteitMaakResForm.controls.aantalPersonen?.touched"
             >
-                Minimaal voor één persoon reserveren.
+                Aantal personen is verplicht
             </small>
         </div>
     </form>

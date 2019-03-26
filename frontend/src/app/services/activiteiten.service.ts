@@ -22,19 +22,19 @@ export class ActiviteitenService {
   saveActiviteit(activiteit: CreateActiviteit): void {
     this.http.post<IActiviteit[]>(this.api, activiteit).subscribe();
     console.log("saveActiviteit", activiteit);
-    // location.reload();
+    location.reload();
   }
 
   updateActiviteit(activiteit: Activiteit): void {
     this.http.post<IActiviteit[]>(this.api, activiteit).subscribe();
     console.log("updateActiviteit", activiteit);
-    // location.reload();
+    location.reload();
   }
 
   deleteActiviteit(activiteitId: number): void {
     this.http.delete<IActiviteit[]>(this.api + activiteitId).subscribe();
     console.log("deleteActiviteit", activiteitId);
-    // location.reload();
+    location.reload();
   }
 
   private static activiteitenResponseToActiviteitMapper(

@@ -31,7 +31,7 @@ export class ActiviteitPlanningService {
   }
 
   public updateActiviteitPlanning(
-    planning: CreateActiviteitPlanningDto,
+    planning: ActiviteitPlanningEntity,
     activiteitId: number,
   ): void {
     this.activiteitenPlanningRepository.update(

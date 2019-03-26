@@ -10,7 +10,7 @@ export class ActiviteitService {
     @InjectRepository(ActiviteitEntity)
     private readonly activiteitRepository: Repository<ActiviteitEntity>,
   ) {}
-  public insert(activiteit: CreateActiviteitDto): Promise<ActiviteitEntity> {
+  public insert(activiteit: ActiviteitEntity): Promise<ActiviteitEntity> {
     return this.activiteitRepository.save(activiteit);
   }
 
@@ -18,7 +18,7 @@ export class ActiviteitService {
     this.activiteitRepository.save([activiteit]);
   }
 
-  public updateActiviteit(activiteit: CreateActiviteitDto): void {
+  public updateActiviteit(activiteit: ActiviteitEntity): void {
     this.activiteitRepository.update(
       { actid: activiteit.actid },
       {

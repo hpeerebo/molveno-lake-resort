@@ -17,7 +17,7 @@ export class ActiviteitResService {
   ) {}
 
   public insertReservering(
-    reservering: CreateActiviteitResDto,
+    reservering: ActiviteitResEntity,
   ): Promise<ActiviteitResEntity> {
     return this.activiteitResRepository.save(reservering);
   }
@@ -33,17 +33,6 @@ export class ActiviteitResService {
     this.activiteitResRepository.save([reservering]);
   }
 
-  //
-  // public async saveActiviteitPlanning(
-  //   activiteitplanning: ActiviteitPlanningEntity,
-  //   activiteitId: number,
-  // ): Promise<void> {
-  //   const activiteit = await this.activiteitRepository.findOne(activiteitId);
-  //   activiteitplanning.activiteit = activiteit;
-  //   this.activiteitenPlanningRepository.save([activiteitplanning]);
-  // }
-  //
-
   async getReservering(): Promise<ActiviteitResEntity[]> {
     return this.activiteitResRepository.find({
       relations: ['planning', 'planning.activiteit'],
@@ -51,8 +40,7 @@ export class ActiviteitResService {
   }
 
   public updateReservering(
-    reservering: CreateActiviteitResDto,
-    planningId: number,
+    reservering: ActiviteitResEntity,
   ): void {
     this.activiteitResRepository.update(
       { resid: reservering.resid },

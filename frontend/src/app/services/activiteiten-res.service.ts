@@ -18,7 +18,6 @@ export class ActiviteitenResService {
   private static activiteitResToActiviteitResMapper(
     reservering: IActiviteitReservering[]
   ): ActiviteitReservering[] {
-    console.log(reservering);
     return reservering;
   }
 
@@ -47,14 +46,14 @@ export class ActiviteitenResService {
         reservering
       )
       .subscribe();
-    // location.reload();
+    location.reload();
   }
 
   deleteActiviteitRes(reserveringId: number) {
     this.http
       .delete<IActiviteitReservering[]>(this.api + reserveringId)
       .subscribe();
-    // location.reload();
+    location.reload();
   }
 }
 interface IActiviteitReservering {

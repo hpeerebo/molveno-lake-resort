@@ -20,12 +20,10 @@ export class ActiviteitResEntity {
   planning: ActiviteitPlanningEntity;
 
   constructor(
-    resid: number,
     emailGast: string,
     phoneGast: string,
     aantalPersonen: number,
   ) {
-    this.resid = resid;
     this.emailGast = emailGast;
     this.phoneGast = phoneGast;
     this.aantalPersonen = aantalPersonen;

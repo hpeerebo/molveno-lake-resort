@@ -8,12 +8,10 @@ export class ActiviteitEntity {
   @Column('varchar') public readonly thumb: string;
 
   constructor(
-    actid: number,
     naam: string,
     beschrijving: string,
     thumb: string,
   ) {
-    this.actid = actid;
     this.naam = naam;
     this.beschrijving = beschrijving;
     this.thumb = thumb;

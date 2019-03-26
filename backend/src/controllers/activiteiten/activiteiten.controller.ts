@@ -30,7 +30,6 @@ export class ActiviteitenController {
   })
   public saveActiviteit(@Body() createActiviteit: CreateActiviteitDto): void {
     const activiteit: ActiviteitEntity = new ActiviteitEntity(
-      createActiviteit.actid,
       createActiviteit.naam,
       createActiviteit.beschrijving,
       createActiviteit.thumb,
@@ -52,7 +51,6 @@ export class ActiviteitenController {
   })
   public updateActiviteit(@Body() createActiviteit: CreateActiviteitDto): void {
     const activiteit: ActiviteitEntity = new ActiviteitEntity(
-      createActiviteit.actid,
       createActiviteit.naam,
       createActiviteit.beschrijving,
       createActiviteit.thumb,
