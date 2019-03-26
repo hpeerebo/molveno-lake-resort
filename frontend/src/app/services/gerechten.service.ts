@@ -50,6 +50,7 @@ export class GerechtenService {
   }
 
   getGerechtDetails(id: number): void {
+    this.gerechtDetails$.next(undefined);
     this.http
       .get<IGerechtDetailsResponse>(`${this.api}/${id}`)
       .pipe(
