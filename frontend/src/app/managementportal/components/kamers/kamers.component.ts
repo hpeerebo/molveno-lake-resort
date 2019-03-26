@@ -49,7 +49,6 @@ export class ManagementPortalKamersComponent implements OnInit, AfterViewInit {
   roomSelected: boolean[] = [false];
   roomslist = new Map();
 
-
   public clickColumnHandler(event: string): string {
     this.field = event;
     return this.field;

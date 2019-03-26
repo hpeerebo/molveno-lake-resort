@@ -1,7 +1,7 @@
 <div class="signup mx-auto">
 <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
-        <label for="signup-form-email">Email address</label>
+        <label for="signup-form-email">E-mailadres</label>
         <!--we added binding using the "formControl directive-->
         <input type="email"
                [formControl]="signUpForm.controls.userName"
@@ -11,10 +11,10 @@
                placeholder="Enter username">
         <!--here a conditional error message is shown that activates when the control is invalid and has been interacted with-->
         <div class="text-danger" *ngIf="signUpForm.controls.userName.invalid  && !signUpForm.controls.userName.pristine">
-            Please provide a valid email address
+            Geen geldige e-mailadres
         </div>
 
-        <label for="signup-form-email-verification">Email address</label>
+        <label for="signup-form-email-verification">E-mailadres</label>
         <input type="email"
                [formControl]="signUpForm.controls.userNameVerification"
                class="form-control"
@@ -40,12 +40,12 @@
               <option>Receptie</option>
             </select>
             <div class="text-danger" *ngIf="signUpForm.controls.role.invalid  && !signUpForm.controls.role.pristine">
-            Please select the role of the user
+            Selecteer de rol van de gebruiker
         </div>
     </div>
 
     <div class="form-group">
-        <label for="signup-form-password">Password</label>
+        <label for="signup-form-password">Wachtwoord</label>
         <!--we added binding using the "formControl directive-->
         <input type="password"
                [formControl]="signUpForm.controls.password"
@@ -55,11 +55,12 @@
                placeholder="Password">
         <!--here a conditional error message is shown that activates when the control is invalid and has been interacted with-->
         <div class="text-danger" *ngIf="signUpForm.controls.password.invalid && !signUpForm.controls.password.pristine">
-            Please provide a safe password. (one special character, capital and a minimum of 8 digits)
+            Voer een geldig wachtwoordin . Het wachtwoord moet minimaal 8 karakters en minstens een special karakter, hoofdletter en een cijfer bevatten.
+
         </div>
 
     </div>
 
-    <button type="submit" class="btn btn-primary" [disabled]="signUpForm.invalid">sign me up!</button>
+    <button type="submit" class="btn btn-primary" [disabled]="signUpForm.invalid">Registreren</button>
 </form>
 </div>
