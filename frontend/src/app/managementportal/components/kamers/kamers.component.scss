@@ -28,13 +28,18 @@
   background-color: lightgoldenrodyellow;
   margin-left: 400px;
 }
-.table-striped {
-  //width: 800px;
-//    margin: auto;
-}
+
 .table-small{
   width: 800px;
 }
+.table-small>tbody>tr{
+  cursor: pointer;
+}
+ .table tr.active td {
+  background-color:lightgreen;
+  color: white;
+}
+
 
 /* .table-striped>tbody>tr:nth-child(odd)>td,
 .table-striped>tbody>tr:nth-child(odd)>th {

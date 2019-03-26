@@ -46,8 +46,10 @@ export class ManagementPortalKamersComponent implements OnInit, AfterViewInit {
   totalPrice: number = 0;
   myCheckbox: FormControl = new FormControl();
   reserverRooms: Kamer[] = [];
-  //marked = false;
-  //theCheckbox = false;
+  //selectedRow: number = 0;
+  roomSelected: boolean[] = [false];
+  roomslist = new Map();
+
 
   public clickColumnHandler(event: string): string {
     this.field = event;
@@ -68,26 +70,28 @@ export class ManagementPortalKamersComponent implements OnInit, AfterViewInit {
       }
     });
   }
-
-  onSelect(kamer: Kamer): void {
-    this.selectedKamer = kamer;
-  }
-  onSelectRoom(kamer: Kamer): void {
-    if (this.myCheckbox.value){
+  setClickedRow(index: number, kamer: Kamer){
+    this.roomSelected[index] = !this.roomSelected[index];
+    if (this.roomSelected[index]){
       this.reserverRooms = [...this.reserverRooms, kamer];
       this.totalPrice = this.totalPrice + (this.numberOfDays * kamer.prijs);
+      this.roomslist.set(kamer, index);
+
     }
-    if (!this.myCheckbox.value){
+    if (!this.roomSelected[index]){
       this.reserverRooms = this.reserverRooms.filter(element => kamer.kamerNaam !== element.kamerNaam);
       this.totalPrice = this.totalPrice - (this.numberOfDays * kamer.prijs);
+      this.roomslist.delete(kamer);
     }
+}
+   onSelect(kamer: Kamer): void {
+    this.selectedKamer = kamer;
   }
   deleteRoomFromBucket(kamer: Kamer){
-    this.reserverRooms = this.reserverRooms.filter(element => kamer.kamerNaam !== element.kamerNaam);
-    this.myCheckbox.setValue(false);
-    this.onSelectRoom(kamer);
-
-
+    const rowIndex = this.roomslist.get(kamer);
+    if(rowIndex != 'undefined'){
+      this.setClickedRow(rowIndex, kamer);
+    }
   }
 
   deleteRoom(kamer: Kamer) {
@@ -262,5 +266,7 @@ export class ManagementPortalKamersComponent implements OnInit, AfterViewInit {
     this.numberOfDays = 0;
     this.myCheckbox.setValue(false);
     this.totalPrice = 0;
+    this.roomSelected = [false];
+
   }
 }

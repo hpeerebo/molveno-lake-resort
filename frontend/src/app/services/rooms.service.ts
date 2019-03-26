@@ -36,7 +36,7 @@ export class RoomService {
       );
   }
 
-  searchRoomByDateAndCapacity(datumvan: Date, datumtot: Date, capacity: number): Observable<Kamer[] | undefined> {
+  searchRoomByDateAndCapacity(datumvan: string, datumtot: string, capacity: number): Observable<Kamer[] | undefined> {
     return this.http.get<KamerDetails>(`${RoomService.api}/search/capacity/${capacity}/${datumvan}/${datumtot}`)
       .pipe(
         map((data: any) => data.map((kamer: Kamer) => new Kamer(kamer.kamerNaam, kamer.kamerType, kamer.kamerLigging, kamer.aantalPersonen, kamer.prijs))),

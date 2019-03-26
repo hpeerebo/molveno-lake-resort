@@ -23,7 +23,10 @@ export class ReservationButtonComponent {
     ) {}
 
   openFormKamerReserveringModal(kamerobject: any){
-    const modalKamerReservering = this.modalService.open(GastKamerReserveringComponent);
+    const modalKamerReservering = this.modalService.open(GastKamerReserveringComponent /*, {
+      size: "lg",
+      ariaLabelledBy: "modal-basic-title",
+  }*/);
 
     if (kamerobject) {
       modalKamerReservering.componentInstance.kamertype = kamerobject.roomtype;

@@ -4,7 +4,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { GastKamerReserveringFormGroup } from './gast-kamerreserveringformgroup';
 import { Kamer } from 'src/app/models/kamer'
 import { RoomService } from 'src/app/services/rooms.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { DatePipe } from '@angular/common';
 
 @Component({
@@ -42,6 +42,9 @@ export class GastKamerReserveringComponent implements OnInit {
   public room1: any | undefined = undefined;
   public room2: any | undefined = undefined;
 
+  public room1Array: Array<Kamer> = [];
+  public room2Array: Array<Kamer> = [];
+
   public arrivedate: Date = new Date();
   public leavedate: Date = new Date();
 
@@ -58,16 +61,20 @@ export class GastKamerReserveringComponent implements OnInit {
 
   constructor(public activeModal: NgbActiveModal, private roomservice: RoomService, private datepipe: DatePipe) {}
 
-  showRoomsByDateAndCapacity(datumvan: Date, datumtot: Date, capacity: number){
-    return this.roomservice.searchRoomByDateAndCapacity(datumvan, datumtot, capacity).subscribe();
-  };
+  // showRoomsByDateAndCapacity(datumvan: Date, datumtot: Date, capacity: number){
+  //   return this.roomservice.searchRoomByDateAndCapacity(datumvan, datumtot, capacity).subscribe();
+  // };
 
   public roomsForTwo: Observable<Kamer[] | undefined> | undefined = undefined;
   public roomsForThree: Observable<Kamer[] | undefined> | undefined = undefined;
   public roomsForFour: Observable<Kamer[] | undefined> | undefined = undefined;
 
+  private subscription: Subscription = new Subscription();
+
   ngOnInit() {
 
+
+    // Remember: Lodash <======================================
     this.tomorrow.setDate(this.today.getDate() + 1)
     
     this.minarrivedate = this.datepipe.transform(this.today, "yyyy-MM-dd")
@@ -114,16 +121,21 @@ export class GastKamerReserveringComponent implements OnInit {
       this.arrivedatecheck = false;
     }
     
+    let arrivedateString: string = datumvan
+    let leavedateString: string = datumtot
+
     if(this.leavedate <= this.arrivedate) {
       this.minleavedate = new Date(new Date(this.arrivedate).getTime() + (1000 * 60 * 60 * 24) )
       this.kamerreserveringForm.controls.datumtot.setValue(this.datepipe.transform(this.minleavedate, "yyyy-MM-dd"));
       this.leavedate = new Date(new Date(this.kamerreserveringForm.controls.datumtot.value).getTime());
+      leavedateString = this.minleavedate
     }
 
+
     if(datumtot && this.kamerreserveringForm.controls.aantalpersonen.value) {
-      this.roomsForTwo = this.roomservice.searchRoomByDateAndCapacity(this.arrivedate, this.leavedate, 2);
-      this.roomsForThree = this.roomservice.searchRoomByDateAndCapacity(this.arrivedate, this.leavedate, 3);
-      this.roomsForFour = this.roomservice.searchRoomByDateAndCapacity(this.arrivedate, this.leavedate, 4);
+      this.roomsForTwo = this.roomservice.searchRoomByDateAndCapacity(arrivedateString, leavedateString, 2);
+      this.roomsForThree = this.roomservice.searchRoomByDateAndCapacity(arrivedateString, leavedateString, 3);
+      this.roomsForFour = this.roomservice.searchRoomByDateAndCapacity(arrivedateString, leavedateString, 4);
       this.showselectpeople = true;
     }
 
@@ -138,17 +150,21 @@ export class GastKamerReserveringComponent implements OnInit {
     this.arrivedate = new Date(new Date(datumvan).getTime());
     this.leavedate = new Date(new Date(datumtot).getTime());
 
+    let arrivedateString: string = datumvan
+    let leavedateString: string = datumtot
+
     if(this.leavedate <= this.arrivedate) {
       this.minleavedate = new Date(new Date(this.arrivedate).getTime() + (1000 * 60 * 60 * 24) )
       this.kamerreserveringForm.controls.datumtot.setValue(this.datepipe.transform(this.minleavedate, "yyyy-MM-dd"));
       this.leavedate = this.minleavedate;
+      leavedateString = this.kamerreserveringForm.controls.datumtot.value
       this.leavedatecheck = false;
     }
 
     if(datumvan && this.kamerreserveringForm.controls.aantalpersonen.value) {
-      this.roomsForTwo = this.roomservice.searchRoomByDateAndCapacity(this.arrivedate, this.leavedate, 2);
-      this.roomsForThree = this.roomservice.searchRoomByDateAndCapacity(this.arrivedate, this.leavedate, 3);
-      this.roomsForFour = this.roomservice.searchRoomByDateAndCapacity(this.arrivedate, this.leavedate, 4);
+      this.roomsForTwo = this.roomservice.searchRoomByDateAndCapacity(arrivedateString, leavedateString, 2);
+      this.roomsForThree = this.roomservice.searchRoomByDateAndCapacity(arrivedateString, leavedateString, 3);
+      this.roomsForFour = this.roomservice.searchRoomByDateAndCapacity(arrivedateString, leavedateString, 4);
       this.showselectpeople = true;
     }
 
@@ -165,63 +181,369 @@ export class GastKamerReserveringComponent implements OnInit {
         this.showfillinfo = false;
       }
 
+      let arrivedateString: string = this.kamerreserveringForm.controls.datumvan.value
+      let leavedateString: string = this.kamerreserveringForm.controls.datumtot.value
+
       this.totalprice = (this.roomprice1 + this.roomprice2) * this.aantalnachten
-      this.roomsForTwo = this.roomservice.searchRoomByDateAndCapacity(this.arrivedate, this.leavedate, 2);
-      this.roomsForThree = this.roomservice.searchRoomByDateAndCapacity(this.arrivedate, this.leavedate, 3);
-      this.roomsForFour = this.roomservice.searchRoomByDateAndCapacity(this.arrivedate, this.leavedate, 4);
+      this.roomsForTwo = this.roomservice.searchRoomByDateAndCapacity(arrivedateString, leavedateString, 2);
+      this.roomsForThree = this.roomservice.searchRoomByDateAndCapacity(arrivedateString, leavedateString, 3);
+      this.roomsForFour = this.roomservice.searchRoomByDateAndCapacity(arrivedateString, leavedateString, 4);
     
       switch (aantalpersonen) {
         case '1': {
-          this.room1 = this.roomsForTwo;
+          this.room1Array = []
+          this.roomsForTwo.subscribe(
+            response => { 
+              this.room1 = response;
+              
+              let room1Budget: boolean = false;
+              let room1Standaard: boolean = false;
+              let room1Luxe: boolean = false;
+
+              this.room1.forEach((element:any) => {
+                if(element.kamerType === 'Budget' && room1Budget === false) {
+                  this.room1Array = [...this.room1Array, element]
+                  room1Budget = true
+                }
+                if(element.kamerType === 'Standaard' && room1Standaard === false) {
+                  this.room1Array = [...this.room1Array, element]
+                  room1Standaard = true
+                }
+                if(element.kamerType === 'Luxe' && room1Luxe === false) {
+                  this.room1Array = [...this.room1Array, element]
+                  room1Luxe = true
+                }
+              });
+            });
           this.showroom2 = false;
           this.personen1 = '2 pers. kamer';
           break;
         }
         case '2': {
-          this.room1 = this.roomsForTwo
+          this.room1Array = []
+          this.roomsForTwo.subscribe(
+            response => { 
+              this.room1 = response;
+              
+              let room1Budget: boolean = false;
+              let room1Standaard: boolean = false;
+              let room1Luxe: boolean = false;
+
+              this.room1.forEach((element:any) => {
+                if(element.kamerType === 'Budget' && room1Budget === false) {
+                  this.room1Array = [...this.room1Array, element]
+                  room1Budget = true
+                }
+                if(element.kamerType === 'Standaard' && room1Standaard === false) {
+                  this.room1Array = [...this.room1Array, element]
+                  room1Standaard = true
+                }
+                if(element.kamerType === 'Luxe' && room1Luxe === false) {
+                  this.room1Array = [...this.room1Array, element]
+                  room1Luxe = true
+                }
+              });
+            });
           this.showroom2 = false;
           this.personen1 = '2 pers. kamer';
           break;
         }
         case '3': {
-          this.room1 = this.roomsForThree;
+          this.room1Array = []
+          this.roomsForThree.subscribe(
+            response => { 
+              this.room1 = response;
+              
+              let room1Budget: boolean = false;
+              let room1Standaard: boolean = false;
+              let room1Luxe: boolean = false;
+
+              this.room1.forEach((element:any) => {
+                if(element.kamerType === 'Budget' && room1Budget === false) {
+                  this.room1Array = [...this.room1Array, element]
+                  room1Budget = true
+                }
+                if(element.kamerType === 'Standaard' && room1Standaard === false) {
+                  this.room1Array = [...this.room1Array, element]
+                  room1Standaard = true
+                }
+                if(element.kamerType === 'Luxe' && room1Luxe === false) {
+                  this.room1Array = [...this.room1Array, element]
+                  room1Luxe = true
+                }
+              });
+            });
           this.personen1 = '3 pers. kamer';
           this.showroom2 = false;
           break;
         }
         case '4': {
-          this.room1 = this.roomsForFour;
+          this.room1Array = []
+          this.roomsForFour.subscribe(
+            response => { 
+              this.room1 = response;
+              
+              let room1Budget: boolean = false;
+              let room1Standaard: boolean = false;
+              let room1Luxe: boolean = false;
+
+              this.room1.forEach((element:any) => {
+                if(element.kamerType === 'Budget' && room1Budget === false) {
+                  this.room1Array = [...this.room1Array, element]
+                  room1Budget = true
+                }
+                if(element.kamerType === 'Standaard' && room1Standaard === false) {
+                  this.room1Array = [...this.room1Array, element]
+                  room1Standaard = true
+                }
+                if(element.kamerType === 'Luxe' && room1Luxe === false) {
+                  this.room1Array = [...this.room1Array, element]
+                  room1Luxe = true
+                }
+              });
+            });
           this.showroom2 = false;
           this.personen1 = '4 pers. kamer';
           break;
         }
         case '5': {
-          this.room1 = this.roomsForTwo;
-          this.room2 = this.roomsForThree;
-          this.showroom2 = true;
+          this.room1Array = []
+          this.roomsForTwo.subscribe(
+            response => { 
+              this.room1 = response;
+              
+              let room1Budget: boolean = false;
+              let room1Standaard: boolean = false;
+              let room1Luxe: boolean = false;
+
+              this.room1.forEach((element:any) => {
+                if(element.kamerType === 'Budget' && room1Budget === false) {
+                  this.room1Array = [...this.room1Array, element]
+                  room1Budget = true
+                }
+                if(element.kamerType === 'Standaard' && room1Standaard === false) {
+                  this.room1Array = [...this.room1Array, element]
+                  room1Standaard = true
+                }
+                if(element.kamerType === 'Luxe' && room1Luxe === false) {
+                  this.room1Array = [...this.room1Array, element]
+                  room1Luxe = true
+                }
+              });
+            });
+
+            this.room2Array = []
+            this.roomsForThree.subscribe(
+              response => { 
+                this.room2 = response;
+                
+                let room2Budget: boolean = false;
+                let room2Standaard: boolean = false;
+                let room2Luxe: boolean = false;
+  
+                this.room2.forEach((element:any) => {
+                  if(element.kamerType === 'Budget' && room2Budget === false) {
+                    this.room2Array = [...this.room2Array, element]
+                    room2Budget = true
+                  }
+                  if(element.kamerType === 'Standaard' && room2Standaard === false) {
+                    this.room2Array = [...this.room2Array, element]
+                    room2Standaard = true
+                  }
+                  if(element.kamerType === 'Luxe' && room2Luxe === false) {
+                    this.room2Array = [...this.room2Array, element]
+                    room2Luxe = true
+                  }
+                });
+              });
+            this.showroom2 = true;
           this.personen1 = '2 personen';
           this.personen2 = '3 personen';
           break;
         }
         case '6': {
-          this.room1 = this.roomsForThree;
-          this.room2 = this.roomsForThree;
-          this.showroom2 = true;
+          this.room1Array = []
+          this.roomsForThree.subscribe(
+            response => { 
+              this.room1 = response;
+              
+              let room1Budget: boolean = false;
+              let room1Standaard: boolean = false;
+              let room1Luxe: boolean = false;
+
+              this.room1.forEach((element:any) => {
+                if(element.kamerType === 'Budget' && room1Budget === false) {
+                  this.room1Array = [...this.room1Array, element]
+                  room1Budget = true
+                }
+                if(element.kamerType === 'Standaard' && room1Standaard === false) {
+                  this.room1Array = [...this.room1Array, element]
+                  room1Standaard = true
+                }
+                if(element.kamerType === 'Luxe' && room1Luxe === false) {
+                  this.room1Array = [...this.room1Array, element]
+                  room1Luxe = true
+                }
+              });
+            });
+            this.room2Array = []
+            this.roomsForThree.subscribe(
+              response => { 
+                this.room2 = response;
+                  
+                let room2Budget: boolean = false;
+                let room2Standaard: boolean = false;
+                let room2Luxe: boolean = false;
+                let room2BudgetSecond: boolean = false;
+                let room2StandaardSecond: boolean = false;
+                let room2LuxeSecond: boolean = false; 
+  
+                this.room2.forEach((element:any) => {
+                  if(element.kamerType === 'Budget' && room2Budget === false && room2BudgetSecond === true) {
+                    this.room2Array = [...this.room2Array, element];
+                    room2Budget = true;
+                  }
+                  if(element.kamerType === 'Budget' && room2Budget === false && room2BudgetSecond === false) {
+                    room2BudgetSecond = true;
+                  }
+                  if(element.kamerType === 'Standaard' && room2Standaard === false && room2StandaardSecond === true) {
+                    this.room2Array = [...this.room2Array, element]
+                    room2Standaard = true
+                  }
+                  if(element.kamerType === 'Standaard' && room2Standaard === false && room2StandaardSecond === false) {
+                    room2StandaardSecond = true;
+                  }
+                  if(element.kamerType === 'Luxe' && room2Luxe === false && room2LuxeSecond === true) {
+                    this.room2Array = [...this.room2Array, element]
+                    room2Luxe = true
+                  }
+                  if(element.kamerType === 'Luxe' && room2Luxe === false && room2LuxeSecond === false) {
+                    room2LuxeSecond = true;
+                  }
+                });
+              });
+            this.showroom2 = true;
           this.personen1 = '3 personon';
           this.personen2 = '3 personon';
           break;
         }
         case '7': {
-          this.room1 = this.roomsForThree;
-          this.room2 = this.roomsForFour;
-          this.showroom2 = true;
+          this.room1Array = []
+          this.roomsForThree.subscribe(
+            response => { 
+              this.room1 = response;
+              
+              let room1Budget: boolean = false;
+              let room1Standaard: boolean = false;
+              let room1Luxe: boolean = false;
+
+              this.room1.forEach((element:any) => {
+                if(element.kamerType === 'Budget' && room1Budget === false) {
+                  this.room1Array = [...this.room1Array, element]
+                  room1Budget = true
+                }
+                if(element.kamerType === 'Standaard' && room1Standaard === false) {
+                  this.room1Array = [...this.room1Array, element]
+                  room1Standaard = true
+                }
+                if(element.kamerType === 'Luxe' && room1Luxe === false) {
+                  this.room1Array = [...this.room1Array, element]
+                  room1Luxe = true
+                }
+              });
+            });
+
+            this.room2Array = []
+            this.roomsForFour.subscribe(
+              response => { 
+                this.room2 = response;
+                
+                let room2Budget: boolean = false;
+                let room2Standaard: boolean = false;
+                let room2Luxe: boolean = false;
+  
+                this.room2.forEach((element:any) => {
+                  if(element.kamerType === 'Budget' && room2Budget === false) {
+                    this.room2Array = [...this.room2Array, element]
+                    room2Budget = true
+                  }
+                  if(element.kamerType === 'Standaard' && room2Standaard === false) {
+                    this.room2Array = [...this.room2Array, element]
+                    room2Standaard = true
+                  }
+                  if(element.kamerType === 'Luxe' && room2Luxe === false) {
+                    this.room2Array = [...this.room2Array, element]
+                    room2Luxe = true
+                  }
+                });
+              });
+            this.showroom2 = true;
           this.personen1 = '3 personon';
           this.personen2 = '4 personon';
           break;
         }
         case '8': {
-          this.room1 = this.roomsForFour;
-          this.room2 = this.roomsForFour;
+          this.room1Array = []
+          this.roomsForFour.subscribe(
+            response => { 
+              this.room1 = response;
+              
+              let room1Budget: boolean = false;
+              let room1Standaard: boolean = false;
+              let room1Luxe: boolean = false;
+
+              this.room1.forEach((element:any) => {
+                if(element.kamerType === 'Budget' && room1Budget === false) {
+                  this.room1Array = [...this.room1Array, element]
+                  room1Budget = true
+                }
+                if(element.kamerType === 'Standaard' && room1Standaard === false) {
+                  this.room1Array = [...this.room1Array, element]
+                  room1Standaard = true
+                }
+                if(element.kamerType === 'Luxe' && room1Luxe === false) {
+                  this.room1Array = [...this.room1Array, element]
+                  room1Luxe = true
+                }
+              });
+            });
+
+          this.room2Array = []
+          this.roomsForFour.subscribe(
+            response => { 
+              this.room2 = response;
+                
+              let room2Budget: boolean = false;
+              let room2Standaard: boolean = false;
+              let room2Luxe: boolean = false;
+              let room2BudgetSecond: boolean = false;
+              let room2StandaardSecond: boolean = false;
+              let room2LuxeSecond: boolean = false; 
+
+              this.room2.forEach((element:any) => {
+                if(element.kamerType === 'Budget' && room2Budget === false && room2BudgetSecond === true) {
+                  this.room2Array = [...this.room2Array, element];
+                  room2Budget = true;
+                }
+                if(element.kamerType === 'Budget' && room2Budget === false && room2BudgetSecond === false) {
+                  room2BudgetSecond = true;
+                }
+                if(element.kamerType === 'Standaard' && room2Standaard === false && room2StandaardSecond === true) {
+                  this.room2Array = [...this.room2Array, element]
+                  room2Standaard = true
+                }
+                if(element.kamerType === 'Standaard' && room2Standaard === false && room2StandaardSecond === false) {
+                  room2StandaardSecond = true;
+                }
+                if(element.kamerType === 'Luxe' && room2Luxe === false && room2LuxeSecond === true) {
+                  this.room2Array = [...this.room2Array, element]
+                  room2Luxe = true
+                }
+                if(element.kamerType === 'Luxe' && room2Luxe === false && room2LuxeSecond === false) {
+                  room2LuxeSecond = true;
+                }
+              });
+            });
           this.showroom2 = true;
           this.personen1 = '4 personon';
           this.personen2 = '4 personon';
