@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {KamerreserveringenService} from "../../../../services/kamerreserveringen.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {KamerReservering} from "../../../../models/kamerreservering";
@@ -16,7 +16,7 @@ import {tap} from "rxjs/operators";
   templateUrl: './kamerreserveringdetails.component.html',
   styleUrls: ['./kamerreserveringdetails.component.scss']
 })
-export class KamerreserveringdetailsComponent implements OnInit {
+export class KamerreserveringdetailsComponent implements OnInit, OnDestroy {
 
   constructor(private kamerreserveringenservice: KamerreserveringenService,
               private route : ActivatedRoute,
@@ -38,13 +38,15 @@ export class KamerreserveringdetailsComponent implements OnInit {
   private uitchecken: boolean = false;
   private todayDate: string = this.dateservice.getCurrentDate();
   private reserveringsnummer: null | string  = "";
+  private showSpinnerOnLoad: boolean = false;
+  private incheckenToegestaan: boolean = false;
 
   public kamerreserveringdetailsormgroup = new KamerReserveringDetailsFormGroup();
 
   async ngOnInit() {
+    this.inchecken = false;
 
     if(this.getReseveringBasedOnId()) {
-      console.log(this.getReseveringBasedOnId());
        this.booking$.pipe(
         tap( booking => {
           if(booking) {
@@ -89,6 +91,13 @@ export class KamerreserveringdetailsComponent implements OnInit {
           }
         })
       ).subscribe();
+
+       this.delay(2000).then( () => {
+         if(this.datumvan <= this.dateservice.getCurrentDate()){
+           this.incheckenToegestaan = true;
+         }
+         this.showSpinnerOnLoad = true;
+       })
     }
   }
 
@@ -144,6 +153,7 @@ export class KamerreserveringdetailsComponent implements OnInit {
         }
       })
     ).subscribe();
+    this.resetInitialValues();
     this.router.navigateByUrl('managementportal/kamerreserveringen');
   }
 
@@ -219,10 +229,18 @@ export class KamerreserveringdetailsComponent implements OnInit {
     return this.numberOfDays;
   }
 
-
-
   private resetInitialValues() {
     this.storagePrice.length = 0;
+    this.numberOfDays = 0;
+    this.totalPrice = 0;
+    this.datumvan = '';
+    this.datumtot ='';
+    this.inchecken = false;
+    this.incheckdatum = '';
+    this.uitcheckdatum = '';
+    this.uitchecken = false;
+    this.showSpinnerOnLoad = false;
+    this.incheckenToegestaan = false;
   }
 
   private addToStorage(result: number) {
@@ -230,8 +248,25 @@ export class KamerreserveringdetailsComponent implements OnInit {
   }
 
   public sumAll(numbers: number[]): number {
-
     return numbers.reduce((a: number,b: number) => a + b, 0);
+  }
+
+  async delay(ms: number) {
+    await new Promise(resolve => setTimeout(()=>resolve(), ms));
+  }
+
+  ngOnDestroy(): void {
+    this.showSpinnerOnLoad = false ;
+    this.numberOfDays = 0;
+    this.totalPrice = 0;
+    this.datumvan = '';
+    this.datumtot ='';
+    this.inchecken = false;
+    this.incheckdatum = '';
+    this.uitcheckdatum = '';
+    this.uitchecken = false;
+    this.showSpinnerOnLoad = false;
+    this.incheckenToegestaan = false;
   }
 
 }

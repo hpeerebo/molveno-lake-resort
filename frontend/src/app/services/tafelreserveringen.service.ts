@@ -22,7 +22,7 @@ export class TafelreserveringenService {
   }
 
   private static reserveringenToReserveringMapper(reservering: IReservering): Tafelreservering {
-    return new Tafelreservering(reservering.aanvangstijd, reservering.personen, reservering.naam, reservering.telefoon, reservering.id);
+    return new Tafelreservering(new Date(reservering.aanvangstijd), reservering.personen, reservering.naam, reservering.telefoon, reservering.id);
   }
 
   getAllReserveringen(): void {
@@ -65,6 +65,15 @@ export class TafelreserveringenService {
       )
       .subscribe();
   }
+
+  checkReservation(reservationDate: Date): Observable<ICheckReservation> {
+    const body = { aanvangstijd: reservationDate }
+    return this.http
+      .post<ICheckReservation>(`${this.api}/check`, body)
+      .pipe(
+        take(1)
+      );
+  }
 }
 
 interface IReserveringenResponse {
@@ -77,4 +86,10 @@ interface IReservering {
   personen: number;
   naam: string;
   telefoon: string;
+}
+
+interface ICheckReservation {
+  bezetting: number;
+  capaciteit: number;
+  beschikbaar: number;
 }

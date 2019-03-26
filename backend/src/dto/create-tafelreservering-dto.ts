@@ -1,16 +1,16 @@
 import { ApiModelProperty } from '@nestjs/swagger';
-import { IsInt, Min, Max, IsString } from 'class-validator';
+import { IsInt, Min, Max, IsString, IsDateString } from 'class-validator';
 import { TafelreserveringRepoEntity } from 'src/entities/tafelreservering.entity';
 
 export class CreateTafelreserveringDto {
     @ApiModelProperty()
-    @IsString()
+    @IsDateString()
     public readonly aanvangstijd: string;
 
     @ApiModelProperty()
     @IsInt()
     @Min(1)
-    @Max(40)
+    @Max(100)
     public readonly personen: number;
 
     @ApiModelProperty()
@@ -22,6 +22,6 @@ export class CreateTafelreserveringDto {
     public readonly telefoon: string;
 
     mapToTafelreserveringEntity(): TafelreserveringRepoEntity {
-        return new TafelreserveringRepoEntity(this.aanvangstijd, this.personen, this.naam, this.telefoon );
+        return new TafelreserveringRepoEntity(new Date(this.aanvangstijd), this.personen, this.naam, this.telefoon );
     }
 }
