@@ -12,7 +12,6 @@ export class GerechtenService {
   private readonly api: string = '/api/restaurant/gerechten';
 
   public readonly gerechten$ = new BehaviorSubject<Gerecht[]>([]);
-  public readonly total$ = new BehaviorSubject<number>(0);
 
   constructor(private http: HttpClient) {
     this.getAllGerechten();
@@ -45,7 +44,6 @@ export class GerechtenService {
         map(GerechtenService.gerechtenResponseToGerechtMapper),
         tap(gerechten => {
           this.gerechten$.next(gerechten);
-          this.total$.next(gerechten.length);
         })
       )
       .subscribe();

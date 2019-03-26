@@ -5,12 +5,15 @@ import {
   FormBuilder,
   Validators,
   ValidatorFn,
-  AbstractControl
+  AbstractControl,
+  FormGroup,
+  FormControl
 } from "@angular/forms";
 import { PickerHelper } from "src/app/models/picker-helper";
 import { debounceTime, tap, take } from "rxjs/operators";
 import { TafelreserveringenService } from "src/app/services/tafelreserveringen.service";
 import { Subscription } from "rxjs";
+import { PersonenValidator } from './personen-validator';
 
 @Component({
   selector: "app-form-tafelreservering",
@@ -29,21 +32,17 @@ export class FormTafelreserveringComponent implements OnInit, OnDestroy {
   public beschikbaar: number | undefined = undefined;
   private subscriptions = new Subscription();
 
-  public tafelreserveringForm = this.formBuilder.group({
-    aanvangsdatum: [PickerHelper.dateObject(new Date()), Validators.required],
-    aanvangstijd: [
-      { hour: 17, minute: 0 },
-      [FormTafelreserveringComponent.timeValidator(), Validators.required]
-    ],
-    personen: [undefined, [Validators.min(1), Validators.max(0)]],
-    naam: [undefined, Validators.required],
-    telefoon: [undefined, Validators.required]
-  });
+  public tafelreserveringForm = new FormGroup({
+    aanvangsdatum: new FormControl(PickerHelper.dateObject(new Date()), Validators.required),
+    aanvangstijd: new FormControl({ hour: 17, minute: 0 }, [FormTafelreserveringComponent.timeValidator(), Validators.required]),
+    personen: new FormControl(undefined),
+    naam: new FormControl (undefined, Validators.required),
+    telefoon: new FormControl (undefined, Validators.required)
+  }, undefined, PersonenValidator.createValidator(this.tafelreserveringenService));
 
   // Begin code Maurice
   private static timeValidator(): ValidatorFn {
     return (control: AbstractControl) => {
-      console.log(control.value);
       if (control.value.hour > 20 || control.value.hour < 13) {
         return {
           message: "keuken is gesloten"
@@ -56,7 +55,6 @@ export class FormTafelreserveringComponent implements OnInit, OnDestroy {
   // End code Maurice
   constructor(
     public activeModal: NgbActiveModal,
-    private formBuilder: FormBuilder,
     private tafelreserveringenService: TafelreserveringenService
   ) {}
 
@@ -98,13 +96,7 @@ export class FormTafelreserveringComponent implements OnInit, OnDestroy {
       .checkReservation(reservationDate)
       .pipe(
         take(1),
-        tap(data => (this.beschikbaar = data.beschikbaar)),
-        tap(data =>
-          this.tafelreserveringForm.controls.personen.setValidators([
-            Validators.min(1),
-            Validators.max(data.beschikbaar)
-          ])
-        )
+        tap(data => (this.beschikbaar = data.beschikbaar))
       )
       .subscribe();
   }
