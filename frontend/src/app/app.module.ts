@@ -9,6 +9,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {RoomService} from './services/rooms.service';
 import { SortGridService } from './shared/services/sort-grid.service';
 import {DateFunctions} from "./shared/services/date-functions";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import {DateFunctions} from "./shared/services/date-functions";
     FrontendModule,
     ManagementportalModule,
     HttpClientModule,
+    BrowserAnimationsModule,
   ],
   providers: [RoomService, SortGridService, DateFunctions],
   bootstrap: [AppComponent]

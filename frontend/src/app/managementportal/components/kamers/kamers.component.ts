@@ -11,17 +11,18 @@ import { FormKamersbeschikbaarComponent } from './kamers-form/form-kamersbeschik
 import {ActivatedRoute} from "@angular/router";
 import { FormControl } from '@angular/forms';
 import {DateFunctions} from "../../../shared/services/date-functions";
+
+
 //import * as DateDiff from 'date-diff';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: "app-kamers",
   templateUrl: "./kamers.component.html",
-  styleUrls: ["./kamers.component.scss"]
+  styleUrls: ["./kamers.component.scss"],
 })
 
 export class ManagementPortalKamersComponent implements OnInit, AfterViewInit {
-
   constructor(
     private roomservice: RoomService,
     private kamerreserveringservice: KamerreserveringenService,
