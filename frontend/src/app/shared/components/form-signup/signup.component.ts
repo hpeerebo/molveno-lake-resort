@@ -15,7 +15,7 @@ export class SignupComponent implements OnInit {
 	public readonly signUpForm = new FormGroup({
 		userName: new FormControl(undefined, [Validators.required, Validators.email]),
 		role: new FormControl(undefined, Validators.required),
-		password: new FormControl(undefined, [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')]),
+		password: new FormControl(undefined, [Validators.required, Validators.minLength(8), Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')]),
 		userNameVerification: new FormControl(undefined, [Validators.required])
 	}, SignupComponent.emailVerificationFormGroupValidator());
 
