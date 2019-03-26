@@ -5,16 +5,6 @@
     >
         Molveno Lake Resort
     </a>
-    <ul class="navbar-nav ">
-        <li class="nav-item text-nowrap">
-            <a
-                class="nav-link"
-                [routerLink]="['/managementportal/signup']"
-            >
-                Gebruiker toevoegen
-            </a>
-        </li>
-    </ul>
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
             <a
@@ -133,6 +123,21 @@
                         </a>
                     </li>
                 </ul>
+              <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                <span>GEBRUIKERSBEHEER</span>
+              </h6>
+              <ul class="nav flex-column mb-2">
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    [routerLink]="['/managementportal/signup']"
+                    routerLinkActive="active"
+                    [routerLinkActiveOptions]="{ exact: true }"
+                  >
+                    Gebruiker toevoegen
+                  </a>
+                </li>
+              </ul>
             </div>
         </nav>
 
