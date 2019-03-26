@@ -3,7 +3,6 @@
 
   <div class="row">
     <div class=" col-12 d-flex text-sm-right">
-<<<<<<< HEAD
       <button
         type="button"
         class="btn btn-outline-primary btn-sm"
@@ -61,11 +60,11 @@
             "
           >
             <td *ngIf="showResButton">
-              <input
+              <!-- <input
                 [formControl]="myCheckbox"
                 type="checkbox"
                 (change)="onSelectRoom(kamer)"
-              />
+              /> -->
             </td>
             <td>{{ kamer.kamerNaam }}</td>
             <td>{{ kamer.kamerType }}</td>
@@ -110,7 +109,6 @@
       Selecteer de kamer(s) die u wilt reserveren
     </div>
   </div>
-=======
       <button type="button" class="btn btn-outline-primary btn-sm" (click)= "showAvailableRoomsModal()">Beschikbare kamers</button>
       <button type="button" class="btn btn-outline-primary btn-sm" (click)="openNewFormModal()">Kamer toevoegen</button>
   </div>
@@ -155,8 +153,7 @@
   </table>
   <!--div class="infotext d-flex justify-content-start" *ngIf="showResButton">Selecteer de kamer(s) die u wilt reserveren</div-->
   <div class="infotext" *ngIf="showResButton">Selecteer de kamer(s) die u wilt reserveren</div>
-</div>
->>>>>>> eeb1bc6658dce3736facc3e42376d99369f31786
+
   <div *ngIf="showResButton && reserverRooms.length > 0" class="room-bucket">
     <div>Voor de periode:</div>
     <h6>{{ datumvan }} tot {{ datumtot }}</h6>
@@ -166,7 +163,6 @@
     </div>
     <div>hebt u de volgende kamers geselecteerd:</div>
 
-<<<<<<< HEAD
     <hr class="bg-light" />
     <div class="row">
       <div class="col-8 text-info">kamer</div>
@@ -190,7 +186,6 @@
         >
           X
         </button>
-=======
       <hr class="bg-light">
       <div class="row">
           <div class="col-8 text-info">kamer</div>
@@ -204,7 +199,6 @@
           <div class="col-2">
               <button class="btn-xs btn-outline-info" placement="top" ngbTooltip="Verwijderen" (click)="deleteRoomFromBucket(room)">X</button>
             </div>
->>>>>>> eeb1bc6658dce3736facc3e42376d99369f31786
       </div>
     </div>
 
