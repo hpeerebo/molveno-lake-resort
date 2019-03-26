@@ -15,7 +15,7 @@ export class FrontEndComponent implements OnInit {
   it = { language: 'it', hotel: 'Albergo', rooms: 'Camere', restaurant: 'Ristorante', activities: 'Attività', contact: 'Contatto', login: 'Accesso' };
 
   siteLanguage = {};
-  
+
   hotel: string = '';
   rooms: string = '';
   restaurant: string = '';
