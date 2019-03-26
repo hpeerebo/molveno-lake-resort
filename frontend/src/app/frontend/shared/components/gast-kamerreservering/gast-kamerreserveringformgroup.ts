@@ -4,7 +4,7 @@ export class GastKamerReserveringFormGroup extends FormGroup{
   public static controls = {
     voornaam: new FormControl('', Validators.required),
     achternaam: new FormControl('', Validators.required),
-    telefoonnummer: new FormControl('', Validators.required),
+    telefoonnummer: new FormControl(''),
     emailadres: new FormControl('', Validators.required),
     identiteitsid: new FormControl('undefined'),
     aantalpersonen: new FormControl('', Validators.required),
