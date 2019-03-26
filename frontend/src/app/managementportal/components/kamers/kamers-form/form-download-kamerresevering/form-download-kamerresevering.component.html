@@ -1,0 +1,121 @@
+<br>
+<div class="row"  >
+  <div class="col-sm-3 align-content-center">
+
+  </div>
+  <div class="col-sm-8 align-content-center">
+    <button kendo-button class="btn btn-outline-primary btn-sm" (click)="pdf.saveAs(reserveringsnummer)">
+      De PDF is aangemaakt en is gereed, klik hier om te downloaden.
+    </button>
+  </div>
+  <div class="col-sm-1 align-content-center">
+
+  </div>
+</div>
+<br/>
+
+
+<div style="position: absolute; left: -1000px; top: 0;">
+  <kendo-pdf-export #pdf paperSize="A3" margin="0.5cm">
+    <div class="container-fluid">
+      <br/>
+      <div class="row">
+        <div class="col-sm-2">
+          <img class="mr-md-3" src="http://localhost:4200/assets/img/logo-64.png" alt="Logo">
+        </div>
+        <div class="col-sm-10">
+          <h1 class="my-0 mr-md-auto font-weight-normal brush">Molveno Lake Resort</h1>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-sm-8">
+        </div>
+        <div class="col-sm-4">
+          Molveno Lake Resort<br>
+          Galgspanweg 8<br>
+          5703 Seon<br>
+          info@molveno-lake-resort.se<br>
+        </div>
+      </div>
+      <br/>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="card">
+            <div class="card-body">
+              <div class="col-sm-1">
+              </div>
+              <div class="col-sm-5">
+                {{voornaam}} {{achternaam}}<br>
+                {{straat}} {{huisnummer}}<br>
+                {{postcode}} {{woonplaats}}<br>
+                {{land}}
+              </div>
+              <div class="col-sm-12 text-right">
+                Factuurdatum: {{todayDate}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <br/>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="card">
+            <div class="card-header">
+              Reseveringsnummer: {{reserveringsnummer}}
+            </div>
+            <div class="container, form-row">
+              <div class="col-sm-1">
+              </div>
+              <div class="col-sm-8">
+                <br/>
+                Voor de periode:
+                <h6>{{datumvan}} tot {{datumtot}} </h6>
+                Aantal nachten: <h6>{{numberOfDays}} nacht(en)</h6>
+                heeft u de volgende kamer(s) geboekt:
+              </div>
+            </div>
+            <hr class="bg-dark">
+            <div class="container, form-row">
+              <div class="col-sm-1">
+              </div>
+              <div class="col-sm-9">
+                <div class="row">
+                  <div class="col-8 text-info">Kamer</div>
+                  <div class="col-4 text-info">Prijs per nacht</div>
+                </div>
+                <div *ngFor="let boeking of kamers;" class="row">
+                  <div class="col-8">{{boeking.kamernaam}}</div>
+                  <div class="col-4">  {{boeking.prijs | currency: "EUR" }}</div>
+                </div>
+                <hr class="bg-dark">
+                <div class="row">
+                  <div class="col-8 text-danger">Totale prijs voor
+                    ({{numberOfDays}} nacht(en))
+                  </div>
+                  <div class="col-4 text-danger">{{totalPrice | currency: "EUR" }} </div>
+                </div>
+                <hr class="bg-dark">
+              </div>
+            </div>
+            <hr class="bg-dark">
+            <br/>
+            <br/>
+          </div>
+          <br/>
+          <br/>
+          <div class="row">
+            <div class="col-sm-12 text-center">
+              BTW Nummer: SE 12345678912 - IBAN NL 99 ABNB 0123 456 78
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </kendo-pdf-export>
+
+</div>
