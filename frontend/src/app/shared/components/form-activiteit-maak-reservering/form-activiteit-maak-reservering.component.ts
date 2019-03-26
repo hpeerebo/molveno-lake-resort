@@ -15,8 +15,8 @@ export class FormActiviteitMaakReserveringComponent implements OnInit {
     emailGast: [undefined, [Validators.required, Validators.email]],
     phoneGast: [undefined],
     aantalPersonen: [1, [Validators.required, Validators.min(1)]],
-    actGastPhone: [undefined],
-    actPlanId: [undefined]
+    actNaam: [undefined],
+    actDate: [undefined],
   });
 
 
@@ -33,9 +33,6 @@ export class FormActiviteitMaakReserveringComponent implements OnInit {
       );
       this.activiteitMaakResForm.controls.actNaam.setValue(
         this.planning.activiteit.naam
-      );
-      this.activiteitMaakResForm.controls.actPlanId.setValue(
-        this.planning.planid
       );
     }
   }

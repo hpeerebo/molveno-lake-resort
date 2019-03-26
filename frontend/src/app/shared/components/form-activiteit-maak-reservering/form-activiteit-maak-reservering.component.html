@@ -40,12 +40,12 @@
             <input
                 type="string"
                 class="form-control"
-                formControlName="actGastMail"
-                [class.is-invalid]="actGastMail?.invalid && actGastMail?.touched"
+                formControlName="emailGast"
+                [class.is-invalid]="emailGast?.invalid && emailGast?.touched"
             >
             <small
                 class="text-danger"
-                [class.d-none]="actGastMail?.valid || actGastMail?.untouched"
+                [class.d-none]="emailGast?.valid || emailGast?.untouched"
             >
                 E-mail adres is verplicht.
             </small>
@@ -55,12 +55,12 @@
             <input
                 type="string"
                 class="form-control"
-                formControlName="actGastPhone"
-                [class.is-invalid]="actGastPhone?.invalid && actGastPhone?.touched"
+                formControlName="phoneGast"
+                [class.is-invalid]="phoneGast?.invalid && phoneGast?.touched"
             >
             <small
                 class="text-danger"
-                [class.d-none]="actGastPhone?.valid || actGastPhone?.untouched"
+                [class.d-none]="phoneGast?.valid || phoneGast?.untouched"
             >
                 Optioneel telefonnummer.
             </small>
@@ -70,12 +70,12 @@
             <input
                 type="number"
                 class="form-control"
-                formControlName="actGastAantal"
-                [class.is-invalid]="actGastAantal?.invalid && actGastAantal?.touched"
+                formControlName="aantalPersonen"
+                [class.is-invalid]="aantalPersonen?.invalid && aantalPersonen?.touched"
             >
             <small
                 class="text-danger"
-                [class.d-none]="actGastAantal?.valid || actGastAantal?.untouched"
+                [class.d-none]="aantalPersonen?.valid || aantalPersonen?.untouched"
             >
                 Minimaal voor één persoon reserveren.
             </small>

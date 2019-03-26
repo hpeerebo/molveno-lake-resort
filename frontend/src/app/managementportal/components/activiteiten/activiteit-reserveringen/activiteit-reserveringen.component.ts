@@ -49,8 +49,9 @@ export class ActiviteitReserveringenComponent {
     this.modalService
       .open(ModalConfirmComponent)
       .result.then(result => {
+        if (result === "yes") {
           this.activiteitenResService.deleteActiviteitRes(reserveringId);
-      })
+      }})
       .catch(error => {
         console.log(error);
       });
