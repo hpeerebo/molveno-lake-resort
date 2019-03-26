@@ -56,13 +56,13 @@ export class FormKamersbeschikbaarComponent implements OnInit {
     return (control: AbstractControl) => {
       const formGroup = control as FormGroup;
       if (formGroup.controls.datumvan.value < this.today){
-         return {dateFromIsInThePastError: "Datum mag niet in het verleden liggen"}
+         return {dateFromIsInThePastError: "De gekozen datum ligt in het verleden"}
       }
       if (formGroup.controls.datumtot.value < this.today){
-        return {dateToIsInThePastError: "Datum mag niet in het verleden liggen"}
+        return {dateToIsInThePastError: "De gekozen datum ligt in het verleden"}
      }
      if (formGroup.controls.datumtot.value < formGroup.controls.datumvan.value){
-      return {dateToIsInThePastError: "Vertrek datum moet hoger zijn dan aankomstdatum"}
+      return {dateToIsInThePastError: "vertrekdatum was eerder dan aankomstdatum"}
      }
       else return null;
   }

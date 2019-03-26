@@ -23,9 +23,9 @@
     </tr>
     </thead>
     <tbody>
-    <div *ngIf="(kamers| async)?.length>0, then welkamers else geenKamers"></div>
-    <ng-template #welkamers>
-    <tr *ngFor="let kamer of (kamers | async | kamersfilter: show | sortgrid:field); let i = index"  (click)="setClickedRow(i, kamer)" [class.active]="roomSelected[i] ">
+    <div *ngIf="(kamers| async)?.length>0, then roomsAvailable else noRoomsAvailable"></div>
+    <ng-template #roomsAvailable>
+    <tr *ngFor="let kamer of (kamers | async | kamersfilter: show | sortgrid:field); let i = index"  (click)="showResButton && setClickedRow(i, kamer)" [class.active]="showResButton && roomSelected[i] ">
         <!-- <td *ngIf="showResButton">
             <input  [formControl]="myCheckbox" type="checkbox" (change)="onSelectRoom(kamer)"/>
        </td> -->
@@ -35,13 +35,13 @@
         <td>{{ kamer.aantalPersonen }}</td>
         <td>{{ kamer.prijs | currency: "EUR" }}</td>
         <td class="text-right">
-          <i *ngIf="showResButton" class="fas fa-marker mr-2" placement="top" ngbTooltip="Reserveren" (click)="openFormKamerReserveringModal(kamer.kamerNaam)"></i>
+          <!--i *ngIf="showResButton" class="fas fa-marker mr-2" placement="top" ngbTooltip="Reserveren" (click)="openFormKamerReserveringModal(kamer.kamerNaam)"></i-->
           <i class="fas fa-edit mr-2" placement="top" ngbTooltip="Wijzigen" (click)="onSelect(kamer); openEditFormModal()"></i>
           <i class="fas fa-trash-alt mr-2" placement="top" ngbTooltip="Verwijderen" (click)="onSelect(kamer); openSm(deleteModal)"></i>
         </td>
       </tr>
     </ng-template>
-    <ng-template #geenKamers>
+    <ng-template #noRoomsAvailable>
       <div class="Noresultfound">Helaas geen kamers beschikbaar in deze periode</div>
       </ng-template>
     </tbody>
@@ -61,7 +61,7 @@
           <div class="col-2 text-info">Prijs/nacht</div>
           <div class="col-2"></div>
       </div>
-      <div *ngFor="let room of reserverRooms" class="row" [routerLink]="'/film-details/' + room.kamerNaam">
+      <div *ngFor="let room of reserverRooms" class="row" >
           <div class="col-8">{{room.kamerNaam}} ({{room.kamerType}})</div>
           <div class="col-2">{{room.prijs}}</div>
           <div class="col-2" hidden>{{numberOfDays}} * {{room.prijs}}</div>

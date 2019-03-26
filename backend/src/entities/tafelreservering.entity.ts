@@ -6,8 +6,8 @@ export class TafelreserveringRepoEntity {
     @PrimaryGeneratedColumn()
     public readonly id: number;
 
-    @Column({ type: 'varchar', length: 50 })
-    public readonly aanvangstijd: string;
+    @Column({ type: 'timestamp' })
+    public readonly aanvangstijd: Date;
 
     @Column('int')
     public readonly personen: number;
@@ -18,7 +18,7 @@ export class TafelreserveringRepoEntity {
     @Column({ type: 'varchar', length: 50 })
     public readonly telefoon: string;
 
-    constructor(aanvangstijd: string, personen: number, naam: string, telefoon: string) {
+    constructor(aanvangstijd: Date, personen: number, naam: string, telefoon: string) {
         this.aanvangstijd = aanvangstijd;
         this.personen = personen;
         this.naam = naam;
@@ -26,6 +26,6 @@ export class TafelreserveringRepoEntity {
     }
 
     mapToTafelreservering(): Tafelreservering {
-        return new Tafelreservering(this.id, this.aanvangstijd, this.personen, this.naam, this.telefoon);
+        return new Tafelreservering(this.id, this.aanvangstijd.toISOString(), this.personen, this.naam, this.telefoon);
     }
 }

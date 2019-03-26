@@ -1,27 +1,25 @@
-<div class="d-flex justify-content-end mt-2">
-  <button class="btn btn-primary">Voeg Toe</button>
-</div>
-
-<div class="table-responsive mt-2">
-  <table class="table table-sm table-hover">
-    <thead>
-      <tr>
-        <th>Naam</th>
-        <th>Hoeveelheid</th>
-        <th></th>
-      </tr>
-    </thead>
+<div class="mt-4" *ngIf="(gerechtDetails$ | async); let gerecht; else: spinner">
+  <h2>{{ gerecht.naam }}</h2>
+  <div>
+    <span>{{ gerecht.type }}</span>
+    <span> | </span>
+    <span>{{ gerecht.subtype }}</span>
+    <span> | </span>
+    <span>{{ gerecht.prijs | currency: 'EUR' }}</span>
+  </div>
+  <table class="table table-borderless table-sm mt-4" id="ingredienten">
     <tbody>
-      <tr>
-        <td>Kaas</td>
-        <td>3</td>
-        <td class="text-right">
-          <i class="fas fa-edit mr-2" placement="top" ngbTooltip="Wijzigen"></i>
-          <i class="fas fa-trash-alt mr-2" placement="top" ngbTooltip="Verwijderen"></i>
-        </td>
+      <tr *ngFor="let ingredient of gerecht.ingredienten">
+        <td class="px-0">{{ ingredient.naam }}</td>
       </tr>
     </tbody>
   </table>
 </div>
 
-<pre>{{ gerechtDetails$ | async | json }}</pre>
+<ng-template #spinner>
+  <div class="d-flex justify-content-center mt-4">
+    <div class="spinner-border" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+</ng-template>

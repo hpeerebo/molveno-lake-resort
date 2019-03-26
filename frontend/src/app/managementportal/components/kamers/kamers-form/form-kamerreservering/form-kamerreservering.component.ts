@@ -46,7 +46,6 @@ export class FormKamerreserveringComponent implements OnInit {
   }
 
   submitForm() {
-    console.log(this.kamerreserveringForm.value.datumvan);
     this.activeModal.close(new KamerReservering(
       this.kamerreserveringForm.value.id,
       this.kamerreserveringForm.value.voornaam,
