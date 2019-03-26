@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ActiviteitEntity } from 'src/entities/activiteit-entity';
-import { Repository, Any } from 'typeorm';
+import { Repository } from 'typeorm';
 import { CreateActiviteitDto } from 'src/dto/create-activiteit-dto';
 
 @Injectable()
@@ -10,7 +10,7 @@ export class ActiviteitService {
     @InjectRepository(ActiviteitEntity)
     private readonly activiteitRepository: Repository<ActiviteitEntity>,
   ) {}
-  public insert(activiteit: CreateActiviteitDto): Promise<ActiviteitEntity> {
+  public insert(activiteit: ActiviteitEntity): Promise<ActiviteitEntity> {
     return this.activiteitRepository.save(activiteit);
   }
 
@@ -18,16 +18,13 @@ export class ActiviteitService {
     this.activiteitRepository.save([activiteit]);
   }
 
-  public updateActiviteit(activiteit: CreateActiviteitDto): void {
+  public updateActiviteit(activiteit: ActiviteitEntity): void {
     this.activiteitRepository.update(
-      { id: activiteit.id },
+      { actid: activiteit.actid },
       {
-        id: activiteit.id,
+        actid: activiteit.actid,
         naam: activiteit.naam,
         beschrijving: activiteit.beschrijving,
-        capaciteit: activiteit.capaciteit,
-        datum: activiteit.datum,
-        prijs: activiteit.prijs,
         thumb: activiteit.thumb,
       },
     );
@@ -38,6 +35,6 @@ export class ActiviteitService {
   }
 
   public deleteActiviteit(activiteitId: number) {
-    this.activiteitRepository.delete({ id: activiteitId });
+    this.activiteitRepository.delete({ actid: activiteitId });
   }
 }

@@ -1,11 +1,14 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { ActiviteitenPlanning } from "src/app/models/activiteit-planning";
 import { Observable } from "rxjs";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { ModalConfirmComponent } from "src/app/shared/components/modal-confirm/modal-confirm.component";
 import { ActiviteitenPlanningService } from "src/app/services/activiteiten-planning.service";
-import { ActiviteitenService } from "src/app/services/activiteiten.service";
 import { FormActiviteitPlanningComponent } from "src/app/shared/components/form-activiteitplanning/form-activiteitplanning.component";
+import { FormActiviteitMaakReserveringComponent } from "src/app/shared/components/form-activiteit-maak-reservering/form-activiteit-maak-reservering.component";
+import { ActiviteitenResService } from "src/app/services/activiteiten-res.service";
+import { CreateActiviteitenPlanning } from 'src/app/models/create-activiteit-planning';
+
 
 @Component({
   selector: "app-activiteiten-planning",
@@ -13,15 +16,34 @@ import { FormActiviteitPlanningComponent } from "src/app/shared/components/form-
   styleUrls: ["./activiteiten-planning.component.scss"]
 })
 export class ActiviteitenPlanningComponent {
-  public activiteitenPlanning: Observable<
+  public activiteitenPlanningen: Observable<
     ActiviteitenPlanning[]
   > = this.activiteitenPlanningService.getAllActiviteitenPlanning();
 
   constructor(
     private activiteitenPlanningService: ActiviteitenPlanningService,
-    private activiteitenService: ActiviteitenService,
+    private activiteitenResService: ActiviteitenResService,
     private modalService: NgbModal
   ) {}
+
+  openCreateReserveringModal(activiteitenPlanning: ActiviteitenPlanning) {
+    const modal = this.modalService.open(
+      FormActiviteitMaakReserveringComponent
+    );
+    modal.componentInstance.planning = activiteitenPlanning;
+
+    modal.result
+      .then(result => {
+        console.log(result);
+        this.activiteitenResService.saveActiviteitRes(
+          result,
+          activiteitenPlanning.planid
+        );
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
 
   openEditFormActiviteitPlanningModal(planning: ActiviteitenPlanning) {
     const modal = this.modalService.open(FormActiviteitPlanningComponent);
@@ -35,27 +57,26 @@ export class ActiviteitenPlanningComponent {
       });
   }
 
-  openFormActiviteitPlanningModal(planning?: ActiviteitenPlanning) {
+  openFormActiviteitPlanningModal(planning?: CreateActiviteitenPlanning) {
     const modal = this.modalService.open(FormActiviteitPlanningComponent);
     if (planning) {
       modal.componentInstance.activiteit = planning;
     }
     modal.result
       .then(result => {
-        // this.activiteitenPlanningService.saveActiviteitPlanning(result);
+        this.activiteitenPlanningService.saveActiviteitPlanning(result);
       })
       .catch(error => {
         console.log(error);
       });
   }
 
-  verwijderActiviteitPlanning(planning: ActiviteitenPlanning) {
+  verwijderActiviteitPlanning(planid: number) {
     this.modalService
       .open(ModalConfirmComponent)
       .result.then(result => {
         if (result === "yes") {
-          console.log(planning);
-          // this.activiteitenPlanningService.deleteActiviteitPlanning(planning);
+          this.activiteitenPlanningService.deleteActiviteitPlanning(planid);
         }
       })
       .catch(error => {

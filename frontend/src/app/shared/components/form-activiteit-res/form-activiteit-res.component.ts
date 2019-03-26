@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 import { FormBuilder, Validators } from "@angular/forms";
-import { ActiviteitRes } from "src/app/models/activiteit-res";
+import { ActiviteitReservering } from "src/app/models/activiteit-reservering";
+import { ActiviteitenPlanning } from 'src/app/models/activiteit-planning';
 
 @Component({
   selector: "app-form-activiteit-res",
@@ -9,15 +10,17 @@ import { ActiviteitRes } from "src/app/models/activiteit-res";
   styleUrls: ["./form-activiteit-res.component.scss"]
 })
 export class FormActiviteitResComponent implements OnInit {
-  @Input() reserveringen: ActiviteitRes | undefined = undefined;
+  @Input() reservering: ActiviteitReservering | undefined = undefined;
 
   public activiteitResForm = this.formBuilder.group({
-    id: [0, Validators.required],
-    naamActiviteit: ["", Validators.required],
-    datum: ["", Validators.required],
-    emailGast: ["", Validators.required],
-    aantalPersonen: [1, [Validators.required, Validators.min(1)]]
+    emailGast: [undefined, [Validators.required, Validators.email]],
+    phoneGast: [undefined],
+    aantalPersonen: [1, [Validators.required, Validators.min(1)]],
+    actNaam: [undefined],
+    actDate: [undefined],
   });
+
+
 
   constructor(
     public activeModal: NgbActiveModal,
@@ -25,30 +28,40 @@ export class FormActiviteitResComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    if (this.reserveringen) {
-      this.activiteitResForm.setValue({
-        id: this.reserveringen.id,
-        naamActiviteit: this.reserveringen.naamActiviteit,
-        datum: this.reserveringen.datum,
-        emailGast: this.reserveringen.emailGast,
-        aantalPersonen: this.reserveringen.aantalPersonen
-      });
+    console.log(this.reservering)
+    if (this.reservering) {
+      this.activiteitResForm.controls.actDate.setValue(
+        this.reservering.planning.actdate
+      );
+      this.activiteitResForm.controls.actNaam.setValue(
+        this.reservering.planning.activiteit.naam
+      );
+      this.activiteitResForm.controls.emailGast.setValue(
+        this.reservering.emailGast
+      );
+      this.activiteitResForm.controls.phoneGast.setValue(
+        this.reservering.phoneGast
+      );
+      this.activiteitResForm.controls.aantalPersonen.setValue(
+        this.reservering.aantalPersonen
+      );
     }
   }
 
   submitForm() {
+    console.log("submitForm", this.activiteitResForm.value);
     this.activeModal.close(this.activiteitResForm.value);
   }
-  get naamActiviteit() {
-    return this.activiteitResForm.get("naamActiviteit");
-  }
-  get datum() {
-    return this.activiteitResForm.get("datum");
-  }
-  get emailGast() {
+
+  get naam() {
     return this.activiteitResForm.get("emailGast");
   }
-  get aantalPersonen() {
+
+  get beschrijving() {
+    return this.activiteitResForm.get("phoneGast");
+  }
+
+  get thumb() {
     return this.activiteitResForm.get("aantalPersonen");
   }
 }

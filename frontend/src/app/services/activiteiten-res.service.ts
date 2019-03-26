@@ -1,8 +1,10 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { ActiviteitRes } from "../models/activiteit-res";
+import { ActiviteitReservering } from "../models/activiteit-reservering";
 import { map } from "rxjs/operators";
+import { CreateActiviteitReservering } from '../models/create-activiteit-reservering';
+import { IActiviteitPlanning } from './activiteiten-planning.service';
 
 @Injectable({
   providedIn: "root"
@@ -14,47 +16,50 @@ export class ActiviteitenResService {
   constructor(private http: HttpClient) {}
 
   private static activiteitResToActiviteitResMapper(
-    reservering: IActiviteitres[]
-  ): ActiviteitRes[] {
-    return reservering.map(
-      ActiviteitenResService.activiteitResToActiviteitMapper
-    );
+    reservering: IActiviteitReservering[]
+  ): ActiviteitReservering[] {
+    return reservering;
   }
 
   private static activiteitResToActiviteitMapper(
-    reservering: IActiviteitres
-  ): ActiviteitRes {
-    return new ActiviteitRes(
-      reservering.id,
-      reservering.naamActiviteit,
-      reservering.datum,
+    reservering: IActiviteitReservering
+  ): ActiviteitReservering {
+    return new ActiviteitReservering(
       reservering.emailGast,
-      reservering.aantalPersonen
+      reservering.phoneGast,
+      reservering.aantalPersonen,
+      reservering.planning
     );
   }
 
-  getAllActiviteitenRes(): Observable<ActiviteitRes[]> {
+  getAllActiviteitenRes(): Observable<ActiviteitReservering[]> {
     return this.http
-      .get<IActiviteitres[]>(this.api)
+      .get<IActiviteitReservering[]>(this.api)
       .pipe(map(ActiviteitenResService.activiteitResToActiviteitResMapper));
   }
 
-  saveActiviteitRes(reservering: ActiviteitRes) {
-    /*return*/ this.http
-      .post<IActiviteitres[]>(this.api /*+ "savereservering"*/, reservering)
+  saveActiviteitRes(reservering: CreateActiviteitReservering, planningId: number) {
+    console.log("saveActiviteitRes", reservering);
+    this.http
+      .post<IActiviteitReservering[]>(
+        this.api + planningId,
+        reservering
+      )
       .subscribe();
-    // location.reload();
+    location.reload();
   }
 
-  deleteActiviteitRes(reservering: ActiviteitRes) {
-    this.http.delete<IActiviteitres[]>(this.api + reservering.id).subscribe();
-    // location.reload();
+  deleteActiviteitRes(reserveringId: number) {
+    this.http
+      .delete<IActiviteitReservering[]>(this.api + reserveringId)
+      .subscribe();
+    location.reload();
   }
 }
-interface IActiviteitres {
-  id: number;
-  naamActiviteit: string;
-  datum: string;
+interface IActiviteitReservering {
+  resid: number;
   emailGast: string;
+  phoneGast: string;
   aantalPersonen: number;
+  planning: IActiviteitPlanning;
 }

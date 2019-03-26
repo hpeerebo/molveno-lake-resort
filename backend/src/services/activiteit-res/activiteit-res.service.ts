@@ -3,40 +3,57 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { ActiviteitResEntity } from 'src/entities/activiteit-res-entity';
 import { Repository } from 'typeorm';
 import { CreateActiviteitResDto } from 'src/dto/create-activiteit-res-dto';
+import { ActiviteitPlanningEntity } from 'src/entities/activiteit-planning-entity';
 
 @Injectable()
 export class ActiviteitResService {
   constructor(
     @InjectRepository(ActiviteitResEntity)
     private readonly activiteitResRepository: Repository<ActiviteitResEntity>,
+    @InjectRepository(ActiviteitPlanningEntity)
+    private readonly activiteitenPlanningRepository: Repository<
+      ActiviteitPlanningEntity
+    >,
   ) {}
+
   public insertReservering(
-    reservering: CreateActiviteitResDto,
+    reservering: ActiviteitResEntity,
   ): Promise<ActiviteitResEntity> {
     return this.activiteitResRepository.save(reservering);
   }
 
-  public saveReservering(reservering: ActiviteitResEntity): void {
+  public async saveReservering(
+    reservering: ActiviteitResEntity,
+    planningid: number,
+  ): Promise<void> {
+    const planning = await this.activiteitenPlanningRepository.findOne(
+      planningid,
+    );
+    reservering.planning = planning;
     this.activiteitResRepository.save([reservering]);
   }
+
   async getReservering(): Promise<ActiviteitResEntity[]> {
-    return this.activiteitResRepository.find();
+    return this.activiteitResRepository.find({
+      relations: ['planning', 'planning.activiteit'],
+    });
   }
 
-  public updateReservering(reservering: CreateActiviteitResDto): void {
+  public updateReservering(
+    reservering: ActiviteitResEntity,
+  ): void {
     this.activiteitResRepository.update(
-      { id: reservering.id },
+      { resid: reservering.resid },
       {
-        id: reservering.id,
-        naamActiviteit: reservering.naamActiviteit,
-        datum: reservering.datum,
+        resid: reservering.resid,
         emailGast: reservering.emailGast,
+        phoneGast: reservering.phoneGast,
         aantalPersonen: reservering.aantalPersonen,
       },
     );
   }
 
   public deleteReservering(reserveringId: number) {
-    this.activiteitResRepository.delete({ id: reserveringId });
+    this.activiteitResRepository.delete({ resid: reserveringId });
   }
 }

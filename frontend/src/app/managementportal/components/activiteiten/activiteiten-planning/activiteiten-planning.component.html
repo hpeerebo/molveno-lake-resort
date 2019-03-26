@@ -6,6 +6,7 @@
         Toevoegen nieuwe planning
     </button>
 </div>
+
 <div class="table-responsive mt-2">
     <table class="table table-striped table-sm">
         <thead>
@@ -18,18 +19,22 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let activiteitplanning of (activiteitenPlanning | async)">
-                <!-- <td *ngFor="let activiteit of (activiteiten | async)"> -->
-                <!-- {{ id: activiteitplanning.planid }} -->
-                <!-- {{ activiteit.naam }} {{ activiteitplanning.actdate}} {{ activiteitplanning.actprijs | currency: "EUR" }} -->
-                <!-- </td> -->
-                <td>{{ activiteitplanning.actid }}</td>
+            <tr *ngFor="let activiteitplanning of (activiteitenPlanningen | async)">
+                <td>
+                    {{ activiteitplanning.activiteit.naam }}
+                </td>
                 <td>{{ activiteitplanning.actdate }}</td>
                 <td>
                     {{ activiteitplanning.actprijs | currency: "EUR" }}
                 </td>
                 <td>{{ activiteitplanning.actcapaciteit }}</td>
                 <td class="text-align: right">
+                    <i
+                        class="fas fa-pen-alt mr-2"
+                        placement="top"
+                        ngbTooltip="Reserveren"
+                        (click)="openCreateReserveringModal(activiteitplanning)"
+                    ></i>
                     <i
                         class="fas fa-edit mr-2"
                         placement="top"

@@ -1,6 +1,5 @@
-export class Activiteit {
+export class CreateActiviteit {
   constructor(
-    public actid: number,
     public naam: string,
     public beschrijving: string,
     public thumb: string

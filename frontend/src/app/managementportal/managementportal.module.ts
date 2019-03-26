@@ -37,6 +37,7 @@ import { FormEmailKamerreseveringComponent } from './components/kamers/kamers-fo
 import { FormDownloadKamerreseveringComponent } from './components/kamers/kamers-form/form-download-kamerresevering/form-download-kamerresevering.component';
 import {PDFExportModule} from "@progress/kendo-angular-pdf-export";
 
+
 @NgModule({
   declarations: [
     ManagementportalComponent,
@@ -56,6 +57,7 @@ import {PDFExportModule} from "@progress/kendo-angular-pdf-export";
     FormActiviteitComponent,
     FormActiviteitResComponent,
     FormActiviteitPlanningComponent,
+    FormActiviteitMaakReserveringComponent,
     ModalConfirmComponent,
     ReserveringenComponent,
     ActiviteitReserveringenComponent,

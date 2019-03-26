@@ -1,24 +1,31 @@
-import { Column, PrimaryGeneratedColumn, Entity } from 'typeorm';
+import {
+  Column,
+  PrimaryGeneratedColumn,
+  Entity,
+  ManyToMany,
+  JoinColumn,
+  ManyToOne,
+} from 'typeorm';
+import { ActiviteitPlanningEntity } from './activiteit-planning-entity';
 
 @Entity('activiteitenreserveringen')
 export class ActiviteitResEntity {
-  @PrimaryGeneratedColumn() public readonly id: number;
-  @Column('varchar') public readonly naamActiviteit: string;
-  @Column('varchar') public readonly datum: string;
+  @PrimaryGeneratedColumn() public readonly resid: number;
   @Column('varchar') public readonly emailGast: string;
+  @Column('varchar') public readonly phoneGast: string;
   @Column('integer') public readonly aantalPersonen: number;
 
+  @ManyToOne(type => ActiviteitPlanningEntity, { cascade: true })
+  @JoinColumn()
+  planning: ActiviteitPlanningEntity;
+
   constructor(
-    id: number,
-    naamActiviteit: string,
-    datum: string,
     emailGast: string,
+    phoneGast: string,
     aantalPersonen: number,
   ) {
-    this.id = id;
-    this.naamActiviteit = naamActiviteit;
-    this.datum = datum;
     this.emailGast = emailGast;
+    this.phoneGast = phoneGast;
     this.aantalPersonen = aantalPersonen;
   }
 }

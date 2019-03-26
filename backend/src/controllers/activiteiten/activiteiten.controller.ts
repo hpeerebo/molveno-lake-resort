@@ -30,12 +30,8 @@ export class ActiviteitenController {
   })
   public saveActiviteit(@Body() createActiviteit: CreateActiviteitDto): void {
     const activiteit: ActiviteitEntity = new ActiviteitEntity(
-      createActiviteit.id,
       createActiviteit.naam,
       createActiviteit.beschrijving,
-      createActiviteit.capaciteit,
-      createActiviteit.datum,
-      createActiviteit.prijs,
       createActiviteit.thumb,
     );
     return this.activiteitenService.saveActiviteit(activiteit);
@@ -55,12 +51,8 @@ export class ActiviteitenController {
   })
   public updateActiviteit(@Body() createActiviteit: CreateActiviteitDto): void {
     const activiteit: ActiviteitEntity = new ActiviteitEntity(
-      createActiviteit.id,
       createActiviteit.naam,
       createActiviteit.beschrijving,
-      createActiviteit.capaciteit,
-      createActiviteit.datum,
-      createActiviteit.prijs,
       createActiviteit.thumb,
     );
     this.activiteitenService.updateActiviteit(activiteit);

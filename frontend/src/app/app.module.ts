@@ -10,11 +10,8 @@ import {RoomService} from './services/rooms.service';
 import { SortGridService } from './shared/services/sort-grid.service';
 import {DateFunctions} from "./shared/services/date-functions";
 
-
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -22,7 +19,7 @@ import {DateFunctions} from "./shared/services/date-functions";
     ReactiveFormsModule,
     FrontendModule,
     ManagementportalModule,
-    HttpClientModule,
+    HttpClientModule
   ],
   providers: [RoomService, SortGridService, DateFunctions],
   bootstrap: [AppComponent]

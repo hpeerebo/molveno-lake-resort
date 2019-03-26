@@ -20,7 +20,7 @@ export class ActiviteitenPlanningController {
     private readonly activiteitenPlanService: ActiviteitPlanningService,
   ) {}
 
-  @Post()
+  @Post(':activiteitid')
   @ApiOperation({ title: 'Maak een nieuw plannings element aan' })
   @ApiResponse({
     status: 201,
@@ -32,10 +32,11 @@ export class ActiviteitenPlanningController {
   })
   public saveActiviteitPlanning(
     @Body() createActiviteitPlanning: CreateActiviteitPlanningDto,
-  ): void {
+    @Param('activiteitid') activiteitid: number,
+  ) {
     const activiteitplanning: ActiviteitPlanningEntity = new ActiviteitPlanningEntity(
       createActiviteitPlanning.planid,
-      createActiviteitPlanning.actid,
+      // createActiviteitPlanning.actid,
       createActiviteitPlanning.actdate,
       createActiviteitPlanning.actprijs,
       createActiviteitPlanning.actcapaciteit,
@@ -43,6 +44,7 @@ export class ActiviteitenPlanningController {
 
     return this.activiteitenPlanService.saveActiviteitPlanning(
       activiteitplanning,
+      activiteitid,
     );
   }
 
@@ -60,15 +62,19 @@ export class ActiviteitenPlanningController {
   })
   updateActiviteitenPlanning(
     @Body() createActiviteitPlanning: CreateActiviteitPlanningDto,
+    @Param('activiteitid') activiteitid: number,
   ): void {
     const planning: ActiviteitPlanningEntity = new ActiviteitPlanningEntity(
       createActiviteitPlanning.planid,
-      createActiviteitPlanning.actid,
+      // createActiviteitPlanning.actid,
       createActiviteitPlanning.actdate,
       createActiviteitPlanning.actprijs,
       createActiviteitPlanning.actcapaciteit,
     );
-    this.activiteitenPlanService.updateActiviteitPlanning(planning);
+    this.activiteitenPlanService.updateActiviteitPlanning(
+      planning,
+      activiteitid,
+    );
   }
 
   @Delete(':planningsId')
