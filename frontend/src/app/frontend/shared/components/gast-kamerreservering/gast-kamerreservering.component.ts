@@ -59,6 +59,9 @@ export class GastKamerReserveringComponent implements OnInit {
   public roomprice2: number = 0;
   public totalprice: number = 0;
 
+  public vacantyRoom1: Boolean = false;
+  public vacantyRoom2: boolean = false;
+
   constructor(public activeModal: NgbActiveModal, private roomservice: RoomService, private datepipe: DatePipe) {}
 
   // showRoomsByDateAndCapacity(datumvan: Date, datumtot: Date, capacity: number){
@@ -191,359 +194,73 @@ export class GastKamerReserveringComponent implements OnInit {
     
       switch (aantalpersonen) {
         case '1': {
+          this.vacantyRoom1 = false;
+          this.fillRoomList1(this.roomsForTwo)
           this.room1Array = []
-          this.roomsForTwo.subscribe(
-            response => { 
-              this.room1 = response;
-              
-              let room1Budget: boolean = false;
-              let room1Standaard: boolean = false;
-              let room1Luxe: boolean = false;
-
-              this.room1.forEach((element:any) => {
-                if(element.kamerType === 'Budget' && room1Budget === false) {
-                  this.room1Array = [...this.room1Array, element]
-                  room1Budget = true
-                }
-                if(element.kamerType === 'Standaard' && room1Standaard === false) {
-                  this.room1Array = [...this.room1Array, element]
-                  room1Standaard = true
-                }
-                if(element.kamerType === 'Luxe' && room1Luxe === false) {
-                  this.room1Array = [...this.room1Array, element]
-                  room1Luxe = true
-                }
-              });
-            });
           this.showroom2 = false;
           this.personen1 = '2 pers. kamer';
           break;
         }
         case '2': {
-          this.room1Array = []
-          this.roomsForTwo.subscribe(
-            response => { 
-              this.room1 = response;
-              
-              let room1Budget: boolean = false;
-              let room1Standaard: boolean = false;
-              let room1Luxe: boolean = false;
-
-              this.room1.forEach((element:any) => {
-                if(element.kamerType === 'Budget' && room1Budget === false) {
-                  this.room1Array = [...this.room1Array, element]
-                  room1Budget = true
-                }
-                if(element.kamerType === 'Standaard' && room1Standaard === false) {
-                  this.room1Array = [...this.room1Array, element]
-                  room1Standaard = true
-                }
-                if(element.kamerType === 'Luxe' && room1Luxe === false) {
-                  this.room1Array = [...this.room1Array, element]
-                  room1Luxe = true
-                }
-              });
-            });
+          this.vacantyRoom1 = false;
+          this.fillRoomList1(this.roomsForTwo)
           this.showroom2 = false;
           this.personen1 = '2 pers. kamer';
           break;
         }
         case '3': {
-          this.room1Array = []
-          this.roomsForThree.subscribe(
-            response => { 
-              this.room1 = response;
-              
-              let room1Budget: boolean = false;
-              let room1Standaard: boolean = false;
-              let room1Luxe: boolean = false;
-
-              this.room1.forEach((element:any) => {
-                if(element.kamerType === 'Budget' && room1Budget === false) {
-                  this.room1Array = [...this.room1Array, element]
-                  room1Budget = true
-                }
-                if(element.kamerType === 'Standaard' && room1Standaard === false) {
-                  this.room1Array = [...this.room1Array, element]
-                  room1Standaard = true
-                }
-                if(element.kamerType === 'Luxe' && room1Luxe === false) {
-                  this.room1Array = [...this.room1Array, element]
-                  room1Luxe = true
-                }
-              });
-            });
+          this.vacantyRoom1 = false;
+          this.fillRoomList1(this.roomsForThree)
           this.personen1 = '3 pers. kamer';
           this.showroom2 = false;
           break;
         }
         case '4': {
-          this.room1Array = []
-          this.roomsForFour.subscribe(
-            response => { 
-              this.room1 = response;
-              
-              let room1Budget: boolean = false;
-              let room1Standaard: boolean = false;
-              let room1Luxe: boolean = false;
-
-              this.room1.forEach((element:any) => {
-                if(element.kamerType === 'Budget' && room1Budget === false) {
-                  this.room1Array = [...this.room1Array, element]
-                  room1Budget = true
-                }
-                if(element.kamerType === 'Standaard' && room1Standaard === false) {
-                  this.room1Array = [...this.room1Array, element]
-                  room1Standaard = true
-                }
-                if(element.kamerType === 'Luxe' && room1Luxe === false) {
-                  this.room1Array = [...this.room1Array, element]
-                  room1Luxe = true
-                }
-              });
-            });
+          this.vacantyRoom1 = false;
+          this.fillRoomList1(this.roomsForFour)
           this.showroom2 = false;
           this.personen1 = '4 pers. kamer';
           break;
         }
         case '5': {
-          this.room1Array = []
-          this.roomsForTwo.subscribe(
-            response => { 
-              this.room1 = response;
-              
-              let room1Budget: boolean = false;
-              let room1Standaard: boolean = false;
-              let room1Luxe: boolean = false;
+          this.vacantyRoom1 = false;
+          this.vacantyRoom2 = false;
+          this.fillRoomList1(this.roomsForTwo)
+          this.fillRoomList2(this.roomsForThree)
 
-              this.room1.forEach((element:any) => {
-                if(element.kamerType === 'Budget' && room1Budget === false) {
-                  this.room1Array = [...this.room1Array, element]
-                  room1Budget = true
-                }
-                if(element.kamerType === 'Standaard' && room1Standaard === false) {
-                  this.room1Array = [...this.room1Array, element]
-                  room1Standaard = true
-                }
-                if(element.kamerType === 'Luxe' && room1Luxe === false) {
-                  this.room1Array = [...this.room1Array, element]
-                  room1Luxe = true
-                }
-              });
-            });
-
-            this.room2Array = []
-            this.roomsForThree.subscribe(
-              response => { 
-                this.room2 = response;
-                
-                let room2Budget: boolean = false;
-                let room2Standaard: boolean = false;
-                let room2Luxe: boolean = false;
-  
-                this.room2.forEach((element:any) => {
-                  if(element.kamerType === 'Budget' && room2Budget === false) {
-                    this.room2Array = [...this.room2Array, element]
-                    room2Budget = true
-                  }
-                  if(element.kamerType === 'Standaard' && room2Standaard === false) {
-                    this.room2Array = [...this.room2Array, element]
-                    room2Standaard = true
-                  }
-                  if(element.kamerType === 'Luxe' && room2Luxe === false) {
-                    this.room2Array = [...this.room2Array, element]
-                    room2Luxe = true
-                  }
-                });
-              });
-            this.showroom2 = true;
+          this.showroom2 = true;
           this.personen1 = '2 personen';
           this.personen2 = '3 personen';
           break;
         }
         case '6': {
-          this.room1Array = []
-          this.roomsForThree.subscribe(
-            response => { 
-              this.room1 = response;
-              
-              let room1Budget: boolean = false;
-              let room1Standaard: boolean = false;
-              let room1Luxe: boolean = false;
+          this.vacantyRoom1 = false;
+          this.vacantyRoom2 = false;
+          this.fillRoomList1(this.roomsForThree)
+          this.fillRoomList2(this.roomsForThree)
 
-              this.room1.forEach((element:any) => {
-                if(element.kamerType === 'Budget' && room1Budget === false) {
-                  this.room1Array = [...this.room1Array, element]
-                  room1Budget = true
-                }
-                if(element.kamerType === 'Standaard' && room1Standaard === false) {
-                  this.room1Array = [...this.room1Array, element]
-                  room1Standaard = true
-                }
-                if(element.kamerType === 'Luxe' && room1Luxe === false) {
-                  this.room1Array = [...this.room1Array, element]
-                  room1Luxe = true
-                }
-              });
-            });
-            this.room2Array = []
-            this.roomsForThree.subscribe(
-              response => { 
-                this.room2 = response;
-                  
-                let room2Budget: boolean = false;
-                let room2Standaard: boolean = false;
-                let room2Luxe: boolean = false;
-                let room2BudgetSecond: boolean = false;
-                let room2StandaardSecond: boolean = false;
-                let room2LuxeSecond: boolean = false; 
-  
-                this.room2.forEach((element:any) => {
-                  if(element.kamerType === 'Budget' && room2Budget === false && room2BudgetSecond === true) {
-                    this.room2Array = [...this.room2Array, element];
-                    room2Budget = true;
-                  }
-                  if(element.kamerType === 'Budget' && room2Budget === false && room2BudgetSecond === false) {
-                    room2BudgetSecond = true;
-                  }
-                  if(element.kamerType === 'Standaard' && room2Standaard === false && room2StandaardSecond === true) {
-                    this.room2Array = [...this.room2Array, element]
-                    room2Standaard = true
-                  }
-                  if(element.kamerType === 'Standaard' && room2Standaard === false && room2StandaardSecond === false) {
-                    room2StandaardSecond = true;
-                  }
-                  if(element.kamerType === 'Luxe' && room2Luxe === false && room2LuxeSecond === true) {
-                    this.room2Array = [...this.room2Array, element]
-                    room2Luxe = true
-                  }
-                  if(element.kamerType === 'Luxe' && room2Luxe === false && room2LuxeSecond === false) {
-                    room2LuxeSecond = true;
-                  }
-                });
-              });
-            this.showroom2 = true;
+          this.showroom2 = true;
           this.personen1 = '3 personon';
           this.personen2 = '3 personon';
           break;
         }
         case '7': {
-          this.room1Array = []
-          this.roomsForThree.subscribe(
-            response => { 
-              this.room1 = response;
-              
-              let room1Budget: boolean = false;
-              let room1Standaard: boolean = false;
-              let room1Luxe: boolean = false;
+          this.vacantyRoom1 = false;
+          this.vacantyRoom2 = false;
+          this.fillRoomList1(this.roomsForThree)
+          this.fillRoomList2(this.roomsForThree)
 
-              this.room1.forEach((element:any) => {
-                if(element.kamerType === 'Budget' && room1Budget === false) {
-                  this.room1Array = [...this.room1Array, element]
-                  room1Budget = true
-                }
-                if(element.kamerType === 'Standaard' && room1Standaard === false) {
-                  this.room1Array = [...this.room1Array, element]
-                  room1Standaard = true
-                }
-                if(element.kamerType === 'Luxe' && room1Luxe === false) {
-                  this.room1Array = [...this.room1Array, element]
-                  room1Luxe = true
-                }
-              });
-            });
-
-            this.room2Array = []
-            this.roomsForFour.subscribe(
-              response => { 
-                this.room2 = response;
-                
-                let room2Budget: boolean = false;
-                let room2Standaard: boolean = false;
-                let room2Luxe: boolean = false;
-  
-                this.room2.forEach((element:any) => {
-                  if(element.kamerType === 'Budget' && room2Budget === false) {
-                    this.room2Array = [...this.room2Array, element]
-                    room2Budget = true
-                  }
-                  if(element.kamerType === 'Standaard' && room2Standaard === false) {
-                    this.room2Array = [...this.room2Array, element]
-                    room2Standaard = true
-                  }
-                  if(element.kamerType === 'Luxe' && room2Luxe === false) {
-                    this.room2Array = [...this.room2Array, element]
-                    room2Luxe = true
-                  }
-                });
-              });
-            this.showroom2 = true;
+          this.showroom2 = true;
           this.personen1 = '3 personon';
           this.personen2 = '4 personon';
           break;
         }
         case '8': {
-          this.room1Array = []
-          this.roomsForFour.subscribe(
-            response => { 
-              this.room1 = response;
-              
-              let room1Budget: boolean = false;
-              let room1Standaard: boolean = false;
-              let room1Luxe: boolean = false;
+          this.vacantyRoom1 = false;
+          this.vacantyRoom2 = false;
+          this.fillRoomList1(this.roomsForFour)
+          this.fillRoomList2(this.roomsForFour)
 
-              this.room1.forEach((element:any) => {
-                if(element.kamerType === 'Budget' && room1Budget === false) {
-                  this.room1Array = [...this.room1Array, element]
-                  room1Budget = true
-                }
-                if(element.kamerType === 'Standaard' && room1Standaard === false) {
-                  this.room1Array = [...this.room1Array, element]
-                  room1Standaard = true
-                }
-                if(element.kamerType === 'Luxe' && room1Luxe === false) {
-                  this.room1Array = [...this.room1Array, element]
-                  room1Luxe = true
-                }
-              });
-            });
-
-          this.room2Array = []
-          this.roomsForFour.subscribe(
-            response => { 
-              this.room2 = response;
-                
-              let room2Budget: boolean = false;
-              let room2Standaard: boolean = false;
-              let room2Luxe: boolean = false;
-              let room2BudgetSecond: boolean = false;
-              let room2StandaardSecond: boolean = false;
-              let room2LuxeSecond: boolean = false; 
-
-              this.room2.forEach((element:any) => {
-                if(element.kamerType === 'Budget' && room2Budget === false && room2BudgetSecond === true) {
-                  this.room2Array = [...this.room2Array, element];
-                  room2Budget = true;
-                }
-                if(element.kamerType === 'Budget' && room2Budget === false && room2BudgetSecond === false) {
-                  room2BudgetSecond = true;
-                }
-                if(element.kamerType === 'Standaard' && room2Standaard === false && room2StandaardSecond === true) {
-                  this.room2Array = [...this.room2Array, element]
-                  room2Standaard = true
-                }
-                if(element.kamerType === 'Standaard' && room2Standaard === false && room2StandaardSecond === false) {
-                  room2StandaardSecond = true;
-                }
-                if(element.kamerType === 'Luxe' && room2Luxe === false && room2LuxeSecond === true) {
-                  this.room2Array = [...this.room2Array, element]
-                  room2Luxe = true
-                }
-                if(element.kamerType === 'Luxe' && room2Luxe === false && room2LuxeSecond === false) {
-                  room2LuxeSecond = true;
-                }
-              });
-            });
           this.showroom2 = true;
           this.personen1 = '4 personon';
           this.personen2 = '4 personon';
@@ -647,4 +364,78 @@ export class GastKamerReserveringComponent implements OnInit {
     this.activeModal.close(this.reservationlist);
     location.reload();
   }
+
+  fillRoomList1(roomsForX: Observable<Kamer[]>) {
+    this.room1Array = []
+    roomsForX.subscribe(
+      response => { 
+        this.room1 = response;
+        
+        let room1Budget: boolean = false;
+        let room1Standaard: boolean = false;
+        let room1Luxe: boolean = false;
+
+        this.room1.forEach((element:any) => {
+          if(element.kamerType === 'Budget' && room1Budget === false) {
+            this.room1Array = [...this.room1Array, element]
+            room1Budget = true
+            this.vacantyRoom1 = true;
+          }
+          if(element.kamerType === 'Standaard' && room1Standaard === false) {
+            this.room1Array = [...this.room1Array, element]
+            this.vacantyRoom1 = true;
+            room1Standaard = true
+          }
+          if(element.kamerType === 'Luxe' && room1Luxe === false) {
+            this.room1Array = [...this.room1Array, element]
+            this.vacantyRoom1 = true;
+            room1Luxe = true
+          }
+        });
+      }
+    );
+  };
+
+  fillRoomList2(roomsForX: Observable<Kamer[]>) {
+    this.room2Array = []
+    roomsForX.subscribe(
+      response => { 
+        this.room2 = response;
+           
+        let room2Budget: boolean = false;
+        let room2Standaard: boolean = false;
+        let room2Luxe: boolean = false;
+        let room2BudgetSecond: boolean = false;
+        let room2StandaardSecond: boolean = false;
+        let room2LuxeSecond: boolean = false; 
+
+        this.room2.forEach((element:any) => {
+          if(element.kamerType === 'Budget' && room2Budget === false && room2BudgetSecond === true) {
+            this.room2Array = [...this.room2Array, element];
+            this.vacantyRoom2 = true;
+            room2Budget = true;
+          }
+          if(element.kamerType === 'Budget' && room2Budget === false && room2BudgetSecond === false) {
+            room2BudgetSecond = true;
+          }
+          if(element.kamerType === 'Standaard' && room2Standaard === false && room2StandaardSecond === true) {
+            this.room2Array = [...this.room2Array, element]
+            this.vacantyRoom2 = true;
+            room2Standaard = true
+          }
+          if(element.kamerType === 'Standaard' && room2Standaard === false && room2StandaardSecond === false) {
+            room2StandaardSecond = true;
+          }
+          if(element.kamerType === 'Luxe' && room2Luxe === false && room2LuxeSecond === true) {
+            this.room2Array = [...this.room2Array, element]
+            this.vacantyRoom2 = true;
+            room2Luxe = true
+          }
+          if(element.kamerType === 'Luxe' && room2Luxe === false && room2LuxeSecond === false) {
+            room2LuxeSecond = true;
+          }
+        });
+      }
+    );
+  };
 }

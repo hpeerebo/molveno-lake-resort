@@ -43,7 +43,7 @@
         <span *ngIf="showroom2">Selecteer twee kamers:</span>
         <label *ngIf="showroom2">Eerste kamer: {{personen1}}</label>
         <select (change)="room1Selected(kamerreserveringForm.controls.kamernaam1.value, kamerreserveringForm.controls.aantalpersonen.value)" class="form-control" formControlName="kamernaam1" [class.is-invalid]="kamerreserveringForm.controls.kamernaam1.invalid && kamerreserveringForm.controls.kamernaam1.touched" ngbAutofocus >
-          <option value="" disabled>--Select een kamer--</option>
+          <option value="" disabled>--Selecteer een kamer--</option>
           <option *ngFor="let kamer1 of room1Array" [value]="[kamer1.kamerNaam, kamer1.prijs]">{{kamer1.kamerType}}, {{kamer1.kamerLigging}},  € {{kamer1.prijs}},-</option>
         </select>
         <small class="text-danger" [class.d-none]="kamerreserveringForm.controls.kamernaam1.valid || kamerreserveringForm.controls.kamernaam1.untouched">Vereist</small>
@@ -52,7 +52,7 @@
         <br>
         <label>Tweede Kamer: {{personen2}}</label>
           <select (change)="room2Selected(kamerreserveringForm.controls.kamernaam2.value)" class="form-control" formControlName="kamernaam2" [class.is-invalid]="kamerreserveringForm.controls.kamernaam2.invalid && kamerreserveringForm.controls.kamernaam2.touched" ngbAutofocus >
-          <option value="" disabled>--Select een kamer--</option>
+          <option value="" disabled>--Selecteer een kamer--</option>
           <option *ngFor="let kamer2 of room2Array" [value]="[kamer2.kamerNaam, kamer2.prijs]">{{kamer2.kamerType}}, {{kamer2.kamerLigging}},  € {{kamer2.prijs}},-</option>
         </select>
         <small class="text-danger" [class.d-none]="kamerreserveringForm.controls.kamernaam2.valid || kamerreserveringForm.controls.kamernaam2.untouched">Vereist</small>
