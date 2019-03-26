@@ -12,10 +12,8 @@ export class TafelService {
     private readonly tafelRepository: Repository<TafelRepoEntity>,
   ) { }
 
-  async getTafels(): Promise<Tafel[]> {
-    const tafelEntities = await this.tafelRepository.find();
-    const tafels = tafelEntities.map(tafelEntity => tafelEntity.mapToTafel());
-    return tafels;
+  async getTafels(): Promise<TafelRepoEntity[]> {
+    return this.tafelRepository.find();
   }
 
   async createTafel(tafelEntity: TafelRepoEntity): Promise<TafelRepoEntity> {

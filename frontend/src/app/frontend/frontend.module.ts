@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 // FrontEnd imports
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -19,7 +19,6 @@ import { RoundedCircleComponent } from './shared/components/rounded-circle/round
 import { GastKamerReserveringComponent } from './shared/components/gast-kamerreservering/gast-kamerreservering.component';
 import { ReservationButtonComponent } from './shared/components/reservation-button/reservation-button.component'
 
-
 @NgModule({
   declarations: [
     FrontEndComponent,
@@ -36,7 +35,7 @@ import { ReservationButtonComponent } from './shared/components/reservation-butt
     ReservationButtonComponent,
   ],
   imports: [CommonModule, FrontEndAppRoutingModule, NgbModule, FormsModule, ReactiveFormsModule, ApplicationPipesModule],
-  entryComponents: [GastKamerReserveringComponent, LoginComponent]
-
+  entryComponents: [GastKamerReserveringComponent, LoginComponent],
+  providers: [DatePipe],
 })
 export class FrontendModule {}

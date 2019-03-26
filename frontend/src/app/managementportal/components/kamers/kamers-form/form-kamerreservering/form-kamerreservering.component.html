@@ -10,7 +10,6 @@
       <div class="form-group col-md-6">
             <label>Aankomst datum</label>
             <input readonly type="date" class="form-control" value={{datumvan}} formControlName="datumvan"  />
-
         </div>
         <div class="form-group col-md-6">
             <label>Vertrek datum</label>
@@ -38,7 +37,7 @@
         <div class="form-group col-md-6">
           <label>E-mailadres</label>
           <input type="text" class="form-control" formControlName="emailadres" [class.is-invalid]="kamerreserveringForm.controls.emailadres.invalid && kamerreserveringForm.controls.emailadres.touched" ngbAutofocus />
-          <small class="text-danger" [class.d-none]="kamerreserveringForm.controls.emailadres.valid || kamerreserveringForm.controls.emailadres.untouched">Vereist</small>
+          <small class="text-danger" [class.d-none]="kamerreserveringForm.controls.emailadres.valid || kamerreserveringForm.controls.emailadres.untouched">Vereist. Voer een geldige e-mailadres in</small>
         </div>
       </div>
     <div class="container, form-row">
@@ -57,7 +56,7 @@
          <div class="form-group col-md-4">
            <label>Postcode</label>
            <input type="text" class="form-control" formControlName="postcode" [class.is-invalid]="kamerreserveringForm.controls.postcode.invalid && kamerreserveringForm.controls.postcode.touched" ngbAutofocus />
-           <small class="text-danger" [class.d-none]="kamerreserveringForm.controls.postcode.valid || kamerreserveringForm.controls.postcode.untouched">Vereist</small>
+           <small class="text-danger" [class.d-none]="kamerreserveringForm.controls.postcode.valid || kamerreserveringForm.controls.postcode.untouched">Vereist. Voer een geldige postcode in</small>
          </div>
         <div class="form-group col-md-8">
               <label>Woonplaats</label>

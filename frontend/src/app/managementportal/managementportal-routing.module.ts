@@ -14,72 +14,34 @@ import { ActiviteitReserveringenComponent } from "./components/activiteiten/acti
 import { KamerreserveringComponent } from "./components/kamers/kamerreserveringen/kamerreservering.component";
 import { GerechtenDetailsComponent } from "./components/restaurant/gerechten-details/gerechten-details.component";
 import { ActiviteitenPlanningComponent } from "./components/activiteiten/activiteiten-planning/activiteiten-planning.component";
+import {KamerreserveringdetailsComponent} from "./components/kamers/kamerreserveringdetails/kamerreserveringdetails.component";
+import { AuthGuard } from '../frontend/guard/auth.guard';
+import { SignupComponent } from '../shared/components/form-signup/signup.component';
 
 const routes: Routes = [
   {
     path: "",
     component: ManagementportalComponent,
     children: [
-      {
-        path: "managementportal/home",
-        component: ManagementPortalHomeComponent
-      },
-      {
-        path: "managementportal/login",
-        component: ManagementPortalLoginComponent
-      },
-      {
-        path: "managementportal/kamers",
-        component: ManagementPortalKamersComponent
-      },
-      {
-        path: "managementportal/kamers/:param",
-        component: ManagementPortalKamersComponent
-      },
-      {
-        path: "managementportal/kamerreserveringen",
-        component: KamerreserveringComponent
-      },
-      {
-        path: "managementportal/kamers-form",
-        component: ManagementPortalKamersFormComponent
-      },
-      {
-        path: "managementportal/activiteiten",
-        component: ManagementPortalActiviteitenComponent
-      },
-      {
-        path: "managementportal/activiteiten/activiteiten-planning",
-        component: ActiviteitenPlanningComponent
-      },
-      {
-        path: "managementportal/activiteiten/activiteit-reserveringen",
-        component: ActiviteitReserveringenComponent
-      },
-      {
-        path: "managementportal/restaurant/tafels",
-        component: ManagementPortalTafelsComponent
-      },
-      {
-        path: "managementportal/restaurant/reserveringen",
-        component: ReserveringenComponent
-      },
-      {
-        path: "managementportal/restaurant/ingredienten",
-        component: ManagementPortalIngredientenComponent
-      },
-      {
-        path: "managementportal/restaurant/gerechten",
-        component: ManagementPortalGerechtenComponent
-      },
-      {
-        path: "managementportal/restaurant/gerechten/:id",
-        component: GerechtenDetailsComponent
-      }
+      { path: 'managementportal/home', component: ManagementPortalHomeComponent,},
+      { path: 'managementportal/login', component: ManagementPortalLoginComponent },
+      { path: 'managementportal/signup', component: SignupComponent },
+      { path: 'managementportal/kamers', component: ManagementPortalKamersComponent/* , canActivate: [AuthGuard] */},
+      { path: 'managementportal/kamers/:param', component: ManagementPortalKamersComponent},
+      { path: 'managementportal/kamerreserveringen', component: KamerreserveringComponent},
+      { path: 'managementportal/kamerreserveringen/:reserveringsnummer', component: KamerreserveringdetailsComponent},
+      { path: 'managementportal/kamers-form', component: ManagementPortalKamersFormComponent },
+      { path: 'managementportal/activiteiten', component: ManagementPortalActiviteitenComponent },
+      { path: 'managementportal/activiteiten/activiteiten-planning', component: ActiviteitenPlanningComponent },
+      { path: 'managementportal/activiteiten/activiteit-reserveringen', component: ActiviteitReserveringenComponent },
+      { path: 'managementportal/restaurant/tafels', component: ManagementPortalTafelsComponent },
+      { path: 'managementportal/restaurant/reserveringen', component: ReserveringenComponent },
+      { path: 'managementportal/restaurant/ingredienten', component: ManagementPortalIngredientenComponent },
+      { path: 'managementportal/restaurant/gerechten', component: ManagementPortalGerechtenComponent },
+      { path: 'managementportal/restaurant/gerechten/:id', component: GerechtenDetailsComponent }
     ]
   }
 ];
-
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

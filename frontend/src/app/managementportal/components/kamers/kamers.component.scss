@@ -10,6 +10,36 @@
 .Noresultfound{
   color: red;
 }
+.infotext{
+  color: green;
+}
+.room-bucket {
+  padding: 20px;
+ // height: 400px;
+  width: 400px;
+  //position: relative;
+  //left:500px;
+ position: fixed;
+  top:135px;
+ // bottom: 0;
+  right: 60px;
+  border-radius: 4px;
+  overflow-y: auto;
+  background-color: lightgoldenrodyellow;
+  margin-left: 400px;
+}
+
+.table-small{
+  width: 800px;
+}
+.table-small>tbody>tr{
+  cursor: pointer;
+}
+ .table tr.active td {
+  background-color:lightgreen;
+  color: white;
+}
+
 
 /* .table-striped>tbody>tr:nth-child(odd)>td,
 .table-striped>tbody>tr:nth-child(odd)>th {

@@ -1,43 +1,36 @@
+<div class="login mx-auto">
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
-<div class="alert alert-info">
-    Username: test<br />
-    Password: test
+    <div class="form-group">
+        <label for="login-form-email">E-mailadres</label>
+        <input type="email"
+               [formControl]="loginForm.controls.userName"
+               class="form-control"
+               id="login-form-email"
+               aria-describedby="login-form-email-help"
+               placeholder="Enter username">
+        <div class="text-danger" *ngIf="loginForm.controls.userName.invalid && !loginForm.controls.userName.pristine">
+            Voer een geldig E-mailadres in
+        </div>
+        <!--small id="login-form-email-help" class="form-text text-muted">Voer het E-mailadres in</small-->
+    </div>
+
+    <div class="form-group">
+        <label for="login-form-password">Wachtwoord</label>
+        <input type="password"
+               [formControl]="loginForm.controls.password"
+               class="form-control"
+               id="login-form-password"
+               aria-describedby="login-form-password-help"
+               placeholder="Password">
+        <div class="text-danger" *ngIf="loginForm.controls.password.invalid && !loginForm.controls.password.pristine">
+            wachtwoord is verplicht
+        </div>
+        <!--small id="login-form-password-help" class="form-text text-muted">Voer het wachtwoord in
+        </small-->
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">log in</button>
+</form>
 </div>
-<h2>Login</h2>
-<!--form [formGroup]="loginForm" (ngSubmit)="onSubmit()"-->
-<form (ngSubmit)="onSubmit()">
-    <div class="form-group">
-        <label for="username">Username</label>
-        <input type="text" class="form-control" formControlName="username" [class.is-invalid]="username?.invalid && username?.touched" ngbAutofocus />
-        <small class="text-danger" [class.d-none]="username?.valid || username?.untouched">Vereist</small>
-    </div>
-    <div class="form-group">
-        <label for="password">Password</label>
-        <input type="text" class="form-control" formControlName="password" [class.is-invalid]="password?.invalid && password?.touched" ngbAutofocus />
-        <small class="text-danger" [class.d-none]="password?.valid || password?.untouched">Vereist</small>
-    </div>
-    <div class="form-group">
-        <button [disabled]="loading" class="btn btn-primary">Login</button>
-        <img *ngIf="loading" class="pl-2" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-    </div>
-    <div *ngIf="error" class="alert alert-danger">{{error}}</div>
-</form>
-<!--div class="login mx-auto">
-  <form class="form-signin" >
-  <img class="mb-4" src="assets/img/assets/img/logo-128.png" alt="">
-  <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-  <label for="inputEmail" class="sr-only">Email address</label>
-  <input type="email" id="inputEmail" class="form-control" placeholder="Email address"  required autofocus>
-  <label for="inputPassword" class="sr-only">Password</label>
-  <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-  <div class="checkbox mb-3">
-    <label>
-      <input type="checkbox" value="remember-me"> Remember me
-    </label>
-  </div>
-  <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-
-  <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
-</form>
-</div-->
 
