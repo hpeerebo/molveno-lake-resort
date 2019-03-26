@@ -12,13 +12,14 @@ export class FormActiviteitMaakReserveringComponent implements OnInit {
   @Input() planning: ActiviteitenPlanning | undefined = undefined;
 
   public activiteitMaakResForm = this.formBuilder.group({
-    actNaam: [undefined],
-    actDate: [undefined],
-    actGastMail: [undefined, [Validators.required, Validators.email]],
+    emailGast: [undefined, [Validators.required, Validators.email]],
+    phoneGast: [undefined],
+    aantalPersonen: [1, [Validators.required, Validators.min(1)]],
     actGastPhone: [undefined],
-    actGastAantal: [1, [Validators.required, Validators.min(1)]],
     actPlanId: [undefined]
   });
+
+
 
   constructor(
     public activeModal: NgbActiveModal,
@@ -27,9 +28,6 @@ export class FormActiviteitMaakReserveringComponent implements OnInit {
 
   ngOnInit() {
     if (this.planning) {
-      console.log("PLANNING", this.planning);
-      console.log("PLANNING DATE", this.planning.actdate);
-      console.log("PLANNING NAME", this.planning.activiteit.naam);
       this.activiteitMaakResForm.controls.actDate.setValue(
         this.planning.actdate
       );
@@ -48,14 +46,14 @@ export class FormActiviteitMaakReserveringComponent implements OnInit {
   }
 
   get naam() {
-    return this.activiteitMaakResForm.get("actGastMail");
+    return this.activiteitMaakResForm.get("emailGast");
   }
 
   get beschrijving() {
-    return this.activiteitMaakResForm.get("actGastPhone");
+    return this.activiteitMaakResForm.get("phoneGast");
   }
 
   get thumb() {
-    return this.activiteitMaakResForm.get("actGastAantal");
+    return this.activiteitMaakResForm.get("aantalPersonen");
   }
 }

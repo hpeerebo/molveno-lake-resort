@@ -2,13 +2,6 @@ import { ApiModelProperty } from '@nestjs/swagger';
 import { IsNumber, IsString } from 'class-validator';
 
 export class CreateActiviteitPlanningDto {
-  @IsNumber()
-  @ApiModelProperty()
-  public readonly planid: number;
-
-  // @IsNumber()
-  // @ApiModelProperty()
-  // public readonly actid: number;
 
   @IsString()
   @ApiModelProperty()

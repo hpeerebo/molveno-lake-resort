@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 import { FormBuilder, Validators } from "@angular/forms";
-import { ActiviteitRes } from "src/app/models/activiteit-res";
+import { ActiviteitReservering } from "src/app/models/activiteit-reservering";
 
 @Component({
   selector: "app-form-activiteit-res",
@@ -9,10 +9,10 @@ import { ActiviteitRes } from "src/app/models/activiteit-res";
   styleUrls: ["./form-activiteit-res.component.scss"]
 })
 export class FormActiviteitResComponent implements OnInit {
-  @Input() reserveringen: ActiviteitRes | undefined = undefined;
+  @Input() reserveringen: ActiviteitReservering | undefined = undefined;
 
   public activiteitResForm = this.formBuilder.group({
-    resid: [0, Validators.required],
+    // resid: [0, Validators.required],
     emailGast: ["", Validators.required],
     phoneGast: ["" /*, Validators.required*/],
     aantalPersonen: [1, [Validators.required, Validators.min(1)]]
@@ -27,7 +27,7 @@ export class FormActiviteitResComponent implements OnInit {
     console.log("FormActiviteitResComponent", this.reserveringen);
     if (this.reserveringen) {
       this.activiteitResForm.setValue({
-        resid: this.reserveringen.resid,
+        // resid: this.reserveringen.resid,
         emailGast: this.reserveringen.emailGast,
         phoneGast: this.reserveringen.phoneGast,
         aantalPersonen: this.reserveringen.aantalPersonen

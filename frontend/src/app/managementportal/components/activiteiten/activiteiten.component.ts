@@ -5,6 +5,7 @@ import { Activiteit } from "src/app/models/activiteit";
 import { NgbModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
 import { FormActiviteitComponent } from "src/app/shared/components/form-activiteit/form-activiteit.component";
 import { ModalConfirmComponent } from "src/app/shared/components/modal-confirm/modal-confirm.component";
+import { CreateActiviteit } from 'src/app/models/create-activiteit';
 
 @Component({
   selector: "app-activiteiten",
@@ -33,7 +34,7 @@ export class ManagementPortalActiviteitenComponent {
       });
   }
 
-  openFormActiviteitModal(activiteit?: Activiteit) {
+  openFormActiviteitModal(activiteit?: CreateActiviteit) {
     const modal = this.modalService.open(FormActiviteitComponent);
     if (activiteit) {
       modal.componentInstance.activiteit = activiteit;
@@ -47,12 +48,12 @@ export class ManagementPortalActiviteitenComponent {
       });
   }
 
-  verwijderActiviteit(activiteit: Activiteit) {
+  verwijderActiviteit(activiteitId: number) {
     this.modalService
       .open(ModalConfirmComponent)
       .result.then(result => {
         if (result === "yes") {
-          this.activiteitenService.deleteActiviteit(activiteit);
+          this.activiteitenService.deleteActiviteit(activiteitId);
         }
       })
       .catch(error => {

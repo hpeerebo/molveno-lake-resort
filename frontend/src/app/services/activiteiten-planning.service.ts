@@ -4,6 +4,7 @@ import { ActiviteitenPlanning } from "../models/activiteit-planning";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import {IActiviteit} from './activiteiten.service';
+import { CreateActiviteitenPlanning } from '../models/create-activiteit-planning';
 
 @Injectable({
   providedIn: "root"
@@ -12,29 +13,6 @@ export class ActiviteitenPlanningService {
   public readonly api: string = `/api/activiteiten/planning/`;
 
   constructor(private http: HttpClient) {}
-
-  private static activiteitenplanResponseToActiviteitplanMapper(
-    activiteitenplanningResponse: IActiviteitPlanning[]
-  ): ActiviteitenPlanning[] {
-    console.log("activiteitenPlanningResponse");
-    return activiteitenplanningResponse;
-    // return activiteitenplanningResponse.map(
-    //   ActiviteitenPlanningService.activiteitenplanResponseToActiviteitplanMapper
-    // );
-  }
-
-  private static activiteitToActiviteitMapper(
-    activiteitplanning: IActiviteitPlanning
-  ): ActiviteitenPlanning {
-    return new ActiviteitenPlanning(
-      activiteitplanning.planid,
-      // activiteitplanning.actid,
-      activiteitplanning.actdate,
-      activiteitplanning.actprijs,
-      activiteitplanning.actcapaciteit,
-      activiteitplanning.activiteit
-    );
-  }
 
   getAllActiviteitenPlanning(): Observable<ActiviteitenPlanning[]> {
     return this.http
@@ -46,9 +24,8 @@ export class ActiviteitenPlanningService {
       );
   }
 
-  saveActiviteitPlanning(planning: ActiviteitenPlanning): void {
+  saveActiviteitPlanning(planning: CreateActiviteitenPlanning): void {
     this.http.post<IActiviteitPlanning[]>(this.api, planning).subscribe();
-    // console.log(planning);
     // location.reload();
   }
 
@@ -57,17 +34,34 @@ export class ActiviteitenPlanningService {
     // location.reload();
   }
 
-  deleteActiviteitPlanning(planning: ActiviteitenPlanning): void {
+  deleteActiviteitPlanning(planningId: number): void {
     this.http
-      .delete<IActiviteitPlanning[]>(this.api + planning.planid)
+      .delete<IActiviteitPlanning[]>(this.api + planningId)
       .subscribe();
     // location.reload();
   }
+
+  private static activiteitenplanResponseToActiviteitplanMapper(
+    activiteitenplanningResponse: IActiviteitPlanning[]
+  ): ActiviteitenPlanning[] {
+    return activiteitenplanningResponse;
+  }
+
+  private static activiteitToActiviteitMapper(
+    activiteitplanning: IActiviteitPlanning
+  ): ActiviteitenPlanning {
+    return new ActiviteitenPlanning(
+      activiteitplanning.planid,
+      activiteitplanning.actdate,
+      activiteitplanning.actprijs,
+      activiteitplanning.actcapaciteit,
+      activiteitplanning.activiteit
+    );
+  }
 }
 
-interface IActiviteitPlanning {
+export interface IActiviteitPlanning {
   planid: number;
-  // actid: number;
   actdate: string;
   actprijs: number;
   actcapaciteit: number;

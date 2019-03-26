@@ -3,6 +3,7 @@ import { Observable } from "rxjs";
 import { Activiteit } from "../models/activiteit";
 import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
+import { CreateActiviteit } from '../models/create-activiteit';
 
 @Injectable({
   providedIn: "root"
@@ -12,10 +13,33 @@ export class ActiviteitenService {
 
   constructor(private http: HttpClient) {}
 
+  getAllActiviteiten(): Observable<Activiteit[]> {
+    return this.http
+      .get<IActiviteit[]>(this.api)
+      .pipe(map(ActiviteitenService.activiteitenResponseToActiviteitMapper));
+  }
+
+  saveActiviteit(activiteit: CreateActiviteit): void {
+    this.http.post<IActiviteit[]>(this.api, activiteit).subscribe();
+    console.log("saveActiviteit", activiteit);
+    // location.reload();
+  }
+
+  updateActiviteit(activiteit: Activiteit): void {
+    this.http.post<IActiviteit[]>(this.api, activiteit).subscribe();
+    console.log("updateActiviteit", activiteit);
+    // location.reload();
+  }
+
+  deleteActiviteit(activiteitId: number): void {
+    this.http.delete<IActiviteit[]>(this.api + activiteitId).subscribe();
+    console.log("deleteActiviteit", activiteitId);
+    // location.reload();
+  }
+
   private static activiteitenResponseToActiviteitMapper(
     activiteitenResponse: IActiviteit[]
   ): Activiteit[] {
-    // console.log(activiteitenResponse);
     return activiteitenResponse.map(
       ActiviteitenService.activiteitToActiviteitMapper
     );
@@ -30,30 +54,6 @@ export class ActiviteitenService {
       activiteit.beschrijving,
       activiteit.thumb
     );
-  }
-
-  getAllActiviteiten(): Observable<Activiteit[]> {
-    return this.http
-      .get<IActiviteit[]>(this.api)
-      .pipe(map(ActiviteitenService.activiteitenResponseToActiviteitMapper));
-  }
-
-  saveActiviteit(activiteit: Activiteit): void {
-    this.http.post<IActiviteit[]>(this.api, activiteit).subscribe();
-    console.log("saveActiviteit", activiteit);
-    // location.reload();
-  }
-
-  updateActiviteit(activiteit: Activiteit): void {
-    this.http.post<IActiviteit[]>(this.api, activiteit).subscribe();
-    console.log("updateActiviteit", activiteit);
-    // location.reload();
-  }
-
-  deleteActiviteit(activiteit: Activiteit): void {
-    this.http.delete<IActiviteit[]>(this.api + activiteit.actid).subscribe();
-    console.log("deleteActiviteit", activiteit);
-    // location.reload();
   }
 }
 

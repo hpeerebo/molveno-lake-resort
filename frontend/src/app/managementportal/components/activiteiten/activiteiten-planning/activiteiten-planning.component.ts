@@ -1,13 +1,14 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { ActiviteitenPlanning } from "src/app/models/activiteit-planning";
 import { Observable } from "rxjs";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { ModalConfirmComponent } from "src/app/shared/components/modal-confirm/modal-confirm.component";
 import { ActiviteitenPlanningService } from "src/app/services/activiteiten-planning.service";
-import { ActiviteitenService } from "src/app/services/activiteiten.service";
 import { FormActiviteitPlanningComponent } from "src/app/shared/components/form-activiteitplanning/form-activiteitplanning.component";
 import { FormActiviteitMaakReserveringComponent } from "src/app/shared/components/form-activiteit-maak-reservering/form-activiteit-maak-reservering.component";
 import { ActiviteitenResService } from "src/app/services/activiteiten-res.service";
+import { CreateActiviteitenPlanning } from 'src/app/models/create-activiteit-planning';
+
 
 @Component({
   selector: "app-activiteiten-planning",
@@ -26,7 +27,6 @@ export class ActiviteitenPlanningComponent {
   ) {}
 
   openCreateReserveringModal(activiteitenPlanning: ActiviteitenPlanning) {
-    console.log("openCreateReserveringModal", activiteitenPlanning);
     const modal = this.modalService.open(
       FormActiviteitMaakReserveringComponent
     );
@@ -34,6 +34,7 @@ export class ActiviteitenPlanningComponent {
 
     modal.result
       .then(result => {
+        console.log(result);
         this.activiteitenResService.saveActiviteitRes(
           result,
           activiteitenPlanning.planid
@@ -56,7 +57,7 @@ export class ActiviteitenPlanningComponent {
       });
   }
 
-  openFormActiviteitPlanningModal(planning?: ActiviteitenPlanning) {
+  openFormActiviteitPlanningModal(planning?: CreateActiviteitenPlanning) {
     const modal = this.modalService.open(FormActiviteitPlanningComponent);
     if (planning) {
       modal.componentInstance.activiteit = planning;
@@ -70,13 +71,12 @@ export class ActiviteitenPlanningComponent {
       });
   }
 
-  verwijderActiviteitPlanning(planning: ActiviteitenPlanning) {
+  verwijderActiviteitPlanning(planningId: number) {
     this.modalService
       .open(ModalConfirmComponent)
       .result.then(result => {
         if (result === "yes") {
-          console.log(planning);
-          this.activiteitenPlanningService.deleteActiviteitPlanning(planning);
+          this.activiteitenPlanningService.deleteActiviteitPlanning(planningId);
         }
       })
       .catch(error => {

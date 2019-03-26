@@ -1,8 +1,7 @@
 import {Activiteit} from './activiteit';
 
-export class ActiviteitenPlanning {
+export class CreateActiviteitenPlanning {
   constructor(
-    public planid: number,
     public actdate: string,
     public actprijs: number,
     public actcapaciteit: number,
