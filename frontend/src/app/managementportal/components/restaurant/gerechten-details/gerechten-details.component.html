@@ -1,20 +1,50 @@
-<div class="mt-4" *ngIf="(gerechtDetails$ | async); let gerecht; else: spinner">
-  <h2>{{ gerecht.naam }}</h2>
+<div *ngIf="(gerechtDetails$ | async); let gerecht; else: spinner" class="d-flex justify-content-between mt-4">
   <div>
-    <span>{{ gerecht.type }}</span>
-    <span> | </span>
-    <span>{{ gerecht.subtype }}</span>
-    <span> | </span>
-    <span>{{ gerecht.prijs | currency: 'EUR' }}</span>
+    <h2>{{ gerecht.naam }}</h2>
+    <div>
+      <span>{{ gerecht.type }}</span>
+      <span> | </span>
+      <span>{{ gerecht.subtype }}</span>
+      <span> | </span>
+      <span>{{ gerecht.prijs | currency: 'EUR' }}</span>
+    </div>
+    <table class="table table-borderless table-sm mt-4" id="ingredienten">
+      <tbody>
+        <tr *ngFor="let ingredient of gerecht.ingredienten">
+          <td class="px-0">{{ ingredient.naam }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-  <table class="table table-borderless table-sm mt-4" id="ingredienten">
-    <tbody>
-      <tr *ngFor="let ingredient of gerecht.ingredienten">
-        <td class="px-0">{{ ingredient.naam }}</td>
-      </tr>
-    </tbody>
-  </table>
+
+  <div>
+    <button class="btn btn-primary" (click)="toggleIngredientenTable()">Nieuw Ingredient</button>
+  </div>
 </div>
+
+<div class="table-responsive mt-2" *ngIf="showIngredientenTable">
+    <table class="table table-striped table-sm">
+      <thead>
+        <tr>
+          <th>Naam</th>
+          <th>Eenheid</th>
+          <th>Prijs</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ingredient of (ingredienten$ | async)">
+          <td>{{ingredient.naam}}</td>
+          <td>{{ingredient.eenheid}}</td>
+          <td>{{ingredient.prijs | currency: 'EUR'}}</td>
+          <td class="text-right">
+            <i class="fas fa-plus" placement="top" ngbTooltip="Voeg Toe" (click)="handleAddIngredientEvent(ingredient)"></i>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
 
 <ng-template #spinner>
   <div class="d-flex justify-content-center mt-4">
