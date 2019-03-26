@@ -9,6 +9,7 @@ import {FormPrintKamerreseveringComponent} from "../kamers-form/form-print-kamer
 import {FormEmailKamerreseveringComponent} from '../kamers-form/form-email-kamerresevering/form-email-kamerresevering.component';
 import {Observable} from "rxjs";
 import {tap} from "rxjs/operators";
+import {FormDownloadKamerreseveringComponent} from "../kamers-form/form-download-kamerresevering/form-download-kamerresevering.component";
 
 @Component({
   //changeDetection: ChangeDetectionStrategy.OnPush,
@@ -221,6 +222,39 @@ export class KamerreserveringdetailsComponent implements OnInit, OnDestroy {
     ).subscribe();
   }
 
+
+  openBookingDownloadForm(){
+    const modalDownBooking = this.modalService.open(FormDownloadKamerreseveringComponent, {
+      size: "lg",
+      ariaLabelledBy: "modal-basic-title"
+    });
+    modalDownBooking.componentInstance.action = "edit";
+
+    this.booking$.pipe(
+      tap(booking => {
+        modalDownBooking.componentInstance.numberOfDays = this.numberOfDays;
+        modalDownBooking.componentInstance.totalPrice = this.totalPrice;
+        modalDownBooking.componentInstance.todayDate = this.todayDate;
+        modalDownBooking.componentInstance.voornaam = this.kamerreserveringdetailsormgroup.value.voornaam;
+        modalDownBooking.componentInstance.achternaam = this.kamerreserveringdetailsormgroup.value.achternaam;
+        modalDownBooking.componentInstance.telefoonnummer = this.kamerreserveringdetailsormgroup.value.telefoonnummer;
+        modalDownBooking.componentInstance.emailadres = this.kamerreserveringdetailsormgroup.value.emailadres;
+        modalDownBooking.componentInstance.identiteitsid = this.kamerreserveringdetailsormgroup.value.identiteitsid;
+        modalDownBooking.componentInstance.postcode = this.kamerreserveringdetailsormgroup.value.postcode;
+        modalDownBooking.componentInstance.straat = this.kamerreserveringdetailsormgroup.value.straat;
+        modalDownBooking.componentInstance.huisnummer = this.kamerreserveringdetailsormgroup.value.huisnummer;
+        modalDownBooking.componentInstance.woonplaats = this.kamerreserveringdetailsormgroup.value.woonplaats;
+        modalDownBooking.componentInstance.land = this.kamerreserveringdetailsormgroup.value.land;
+        modalDownBooking.componentInstance.inchecken = this.kamerreserveringdetailsormgroup.value.inchecken || this.incheckdatum;
+        modalDownBooking.componentInstance.uitchecken = this.kamerreserveringdetailsormgroup.value.uitchecken || this.uitcheckdatum;
+        modalDownBooking.componentInstance.reserveringsnummer = this.kamerreserveringdetailsormgroup.value.reserveringsnummer;
+        modalDownBooking.componentInstance.datumvan = this.datumvan;
+        modalDownBooking.componentInstance.datumtot = this.datumtot;
+        modalDownBooking.componentInstance.kamers = booking;
+      })
+    ).subscribe();
+
+  }
   calculateNumberofDays(datumvan: string, datumtot: string){
     this.numberOfDays = (new Date(this.datumtot).getTime() - new Date(this.datumvan).getTime())/(1000 * 60 * 60 * 24);
     if(this.numberOfDays === 0){
