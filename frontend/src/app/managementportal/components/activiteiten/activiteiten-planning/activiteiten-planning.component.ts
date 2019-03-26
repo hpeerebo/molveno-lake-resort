@@ -71,13 +71,12 @@ export class ActiviteitenPlanningComponent {
       });
   }
 
-  verwijderActiviteitPlanning(planningId: number) {
+  verwijderActiviteitPlanning(planid: number) {
     this.modalService
       .open(ModalConfirmComponent)
       .result.then(result => {
         if (result === "yes") {
-          console.log(planningId);
-          this.activiteitenPlanningService.deleteActiviteitPlanning(planningId);
+          this.activiteitenPlanningService.deleteActiviteitPlanning(planid);
         }
       })
       .catch(error => {

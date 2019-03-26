@@ -34,9 +34,9 @@ export class ActiviteitenPlanningService {
     // location.reload();
   }
 
-  deleteActiviteitPlanning(planningId: number): void {
+  deleteActiviteitPlanning(planid: number): void {
     this.http
-      .delete<IActiviteitPlanning[]>(this.api + planningId)
+      .delete<IActiviteitPlanning[]>(this.api + planid)
       .subscribe();
     // location.reload();
   }
