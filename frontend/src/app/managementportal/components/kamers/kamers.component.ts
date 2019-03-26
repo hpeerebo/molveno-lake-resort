@@ -265,5 +265,7 @@ export class ManagementPortalKamersComponent implements OnInit, AfterViewInit {
     this.numberOfDays = 0;
     this.myCheckbox.setValue(false);
     this.totalPrice = 0;
+    this.roomSelected = [false];
+
   }
 }
