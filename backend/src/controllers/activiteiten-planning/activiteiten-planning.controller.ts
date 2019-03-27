@@ -12,6 +12,7 @@ import { ActiviteitPlanning } from 'src/models/activiteit-planning';
 import { ActiviteitPlanningService } from 'src/services/activiteit-planning/activiteit-planning.service';
 import { CreateActiviteitPlanningDto } from 'src/dto/create-activiteit-planning-dto';
 import { ActiviteitPlanningEntity } from 'src/entities/activiteit-planning-entity';
+import { UpdateActiviteitPlanningDto } from 'src/dto/update-activiteit-planning-dto';
 
 @Controller('activiteiten/planning')
 @ApiUseTags('activiteiten')
@@ -35,8 +36,6 @@ export class ActiviteitenPlanningController {
     @Param('activiteitid') activiteitid: number,
   ) {
     const activiteitplanning: ActiviteitPlanningEntity = new ActiviteitPlanningEntity(
-      createActiviteitPlanning.planid,
-      // createActiviteitPlanning.actid,
       createActiviteitPlanning.actdate,
       createActiviteitPlanning.actprijs,
       createActiviteitPlanning.actcapaciteit,
@@ -61,15 +60,14 @@ export class ActiviteitenPlanningController {
     description: 'De geplande activiteit is succesvol bijgewerkt',
   })
   updateActiviteitenPlanning(
-    @Body() createActiviteitPlanning: CreateActiviteitPlanningDto,
+    @Body() createActiviteitPlanning: UpdateActiviteitPlanningDto,
     @Param('activiteitid') activiteitid: number,
   ): void {
     const planning: ActiviteitPlanningEntity = new ActiviteitPlanningEntity(
-      createActiviteitPlanning.planid,
-      // createActiviteitPlanning.actid,
       createActiviteitPlanning.actdate,
       createActiviteitPlanning.actprijs,
       createActiviteitPlanning.actcapaciteit,
+      createActiviteitPlanning.planid,
     );
     this.activiteitenPlanService.updateActiviteitPlanning(
       planning,

@@ -12,6 +12,7 @@ import { ActiviteitEntity } from 'src/entities/activiteit-entity';
 import { CreateActiviteitDto } from 'src/dto/create-activiteit-dto';
 import { ActiviteitService } from 'src/services/activiteit/activiteit.service';
 import { ApiUseTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { UpdateActiviteitDto } from 'src/dto/update-activiteit-dto';
 
 @ApiUseTags('activiteiten')
 @Controller('activiteiten')
@@ -49,11 +50,12 @@ export class ActiviteitenController {
     status: 201,
     description: 'De activiteit is succesvol bijgewerkt',
   })
-  public updateActiviteit(@Body() createActiviteit: CreateActiviteitDto): void {
+  public updateActiviteit(@Body() createActiviteit: UpdateActiviteitDto): void {
     const activiteit: ActiviteitEntity = new ActiviteitEntity(
       createActiviteit.naam,
       createActiviteit.beschrijving,
       createActiviteit.thumb,
+      createActiviteit.actid,
     );
     this.activiteitenService.updateActiviteit(activiteit);
   }

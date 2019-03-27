@@ -20,11 +20,20 @@ export class ActiviteitenPlanningComponent {
     ActiviteitenPlanning[]
   > = this.activiteitenPlanningService.getAllActiviteitenPlanning();
 
+  public field: string = "";
+  public show: string = "";
+
+
   constructor(
     private activiteitenPlanningService: ActiviteitenPlanningService,
     private activiteitenResService: ActiviteitenResService,
     private modalService: NgbModal
   ) {}
+
+  public clickColumnHandler(event: string): string {
+    this.field = event;
+    return this.field;
+  }
 
   openCreateReserveringModal(activiteitenPlanning: ActiviteitenPlanning) {
     const modal = this.modalService.open(

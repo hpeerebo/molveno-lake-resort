@@ -11,9 +11,11 @@ export class ActiviteitEntity {
     naam: string,
     beschrijving: string,
     thumb: string,
+    actid?: number,
   ) {
     this.naam = naam;
     this.beschrijving = beschrijving;
     this.thumb = thumb;
+    this.actid = actid
   }
 }
