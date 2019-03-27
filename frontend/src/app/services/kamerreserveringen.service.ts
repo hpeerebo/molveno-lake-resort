@@ -4,7 +4,6 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {KamerReservering} from '../models/kamerreservering';
 import {map, take, tap} from 'rxjs/operators';
 import {DateFunctions} from "../shared/services/date-functions";
-import {Tafel} from "../models/tafel";
 
 @Injectable({
   providedIn: 'root'

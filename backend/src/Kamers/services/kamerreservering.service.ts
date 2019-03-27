@@ -4,8 +4,6 @@ import {getRepository, Repository} from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { KamerReservering } from '../models/kamerReservering';
 import { CreateKamerreserveringDto } from '../dto/create-kamerreservering-dto';
-import {Tafelreservering} from "../../../../frontend/src/app/models/tafelreservering";
-import {UpdateKamerDto} from "../dto/update-kamer-dto";
 import {UpdateKamerreserveringDto} from "../dto/update-kamerreservering-dto";
 
 @Injectable()
