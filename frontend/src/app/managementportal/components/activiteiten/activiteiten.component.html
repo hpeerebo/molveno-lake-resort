@@ -11,13 +11,13 @@
     <table class="table table-striped table-sm">
         <thead>
             <tr>
-                <th>Naam</th>
-                <th>Beschrijving</th>
+                <th (click)="clickColumnHandler('naam')">Naam</th>
+                <th (click)="clickColumnHandler('beschrijving')">Beschrijving</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let activiteit of (activiteiten | async)">
+            <tr *ngFor="let activiteit of (activiteiten | async | activiteitFilter: show | sortgrid:field)">
                 <td>{{ activiteit.naam }}</td>
                 <td>{{ activiteit.beschrijving }}</td>
                 <td class="text-align: right">

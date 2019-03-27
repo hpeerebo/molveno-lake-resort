@@ -37,6 +37,8 @@ import { FormEmailKamerreseveringComponent } from './components/kamers/kamers-fo
 import { FormDownloadKamerreseveringComponent } from './components/kamers/kamers-form/form-download-kamerresevering/form-download-kamerresevering.component';
 import {PDFExportModule} from "@progress/kendo-angular-pdf-export";
 import {FormActiviteitMaakReserveringComponent} from '../shared/components/form-activiteit-maak-reservering/form-activiteit-maak-reservering.component';
+import { ActiviteitReserveringenPipe } from '../shared/pipes/activiteit-reserveringen.pipe';
+
 
 @NgModule({
   declarations: [
@@ -66,6 +68,7 @@ import {FormActiviteitMaakReserveringComponent} from '../shared/components/form-
     KamerreserveringdetailsComponent,
     GerechtenDetailsComponent,
     ActiviteitenPlanningComponent,
+    ActiviteitReserveringenPipe,
     FormKamersbeschikbaarComponent,
     SignupComponent,
     FormPrintKamerreseveringComponent,

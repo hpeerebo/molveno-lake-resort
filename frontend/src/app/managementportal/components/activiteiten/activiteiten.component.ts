@@ -17,10 +17,18 @@ export class ManagementPortalActiviteitenComponent {
     Activiteit[]
   > = this.activiteitenService.getAllActiviteiten();
 
+  public field: string = "";
+  public show: string = "";
+
   constructor(
     private activiteitenService: ActiviteitenService,
     private modalService: NgbModal
   ) {}
+
+  public clickColumnHandler(event: string): string {
+    this.field = event;
+    return this.field;
+  }
 
   openEditFormActiviteitModal(activiteit: Activiteit) {
     const modal = this.modalService.open(FormActiviteitComponent);
