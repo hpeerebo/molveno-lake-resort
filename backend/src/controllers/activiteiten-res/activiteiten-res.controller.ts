@@ -54,14 +54,13 @@ export class ActiviteitenResController {
   })
   public updateReservering(
     @Body() createResActiviteit: CreateActiviteitResDto,
-    @Param('reserveringid') reserveringid: number,
   ): void {
     const reservering: ActiviteitResEntity = new ActiviteitResEntity(
       createResActiviteit.emailGast,
       createResActiviteit.phoneGast,
       createResActiviteit.aantalPersonen,
     );
-    this.activiteitenResService.updateReservering(reservering, reserveringid);
+    this.activiteitenResService.updateReservering(reservering);
   }
 
   @Delete(':reserveringId')
