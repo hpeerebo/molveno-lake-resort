@@ -5,6 +5,7 @@ import { ActiviteitenPlanningService } from 'src/app/services/activiteiten-plann
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormActiviteitMaakReserveringComponent } from 'src/app/shared/components/form-activiteit-maak-reservering/form-activiteit-maak-reservering.component';
 import { ActiviteitenResService } from 'src/app/services/activiteiten-res.service';
+import { Activiteit } from 'src/app/models/activiteit';
 
 @Component({
   selector: 'app-activiteiten-planning-reserveren',
