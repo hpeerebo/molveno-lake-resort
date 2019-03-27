@@ -36,7 +36,7 @@ export class ReserveringenComponent implements OnInit {
     this.openFormTafelreserveringModal(reservering);
   }
 
-  public handleDeleteReservationeButtonClick(reservering: Tafelreservering) {
+  public handleDeleteReservationButtonClick(reservering: Tafelreservering) {
     this.verwijderReservering(reservering);
   }
 
