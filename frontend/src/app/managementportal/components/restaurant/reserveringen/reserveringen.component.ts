@@ -15,7 +15,7 @@ export class ReserveringenComponent implements OnInit {
   public reserveringen$: Observable<Tafelreservering[]> = this.tafelreserveringenService.data$;
 
   columnTitle: string = "aanvangstijd";
-  public columnSortClickHandler(event: string): string {
+  public columnSortClickHandler(event: 'aanvangstijd' | 'personen' | 'naam' | 'telefoon'): string {
     this.columnTitle = event;
     return this.columnTitle;
   }

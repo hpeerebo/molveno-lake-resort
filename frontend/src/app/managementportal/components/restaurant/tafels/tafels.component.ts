@@ -15,7 +15,7 @@ export class ManagementPortalTafelsComponent {
   public tafels$: Observable<Tafel[]> = this.tafelsService.data$;
 
   columnTitle: string = "kenmerk";
-  public columnSortClickHandler(event: string): string {
+  public columnSortClickHandler(event: 'kenmerk' | 'personen'): string {
     this.columnTitle = event;
     return this.columnTitle;
   }

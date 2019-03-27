@@ -14,7 +14,7 @@ import { ModalConfirmComponent } from 'src/app/shared/components/modal-confirm/m
 export class ManagementPortalGerechtenComponent {
 
   columnTitle: string = "naam";
-  public columnSortClickHandler(event: string): string {
+  public columnSortClickHandler(event: 'naam' | 'type' | 'subtype' | 'prijs'): string {
     this.columnTitle = event;
     return this.columnTitle;
   }
