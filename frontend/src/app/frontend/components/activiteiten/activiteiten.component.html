@@ -14,7 +14,9 @@
                     <h2>{{ activiteit.naam }}</h2>
                     <p>{{ activiteit.beschrijving }}</p>
                     <p>
-                        <button class="btn btn-lg btn-primary">Aanmelden</button>
+                         <!-- <button class="btn btn-lg btn-primary">Aanmelden</button> -->
+                        <button class="btn btn-lg btn-primary" [routerLink]="['/activiteiten-planning-reserveren']"
+                        routerLinkActive="active">Beschikbaarheid en aanmelden</button>
                     </p>
                 </div>
             </ng-template>
@@ -43,15 +45,18 @@
                 </td>
                 <td>
                     <h4>{{ activiteit.naam }}</h4>
-                    {{ activiteit.beschrijving }}
+                    {{ activiteit.actid }} {{ activiteit.beschrijving }}
+
                 </td>
                 <td>
                     <p>
                         <button
                             type="button"
                             class="btn btn-primary btn-block btn-primary movelake"
+                            [routerLink]="['/activiteiten-planning-reserveren']"
+                            routerLinkActive="active"
                         >
-                            Planning an aanmelden
+                            Beschikbaarheid en aanmelden
                         </button>
                     </p>
                 </td>
