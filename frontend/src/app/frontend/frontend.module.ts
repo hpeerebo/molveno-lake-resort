@@ -17,7 +17,8 @@ import { CarouselComponent } from './shared/components/carousel/carousel.compone
 import { FeaturetteComponent } from './shared/components/featurette/featurette.component';
 import { RoundedCircleComponent } from './shared/components/rounded-circle/rounded-circle.component';
 import { GastKamerReserveringComponent } from './shared/components/gast-kamerreservering/gast-kamerreservering.component';
-import { ReservationButtonComponent } from './shared/components/reservation-button/reservation-button.component'
+import { ReservationButtonComponent } from './shared/components/reservation-button/reservation-button.component';
+import { ActiviteitenPlanningReserverenComponent } from './components/activiteiten/activiteiten-planning-reserveren/activiteiten-planning-reserveren.component'
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { ReservationButtonComponent } from './shared/components/reservation-butt
     RoundedCircleComponent,
     GastKamerReserveringComponent,
     ReservationButtonComponent,
+    ActiviteitenPlanningReserverenComponent,
   ],
   imports: [CommonModule, FrontEndAppRoutingModule, NgbModule, FormsModule, ReactiveFormsModule, ApplicationPipesModule],
   entryComponents: [GastKamerReserveringComponent, LoginComponent],
