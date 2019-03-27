@@ -36,7 +36,7 @@ import { FormPrintKamerreseveringComponent } from './components/kamers/kamers-fo
 import { FormEmailKamerreseveringComponent } from './components/kamers/kamers-form/form-email-kamerresevering/form-email-kamerresevering.component';
 import { FormDownloadKamerreseveringComponent } from './components/kamers/kamers-form/form-download-kamerresevering/form-download-kamerresevering.component';
 import {PDFExportModule} from "@progress/kendo-angular-pdf-export";
-
+import {FormActiviteitMaakReserveringComponent} from '../shared/components/form-activiteit-maak-reservering/form-activiteit-maak-reservering.component';
 
 @NgModule({
   declarations: [
