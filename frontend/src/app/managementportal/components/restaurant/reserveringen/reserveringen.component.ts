@@ -28,33 +28,36 @@ export class ReserveringenComponent implements OnInit {
   ngOnInit() {
   }
 
-  openFormTafelreserveringModal(tafelreservering?: Tafelreservering) {
+  public handleNewReservationButtonClick() {
+    this.openFormTafelreserveringModal();
+  }
+
+  public handleModifyReservationButtonClick(reservering: Tafelreservering) {
+    this.openFormTafelreserveringModal(reservering);
+  }
+
+  public handleDeleteReservationeButtonClick(reservering: Tafelreservering) {
+    this.verwijderReservering(reservering);
+  }
+
+  private async openFormTafelreserveringModal(tafelreservering?: Tafelreservering) {
     const modal = this.modalService.open(FormTafelreserveringComponent);
 
     if (tafelreservering) {
       modal.componentInstance.tafelreservering = tafelreservering;
     }
 
-    modal.result
-      .then(result => {
-        if (result.id) this.tafelreserveringenService.updateTafelreservering(result);
-        else this.tafelreserveringenService.addNewReservering(result);
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    try {
+      const result = await modal.result
+      if (result.id) this.tafelreserveringenService.updateTafelreservering(result);
+      else this.tafelreserveringenService.addNewReservering(result);
+    } catch (message) { }
   }
 
-  verwijderReservering(reservering: Tafelreservering) {
-    this.modalService
-      .open(ModalConfirmComponent)
-      .result.then(result => {
-        if (result === 'yes') {
-          this.tafelreserveringenService.deleteReservering(reservering);
-        }
-      })
-      .catch(error => {
-        console.log(error);
-      });
+  private async verwijderReservering(reservering: Tafelreservering) {
+    try {
+      const result = await this.modalService.open(ModalConfirmComponent).result;
+      if (result === 'yes') this.tafelreserveringenService.deleteReservering(reservering);
+    } catch (message) { }
   }
 }

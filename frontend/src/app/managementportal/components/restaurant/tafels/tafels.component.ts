@@ -48,21 +48,16 @@ export class ManagementPortalTafelsComponent implements OnInit {
     }
 
     try {
-      const result = await modal.result
-      if (result.id) {
-        this.tafelsService.updateTafel(result);
-      } else {
-        this.tafelsService.addNewTafel(result);
-      }
+      const result = await modal.result;
+      if (result.id) this.tafelsService.updateTafel(result);
+      else this.tafelsService.addNewTafel(result);
     } catch (message) { }
   }
 
   private async verwijderTafel(tafel: Tafel) {
     try {
-      const result = await this.modalService.open(ModalConfirmComponent).result
-      if (result === 'yes') {
-        this.tafelsService.deleteTafel(tafel);
-      }
+      const result = await this.modalService.open(ModalConfirmComponent).result;
+      if (result === 'yes') this.tafelsService.deleteTafel(tafel);
     } catch (message) { }
   }
 }

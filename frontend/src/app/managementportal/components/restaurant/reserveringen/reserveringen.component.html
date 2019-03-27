@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-end mt-2">
-  <button class="btn btn-primary" (click)="openFormTafelreserveringModal()">Nieuwe Reservering</button>
+  <button class="btn btn-primary" (click)="handleNewReservationButtonClick()">Nieuwe Reservering</button>
 </div>
 
 <div class="table-responsive mt-2">
@@ -20,8 +20,8 @@
       <td>{{ reservering.naam }}</td>
       <td>{{ reservering.telefoon }}</td>
       <td class="text-right">
-        <i class="fas fa-edit mr-2" placement="top" ngbTooltip="Wijzigen" (click)="openFormTafelreserveringModal(reservering)"></i>
-        <i class="fas fa-trash-alt mr-2" placement="top" ngbTooltip="Verwijderen" (click)="verwijderReservering(reservering)"></i>
+        <i class="fas fa-edit mr-2" placement="top" ngbTooltip="Wijzigen" (click)="handleModifyReservationButtonClick(reservering)"></i>
+        <i class="fas fa-trash-alt mr-2" placement="top" ngbTooltip="Verwijderen" (click)="handleDeleteReservationeButtonClick(reservering)"></i>
       </td>
     </tr>
   </tbody>
