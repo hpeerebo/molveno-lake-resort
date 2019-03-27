@@ -4,10 +4,8 @@ import { Observable } from "rxjs";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { FormActiviteitResComponent } from "src/app/shared/components/form-activiteit-res/form-activiteit-res.component";
 import { ModalConfirmComponent } from "src/app/shared/components/modal-confirm/modal-confirm.component";
-import { ActiviteitenService } from "src/app/services/activiteiten.service";
 import { ActiviteitenPlanningService } from "src/app/services/activiteiten-planning.service";
 import { ActiviteitenResService } from "src/app/services/activiteiten-res.service";
-import { CreateActiviteitReservering } from 'src/app/models/create-activiteit-reservering';
 
 @Component({
   selector: "app-activiteit-reserveringen",
@@ -19,11 +17,19 @@ export class ActiviteitReserveringenComponent {
     ActiviteitReservering[]
   > = this.activiteitenResService.getAllActiviteitenRes();
 
+  public field: string = "";
+  public show: string = "";
+
+
   constructor(
     private activiteitenResService: ActiviteitenResService,
-    private activiteitenPlanningService: ActiviteitenPlanningService,
     private modalService: NgbModal
   ) {}
+
+  public clickColumnHandler(event: string): string {
+    this.field = event;
+    return this.field;
+  }
 
   openFormActiviteitResModal(
     planningId: number,
