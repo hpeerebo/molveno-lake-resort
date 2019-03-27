@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-end mt-2">
-    <button class="btn btn-primary" (click)="openFormIngredientModal()">Nieuw</button>
+    <button class="btn btn-primary" (click)="handleNewIngredientButtonClick()">Nieuw</button>
 </div>
 
 <div class="table-responsive mt-2">
@@ -18,8 +18,8 @@
         <td>{{ingredient.eenheid}}</td>
         <td>{{ingredient.prijs | currency: 'EUR'}}</td>
         <td class="text-right">
-          <i class="fas fa-edit mr-2" placement="top" ngbTooltip="Wijzigen" (click)="openFormIngredientModal(ingredient)"></i>
-          <i class="fas fa-trash-alt mr-2" placement="top" ngbTooltip="Verwijderen" (click)="verwijderIngredient(ingredient)"></i>
+          <i class="fas fa-edit mr-2" placement="top" ngbTooltip="Wijzigen" (click)="handleModifyIngredientButtonClick(ingredient)"></i>
+          <i class="fas fa-trash-alt mr-2" placement="top" ngbTooltip="Verwijderen" (click)="handleDeleteIngredientButtonClick(ingredient)"></i>
         </td>
       </tr>
     </tbody>
