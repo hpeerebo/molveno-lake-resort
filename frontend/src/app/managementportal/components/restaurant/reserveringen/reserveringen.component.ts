@@ -25,8 +25,7 @@ export class ReserveringenComponent implements OnInit {
     private modalService: NgbModal,
   ) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   public handleNewReservationButtonClick() {
     this.openFormTafelreserveringModal();

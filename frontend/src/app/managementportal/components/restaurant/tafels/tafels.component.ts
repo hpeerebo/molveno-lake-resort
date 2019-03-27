@@ -25,8 +25,7 @@ export class ManagementPortalTafelsComponent implements OnInit {
     private modalService: NgbModal,
   ) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   public handleNewTableButtonClick() {
     this.openFormTafelModal();
