@@ -14,10 +14,10 @@ import { ModalConfirmComponent } from 'src/app/shared/components/modal-confirm/m
 export class ManagementPortalTafelsComponent {
   public tafels$: Observable<Tafel[]> = this.tafelsService.data$;
 
-  field: string = "kenmerk";
-  public clickColumnHandler(event: string): string {
-    this.field = event;
-    return console.log(this.field), this.field;
+  columnTitle: string = "kenmerk";
+  public columnSortClickHandler(event: string): string {
+    this.columnTitle = event;
+    return this.columnTitle;
   }
 
   constructor(

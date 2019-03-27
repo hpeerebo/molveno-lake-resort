@@ -14,10 +14,10 @@ import { FormTafelreserveringComponent } from 'src/app/shared/components/form-ta
 export class ReserveringenComponent implements OnInit {
   public reserveringen$: Observable<Tafelreservering[]> = this.tafelreserveringenService.data$;
 
-  field: string = "aanvangstijd";
-  public clickColumnHandler(event: string): string {
-    this.field = event;
-    return console.log(this.field), this.field;
+  columnTitle: string = "aanvangstijd";
+  public columnSortClickHandler(event: string): string {
+    this.columnTitle = event;
+    return this.columnTitle;
   }
 
   constructor(

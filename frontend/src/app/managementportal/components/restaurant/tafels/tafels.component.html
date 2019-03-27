@@ -6,13 +6,13 @@
   <table class="table table-striped table-sm">
     <thead>
       <tr>
-        <th class="handCursor" (click)="clickColumnHandler('kenmerk')">Kenmerk</th>
-        <th class="handCursor" (click)="clickColumnHandler('personen')">Personen</th>
+        <th class="handCursor" (click)="columnSortClickHandler('kenmerk')">Kenmerk</th>
+        <th class="handCursor" (click)="columnSortClickHandler('personen')">Personen</th>
         <th></th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let tafel of (tafels$ | async | sortgrid:field)">
+      <tr *ngFor="let tafel of (tafels$ | async | sortgrid:columnTitle)">
         <td>{{ tafel.kenmerk }}</td>
         <td>{{ tafel.personen }}</td>
         <td class="text-right">

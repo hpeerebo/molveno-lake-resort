@@ -13,10 +13,10 @@ import { ModalConfirmComponent } from 'src/app/shared/components/modal-confirm/m
 })
 export class ManagementPortalIngredientenComponent {
 
-  field: string = "naam";
-  public clickColumnHandler(event: string): string {
-    this.field = event;
-    return console.log(this.field), this.field;
+  columnTitle: string = "naam";
+  public columnSortClickHandler(event: string): string {
+    this.columnTitle = event;
+    return this.columnTitle;
   }
 
   public ingredienten$: Observable<Ingredient[]> = this.ingredientenService.data$;

@@ -6,10 +6,10 @@ import { Injectable } from "@angular/core";
 
 export class SortGridService {
 
-  field: string = "";
-  public clickColumnHandler(event: string): string {
-    this.field = event;
-    return console.log(this.field), this.field;
+  columnTitle: string = "";
+  public columnSortClickHandler(event: string): string {
+    this.columnTitle = event;
+    return this.columnTitle;
   }
 
   constructor() {}
