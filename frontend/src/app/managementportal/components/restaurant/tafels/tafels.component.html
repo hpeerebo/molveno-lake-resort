@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-end mt-2">
-    <button class="btn btn-primary" (click)="openFormTafelModal()">Nieuwe Tafel</button>
+    <button class="btn btn-primary" (click)="handleNewTableButtonClick()">Nieuwe Tafel</button>
 </div>
 
 <div class="table-responsive mt-2">
@@ -16,8 +16,8 @@
         <td>{{ tafel.kenmerk }}</td>
         <td>{{ tafel.personen }}</td>
         <td class="text-right">
-          <i class="fas fa-edit mr-2" placement="top" ngbTooltip="Wijzigen" (click)="openFormTafelModal(tafel)"></i>
-          <i class="fas fa-trash-alt mr-2" placement="top" ngbTooltip="Verwijderen" (click)="verwijderTafel(tafel)"></i>
+          <i class="fas fa-edit mr-2" placement="top" ngbTooltip="Wijzigen" (click)="handleModifyTableButtonClick(tafel)"></i>
+          <i class="fas fa-trash-alt mr-2" placement="top" ngbTooltip="Verwijderen" (click)="handleDeleteTableButtonClick(tafel)"></i>
         </td>
       </tr>
     </tbody>

@@ -20,15 +20,10 @@ export class FormTafelComponent implements OnInit {
   constructor(public activeModal: NgbActiveModal, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    if (this.tafel) {
-      this.tafelForm.setValue({
-        kenmerk: this.tafel.kenmerk,
-        personen: this.tafel.personen
-      });
-    }
+    this.setInitialFormValues();
   }
 
-  submitForm() {
+  public submitForm() {
     if (this.tafel){
       this.tafel.kenmerk = this.tafelForm.value.kenmerk;
       this.tafel.personen = this.tafelForm.value.personen;
@@ -40,6 +35,15 @@ export class FormTafelComponent implements OnInit {
         this.tafelForm.value.kenmerk,
         this.tafelForm.value.personen
       ));
+    }
+  }
+
+  private setInitialFormValues() {
+    if (this.tafel) {
+      this.tafelForm.setValue({
+        kenmerk: this.tafel.kenmerk,
+        personen: this.tafel.personen
+      });
     }
   }
 

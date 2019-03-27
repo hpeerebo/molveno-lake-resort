@@ -169,7 +169,7 @@ export class RestaurantController {
         const bezetting = reserveringEntities.reduce((prev, curr) => prev + curr.personen, 0);
         const capaciteit = tafelEntities.reduce((prev, curr) => prev + curr.personen, 0);
         const beschikbaar = capaciteit - bezetting;
-        return { bezetting, capaciteit, beschikbaar };
+        return { bezetting, capaciteit, beschikbaar }; // aparte service business log
     }
 
     @Put('reserveringen/:id')
