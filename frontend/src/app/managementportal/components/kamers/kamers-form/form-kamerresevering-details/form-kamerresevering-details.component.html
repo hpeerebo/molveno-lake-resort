@@ -1,0 +1,318 @@
+<!-- <pre>{{kamerreserveringen$ | async | json}}</pre> -->
+<!--<pre>{{booking | json}}</pre>-->
+<br/>
+<div  *ngIf="showSpinnerOnLoad; else showSpinner;">
+  <div class="row">
+    <div class="col-10 d-flex text-sm-center">
+      <button type="button" class="btn btn-outline-primary btn-sm" (click)="backToOverview(); resetInitialValues()">
+        Terug naar het overzicht
+      </button>
+      <button type="button" class="btn btn-outline-primary btn-sm" (click)="openBookingPrintingForm()">
+        Factuur printen
+      </button>
+      <button type="button" class="btn btn-outline-primary btn-sm" (click)="openBookingEmailForm()">
+        Factuur e-mailen
+      </button>
+      <button type="button" class="btn btn-outline-primary btn-sm" (click)="openBookingDownloadForm()">
+        Factuur downloaden
+      </button>
+    </div>
+    <div class="col-2 d-flex text-sm-center">
+      <button type="button" class="btn btn-outline-danger btn-sm" (click)="saveChangesToBooking()">
+        Wijzigingen opslaan
+      </button>
+    </div>
+  </div>
+  <br/>
+
+  <form [formGroup]="kamerreserveringdetailsormgroup">
+    <div class="container-fluid">
+      <div>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="card">
+              <div class="card-header">
+                Persoonsgegevens
+              </div>
+              <div class="container, form-row">
+                <div class="form-group col-sm-1">
+                </div>
+                <div class="form-group col-sm-5">
+                  <br/>
+                  <label>Voornaam</label>
+                  <input type="text" class="form-control" formControlName="voornaam"
+                         [class.is-invalid]="kamerreserveringdetailsormgroup.controls.voornaam.invalid && kamerreserveringdetailsormgroup.controls.voornaam.touched"
+                  />
+                  <small class="text-danger"
+                         [class.d-none]="kamerreserveringdetailsormgroup.controls.voornaam.valid || kamerreserveringdetailsormgroup.controls.voornaam.untouched">
+                    Vereist
+                  </small>
+                </div>
+                <div class="form-group col-sm-5">
+                  <br/>
+                  <label>Achternaam</label>
+                  <input type="text" class="form-control" formControlName="achternaam"
+                         [class.is-invalid]="kamerreserveringdetailsormgroup.controls.achternaam.invalid && kamerreserveringdetailsormgroup.controls.achternaam.touched"
+                         ngbAutofocus/>
+                  <small class="text-danger"
+                         [class.d-none]="kamerreserveringdetailsormgroup.controls.achternaam.valid || kamerreserveringdetailsormgroup.controls.achternaam.untouched">
+                    Vereist
+                  </small>
+                </div>
+              </div>
+              <div class="container, form-row">
+                <div class="form-group col-sm-1">
+                </div>
+                <div class="form-group col-sm-7">
+                  <label>Straat</label>
+                  <input type="text" class="form-control" formControlName="straat"
+                         [class.is-invalid]="kamerreserveringdetailsormgroup.controls.straat.invalid && kamerreserveringdetailsormgroup.controls.straat.touched"
+                         ngbAutofocus/>
+                  <small class="text-danger"
+                         [class.d-none]="kamerreserveringdetailsormgroup.controls.straat.valid || kamerreserveringdetailsormgroup.controls.straat.untouched">
+                    Vereist
+                  </small>
+                </div>
+                <div class="form-group col-sm-3">
+                  <label>Nummer</label>
+                  <input type="text" class="form-control" formControlName="huisnummer"
+                         [class.is-invalid]="kamerreserveringdetailsormgroup.controls.huisnummer.invalid && kamerreserveringdetailsormgroup.controls.huisnummer.touched"
+                         ngbAutofocus/>
+                  <small class="text-danger"
+                         [class.d-none]="kamerreserveringdetailsormgroup.controls.huisnummer.valid || kamerreserveringdetailsormgroup.controls.huisnummer.untouched">
+                    Vereist
+                  </small>
+                </div>
+              </div>
+              <div class="container, form-row">
+                <div class="form-group col-sm-1">
+                </div>
+                <div class="form-group col-sm-5">
+                  <label>Postcode</label>
+                  <input type="text" class="form-control" formControlName="postcode"
+                         [class.is-invalid]="kamerreserveringdetailsormgroup.controls.postcode.invalid && kamerreserveringdetailsormgroup.controls.postcode.touched"
+                         ngbAutofocus/>
+                  <small class="text-danger"
+                         [class.d-none]="kamerreserveringdetailsormgroup.controls.postcode.valid || kamerreserveringdetailsormgroup.controls.postcode.untouched">
+                    Vereist
+                  </small>
+                </div>
+                <div class="form-group col-sm-5">
+                  <label>Woonplaats</label>
+                  <input type="text" class="form-control" formControlName="woonplaats"
+                         [class.is-invalid]="kamerreserveringdetailsormgroup.controls.woonplaats.invalid && kamerreserveringdetailsormgroup.controls.woonplaats.touched"
+                         ngbAutofocus/>
+                  <small class="text-danger"
+                         [class.d-none]="kamerreserveringdetailsormgroup.controls.woonplaats.valid || kamerreserveringdetailsormgroup.controls.woonplaats.untouched">
+                    Vereist
+                  </small>
+                </div>
+              </div>
+              <div class="container, form-row">
+                <div class="form-group col-sm-1">
+                </div>
+                <div class="form-group col-sm-10">
+                  <label>Land</label>
+                  <input type="text" class="form-control" formControlName="land"
+                         [class.is-invalid]="kamerreserveringdetailsormgroup.controls.land.invalid && kamerreserveringdetailsormgroup.controls.land.touched"
+                         ngbAutofocus/>
+                  <small class="text-danger"
+                         [class.d-none]="kamerreserveringdetailsormgroup.controls.land.valid || kamerreserveringdetailsormgroup.controls.land.untouched">
+                    Vereist
+                  </small>
+                </div>
+              </div>
+              <div class="container, form-row">
+                <div class="form-group col-sm-12">
+                  <br/>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="card">
+              <div class="card-header">
+                Inchecken/Uitchecken
+              </div>
+              <div class="container, form-row">
+                <div class="form-group col-sm-1">
+                </div>
+                <div class="form-group col-sm-5">
+                  <div class="custom-control custom-switch">
+                    <br/>
+                    <div *ngIf="incheckenToegestaan">
+                      <input type="checkbox" class="custom-control-input" id="inchecken_toegestaan"  [(ngModel)]="inchecken" [ngModelOptions]="{standalone: true}" [disabled]="inchecken">
+                      <label class="custom-control-label" for="inchecken_toegestaan"> Inchecken </label>
+                    </div>
+                    <div *ngIf="!incheckenToegestaan">
+                      <input type="checkbox" class="custom-control-input" id="inchecken_niettoegestaan"  [(ngModel)]="inchecken_niettoegestaan" [ngModelOptions]="{standalone: true}" [disabled]="true">
+                      <label class="custom-control-label" for="inchecken_niettoegestaan"> Inchecken niet mogelijk.</label>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="form-group col-sm-5">
+                  <div *ngIf="incheckenToegestaan">
+                    <div *ngIf="inchecken">
+                      <br/>
+                      <div>op: {{ kamerreserveringdetailsormgroup.value.inchecken || todayDate}}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="container, form-row">
+                <div class="form-group col-sm-1">
+                </div>
+                <div class="form-group col-sm-5">
+                  <div class="custom-control custom-switch">
+                    <div *ngIf="incheckenToegestaan">
+                      <input type="checkbox" class="custom-control-input" id="uitchecken_toestaan" [(ngModel)]="uitchecken" [ngModelOptions]="{standalone: true}" [disabled]="uitchecken">
+                      <label class="custom-control-label" for="uitchecken_toestaan"> Uitchecken </label>
+                    </div>
+                    <div *ngIf="!incheckenToegestaan">
+                      <input type="checkbox" class="custom-control-input" id="uitchecken_niettoestaan" [(ngModel)]="uitchecken_toestaan" [ngModelOptions]="{standalone: true}" [disabled]="true">
+                      <label class="custom-control-label" for="uitchecken_niettoestaan"> Uitchecken niet mogelijk</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group col-sm-5">
+                  <div *ngIf="uitchecken">
+                    <div>op: {{kamerreserveringdetailsormgroup.value.uitchecken ||todayDate}}</div>
+
+                  </div>
+                </div>
+              </div>
+              <div class="container, form-row">
+                <div class="form-group col-sm-1">
+                </div>
+                <div class="form-group col-sm-6">
+                  <div *ngIf="!incheckenToegestaan">
+                    <div *ngIf="!inchecken">
+                      <br />
+                      <br />
+                      <br />
+                    </div>
+                  </div>
+
+                  <div *ngIf="incheckenToegestaan">
+                    <div *ngIf="inchecken">
+                      <label>Identiteitsgegevens</label>
+                      <input type="text" class="form-control" formControlName="identiteitsid"
+                             [class.is-invalid]="kamerreserveringdetailsormgroup.controls.identiteitsid.invalid && kamerreserveringdetailsormgroup.controls.identiteitsid.touched" ngbAutofocus/>
+                      <small class="text-danger"
+                             [class.d-none]="kamerreserveringdetailsormgroup.controls.identiteitsid.valid || kamerreserveringdetailsormgroup.controls.identiteitsid.untouched"> Vereist
+                      </small>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <br/>
+            <div class="card">
+              <div class="card-header">
+                Contactgegevens
+              </div>
+              <div class="container, form-row">
+                <div class="form-group col-sm-1">
+                </div>
+                <div class="form-group col-sm-8">
+                  <br/>
+                  <label>E-mailadres</label>
+                  <input type="text" class="form-control" formControlName="emailadres"
+                         [class.is-invalid]="kamerreserveringdetailsormgroup.controls.emailadres.invalid && kamerreserveringdetailsormgroup.controls.emailadres.touched"
+                         ngbAutofocus/>
+                  <small class="text-danger"
+                         [class.d-none]="kamerreserveringdetailsormgroup.controls.emailadres.valid || kamerreserveringdetailsormgroup.controls.emailadres.untouched">
+                    Vereist
+                  </small>
+                </div>
+              </div>
+              <div class="container, form-row">
+                <div class="form-group col-sm-1">
+                </div>
+                <div class="form-group col-sm-8">
+                  <label>Telefoonnummer</label>
+                  <input type="text" class="form-control" formControlName="telefoonnummer"
+                         [class.is-invalid]="kamerreserveringdetailsormgroup.controls.telefoonnummer.invalid && kamerreserveringdetailsormgroup.controls.telefoonnummer.touched"
+                         ngbAutofocus/>
+                  <small class="text-danger"
+                         [class.d-none]="kamerreserveringdetailsormgroup.controls.telefoonnummer.valid || kamerreserveringdetailsormgroup.controls.telefoonnummer.untouched">
+                    Vereist
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="card">
+              <div class="card-header">
+                Boekinggegevens
+              </div>
+              <div class="container, form-row">
+                <div class="form-group col-sm-1">
+                </div>
+                <div class="form-group col-sm-8">
+                  <br/>
+                  Voor de periode:
+                  <h6>{{datumvan}} tot {{datumtot}} </h6>
+                  Aantal nachten: <h6>{{numberOfDays}} nacht(en)</h6>
+                  Korting: {{kamerreserveringdetailsormgroup.value.korting}}%
+                  <div class="row">
+                    <div class="col-sm-5"> <input type="range" class="form-control" formControlName="korting" min="0" max="99" step="2.5" value="5" (change)="updateTotalPrice(kamerreserveringdetailsormgroup.value.korting)"/></div>
+                  </div>
+                  heeft u de volgende kamer(s) geboekt:
+                </div>
+              </div>
+              <hr class="bg-dark">
+              <div class="container, form-row">
+                <div class="form-group col-sm-1">
+                </div>
+                <div class="form-group col-sm-8">
+                  <div class="row">
+                    <div class="col-8 text-info">Kamer</div>
+                    <div class="col-2 text-info">Prijs per nacht</div>
+                    <div class="col-2"></div>
+                  </div>
+                  <div *ngFor="let boeking of (kamerreserveringen$ | async);" class="row">
+                    <div class="col-8">{{boeking.kamernaam}}</div>
+                    <div class="col-2">{{boeking.prijs | currency: "EUR" }}</div>
+                  </div>
+                  <hr class="bg-dark">
+
+                  <div class="row">
+                    <div class="col-8 text-danger">Totale prijs voor
+                      ({{numberOfDays}} nacht(en))
+                    </div>
+                    <div class="col-2 text-danger">{{updateTotalPrice(kamerreserveringdetailsormgroup.value.korting) || totalPrice | currency: "EUR" }} </div>
+                  </div>
+
+                  <hr class="bg-dark">
+                </div>
+              </div>
+              <hr class="bg-dark">
+              <br/>
+              <br/>
+            </div>
+            <br/>
+            <br/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+<ng-template #showSpinner>
+  <div class="d-flex justify-content-center modal-dialog-centered">
+    <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+      <span class="sr-only">Gegevens worden geladen...</span>
+    </div>
+  </div>
+</ng-template>

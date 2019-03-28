@@ -2,14 +2,15 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {KamerreserveringenService} from "../../../../services/kamerreserveringen.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {KamerReservering} from "../../../../models/kamerreservering";
-import {KamerReserveringDetailsFormGroup} from "./kamerreserveringdetailsormgroup";
-import {DateFunctions} from "../../../../shared/services/date-functions";
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {KamerReserveringDetailsFormGroup} from "../kamers-form/form-kamerresevering-details/kamerreserveringdetailsormgroup";
 import {FormPrintKamerreseveringComponent} from "../kamers-form/form-print-kamerresevering/form-print-kamerresevering.component";
 import {FormEmailKamerreseveringComponent} from '../kamers-form/form-email-kamerresevering/form-email-kamerresevering.component';
+import {FormDownloadKamerreseveringComponent} from "../kamers-form/form-download-kamerresevering/form-download-kamerresevering.component";
+import {DateFunctions} from "../../../../shared/services/date-functions";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {Observable} from "rxjs";
 import {tap} from "rxjs/operators";
-import {FormDownloadKamerreseveringComponent} from "../kamers-form/form-download-kamerresevering/form-download-kamerresevering.component";
+
 
 @Component({
   selector: 'app-kamerreserveringdetails',

@@ -37,6 +37,7 @@ import { FormEmailKamerreseveringComponent } from './components/kamers/kamers-fo
 import { FormDownloadKamerreseveringComponent } from './components/kamers/kamers-form/form-download-kamerresevering/form-download-kamerresevering.component';
 import {PDFExportModule} from "@progress/kendo-angular-pdf-export";
 import { KamerModalConfirmComponent } from './components/kamers/kamers-form/kamer-modal-confirm/kamer-modal-confirm.component';
+import { FormKamerreseveringDetailsComponent } from './components/kamers/kamers-form/form-kamerresevering-details/form-kamerresevering-details.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { KamerModalConfirmComponent } from './components/kamers/kamers-form/kame
     FormPrintKamerreseveringComponent,
     FormEmailKamerreseveringComponent,
     FormDownloadKamerreseveringComponent,
-    KamerModalConfirmComponent
+    KamerModalConfirmComponent,
+    FormKamerreseveringDetailsComponent
   ],
   imports: [CommonModule, ManagementportalRoutingModule, NgbModule, FormsModule, ReactiveFormsModule, ApplicationPipesModule, PDFExportModule],
   entryComponents: [FormTafelComponent, FormTafelreserveringComponent, FormGerechtComponent, FormIngredientComponent, FormActiviteitComponent,  FormActiviteitResComponent, FormActiviteitPlanningComponent, ModalConfirmComponent, FormKamerreserveringComponent, KamerreserveringdetailsComponent, FormKamersbeschikbaarComponent, FormPrintKamerreseveringComponent, FormEmailKamerreseveringComponent, SignupComponent, FormDownloadKamerreseveringComponent, KamerModalConfirmComponent]
