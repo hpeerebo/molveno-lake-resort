@@ -11,15 +11,15 @@
     <table class="table table-striped table-sm">
         <thead>
             <tr>
-                <th class="handCursor" (click)="clickColumnHandler('activiteit.naam')">Activiteit<i class="fa fa-fw fa-sort"></i></th>
-                <th class="handCursor" (click)="clickColumnHandler('actdate')">Datum<i class="fa fa-fw fa-sort"></i></th>
-                <th class="handCursor" (click)="clickColumnHandler('actprijs')">Prijs<i class="fa fa-fw fa-sort"></i></th>
-                <th class="handCursor" (click)="clickColumnHandler('actcapaciteit')">Capaciteit<i class="fa fa-fw fa-sort"></i></th>
+                <th class="handCursor" (click)="clickColumnHandler('activiteit.naam')">Activiteit</th>
+                <th class="handCursor" (click)="clickColumnHandler('actdate')">Datum</th>
+                <th class="handCursor" (click)="clickColumnHandler('actprijs')">Prijs</th>
+                <th class="handCursor" (click)="clickColumnHandler('actcapaciteit')">Capaciteit</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let activiteitplanning of (activiteitenPlanningen | async | activiteitPlanningFilter: show | sortgrid:field)">
+            <tr *ngFor="let activiteitplanning of (activiteitenPlanningen | async)">
                 <td>
                     {{ activiteitplanning.activiteit.naam }}
                 </td>

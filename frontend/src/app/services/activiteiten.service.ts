@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, BehaviorSubject } from "rxjs";
 import { Activiteit } from "../models/activiteit";
 import { HttpClient } from "@angular/common/http";
-import { map } from "rxjs/operators";
+import { map, take, tap } from "rxjs/operators";
 import { CreateActiviteit } from '../models/create-activiteit';
 
 @Injectable({
@@ -10,13 +10,25 @@ import { CreateActiviteit } from '../models/create-activiteit';
 })
 export class ActiviteitenService {
   public readonly api: string = `/api/activiteiten/`;
+  private readonly datastore = new BehaviorSubject<Activiteit[]>([]);
+  public readonly data$: Observable<Activiteit[]> = this.datastore.asObservable();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    console.log("constructor")
+    this.getAllActiviteiten();
+  }
 
-  getAllActiviteiten(): Observable<Activiteit[]> {
-    return this.http
+  getAllActiviteiten(): void {
+    console.log("getAllActiviteiten")
+      this.http
       .get<IActiviteit[]>(this.api)
-      .pipe(map(ActiviteitenService.activiteitenResponseToActiviteitMapper));
+      .pipe(
+        take(1),
+        
+        map(ActiviteitenService.activiteitenResponseToActiviteitMapper),
+        tap(activiteiten => this.datastore.next(activiteiten))
+        )
+        .subscribe();
   }
 
   saveActiviteit(activiteit: CreateActiviteit): void {

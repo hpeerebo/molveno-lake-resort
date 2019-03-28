@@ -8,7 +8,7 @@ import { ModalConfirmComponent } from "src/app/shared/components/modal-confirm/m
 import { CreateActiviteit } from "src/app/models/create-activiteit";
 import { FormControl } from "@angular/forms";
 import { DecimalPipe } from "@angular/common";
-import { map, startWith } from 'rxjs/operators';
+import { map, startWith, tap } from 'rxjs/operators';
 
 @Component({
   selector: "app-activiteiten",
@@ -17,17 +17,17 @@ import { map, startWith } from 'rxjs/operators';
   styleUrls: ["./activiteiten.component.scss"]
 })
 export class ManagementPortalActiviteitenComponent {
-  public activiteiten$: Observable<Activiteit[]> = this.activiteitenService.getAllActiviteiten();
+  public activiteiten$: Observable<Activiteit[]> = this.activiteitenService.data$.pipe();
 
   public field: string = "";
   public show: string = "";
   public filter = new FormControl("");
 
+
   constructor(public pipe: DecimalPipe, private activiteitenService: ActiviteitenService, private modalService: NgbModal) {
-    this.activiteiten$ = this.filter.valueChanges.pipe(
-      startWith(""),
-      map(text => search(text, pipe))
-    );
+    // this.activiteiten$ = this.filter.valueChanges.pipe(
+    //   tap(text => search(text, pipe))
+    //  );
   }
 
   public clickColumnHandler(event: string): string {
@@ -74,17 +74,18 @@ export class ManagementPortalActiviteitenComponent {
       });
   }
 
-
 }
 
 const activiteiten: Activiteit[] = [];
 
 function search(text: string, pipe: PipeTransform): Activiteit[] {
-  return activiteiten.filter(activiteit => {
+   return activiteiten.filter(activiteit => {
     const term = text.toLowerCase();
     return (
       activiteit.naam.toLowerCase().includes(term) ||
       pipe.transform(activiteit.beschrijving).includes(term)
     );
   });
+
 }
+

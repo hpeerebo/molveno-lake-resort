@@ -9,10 +9,8 @@ import { ActiviteitenService } from 'src/app/services/activiteiten.service';
   styleUrls: ['./activiteiten.component.scss']
 })
 export class ActiviteitenComponent implements OnInit {
+public activiteiten$: Observable<Activiteit[]> = this.activiteitenService.data$
 
-  public activiteiten: Observable<
-  Activiteit[]
-> = this.activiteitenService.getAllActiviteiten();
 
 constructor(
   private activiteitenService: ActiviteitenService,

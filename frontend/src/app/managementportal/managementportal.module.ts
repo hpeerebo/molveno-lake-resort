@@ -80,7 +80,7 @@ import { FormActiviteitResComponent } from '../shared/components/form-activiteit
     FormDownloadKamerreseveringComponent
   ],
   imports: [CommonModule, ManagementportalRoutingModule, NgbModule, FormsModule, ReactiveFormsModule, ApplicationPipesModule, PDFExportModule],
-  entryComponents: [FormTafelComponent, FormTafelreserveringComponent, FormGerechtComponent, FormIngredientComponent, FormActiviteitComponent,  FormActiviteitResComponent, FormActiviteitPlanningComponent, ModalConfirmComponent, FormKamerreserveringComponent, KamerreserveringdetailsComponent, FormKamersbeschikbaarComponent, FormPrintKamerreseveringComponent, FormEmailKamerreseveringComponent, SignupComponent, FormDownloadKamerreseveringComponent]
+  entryComponents: [FormTafelComponent, FormTafelreserveringComponent,FormActiviteitMaakReserveringComponent, FormGerechtComponent, FormIngredientComponent, FormActiviteitComponent,  FormActiviteitResComponent, FormActiviteitPlanningComponent, ModalConfirmComponent, FormKamerreserveringComponent, KamerreserveringdetailsComponent, FormKamersbeschikbaarComponent, FormPrintKamerreseveringComponent, FormEmailKamerreseveringComponent, SignupComponent, FormDownloadKamerreseveringComponent]
 
 })
 export class ManagementportalModule {

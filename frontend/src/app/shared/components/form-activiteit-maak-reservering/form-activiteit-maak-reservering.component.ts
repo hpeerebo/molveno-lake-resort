@@ -20,7 +20,6 @@ export class FormActiviteitMaakReserveringComponent implements OnInit {
   });
 
 
-
   constructor(
     public activeModal: NgbActiveModal,
     private formBuilder: FormBuilder

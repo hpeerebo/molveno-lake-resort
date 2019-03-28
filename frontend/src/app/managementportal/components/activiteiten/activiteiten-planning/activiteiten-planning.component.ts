@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, NgModule } from "@angular/core";
 import { ActiviteitenPlanning } from "src/app/models/activiteit-planning";
 import { Observable } from "rxjs";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
@@ -16,9 +16,7 @@ import { CreateActiviteitenPlanning } from 'src/app/models/create-activiteit-pla
   styleUrls: ["./activiteiten-planning.component.scss"]
 })
 export class ActiviteitenPlanningComponent {
-  public activiteitenPlanningen: Observable<
-    ActiviteitenPlanning[]
-  > = this.activiteitenPlanningService.getAllActiviteitenPlanning();
+  public activiteitenPlanningen: Observable<ActiviteitenPlanning[]> = this.activiteitenPlanningService.getAllActiviteitenPlanning();
 
   public field: string = "";
   public show: string = "";
@@ -27,24 +25,24 @@ export class ActiviteitenPlanningComponent {
   constructor(
     private activiteitenPlanningService: ActiviteitenPlanningService,
     private activiteitenResService: ActiviteitenResService,
-    private modalService: NgbModal
-  ) {}
+    private modalService: NgbModal,
+    ) {}
 
-  public clickColumnHandler(event: string): string {
-    this.field = event;
-    return this.field;
-  }
+  // public clickColumnHandler(event: string): string {
+  //   this.field = event;
+  //   return this.field;
+  // }
 
   openCreateReserveringModal(activiteitenPlanning: ActiviteitenPlanning) {
-    const modal = this.modalService.open(
-      FormActiviteitMaakReserveringComponent
-    );
+    console.log("Openen reserverings modal Marc");
+    console.log(activiteitenPlanning);
+    const modal = this.modalService.open(FormActiviteitMaakReserveringComponent);
     modal.componentInstance.planning = activiteitenPlanning;
 
     modal.result
       .then(result => {
         console.log(result);
-        this.activiteitenResService.saveActiviteitRes(
+          this.activiteitenResService.saveActiviteitRes(
           result,
           activiteitenPlanning.planid
         );
@@ -81,7 +79,7 @@ export class ActiviteitenPlanningComponent {
   }
 
   verwijderActiviteitPlanning(planid: number) {
-    this.modalService
+      this.modalService
       .open(ModalConfirmComponent)
       .result.then(result => {
         if (result === "yes") {
