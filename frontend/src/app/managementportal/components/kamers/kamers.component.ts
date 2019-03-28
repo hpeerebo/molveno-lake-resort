@@ -1,7 +1,7 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, OnInit} from "@angular/core";
 import { RoomService } from "src/app/services/rooms.service";
 import { Kamer } from "../../../models/kamer";
-import { Observable } from "rxjs";
+import { Observable, Subscription } from "rxjs";
 import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
 import { ManagementPortalKamersFormComponent } from "./kamers-form/kamers-form.component";
 import { FormKamerreserveringComponent } from './kamers-form/form-kamerreservering/form-kamerreservering.component';
@@ -11,7 +11,7 @@ import { FormKamersbeschikbaarComponent } from './kamers-form/form-kamersbeschik
 import {ActivatedRoute} from "@angular/router";
 import { FormControl } from '@angular/forms';
 import {DateFunctions} from "../../../shared/services/date-functions";
-//import * as DateDiff from 'date-diff';
+import { KamerModalConfirmComponent } from './kamers-form/kamer-modal-confirm/kamer-modal-confirm.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -58,6 +58,7 @@ export class ManagementPortalKamersComponent implements OnInit, AfterViewInit {
 
   }
 
+  // voor het reserveren van een kamer vanuit Reserveringscomponent
   ngAfterViewInit () {
     this.route.paramMap.subscribe(params => {
       this.param = params.get("param")
@@ -74,7 +75,6 @@ export class ManagementPortalKamersComponent implements OnInit, AfterViewInit {
       this.reserverRooms = [...this.reserverRooms, kamer];
       this.totalPrice = this.totalPrice + (this.numberOfDays * kamer.prijs);
       this.roomslist.set(kamer, index);
-
     }
     if (!this.roomSelected[index]){
       this.reserverRooms = this.reserverRooms.filter(element => kamer.kamerNaam !== element.kamerNaam);
@@ -95,7 +95,8 @@ export class ManagementPortalKamersComponent implements OnInit, AfterViewInit {
   deleteRoom(kamer: Kamer) {
     if (this.kamers) {
       this.roomservice.deleteRoom(kamer);
-    }
+      //this.openConfirmModal('delete', kamer);
+  }
   }
 
   openSm(content: NgbModal) {
@@ -111,7 +112,7 @@ export class ManagementPortalKamersComponent implements OnInit, AfterViewInit {
       );
   }
 
-  openNewFormModal() {
+ /*  openNewFormModal() {
     const modalRef = this.modalService.open(ManagementPortalKamersFormComponent, {
       size: "lg",
       ariaLabelledBy: "modal-basic-title",
@@ -126,27 +127,46 @@ export class ManagementPortalKamersComponent implements OnInit, AfterViewInit {
         resultPromise.prijs
       ));
     });
-  }
+  } */
 
-  openEditFormModal() {
+  openNewEditFormModal(kamer?: Kamer) {
     const modalRef = this.modalService.open(ManagementPortalKamersFormComponent, {
       size: "lg",
       ariaLabelledBy: "modal-basic-title"
     });
-    modalRef.componentInstance.model = this.selectedKamer;
+   // modalRef.componentInstance.model = this.selectedKamer;
+   if(kamer){
+    modalRef.componentInstance.model = kamer;
     modalRef.componentInstance.action = "edit";
+    modalRef.result.
+    then((resultPromise: Kamer) => {
+    this.roomservice.updateRoom(resultPromise)
+    this.openConfirmModal('edit', kamer);
+    },
 
-    modalRef.result.then(resultPromise => {
-      //this.closeResult = resultPromise;
-      this.roomservice.updateRoom(new Kamer(
-        resultPromise.kamerNaam,
-        resultPromise.kamerType,
-        resultPromise.kamerLigging,
-        resultPromise.aantalPersonen,
-        resultPromise.prijs
-      ));
+    reason => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
 
+   }
+   else{
+    modalRef.componentInstance.action = "add";
+    modalRef.result.then((resultPromise: Kamer) => {
+    this.roomservice.saveRoom(resultPromise)
+    this.openConfirmModal('add', resultPromise);
+    },
+    reason => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+   }
+  }
+  openConfirmModal(action: string, kamer?: Kamer){
+    const modalconfirm = this.modalService.open(KamerModalConfirmComponent, {
+      size: "sm",
+      ariaLabelledBy: "modal-basic-title"
+    });
+    modalconfirm.componentInstance.model = kamer;
+    modalconfirm.componentInstance.action = action;
   }
 
   private getDismissReason(reason: any): string {
@@ -158,7 +178,7 @@ export class ManagementPortalKamersComponent implements OnInit, AfterViewInit {
       return `with: ${reason}`;
     }
   }
-  openFormKamerToReserveMultipleRooms(kamers: Kamer[]){
+  async openFormKamerToReserveMultipleRooms(kamers: Kamer[]){
     const modalKamerReservering = this.modalService.open(FormKamerreserveringComponent);
     if (this.datumvan) {
       modalKamerReservering.componentInstance.datumvan = this.datumvan;
@@ -166,10 +186,10 @@ export class ManagementPortalKamersComponent implements OnInit, AfterViewInit {
     if (this.datumtot) {
       modalKamerReservering.componentInstance.datumtot = this.datumtot;
     }
-    modalKamerReservering.result.then(resultPromise => {
+    await modalKamerReservering.result.then(resultPromise => {
       const reserveringsnummer = `MO-${this.datetime.getCurrentDateTime()}-1`;
 
-      kamers.forEach(kamer => {
+       kamers.forEach(kamer => {
       this.kamerreserveringservice.saveKamerReservering(new KamerReservering(
         resultPromise.id,
         resultPromise.voornaam,
@@ -191,8 +211,9 @@ export class ManagementPortalKamersComponent implements OnInit, AfterViewInit {
         kamer.prijs,
         reserveringsnummer
       ))});
+      this.openConfirmModal('reserve',kamers[0])
     });
-
+    //this.openConfirmModal('reserve',kamers[0])
   }
   openFormKamerReserveringModal(kamernaam: string){
     const modalKamerReservering = this.modalService.open(FormKamerreserveringComponent);
