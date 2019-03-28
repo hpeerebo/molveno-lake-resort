@@ -1,6 +1,6 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {KamerreserveringenService} from "../../../../services/kamerreserveringen.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 import {FormKamerreseveringDetailsComponent} from "../kamers-form/form-kamerresevering-details/form-kamerresevering-details.component";
 
 @Component({
@@ -9,13 +9,12 @@ import {FormKamerreseveringDetailsComponent} from "../kamers-form/form-kamerrese
   styleUrls: ['./kamerreserveringdetails.component.scss']
 })
 
-export class KamerreserveringdetailsComponent implements OnInit, OnDestroy {
+export class KamerreserveringdetailsComponent implements OnInit {
 
   private reserveringsnummer: null | string = "";
   reseveringsId = this.getReseveringBasedOnId();
 
-  constructor(private kamerreserveringenservice: KamerreserveringenService,
-              private route: ActivatedRoute,
+  constructor(private route: ActivatedRoute,
               private formkamerreseveringdetails: FormKamerreseveringDetailsComponent,) {
   };
 
@@ -30,6 +29,5 @@ export class KamerreserveringdetailsComponent implements OnInit, OnDestroy {
     // @ts-ignore
     return this.reserveringsnummer;
   }
-
 
 }
