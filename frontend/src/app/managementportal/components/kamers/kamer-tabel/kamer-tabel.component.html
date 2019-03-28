@@ -24,8 +24,17 @@
 
   <ng-container matColumnDef="prijs">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Prijs </th>
-    <td mat-cell *matCellDef="let element"> {{element.prijs | currency: "EUR"}} </td>
-  </ng-container>
+    <td mat-cell *matCellDef="let element"> {{element.prijs | currency: "EUR"}}
+      <!-- <tr *ngFor="let kamer of (kamers$ | async )"> -->
+    </ng-container>
+
+    <ng-container matColumnDef="customColumn">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let person">
+            <i class="fas fa-edit mr-2" placement="top" ngbTooltip="Wijzigen" (click)="onSelect(element); openEditFormModal()"></i>
+            <i class="fas fa-trash-alt mr-2" placement="top" ngbTooltip="Verwijderen" (click)="onSelect(element); openSm(deleteModal)"></i>
+        </td>
+      </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
@@ -35,5 +44,27 @@
     Use of this source code is governed by an MIT-style license that
     can be found in the LICENSE file at http://angular.io/license -->
 
+
+
+<!-- Modal to confirm deleting room-->
+<ng-template #deleteModal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Kamer verwijderen</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="form-group">
+          <P>Uw staat op het punt om kamer <i>{{selectedKamer?.kamerNaam}}</i> te verwijderen. Weet u dit zeker?</P>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-danger" (click)="modal.close('Save click')">Nee</button>
+      <button type="button" class="btn btn-success" (click)="deleteRoom(selectedKamer); modal.close('Save click')">Ja</button>
+    </div>
+  </ng-template>
 
 
