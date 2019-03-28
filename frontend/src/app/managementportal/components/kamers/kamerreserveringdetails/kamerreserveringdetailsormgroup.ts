@@ -20,6 +20,7 @@ export class KamerReserveringDetailsFormGroup extends FormGroup{
     personen: new FormControl(undefined),
     prijs: new FormControl(undefined),
     reserveringsnummer: new FormControl(undefined),
+    korting: new FormControl(undefined, Validators.max(2))
   };
   constructor(){
     super(KamerReserveringDetailsFormGroup.controls);

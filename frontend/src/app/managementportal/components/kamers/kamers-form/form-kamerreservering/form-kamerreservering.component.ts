@@ -40,7 +40,8 @@ export class FormKamerreserveringComponent implements OnInit {
         uitchecken: this.kamerreservering.uitchecken,
         personen: this.kamerreservering.personen,
         prijs: this.kamerreservering.prijs,
-        reserveringsnummer: this.kamerreservering.reserveringsnummer
+        reserveringsnummer: this.kamerreservering.reserveringsnummer,
+        korting: this.kamerreservering.korting
       });
     }
   }
@@ -66,6 +67,7 @@ export class FormKamerreserveringComponent implements OnInit {
       this.kamerreserveringForm.value.personen,
       this.kamerreserveringForm.value.prijs,
       this.kamerreserveringForm.value.reserveringsnummer,
+      this.kamerreserveringForm.value.korting
     ));
     this.kamerreserveringForm.reset();
     this.router.navigateByUrl('managementportal/kamerreserveringen');

@@ -20,7 +20,8 @@ export class KamerReservering{
         public uitchecken: string,
         public personen: number,
         public prijs: number,
-        public reserveringsnummer: string
+        public reserveringsnummer: string,
+        public korting: number,
     ){}
 
     public static fromKamerReservering(kamerReserveringEntity: KamerReserveringEntity): KamerReservering {
@@ -42,6 +43,7 @@ export class KamerReservering{
             kamerReserveringEntity.uitchecken,
             kamerReserveringEntity.personen,
             kamerReserveringEntity.prijs,
-            kamerReserveringEntity.reserveringsnummer);
+            kamerReserveringEntity.reserveringsnummer,
+            kamerReserveringEntity.korting);
     }
 }

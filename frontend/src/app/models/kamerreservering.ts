@@ -18,6 +18,7 @@ export class KamerReservering {
     public uitchecken: string,
     public personen: number,
     public prijs: number,
-    public reserveringsnummer: string) {
+    public reserveringsnummer: string,
+    public korting: number,) {
   }
 }
