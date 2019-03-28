@@ -3,7 +3,7 @@
         <ngb-carousel>
             <ng-template
                 ngbSlide
-                *ngFor="let activiteit of (activiteiten | async)"
+                *ngFor="let activiteit of (activiteiten$ | async)"
             >
                 <img
                     src="assets/img/{{ activiteit.thumb }}"
@@ -39,7 +39,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let activiteit of (activiteiten | async)">
+            <tr *ngFor="let activiteit of (activiteiten$ | async)">
                 <td>
                     <img src="assets/img/thumb_{{ activiteit.thumb }}">
                 </td>

@@ -7,11 +7,11 @@
     </button>
 </div>
 
-<form>
+<!-- <form>
   <div class="form-group form-inline">
       Zoek activiteit <input class="form-control ml-2" type="text" [formControl]="filter"/>
   </div>
-</form>
+</form> -->
 
 <div class="table-responsive mt-2">
     <table class="table table-striped table-sm">
@@ -23,10 +23,13 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let activiteit of (activiteiten$ | activiteitFilter: show | sortgrid:field) | async; index as i ">
-                <th scope="row">{{ i + 1 }}</th>
-                <td><ngb-highlight [result]="activiteit.naam | number" [term]="filter.value"></ngb-highlight></td>
-                <td><ngb-highlight [result]="activiteit.beschrijving | number" [term]="filter.value"></ngb-highlight></td>
+            <tr *ngFor="let activiteit of (activiteiten$ | async | activiteitFilter: show | sortgrid:field)">
+            <!-- <tr *ngFor="let activiteit of (activiteiten$ | activiteitFilter: show | sortgrid:field) | async; index as i "> -->
+                <!-- <th scope="row">{{ i + 1 }}</th> -->
+                <td>{{ activiteit.naam }}</td>
+                <td>{{ activiteit.beschrijving }}</td>
+                <!-- <td><ngb-highlight [result]="activiteit.naam | number" [term]="filter.value"></ngb-highlight></td> -->
+                <!-- <td><ngb-highlight [result]="activiteit.beschrijving | number" [term]="filter.value"></ngb-highlight></td> -->
                 <td class="text-align: right">
                     <i
                         class="fas fa-edit mr-2"

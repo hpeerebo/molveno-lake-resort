@@ -24,10 +24,10 @@ export class ManagementPortalActiviteitenComponent {
   public filter = new FormControl("");
 
   constructor(public pipe: DecimalPipe, private activiteitenService: ActiviteitenService, private modalService: NgbModal) {
-    this.activiteiten$ = this.filter.valueChanges.pipe(
-      startWith(""),
-      map(text => search(text, pipe))
-    );
+    // this.activiteiten$ = this.filter.valueChanges.pipe(
+    //   startWith(""),
+    //   map(naam => search(naam, pipe))
+    // );
   }
 
   public clickColumnHandler(event: string): string {

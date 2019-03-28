@@ -13,7 +13,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ActiviteitenComponent implements OnInit {
 
-  public activiteiten: Observable<
+  public activiteiten$: Observable<
   Activiteit[]
 > = this.activiteitenService.getAllActiviteiten();
 
