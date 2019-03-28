@@ -1,3 +1,4 @@
+
 <div class="d-flex justify-content-end mt-2">
   <button class="btn btn-primary mt-2" (click)="openFormSaveActiviteit()">
     Toevoegen nieuwe activiteit
@@ -28,14 +29,9 @@
         <!-- <td><ngb-highlight [result]="activiteit.naam | number" [term]="filter.value"></ngb-highlight></td> -->
         <!-- <td><ngb-highlight [result]="activiteit.beschrijving | number" [term]="filter.value"></ngb-highlight></td> -->
         <td class="text-align: right">
-          <i class="fas fa-pen-alt mr-2" placement="top" ngbTooltip="Maak planning" (click)="openCreatePlanning(activiteit)"></i>
+          <i class="far fa-calendar-alt mr-2" placement="top" ngbTooltip="Maak planning" (click)="openCreatePlanning(activiteit)"></i>
           <i class="fas fa-edit mr-2" placement="top" ngbTooltip="Wijzigen" (click)="openFormUpdateActiviteit(activiteit)"></i>
-          <i
-            class="fas fa-trash-alt mr-2"
-            placement="top"
-            ngbTooltip="Verwijderen"
-            (click)="openFormDeleteActiviteit(activiteit.actid)"
-          ></i>
+          <i class="fas fa-trash-alt mr-2" placement="top" ngbTooltip="Verwijderen" (click)="openFormDeleteActiviteit(activiteit.actid)"></i>
         </td>
       </tr>
     </tbody>
