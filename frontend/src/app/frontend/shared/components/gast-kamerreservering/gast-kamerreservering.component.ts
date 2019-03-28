@@ -217,7 +217,7 @@ export class GastKamerReserveringComponent implements OnInit {
           this.vacantyRoom1 = false;
           this.vacantyRoom2 = false;
           this.fillRoomList1(this.roomsForTwo.pipe(filter(filterNullsAndUndefined)))
-          this.fillRoomList2(this.roomsForThree.pipe(filter(filterNullsAndUndefined)))
+          this.fillRoomList21(this.roomsForThree.pipe(filter(filterNullsAndUndefined)))
 
           this.showroom2 = true;
           this.personen1 = '2 personen';
@@ -239,7 +239,7 @@ export class GastKamerReserveringComponent implements OnInit {
           this.vacantyRoom1 = false;
           this.vacantyRoom2 = false;
           this.fillRoomList1(this.roomsForThree.pipe(filter(filterNullsAndUndefined)))
-          this.fillRoomList2(this.roomsForFour.pipe(filter(filterNullsAndUndefined)))
+          this.fillRoomList21(this.roomsForFour.pipe(filter(filterNullsAndUndefined)))
 
           this.showroom2 = true;
           this.personen1 = '3 personon';
@@ -429,6 +429,38 @@ export class GastKamerReserveringComponent implements OnInit {
       }
     );
   };
+
+  fillRoomList21(roomsForX: Observable<Kamer[]>) {
+    this.room2Array = []
+    roomsForX.subscribe(
+      response => { 
+        let room2 = response;
+        
+        let room2Budget: boolean = false;
+        let room2Standaard: boolean = false;
+        let room2Luxe: boolean = false;
+
+        room2.forEach((element:any) => {
+          if(element.kamerType === 'Budget' && room2Budget === false) {
+            this.room2Array = [...this.room2Array, element]
+            room2Budget = true
+            this.vacantyRoom2 = true;
+          }
+          if(element.kamerType === 'Standaard' && room2Standaard === false) {
+            this.room2Array = [...this.room2Array, element]
+            this.vacantyRoom1 = true;
+            room2Standaard = true
+          }
+          if(element.kamerType === 'Luxe' && room2Luxe === false) {
+            this.room2Array = [...this.room2Array, element]
+            this.vacantyRoom1 = true;
+            room2Luxe = true
+          }
+        });
+      }
+    );
+  };
+
 }
 
 export const filterNullsAndUndefined = <T>(el: T | undefined | null): el is T => !!el;
