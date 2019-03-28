@@ -9,9 +9,11 @@ import {HttpClientModule} from '@angular/common/http';
 import {RoomService} from './services/rooms.service';
 import { SortGridService } from './shared/services/sort-grid.service';
 import {DateFunctions} from "./shared/services/date-functions";
+import { FormActiviteitMaakReserveringComponent } from './shared/components/form-activiteit-maak-reservering/form-activiteit-maak-reservering.component';
+
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, FormActiviteitMaakReserveringComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -19,7 +21,8 @@ import {DateFunctions} from "./shared/services/date-functions";
     ReactiveFormsModule,
     FrontendModule,
     ManagementportalModule,
-    HttpClientModule
+    HttpClientModule,
+
   ],
   providers: [RoomService, SortGridService, DateFunctions],
   bootstrap: [AppComponent]

@@ -7,8 +7,7 @@ import { ActiviteitenPlanningService } from "src/app/services/activiteiten-plann
 import { FormActiviteitPlanningComponent } from "src/app/shared/components/form-activiteitplanning/form-activiteitplanning.component";
 import { FormActiviteitMaakReserveringComponent } from "src/app/shared/components/form-activiteit-maak-reservering/form-activiteit-maak-reservering.component";
 import { ActiviteitenResService } from "src/app/services/activiteiten-res.service";
-import { CreateActiviteitenPlanning } from 'src/app/models/create-activiteit-planning';
-
+import { CreateActiviteitenPlanning } from "src/app/models/create-activiteit-planning";
 
 @Component({
   selector: "app-activiteiten-planning",
@@ -16,13 +15,10 @@ import { CreateActiviteitenPlanning } from 'src/app/models/create-activiteit-pla
   styleUrls: ["./activiteiten-planning.component.scss"]
 })
 export class ActiviteitenPlanningComponent {
-  public activiteitenPlanningen: Observable<
-    ActiviteitenPlanning[]
-  > = this.activiteitenPlanningService.getAllActiviteitenPlanning();
+  public activiteitenPlanningen: Observable<ActiviteitenPlanning[]> = this.activiteitenPlanningService.getAllActiviteitenPlanning();
 
   public field: string = "";
   public show: string = "";
-
 
   constructor(
     private activiteitenPlanningService: ActiviteitenPlanningService,
@@ -36,18 +32,13 @@ export class ActiviteitenPlanningComponent {
   }
 
   openCreateReserveringModal(activiteitenPlanning: ActiviteitenPlanning) {
-    const modal = this.modalService.open(
-      FormActiviteitMaakReserveringComponent
-    );
+    const modal = this.modalService.open(FormActiviteitMaakReserveringComponent);
     modal.componentInstance.planning = activiteitenPlanning;
 
     modal.result
       .then(result => {
         console.log(result);
-        this.activiteitenResService.saveActiviteitRes(
-          result,
-          activiteitenPlanning.planid
-        );
+        this.activiteitenResService.saveActiviteitRes(result, activiteitenPlanning.planid);
       })
       .catch(error => {
         console.log(error);

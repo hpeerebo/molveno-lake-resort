@@ -19,6 +19,7 @@ import { RoundedCircleComponent } from './shared/components/rounded-circle/round
 import { GastKamerReserveringComponent } from './shared/components/gast-kamerreservering/gast-kamerreservering.component';
 import { ReservationButtonComponent } from './shared/components/reservation-button/reservation-button.component';
 import { ActiviteitenPlanningReserverenComponent } from './components/activiteiten/activiteiten-planning-reserveren/activiteiten-planning-reserveren.component'
+import { FormActiviteitMaakReserveringComponent } from '../shared/components/form-activiteit-maak-reservering/form-activiteit-maak-reservering.component';
 
 @NgModule({
   declarations: [
@@ -35,9 +36,10 @@ import { ActiviteitenPlanningReserverenComponent } from './components/activiteit
     GastKamerReserveringComponent,
     ReservationButtonComponent,
     ActiviteitenPlanningReserverenComponent,
+
   ],
   imports: [CommonModule, FrontEndAppRoutingModule, NgbModule, FormsModule, ReactiveFormsModule, ApplicationPipesModule],
-  entryComponents: [GastKamerReserveringComponent, LoginComponent],
+  entryComponents: [GastKamerReserveringComponent, LoginComponent, FormActiviteitMaakReserveringComponent],
   providers: [DatePipe],
 })
 export class FrontendModule {}
