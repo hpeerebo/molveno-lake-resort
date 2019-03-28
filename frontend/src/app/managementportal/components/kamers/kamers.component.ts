@@ -95,7 +95,7 @@ export class ManagementPortalKamersComponent implements OnInit, AfterViewInit {
   deleteRoom(kamer: Kamer) {
     if (this.kamers) {
       this.roomservice.deleteRoom(kamer);
-      //this.openConfirmModal('delete', kamer);
+      this.openConfirmModal('delete', kamer);
   }
   }
 

@@ -6,9 +6,14 @@
     </div>
     <div class="modal-body">
       <form>
-        <div class="form-group">
-          <P>Kamer <i>{{model?.kamerNaam}}</i> is {{textToDisplay}} </P>
-        </div>
+          <div *ngIf="action === 'reserve', else geenReservering" class="form-group">
+              <P>Uw reservering is succesvol uitgevoerd</P>
+            </div>
+        <ng-template #geenReservering>
+          <div class="form-group">
+              <P>Kamer <i>{{model?.kamerNaam}}</i> is {{textToDisplay}} </P>
+          </div>
+        </ng-template>
       </form>
     </div>
     <div class="modal-footer">

@@ -81,7 +81,7 @@ export class RoomService {
     .pipe(
       take(1),
       tap(() => this.getRoom(true))
-    )
+    ).subscribe()
 
   }
 }
