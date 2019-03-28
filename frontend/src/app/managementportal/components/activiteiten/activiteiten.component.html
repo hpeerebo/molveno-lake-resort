@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-end mt-2">
     <button
         class="btn btn-primary mt-2"
-        (click)="openFormActiviteitModal()"
+        (click)="openFormSaveActiviteit()"
     >
         Toevoegen nieuwe activiteit
     </button>
@@ -35,13 +35,13 @@
                         class="fas fa-edit mr-2"
                         placement="top"
                         ngbTooltip="Wijzigen"
-                        (click)="openEditFormActiviteitModal(activiteit)"
+                        (click)="openFormUpdateActiviteit(activiteit)"
                     ></i>
                     <i
                         class="fas fa-trash-alt mr-2"
                         placement="top"
                         ngbTooltip="Verwijderen"
-                        (click)="verwijderActiviteit(activiteit)"
+                        (click)="openFormDeleteActiviteit(activiteit.actid)"
                     ></i>
                 </td>
             </tr>

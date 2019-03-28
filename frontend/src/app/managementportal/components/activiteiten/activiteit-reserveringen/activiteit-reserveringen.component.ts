@@ -13,7 +13,7 @@ import { ActiviteitenResService } from "src/app/services/activiteiten-res.servic
   styleUrls: ["./activiteit-reserveringen.component.scss"]
 })
 export class ActiviteitReserveringenComponent {
-  public reserveringen: Observable<
+  public reserveringen$: Observable<
     ActiviteitReservering[]
   > = this.activiteitenResService.getAllActiviteitenRes();
 
@@ -31,12 +31,26 @@ export class ActiviteitReserveringenComponent {
     return this.field;
   }
 
+  openFormUpdateActiviteitRes(reservering: ActiviteitReservering) {
+    console.log('UpdateRes Reservering', reservering)
+    const modal = this.modalService.open(FormActiviteitResComponent);
+    modal.componentInstance.reservering = reservering;
+    modal.result
+      .then(result => {
+        console.log('UpdateRes Result', result)
+        this.activiteitenResService.updateReservering(result);
+      })
+
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
   openFormActiviteitResModal(
     planningId: number,
     reservering?: ActiviteitReservering
   ) {
     const modal = this.modalService.open(FormActiviteitResComponent);
-console.log(reservering)
     if (reservering) {
       modal.componentInstance.reservering = reservering;
     }
@@ -44,7 +58,7 @@ console.log(reservering)
     modal.result
       .then(result => {
         console.log("Result", result);
-        this.activiteitenResService.saveActiviteitRes(result, planningId);
+        this.activiteitenResService.updateReservering(result);
       })
       .catch(error => {
         console.log(error);

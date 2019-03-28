@@ -30,7 +30,7 @@ export class ActiviteitenPlanningService {
   }
 
   updateActiviteitPlanning(planning: ActiviteitenPlanning): void {
-    this.http.post<IActiviteitPlanning[]>(this.api, planning).subscribe();
+    this.http.put<IActiviteitPlanning[]>(this.api, planning).subscribe();
     location.reload();
   }
 

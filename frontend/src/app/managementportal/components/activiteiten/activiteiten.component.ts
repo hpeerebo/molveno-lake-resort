@@ -35,7 +35,7 @@ export class ManagementPortalActiviteitenComponent {
     return this.field;
   }
 
-  openEditFormActiviteitModal(activiteit: Activiteit) {
+  openFormUpdateActiviteit(activiteit: Activiteit) {
     const modal = this.modalService.open(FormActiviteitComponent);
     modal.componentInstance.activiteit = activiteit;
     modal.result
@@ -47,7 +47,7 @@ export class ManagementPortalActiviteitenComponent {
       });
   }
 
-  openFormActiviteitModal(activiteit?: CreateActiviteit) {
+  openFormSaveActiviteit(activiteit?: CreateActiviteit) {
     const modal = this.modalService.open(FormActiviteitComponent);
     if (activiteit) {
       modal.componentInstance.activiteit = activiteit;
@@ -61,7 +61,7 @@ export class ManagementPortalActiviteitenComponent {
       });
   }
 
-  verwijderActiviteit(activiteitId: number) {
+  openFormDeleteActiviteit(activiteitId: number) {
     this.modalService
       .open(ModalConfirmComponent)
       .result.then(result => {

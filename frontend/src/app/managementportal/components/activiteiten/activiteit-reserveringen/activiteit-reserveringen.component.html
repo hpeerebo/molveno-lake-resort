@@ -11,7 +11,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let reservering of (reserveringen | async | activiteitReserveringenFilter: show | sortgrid:field)">
+            <tr *ngFor="let reservering of (reserveringen$ | async | activiteitReserveringenFilter: show | sortgrid:field)">
                 <td>
                     {{reservering.planning.activiteit.naam }}
                 </td>
@@ -25,7 +25,7 @@
                         class="fas fa-edit mr-2"
                         placement="top"
                         ngbTooltip="Wijzigen"
-                        (click)="openFormActiviteitResModal(reservering.planning.planid, reservering)"
+                        (click)="openFormUpdateActiviteitRes(reservering)"
                     ></i>
                     <i
                         class="fas fa-trash-alt mr-2"

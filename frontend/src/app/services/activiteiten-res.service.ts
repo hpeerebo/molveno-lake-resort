@@ -28,7 +28,8 @@ export class ActiviteitenResService {
       reservering.emailGast,
       reservering.phoneGast,
       reservering.aantalPersonen,
-      reservering.planning
+      reservering.planning,
+      reservering.resid
     );
   }
 
@@ -49,17 +50,22 @@ export class ActiviteitenResService {
     location.reload();
   }
 
+  updateReservering(reservering: ActiviteitReservering): void {
+    this.http.put<IActiviteitReservering[]>(this.api, reservering).subscribe();
+    // location.reload();
+  }
+
   deleteActiviteitRes(reserveringId: number) {
     this.http
       .delete<IActiviteitReservering[]>(this.api + reserveringId)
       .subscribe();
-    location.reload();
+    // location.reload();
   }
 }
 interface IActiviteitReservering {
-  resid: number;
   emailGast: string;
   phoneGast: string;
   aantalPersonen: number;
   planning: IActiviteitPlanning;
+  resid: number;
 }

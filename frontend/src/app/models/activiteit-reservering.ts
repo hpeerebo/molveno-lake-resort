@@ -5,6 +5,7 @@ export class ActiviteitReservering {
     public emailGast: string,
     public phoneGast: string,
     public aantalPersonen: number,
-    public planning: ActiviteitenPlanning
+    public planning: ActiviteitenPlanning,
+    public resid: number
   ) {}
 }

@@ -21,19 +21,17 @@ export class ActiviteitenService {
 
   saveActiviteit(activiteit: CreateActiviteit): void {
     this.http.post<IActiviteit[]>(this.api, activiteit).subscribe();
-    console.log("saveActiviteit", activiteit);
+    // console.log("saveActiviteit", activiteit);
     location.reload();
   }
 
   updateActiviteit(activiteit: Activiteit): void {
-    this.http.post<IActiviteit[]>(this.api, activiteit).subscribe();
-    console.log("updateActiviteit", activiteit);
-    location.reload();
+    this.http.put<IActiviteit[]>(this.api, activiteit).subscribe();
   }
+
 
   deleteActiviteit(activiteitId: number): void {
     this.http.delete<IActiviteit[]>(this.api + activiteitId).subscribe();
-    console.log("deleteActiviteit", activiteitId);
     location.reload();
   }
 
