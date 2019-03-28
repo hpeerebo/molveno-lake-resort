@@ -9,6 +9,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {RoomService} from './services/rooms.service';
 import { SortGridService } from './shared/services/sort-grid.service';
 import {DateFunctions} from "./shared/services/date-functions";
+import {CalculationFunctions} from "./shared/services/calculation-functions";
 
 
 @NgModule({
@@ -24,7 +25,7 @@ import {DateFunctions} from "./shared/services/date-functions";
     ManagementportalModule,
     HttpClientModule,
   ],
-  providers: [RoomService, SortGridService, DateFunctions],
+  providers: [RoomService, SortGridService, DateFunctions, CalculationFunctions],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

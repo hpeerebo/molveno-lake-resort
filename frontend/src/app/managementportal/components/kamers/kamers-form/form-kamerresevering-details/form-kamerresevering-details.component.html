@@ -1,10 +1,9 @@
-<!-- <pre>{{kamerreserveringen$ | async | json}}</pre> -->
-<!--<pre>{{booking | json}}</pre>-->
+ <!--<pre>{{kamerreserveringen$ | async | json}}</pre>-->
 <br/>
 <div  *ngIf="showSpinnerOnLoad; else showSpinner;">
   <div class="row">
     <div class="col-10 d-flex text-sm-center">
-      <button type="button" class="btn btn-outline-primary btn-sm" (click)="backToOverview(); resetInitialValues()">
+      <button type="button" class="btn btn-outline-primary btn-sm" (click)="ngOnDestroy()">
         Terug naar het overzicht
       </button>
       <button type="button" class="btn btn-outline-primary btn-sm" (click)="openBookingPrintingForm()">
@@ -260,7 +259,7 @@
                 <div class="form-group col-sm-8">
                   <br/>
                   Voor de periode:
-                  <h6>{{datumvan}} tot {{datumtot}} </h6>
+                  <h6>{{kamerreserveringdetailsormgroup.value.datumvan}} tot {{kamerreserveringdetailsormgroup.value.datumtot}} </h6>
                   Aantal nachten: <h6>{{numberOfDays}} nacht(en)</h6>
                   Korting: {{kamerreserveringdetailsormgroup.value.korting}}%
                   <div class="row">
@@ -289,7 +288,7 @@
                     <div class="col-8 text-danger">Totale prijs voor
                       ({{numberOfDays}} nacht(en))
                     </div>
-                    <div class="col-2 text-danger">{{updateTotalPrice(kamerreserveringdetailsormgroup.value.korting) || totalPrice | currency: "EUR" }} </div>
+                    <div class="col-2 text-danger">{{updateTotalPrice(kamerreserveringdetailsormgroup.value.korting) | currency: "EUR" }} </div>
                   </div>
 
                   <hr class="bg-dark">
