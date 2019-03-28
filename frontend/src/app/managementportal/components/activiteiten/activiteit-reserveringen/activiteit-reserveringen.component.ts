@@ -46,26 +46,26 @@ export class ActiviteitReserveringenComponent {
       });
   }
 
-  openFormActiviteitResModal(
-    planningId: number,
-    reservering?: ActiviteitReservering
-  ) {
-    const modal = this.modalService.open(FormActiviteitResComponent);
-    if (reservering) {
-      modal.componentInstance.reservering = reservering;
-    }
+  // openFormActiviteitResModal(
+  //   planningId: number,
+  //   reservering?: ActiviteitReservering
+  // ) {
+  //   const modal = this.modalService.open(FormActiviteitResComponent);
+  //   if (reservering) {
+  //     modal.componentInstance.reservering = reservering;
+  //   }
 
-    modal.result
-      .then(result => {
-        console.log("Result", result);
-        this.activiteitenResService.updateReservering(result);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }
+  //   modal.result
+  //     .then(result => {
+  //       console.log("Result", result);
+  //       this.activiteitenResService.updateReservering(result);
+  //     })
+  //     .catch(error => {
+  //       console.log(error);
+  //     });
+  // }
 
-  verwijderActiviteitRes(reserveringId: number) {
+  openFormDeleteActiviteitReservering(reserveringId: number) {
     this.modalService
       .open(ModalConfirmComponent)
       .result.then(result => {
