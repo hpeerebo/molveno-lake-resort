@@ -42,8 +42,11 @@ export class KamerService {
         else{
             return await getRepository(KamerEntity)
             .createQueryBuilder("kamer")
-            .where(`kamer.kamerNaam NOT IN (select kamernaam from kamer_reservering_entity where datumvan >= '${datumvan}' 
-                    AND datumtot <= '${datumtot}')`)
+            .where(`kamer.kamerNaam NOT IN (select kamernaam from kamer_reservering_entity where datumvan between '${datumvan}' and '${datumtot}'
+            or datumtot between '${datumvan}' and '${datumtot}')`)
+            
+            /* .where(`kamer.kamerNaam NOT IN (select kamernaam from kamer_reservering_entity where datumvan >= '${datumvan}' 
+                    AND datumtot <= '${datumtot}')`) */
             .getMany()
             .then(kamersEntities => kamersEntities.map(kamerEntity => kamerEntity.mapToKamers()));
         }
