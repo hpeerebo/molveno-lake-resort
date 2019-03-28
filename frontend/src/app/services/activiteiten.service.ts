@@ -27,6 +27,7 @@ export class ActiviteitenService {
 
   updateActiviteit(activiteit: Activiteit): void {
     this.http.put<IActiviteit[]>(this.api, activiteit).subscribe();
+    location.reload();
   }
 
 

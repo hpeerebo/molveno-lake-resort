@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-end mt-2">
     <button
         class="btn btn-primary mt-2"
-        (click)="openFormActiviteitPlanningModal()"
+        (click)="openFormSavePlanning()"
     >
         Toevoegen nieuwe planning
     </button>
@@ -33,19 +33,19 @@
                         class="fas fa-pen-alt mr-2"
                         placement="top"
                         ngbTooltip="Reserveren"
-                        (click)="openCreateReserveringModal(activiteitplanning)"
+                        (click)="openCreateReservering(activiteitplanning)"
                     ></i>
                     <i
                         class="fas fa-edit mr-2"
                         placement="top"
                         ngbTooltip="Wijzigen"
-                        (click)="openEditFormActiviteitPlanningModal(activiteitplanning)"
+                        (click)="openFormUpdatePlanning(activiteitplanning)"
                     ></i>
                     <i
                         class="fas fa-trash-alt mr-2"
                         placement="top"
                         ngbTooltip="Verwijderen"
-                        (click)="verwijderActiviteitPlanning(activiteitplanning)"
+                        (click)="openFormDeletePlanning(activiteitplanning.planid)"
                     ></i>
                 </td>
             </tr>

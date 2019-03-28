@@ -31,7 +31,7 @@ export class ActiviteitenPlanningComponent {
     return this.field;
   }
 
-  openCreateReserveringModal(activiteitenPlanning: ActiviteitenPlanning) {
+  openCreateReservering(activiteitenPlanning: ActiviteitenPlanning) {
     const modal = this.modalService.open(FormActiviteitMaakReserveringComponent);
     modal.componentInstance.planning = activiteitenPlanning;
 
@@ -45,9 +45,10 @@ export class ActiviteitenPlanningComponent {
       });
   }
 
-  openEditFormActiviteitPlanningModal(planning: ActiviteitenPlanning) {
+  openFormUpdatePlanning(activiteitenPlanning: ActiviteitenPlanning) {
+    console.log('test', activiteitenPlanning)
     const modal = this.modalService.open(FormActiviteitPlanningComponent);
-    modal.componentInstance.planning = planning;
+    modal.componentInstance.activiteitenPlanning = activiteitenPlanning;
     modal.result
       .then(result => {
         this.activiteitenPlanningService.updateActiviteitPlanning(result);
@@ -57,10 +58,10 @@ export class ActiviteitenPlanningComponent {
       });
   }
 
-  openFormActiviteitPlanningModal(planning?: CreateActiviteitenPlanning) {
+  openFormSavePlanning(activiteitenPlanning?: CreateActiviteitenPlanning) {
     const modal = this.modalService.open(FormActiviteitPlanningComponent);
-    if (planning) {
-      modal.componentInstance.activiteit = planning;
+    if (activiteitenPlanning) {
+      modal.componentInstance.activiteit = activiteitenPlanning;
     }
     modal.result
       .then(result => {
@@ -71,7 +72,7 @@ export class ActiviteitenPlanningComponent {
       });
   }
 
-  verwijderActiviteitPlanning(planid: number) {
+  openFormDeletePlanning(planid: number) {
     this.modalService
       .open(ModalConfirmComponent)
       .result.then(result => {

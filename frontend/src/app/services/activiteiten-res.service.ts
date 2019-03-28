@@ -52,14 +52,14 @@ export class ActiviteitenResService {
 
   updateReservering(reservering: ActiviteitReservering): void {
     this.http.put<IActiviteitReservering[]>(this.api, reservering).subscribe();
-    // location.reload();
+    location.reload();
   }
 
   deleteActiviteitRes(reserveringId: number) {
     this.http
       .delete<IActiviteitReservering[]>(this.api + reserveringId)
       .subscribe();
-    // location.reload();
+    location.reload();
   }
 }
 interface IActiviteitReservering {
