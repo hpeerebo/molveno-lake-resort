@@ -189,7 +189,8 @@ export class ManagementPortalKamersComponent implements OnInit, AfterViewInit {
         resultPromise.uitchecken,
         kamer.aantalPersonen,
         kamer.prijs,
-        reserveringsnummer
+        reserveringsnummer,
+        resultPromise.korting
       ))});
     });
 
@@ -227,7 +228,8 @@ export class ManagementPortalKamersComponent implements OnInit, AfterViewInit {
         resultPromise.uitchecken,
         resultPromise.personen,
         resultPromise.prijs,
-        reserveringsnummer
+        reserveringsnummer,
+        resultPromise.korting
       ));
     });
 
@@ -253,7 +255,7 @@ export class ManagementPortalKamersComponent implements OnInit, AfterViewInit {
     );
   }
   calculateNumberofDays(datumvan: string, datumtot: string){
-    this.numberOfDays = (new Date(this.datumtot).getTime() - new Date(this.datumvan).getTime())/(1000 * 60 * 60 * 24)
+    this.numberOfDays = (new Date(this.datumtot).getTime() - new Date(this.datumvan).getTime())/(1000 * 60 * 60 * 24);
     if(this.numberOfDays === 0){
       this.numberOfDays = 1;
     }

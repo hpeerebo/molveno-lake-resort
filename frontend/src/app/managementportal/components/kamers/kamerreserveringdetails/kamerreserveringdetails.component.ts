@@ -296,7 +296,12 @@ export class KamerreserveringdetailsComponent implements OnInit, OnDestroy {
     return numbers.reduce((a: number, b: number) => a + b, 0);
   }
   public updateTotalPrice(korting: number): number {
-    return this.totalPrice - this.totalPrice /  100 * korting;
+    if(korting > 0) {
+      return this.totalPrice - ((this.totalPrice /  100) * korting);
+    } else {
+      return this.totalPrice
+    }
+
   }
 
   async delay(ms: number) {
