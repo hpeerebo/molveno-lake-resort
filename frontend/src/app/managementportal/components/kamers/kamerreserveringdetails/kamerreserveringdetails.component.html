@@ -180,6 +180,7 @@
                 <div class="form-group col-sm-5">
                   <div *ngIf="uitchecken">
                     <div>op: {{kamerreserveringdetailsormgroup.value.uitchecken ||todayDate}}</div>
+
                   </div>
                 </div>
               </div>
@@ -261,6 +262,10 @@
                   Voor de periode:
                   <h6>{{datumvan}} tot {{datumtot}} </h6>
                   Aantal nachten: <h6>{{numberOfDays}} nacht(en)</h6>
+                  Korting: {{kamerreserveringdetailsormgroup.value.korting}}%
+                  <div class="row">
+                    <div class="col-sm-5"> <input type="range" class="form-control" formControlName="korting" min="0" max="99" step="2.5" value="5" (change)="updateTotalPrice(kamerreserveringdetailsormgroup.value.korting)"/></div>
+                  </div>
                   heeft u de volgende kamer(s) geboekt:
                 </div>
               </div>
@@ -279,12 +284,14 @@
                     <div class="col-2">{{boeking.prijs | currency: "EUR" }}</div>
                   </div>
                   <hr class="bg-dark">
+
                   <div class="row">
                     <div class="col-8 text-danger">Totale prijs voor
                       ({{numberOfDays}} nacht(en))
                     </div>
-                    <div class="col-2 text-danger">{{totalPrice | currency: "EUR" }} </div>
+                    <div class="col-2 text-danger">{{updateTotalPrice(kamerreserveringdetailsormgroup.value.korting) || totalPrice | currency: "EUR" }} </div>
                   </div>
+
                   <hr class="bg-dark">
                 </div>
               </div>

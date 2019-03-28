@@ -22,6 +22,7 @@ export class KamerReserveringEntity {
   @Column({ type: 'integer', nullable: true}) public readonly personen: number;
   @Column({ type: 'integer', nullable: true}) public readonly prijs: number;
   @Column({ type: 'varchar', nullable: true}) public readonly reserveringsnummer: string;
+  @Column({ type: 'integer', nullable: true}) public readonly korting: number;
 
   constructor(
       voornaam: string,
@@ -42,6 +43,7 @@ export class KamerReserveringEntity {
       personen: number,
       prijs: number,
       reserveringsnummer: string,
+      korting: number,
   ) {
     this.voornaam = voornaam;
     this.achternaam = achternaam;
@@ -61,9 +63,10 @@ export class KamerReserveringEntity {
     this.personen = personen;
     this.prijs = prijs;
     this.reserveringsnummer = reserveringsnummer;
+    this.korting = korting;
   }
 
   mapToKamersReserving(): KamerReservering {
-    return new KamerReservering(this.id, this.voornaam, this.achternaam, this.telefoonnummer, this.emailadres , this.identiteitsid, this.postcode, this.straat, this.huisnummer, this.woonplaats, this.land, this.datumvan, this.datumtot, this.kamernaam, this.inchecken, this.uitchecken, this.personen, this.prijs, this.reserveringsnummer);
+    return new KamerReservering(this.id, this.voornaam, this.achternaam, this.telefoonnummer, this.emailadres , this.identiteitsid, this.postcode, this.straat, this.huisnummer, this.woonplaats, this.land, this.datumvan, this.datumtot, this.kamernaam, this.inchecken, this.uitchecken, this.personen, this.prijs, this.reserveringsnummer, this.korting);
   }
 }

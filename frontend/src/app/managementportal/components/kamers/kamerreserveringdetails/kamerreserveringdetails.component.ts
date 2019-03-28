@@ -88,6 +88,7 @@ export class KamerreserveringdetailsComponent implements OnInit, OnDestroy {
               personen: booking[0].personen,
               prijs: booking[0].prijs,
               reserveringsnummer: booking[0].reserveringsnummer,
+              korting: booking[0].korting || 0,
             });
           }
         })
@@ -120,12 +121,16 @@ export class KamerreserveringdetailsComponent implements OnInit, OnDestroy {
       tap(booking => {
         if (booking) {
 
-          if (this.inchecken) {
+          if (this.incheckenToegestaan && this.inchecken) {
             this.incheckdatum = this.todayDate;
+          } else {
+            this.incheckdatum = '';
           }
 
-          if (this.uitchecken) {
+          if (this.incheckenToegestaan && this.uitchecken) {
             this.uitcheckdatum = this.todayDate;
+          } else {
+            this.uitcheckdatum = '';
           }
 
           booking.forEach(kamer => {
@@ -144,11 +149,12 @@ export class KamerreserveringdetailsComponent implements OnInit, OnDestroy {
               kamer.datumvan,
               kamer.datumtot,
               kamer.kamernaam,
-              this.kamerreserveringdetailsormgroup.value.inchecken || this.incheckdatum,
-              this.kamerreserveringdetailsormgroup.value.uitchecken || this.uitcheckdatum,
+              this.incheckdatum,
+              this.uitcheckdatum,
               kamer.personen,
               kamer.prijs,
               this.kamerreserveringdetailsormgroup.value.reserveringsnummer,
+              this.kamerreserveringdetailsormgroup.value.korting
             ));
           });
         }
@@ -183,6 +189,7 @@ export class KamerreserveringdetailsComponent implements OnInit, OnDestroy {
         modalPrintBooking.componentInstance.inchecken = this.kamerreserveringdetailsormgroup.value.inchecken || this.incheckdatum;
         modalPrintBooking.componentInstance.uitchecken = this.kamerreserveringdetailsormgroup.value.uitchecken || this.uitcheckdatum;
         modalPrintBooking.componentInstance.reserveringsnummer = this.kamerreserveringdetailsormgroup.value.reserveringsnummer;
+        modalPrintBooking.componentInstance.korting = this.kamerreserveringdetailsormgroup.value.korting;
         modalPrintBooking.componentInstance.datumvan = this.datumvan;
         modalPrintBooking.componentInstance.datumtot = this.datumtot;
         modalPrintBooking.componentInstance.kamers = booking;
@@ -215,6 +222,7 @@ export class KamerreserveringdetailsComponent implements OnInit, OnDestroy {
         modalPrintBooking.componentInstance.inchecken = this.kamerreserveringdetailsormgroup.value.inchecken || this.incheckdatum;
         modalPrintBooking.componentInstance.uitchecken = this.kamerreserveringdetailsormgroup.value.uitchecken || this.uitcheckdatum;
         modalPrintBooking.componentInstance.reserveringsnummer = this.kamerreserveringdetailsormgroup.value.reserveringsnummer;
+        modalPrintBooking.componentInstance.korting = this.kamerreserveringdetailsormgroup.value.korting;
         modalPrintBooking.componentInstance.datumvan = this.datumvan;
         modalPrintBooking.componentInstance.datumtot = this.datumtot;
         modalPrintBooking.componentInstance.kamers = booking;
@@ -250,6 +258,7 @@ export class KamerreserveringdetailsComponent implements OnInit, OnDestroy {
         modalDownBooking.componentInstance.reserveringsnummer = this.kamerreserveringdetailsormgroup.value.reserveringsnummer;
         modalDownBooking.componentInstance.datumvan = this.datumvan;
         modalDownBooking.componentInstance.datumtot = this.datumtot;
+        modalDownBooking.componentInstance.korting = this.kamerreserveringdetailsormgroup.value.korting;
         modalDownBooking.componentInstance.kamers = booking;
       })
     ).subscribe();
@@ -278,12 +287,16 @@ export class KamerreserveringdetailsComponent implements OnInit, OnDestroy {
     this.incheckenToegestaan = false;
   }
 
+
   private addToStorage(result: number) {
     return this.storagePrice = [...this.storagePrice, result];
   }
 
   public sumAll(numbers: number[]): number {
     return numbers.reduce((a: number, b: number) => a + b, 0);
+  }
+  public updateTotalPrice(korting: number): number {
+    return this.totalPrice - this.totalPrice /  100 * korting;
   }
 
   async delay(ms: number) {

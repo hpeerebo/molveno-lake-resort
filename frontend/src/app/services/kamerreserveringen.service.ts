@@ -98,23 +98,6 @@ export class KamerreserveringenService {
       ).subscribe();
   }
 
-  getKamerReseveringById2(reserveringsnummer: string): Promise<any> {
-    return this.http
-      .get<IKamerReserveringenResponse>(`${KamerreserveringenService.api}/id/${reserveringsnummer}`)
-      .toPromise()
-      .then(this.extractData)
-      .catch(this.handleError);
-  }
-
-  private extractData(res: IKamerReserveringenResponse) {
-    let body = res.kamerreserveringen;
-    return body || {};
-  }
-
-  private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error);
-    return Promise.reject(error.message || error);
-  }
 
   private static kamerResponseToReserveringMapper(kamerreserveringenResponse: IKamerReserveringenResponse): KamerReservering[] {
     return kamerreserveringenResponse.kamerreserveringen.map(KamerreserveringenService.kamerToReserveringMapper);
@@ -140,7 +123,8 @@ export class KamerreserveringenService {
       kamerreservering.uitchecken,
       kamerreservering.personen,
       kamerreservering.prijs,
-      kamerreservering.reserveringsnummer);
+      kamerreservering.reserveringsnummer,
+      kamerreservering.korting);
   }
 
 }
@@ -168,4 +152,5 @@ export interface IKamerReservering {
   personen: number,
   prijs: number,
   reserveringsnummer: string,
+  korting: number,
 }

@@ -58,7 +58,8 @@ export class KamerreserveringService {
             uitchecken: updateKamerreserveringDto.uitchecken,
             personen: updateKamerreserveringDto.personen,
             prijs: updateKamerreserveringDto.prijs,
-            reserveringsnummer: updateKamerreserveringDto.reserveringsnummer
+            reserveringsnummer: updateKamerreserveringDto.reserveringsnummer,
+            korting: updateKamerreserveringDto.korting,
         });
     }
 
