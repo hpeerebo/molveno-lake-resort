@@ -40,6 +40,7 @@ import { ActiviteitReserveringenComponent } from "./components/activiteiten/acti
 import { FormActiviteitPlanningComponent } from "../shared/components/form-activiteitplanning/form-activiteitplanning.component";
 import { FormActiviteitResComponent } from "../shared/components/form-activiteit-res/form-activiteit-res.component";
 import { FormActiviteitMaakReserveringComponent } from "../shared/components/form-activiteit-maak-reservering/form-activiteit-maak-reservering.component";
+import { FormActiviteitMaakPlanningComponent } from '../shared/components/form-activiteit-maak-planning/form-activiteit-maak-planning.component';
 
 @NgModule({
   declarations: [
@@ -88,6 +89,7 @@ import { FormActiviteitMaakReserveringComponent } from "../shared/components/for
   ],
   entryComponents: [
     FormActiviteitMaakReserveringComponent,
+    FormActiviteitMaakPlanningComponent,
     FormTafelComponent,
     FormTafelreserveringComponent,
     FormGerechtComponent,

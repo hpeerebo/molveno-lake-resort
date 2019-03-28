@@ -33,7 +33,7 @@ export class ActiviteitenPlanningController {
   })
   public saveActiviteitPlanning(
     @Body() createActiviteitPlanning: CreateActiviteitPlanningDto,
-    @Param('activiteitid') activiteitid: number,
+    @Param('activiteitid') actId: number,
   ) {
     const activiteitplanning: ActiviteitPlanningEntity = new ActiviteitPlanningEntity(
       createActiviteitPlanning.actdate,
@@ -43,7 +43,7 @@ export class ActiviteitenPlanningController {
 
     return this.activiteitenPlanService.saveActiviteitPlanning(
       activiteitplanning,
-      activiteitid,
+      actId,
     );
   }
 

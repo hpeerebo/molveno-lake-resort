@@ -15,13 +15,11 @@ export class FormActiviteitMaakPlanningComponent implements OnInit {
 
   public activiteitenMaakPlanningForm = this.formBuilder.group({
     actNaam: [undefined],
-    actdate: ["", Validators.required],
-    actprijs: [0, [Validators.required, Validators.min(1)]],
-    actcapaciteit: [0, [Validators.required, Validators.min(1)]],
-    planid: [0, Validators.required],
+    actDate: ["", Validators.required],
+    actPrijs: [1, [Validators.required, Validators.min(1)]],
+    actCapaciteit: [1, [Validators.required, Validators.min(1)]],
+    actId: [undefined],
   });
-
-
 
   constructor(
     public activeModal: NgbActiveModal,
@@ -29,21 +27,12 @@ export class FormActiviteitMaakPlanningComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    if (this.activiteitenplanning) {
+    if (this.activiteit) {
       this.activiteitenMaakPlanningForm.controls.actNaam.setValue(
-        this.activiteitenplanning.activiteit.naam
+        this.activiteit.naam
       );
-      this.activiteitenMaakPlanningForm.controls.actDate.setValue(
-        this.activiteitenplanning.actdate
-      );
-      this.activiteitenMaakPlanningForm.controls.actprijs.setValue(
-        this.activiteitenplanning.actprijs
-      );
-      this.activiteitenMaakPlanningForm.controls.actcapaciteit.setValue(
-        this.activiteitenplanning.actcapaciteit
-      );
-      this.activiteitenMaakPlanningForm.controls.planid.setValue(
-        this.activiteitenplanning.planid
+      this.activiteitenMaakPlanningForm.controls.actId.setValue(
+        this.activiteit.actid
       );
     }
   }
@@ -53,15 +42,18 @@ export class FormActiviteitMaakPlanningComponent implements OnInit {
     this.activeModal.close(this.activiteitenMaakPlanningForm.value);
   }
 
-  get naam() {
-    return this.activiteitenMaakPlanningForm.get("actdate");
+  get actNaam() {
+    return this.activiteitenMaakPlanningForm.get("actNaam");
   }
 
-  get beschrijving() {
-    return this.activiteitenMaakPlanningForm.get("actprijs");
+  get actDate() {
+    return this.activiteitenMaakPlanningForm.get("actDate");
   }
 
-  get thumb() {
-    return this.activiteitenMaakPlanningForm.get("actcapaciteit");
+  get actPrijs() {
+    return this.activiteitenMaakPlanningForm.get("actPrijs");
+  }
+  get actCapaciteit() {
+    return this.activiteitenMaakPlanningForm.get("actCapaciteit");
   }
 }

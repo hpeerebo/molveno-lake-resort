@@ -24,8 +24,9 @@ export class ActiviteitenPlanningService {
       );
   }
 
-  saveActiviteitPlanning(planning: CreateActiviteitenPlanning): void {
-    this.http.post<IActiviteitPlanning[]>(this.api, planning).subscribe();
+  saveActiviteitPlanning(planning: CreateActiviteitenPlanning, actId: number) {
+    console.log("saveActiviteitPlanning", planning);
+    this.http.post<IActiviteitPlanning[]>(this.api + actId, planning).subscribe();
     // location.reload();
   }
 
@@ -53,8 +54,8 @@ export class ActiviteitenPlanningService {
     return new ActiviteitenPlanning(
       activiteitplanning.planid,
       activiteitplanning.actdate,
-      activiteitplanning.actprijs,
       activiteitplanning.actcapaciteit,
+      activiteitplanning.actprijs,
       activiteitplanning.activiteit
     );
   }
@@ -62,8 +63,9 @@ export class ActiviteitenPlanningService {
 
 export interface IActiviteitPlanning {
   planid: number;
+  actcapaciteit: number;
   actdate: string;
   actprijs: number;
-  actcapaciteit: number;
   activiteit: IActiviteit;
 }
+

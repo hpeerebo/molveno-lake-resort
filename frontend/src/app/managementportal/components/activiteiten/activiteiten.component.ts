@@ -8,7 +8,8 @@ import { ModalConfirmComponent } from "src/app/shared/components/modal-confirm/m
 import { CreateActiviteit } from "src/app/models/create-activiteit";
 import { FormControl } from "@angular/forms";
 import { DecimalPipe } from "@angular/common";
-import { map, startWith } from 'rxjs/operators';
+import { FormActiviteitMaakPlanningComponent } from 'src/app/shared/components/form-activiteit-maak-planning/form-activiteit-maak-planning.component';
+import { ActiviteitenPlanningService } from 'src/app/services/activiteiten-planning.service';
 
 @Component({
   selector: "app-activiteiten",
@@ -23,7 +24,11 @@ export class ManagementPortalActiviteitenComponent {
   public show: string = "";
   public filter = new FormControl("");
 
-  constructor(public pipe: DecimalPipe, private activiteitenService: ActiviteitenService, private modalService: NgbModal) {
+  constructor(
+    public pipe: DecimalPipe,
+    private activiteitenService: ActiviteitenService,
+    private ActiviteitenPlanningService: ActiviteitenPlanningService,
+    private modalService: NgbModal) {
     // this.activiteiten$ = this.filter.valueChanges.pipe(
     //   startWith(""),
     //   map(naam => search(naam, pipe))
@@ -33,6 +38,20 @@ export class ManagementPortalActiviteitenComponent {
   public clickColumnHandler(event: string): string {
     this.field = event;
     return this.field;
+  }
+
+  openCreatePlanning(activiteitenMaakPlanning: Activiteit) {
+    const modal = this.modalService.open(FormActiviteitMaakPlanningComponent);
+    modal.componentInstance.activiteit = activiteitenMaakPlanning;
+
+    modal.result
+      .then(result => {
+        console.log(result);
+        this.ActiviteitenPlanningService.saveActiviteitPlanning(result, activiteitenMaakPlanning.actid);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   openFormUpdateActiviteit(activiteit: Activiteit) {

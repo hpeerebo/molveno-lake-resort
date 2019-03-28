@@ -8,6 +8,7 @@ import { FormActiviteitPlanningComponent } from "src/app/shared/components/form-
 import { FormActiviteitMaakReserveringComponent } from "src/app/shared/components/form-activiteit-maak-reservering/form-activiteit-maak-reservering.component";
 import { ActiviteitenResService } from "src/app/services/activiteiten-res.service";
 import { CreateActiviteitenPlanning } from "src/app/models/create-activiteit-planning";
+import { FormActiviteitMaakPlanningComponent } from 'src/app/shared/components/form-activiteit-maak-planning/form-activiteit-maak-planning.component';
 
 @Component({
   selector: "app-activiteiten-planning",
@@ -52,20 +53,6 @@ export class ActiviteitenPlanningComponent {
     modal.result
       .then(result => {
         this.activiteitenPlanningService.updateActiviteitPlanning(result);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }
-
-  openFormSavePlanning(activiteitenPlanning?: CreateActiviteitenPlanning) {
-    const modal = this.modalService.open(FormActiviteitPlanningComponent);
-    if (activiteitenPlanning) {
-      modal.componentInstance.activiteit = activiteitenPlanning;
-    }
-    modal.result
-      .then(result => {
-        this.activiteitenPlanningService.saveActiviteitPlanning(result);
       })
       .catch(error => {
         console.log(error);
