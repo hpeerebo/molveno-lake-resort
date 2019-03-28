@@ -12,7 +12,6 @@ import {tap} from "rxjs/operators";
 import {FormDownloadKamerreseveringComponent} from "../kamers-form/form-download-kamerresevering/form-download-kamerresevering.component";
 
 @Component({
-  //changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-kamerreserveringdetails',
   templateUrl: './kamerreserveringdetails.component.html',
   styleUrls: ['./kamerreserveringdetails.component.scss']
@@ -20,13 +19,16 @@ import {FormDownloadKamerreseveringComponent} from "../kamers-form/form-download
 export class KamerreserveringdetailsComponent implements OnInit, OnDestroy {
 
   constructor(private kamerreserveringenservice: KamerreserveringenService,
-              private route : ActivatedRoute,
+              private route: ActivatedRoute,
               private router: Router,
               private dateservice: DateFunctions,
-              private modalService: NgbModal,) {};
+              private modalService: NgbModal,) {
+  };
 
   public kamerreserveringen$: Observable<KamerReservering[] | undefined> = this.kamerreserveringenservice.getKamerReseveringById(true, this.getReseveringBasedOnId());
   public booking$: Observable<KamerReservering[] | undefined> = this.kamerreserveringen$;
+  public incheckenToegestaan: boolean = false;
+  public kamerreserveringdetailsormgroup = new KamerReserveringDetailsFormGroup();
 
   private storagePrice: number[] = [];
   private numberOfDays: number = 0;
@@ -38,28 +40,26 @@ export class KamerreserveringdetailsComponent implements OnInit, OnDestroy {
   private uitcheckdatum: string = '';
   private uitchecken: boolean = false;
   private todayDate: string = this.dateservice.getCurrentDate();
-  private reserveringsnummer: null | string  = "";
+  private reserveringsnummer: null | string = "";
   private showSpinnerOnLoad: boolean = false;
-  private incheckenToegestaan: boolean = false;
 
-  public kamerreserveringdetailsormgroup = new KamerReserveringDetailsFormGroup();
 
   async ngOnInit() {
     this.inchecken = false;
 
-    if(this.getReseveringBasedOnId()) {
-       this.booking$.pipe(
-        tap( booking => {
-          if(booking) {
+    if (this.getReseveringBasedOnId()) {
+      this.booking$.pipe(
+        tap(booking => {
+          if (booking) {
             this.datumtot = booking[0].datumtot;
             this.datumvan = booking[0].datumvan;
             this.numberOfDays = this.calculateNumberofDays(this.datumvan, this.datumtot);
 
-            if(booking[0].inchecken){
+            if (booking[0].inchecken) {
               this.inchecken = true;
             }
 
-            if(booking[0].uitchecken){
+            if (booking[0].uitchecken) {
               this.uitchecken = true;
             }
 
@@ -88,17 +88,18 @@ export class KamerreserveringdetailsComponent implements OnInit, OnDestroy {
               personen: booking[0].personen,
               prijs: booking[0].prijs,
               reserveringsnummer: booking[0].reserveringsnummer,
+              korting: booking[0].korting || 0,
             });
           }
         })
       ).subscribe();
 
-       this.delay(2000).then( () => {
-         if(this.datumvan <= this.dateservice.getCurrentDate()){
-           this.incheckenToegestaan = true;
-         }
-         this.showSpinnerOnLoad = true;
-       })
+      this.delay(2000).then(() => {
+        if (this.datumvan <= this.dateservice.getCurrentDate()) {
+          this.incheckenToegestaan = true;
+        }
+        this.showSpinnerOnLoad = true;
+      })
     }
   }
 
@@ -107,7 +108,7 @@ export class KamerreserveringdetailsComponent implements OnInit, OnDestroy {
     this.router.navigateByUrl('managementportal/kamerreserveringen');
   }
 
-  getReseveringBasedOnId(): string{
+  getReseveringBasedOnId(): string {
     this.route.paramMap.subscribe(params => {
       this.reserveringsnummer = params.get("reserveringsnummer")
     });
@@ -115,20 +116,24 @@ export class KamerreserveringdetailsComponent implements OnInit, OnDestroy {
     return this.reserveringsnummer;
   }
 
-  saveChangesToBooking(){
+  saveChangesToBooking() {
     this.booking$.pipe(
       tap(booking => {
-        if(booking) {
+        if (booking) {
 
-          if (this.inchecken) {
+          if (this.incheckenToegestaan && this.inchecken) {
             this.incheckdatum = this.todayDate;
+          } else {
+            this.incheckdatum = '';
           }
 
-          if (this.uitchecken) {
+          if (this.incheckenToegestaan && this.uitchecken) {
             this.uitcheckdatum = this.todayDate;
+          } else {
+            this.uitcheckdatum = '';
           }
 
-          booking.forEach( kamer => {
+          booking.forEach(kamer => {
             this.kamerreserveringenservice.updateReservering(new KamerReservering(
               kamer.id,
               this.kamerreserveringdetailsormgroup.value.voornaam,
@@ -144,11 +149,12 @@ export class KamerreserveringdetailsComponent implements OnInit, OnDestroy {
               kamer.datumvan,
               kamer.datumtot,
               kamer.kamernaam,
-              this.kamerreserveringdetailsormgroup.value.inchecken || this.incheckdatum,
-              this.kamerreserveringdetailsormgroup.value.uitchecken ||this.uitcheckdatum,
+              this.incheckdatum,
+              this.uitcheckdatum,
               kamer.personen,
               kamer.prijs,
               this.kamerreserveringdetailsormgroup.value.reserveringsnummer,
+              this.kamerreserveringdetailsormgroup.value.korting
             ));
           });
         }
@@ -158,7 +164,7 @@ export class KamerreserveringdetailsComponent implements OnInit, OnDestroy {
     this.router.navigateByUrl('managementportal/kamerreserveringen');
   }
 
-  openBookingPrintingForm(){
+  openBookingPrintingForm() {
     const modalPrintBooking = this.modalService.open(FormPrintKamerreseveringComponent, {
       size: "lg",
       ariaLabelledBy: "modal-basic-title"
@@ -183,6 +189,7 @@ export class KamerreserveringdetailsComponent implements OnInit, OnDestroy {
         modalPrintBooking.componentInstance.inchecken = this.kamerreserveringdetailsormgroup.value.inchecken || this.incheckdatum;
         modalPrintBooking.componentInstance.uitchecken = this.kamerreserveringdetailsormgroup.value.uitchecken || this.uitcheckdatum;
         modalPrintBooking.componentInstance.reserveringsnummer = this.kamerreserveringdetailsormgroup.value.reserveringsnummer;
+        modalPrintBooking.componentInstance.korting = this.kamerreserveringdetailsormgroup.value.korting;
         modalPrintBooking.componentInstance.datumvan = this.datumvan;
         modalPrintBooking.componentInstance.datumtot = this.datumtot;
         modalPrintBooking.componentInstance.kamers = booking;
@@ -191,7 +198,7 @@ export class KamerreserveringdetailsComponent implements OnInit, OnDestroy {
 
   }
 
-  openBookingEmailForm(){
+  openBookingEmailForm() {
     const modalPrintBooking = this.modalService.open(FormEmailKamerreseveringComponent, {
       size: "lg",
       ariaLabelledBy: "modal-basic-title"
@@ -215,6 +222,7 @@ export class KamerreserveringdetailsComponent implements OnInit, OnDestroy {
         modalPrintBooking.componentInstance.inchecken = this.kamerreserveringdetailsormgroup.value.inchecken || this.incheckdatum;
         modalPrintBooking.componentInstance.uitchecken = this.kamerreserveringdetailsormgroup.value.uitchecken || this.uitcheckdatum;
         modalPrintBooking.componentInstance.reserveringsnummer = this.kamerreserveringdetailsormgroup.value.reserveringsnummer;
+        modalPrintBooking.componentInstance.korting = this.kamerreserveringdetailsormgroup.value.korting;
         modalPrintBooking.componentInstance.datumvan = this.datumvan;
         modalPrintBooking.componentInstance.datumtot = this.datumtot;
         modalPrintBooking.componentInstance.kamers = booking;
@@ -223,7 +231,7 @@ export class KamerreserveringdetailsComponent implements OnInit, OnDestroy {
   }
 
 
-  openBookingDownloadForm(){
+  openBookingDownloadForm() {
     const modalDownBooking = this.modalService.open(FormDownloadKamerreseveringComponent, {
       size: "lg",
       ariaLabelledBy: "modal-basic-title"
@@ -250,14 +258,16 @@ export class KamerreserveringdetailsComponent implements OnInit, OnDestroy {
         modalDownBooking.componentInstance.reserveringsnummer = this.kamerreserveringdetailsormgroup.value.reserveringsnummer;
         modalDownBooking.componentInstance.datumvan = this.datumvan;
         modalDownBooking.componentInstance.datumtot = this.datumtot;
+        modalDownBooking.componentInstance.korting = this.kamerreserveringdetailsormgroup.value.korting;
         modalDownBooking.componentInstance.kamers = booking;
       })
     ).subscribe();
 
   }
-  calculateNumberofDays(datumvan: string, datumtot: string){
-    this.numberOfDays = (new Date(this.datumtot).getTime() - new Date(this.datumvan).getTime())/(1000 * 60 * 60 * 24);
-    if(this.numberOfDays === 0){
+
+  calculateNumberofDays(datumvan: string, datumtot: string) {
+    this.numberOfDays = (new Date(this.datumtot).getTime() - new Date(this.datumvan).getTime()) / (1000 * 60 * 60 * 24);
+    if (this.numberOfDays === 0) {
       this.numberOfDays = 1;
     }
     return this.numberOfDays;
@@ -268,7 +278,7 @@ export class KamerreserveringdetailsComponent implements OnInit, OnDestroy {
     this.numberOfDays = 0;
     this.totalPrice = 0;
     this.datumvan = '';
-    this.datumtot ='';
+    this.datumtot = '';
     this.inchecken = false;
     this.incheckdatum = '';
     this.uitcheckdatum = '';
@@ -277,24 +287,33 @@ export class KamerreserveringdetailsComponent implements OnInit, OnDestroy {
     this.incheckenToegestaan = false;
   }
 
+
   private addToStorage(result: number) {
     return this.storagePrice = [...this.storagePrice, result];
   }
 
   public sumAll(numbers: number[]): number {
-    return numbers.reduce((a: number,b: number) => a + b, 0);
+    return numbers.reduce((a: number, b: number) => a + b, 0);
+  }
+  public updateTotalPrice(korting: number): number {
+    if(korting > 0) {
+      return this.totalPrice - ((this.totalPrice /  100) * korting);
+    } else {
+      return this.totalPrice
+    }
+
   }
 
   async delay(ms: number) {
-    await new Promise(resolve => setTimeout(()=>resolve(), ms));
+    await new Promise(resolve => setTimeout(() => resolve(), ms));
   }
 
   ngOnDestroy(): void {
-    this.showSpinnerOnLoad = false ;
+    this.showSpinnerOnLoad = false;
     this.numberOfDays = 0;
     this.totalPrice = 0;
     this.datumvan = '';
-    this.datumtot ='';
+    this.datumtot = '';
     this.inchecken = false;
     this.incheckdatum = '';
     this.uitcheckdatum = '';
