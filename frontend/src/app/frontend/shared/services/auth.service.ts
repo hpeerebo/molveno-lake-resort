@@ -16,16 +16,14 @@ export class AuthService {
 	constructor(private http: HttpClient, private router: Router) {
 	}
 
-	public login(userLogin: IUserLogin): Observable<any> {
-		return this.http.post<Tokenresponse>(AuthService.api, userLogin)
-			.pipe(
-				tap(data => {
-          localStorage.setItem("token", data.token),
-          //this.router.navigate(['managementportal/home'])
-        }),
-				take(1)
-			);
-	}
+  public login(userLogin: IUserLogin): Observable<any> {
+    return this.http.post<Tokenresponse>(AuthService.api, userLogin)
+      .pipe(
+        tap(data => {
+          localStorage.setItem("token", data.token)
+        }), take(1)
+      );
+  }
 
 	public token(): string{
 		return localStorage.getItem("token") as string;
