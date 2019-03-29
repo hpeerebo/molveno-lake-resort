@@ -4,6 +4,7 @@ import { Gerecht } from '../models/gerecht';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, take, tap } from 'rxjs/operators';
 import { GerechtDetails } from '../models/gerecht-details';
+import { Ingredient } from '../models/ingredient';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class GerechtenService {
   private readonly api: string = '/api/restaurant/gerechten';
 
   public readonly gerechten$ = new BehaviorSubject<Gerecht[]>([]);
-  public readonly total$ = new BehaviorSubject<number>(0);
+  public readonly gerechtDetails$ = new BehaviorSubject<GerechtDetails | undefined>(undefined);
 
   constructor(private http: HttpClient) {
     this.getAllGerechten();
@@ -43,18 +44,21 @@ export class GerechtenService {
       .pipe(
         take(1),
         map(GerechtenService.gerechtenResponseToGerechtMapper),
-        tap(gerechten => {
-          this.gerechten$.next(gerechten);
-          this.total$.next(gerechten.length);
-        })
+        tap(gerechten => this.gerechten$.next(gerechten))
       )
       .subscribe();
   }
 
-  getGerechtDetails(id: number): Observable<GerechtDetails> {
-    return this.http
+  getGerechtDetails(id: number): void {
+    this.gerechtDetails$.next(undefined);
+    this.http
       .get<IGerechtDetailsResponse>(`${this.api}/${id}`)
-      .pipe(map(GerechtenService.gerechtDetailsResponseToGerechtDetailsMapper));
+      .pipe(
+        take(1),
+        map(GerechtenService.gerechtDetailsResponseToGerechtDetailsMapper),
+        tap(gerechtDetails => this.gerechtDetails$.next(gerechtDetails))
+      )
+      .subscribe()
   }
 
   addNewGerecht(gerecht: Gerecht): void {
@@ -65,6 +69,18 @@ export class GerechtenService {
         tap(() => this.getAllGerechten())
       )
       .subscribe();
+  }
+
+  addIngredientToGerecht(gerechtId: number, ingredient: Ingredient): void {
+    const body = { id: ingredient.id };
+    this.http
+      .post<IGerechtDetailsResponse>(`${this.api}/${gerechtId}/ingredienten`, body)
+      .pipe(
+        take(1),
+        map(GerechtenService.gerechtDetailsResponseToGerechtDetailsMapper),
+        tap(gerechtDetails => this.gerechtDetails$.next(gerechtDetails))
+      )
+      .subscribe()
   }
 
   updateGerecht(gerecht: Gerecht): void {

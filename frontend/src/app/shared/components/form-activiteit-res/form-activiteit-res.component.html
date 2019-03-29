@@ -19,37 +19,25 @@
         <div class="form-group">
             <label>Activiteit</label>
             <input
+                disabled="true"
                 type="string"
                 class="form-control"
-                formControlName="naamActiviteit"
-                [class.is-invalid]="naamActiviteit?.invalid && naamActiviteit?.touched"
+                formControlName="actNaam"
                 ngbAutofocus
             >
-            <small
-                class="text-danger"
-                [class.d-none]="naamActiviteit?.valid || naamActiviteit?.untouched"
-            >
-                Verplicht
-            </small>
         </div>
         <div class="form-group">
             <label for="inputDateFrom">Datum activiteit</label>
             <div class="form-group">
-                <div
-                    class="input-group date"
-                    id="datetimepicker6"
-                >
                     <input
-                        type="date"
+                        disabled="true"
+                        type="string"
                         class="form-control"
-                        formControlName="datum"
-                        [class.is-invalid]="datum?.invalid && datum?.touched"
-                    >
+                        formControlName="actDate">
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
                 </div>
-            </div>
         </div>
         <div class="form-group">
             <label>Email</label>
@@ -57,13 +45,28 @@
                 type="string"
                 class="form-control"
                 formControlName="emailGast"
-                [class.is-invalid]="emailGast?.invalid && emailGast?.touched"
+                [class.is-invalid]="activiteitResForm.controls.emailGast?.invalid && activiteitResForm.controls.emailGast?.touched"
             >
             <small
-                class="text-danger"
-                [class.d-none]="emailGast?.valid || emailGast?.untouched"
+            class="text-danger d-none"
+            [class.d-block]="activiteitResForm.controls.emailGast?.invalid && activiteitResForm.controls.emailGast?.touched"
             >
-                Email adres invullen
+                Email adres is verplicht
+            </small>
+        </div>
+        <div class="form-group">
+            <label>Telefoon</label>
+            <input
+                type="string"
+                class="form-control"
+                formControlName="phoneGast"
+                [class.is-invalid]="activiteitResForm.controls.phoneGast?.invalid && activiteitResForm.controls.phoneGast?.touched"
+            >
+            <small
+            class="text-danger d-none"
+            [class.d-block]="activiteitResForm.controls.phoneGast?.invalid && activiteitResForm.controls.phoneGast?.touched"
+            >
+                Telefoonnummer is verplicht
             </small>
         </div>
         <div class="form-group">
@@ -72,13 +75,13 @@
                 type="number"
                 class="form-control"
                 formControlName="aantalPersonen"
-                [class.is-invalid]="aantalPersonen?.invalid && aantalPersonen?.touched"
+                [class.is-invalid]="activiteitResForm.controls.aantalPersonen?.invalid && activiteitResForm.controls.aantalPersonen?.touched"
             >
             <small
-                class="text-danger"
-                [class.d-none]="aantalPersonen?.valid || aantalPersonen?.untouched"
+                class="text-danger d-none"
+                [class.d-block]="activiteitResForm.controls.aantalPersonen?.invalid && activiteitResForm.controls.aantalPersonen?.touched"
             >
-                Aantal Personen
+                Aantal Personen is verplicht
             </small>
         </div>
     </form>

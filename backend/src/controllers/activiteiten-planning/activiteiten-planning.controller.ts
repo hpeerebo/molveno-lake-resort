@@ -12,6 +12,7 @@ import { ActiviteitPlanning } from 'src/models/activiteit-planning';
 import { ActiviteitPlanningService } from 'src/services/activiteit-planning/activiteit-planning.service';
 import { CreateActiviteitPlanningDto } from 'src/dto/create-activiteit-planning-dto';
 import { ActiviteitPlanningEntity } from 'src/entities/activiteit-planning-entity';
+import { UpdateActiviteitPlanningDto } from 'src/dto/update-activiteit-planning-dto';
 
 @Controller('activiteiten/planning')
 @ApiUseTags('activiteiten')
@@ -20,7 +21,7 @@ export class ActiviteitenPlanningController {
     private readonly activiteitenPlanService: ActiviteitPlanningService,
   ) {}
 
-  @Post()
+  @Post(':activiteitid')
   @ApiOperation({ title: 'Maak een nieuw plannings element aan' })
   @ApiResponse({
     status: 201,
@@ -32,17 +33,18 @@ export class ActiviteitenPlanningController {
   })
   public saveActiviteitPlanning(
     @Body() createActiviteitPlanning: CreateActiviteitPlanningDto,
-  ): void {
-    const activiteitplanning: ActiviteitPlanningEntity = new ActiviteitPlanningEntity(
-      createActiviteitPlanning.planid,
-      createActiviteitPlanning.actid,
-      createActiviteitPlanning.actdate,
-      createActiviteitPlanning.actprijs,
-      createActiviteitPlanning.actcapaciteit,
+    @Param('activiteitid') actId: number,
+  ) {
+    const activiteitenMaakPlanning: ActiviteitPlanningEntity = new ActiviteitPlanningEntity(
+      createActiviteitPlanning.actCapaciteit,
+      createActiviteitPlanning.actDate,
+      createActiviteitPlanning.actPrijs,
+ 
     );
-
+    console.log("activiteitenMaakPlanning", activiteitenMaakPlanning);
     return this.activiteitenPlanService.saveActiviteitPlanning(
-      activiteitplanning,
+      activiteitenMaakPlanning,
+      actId,
     );
   }
 
@@ -59,16 +61,19 @@ export class ActiviteitenPlanningController {
     description: 'De geplande activiteit is succesvol bijgewerkt',
   })
   updateActiviteitenPlanning(
-    @Body() createActiviteitPlanning: CreateActiviteitPlanningDto,
+    @Body() createActiviteitPlanning: UpdateActiviteitPlanningDto,
+    @Param('activiteitid') activiteitid: number,
   ): void {
     const planning: ActiviteitPlanningEntity = new ActiviteitPlanningEntity(
+      createActiviteitPlanning.actCapaciteit,
+      createActiviteitPlanning.actDate,
+      createActiviteitPlanning.actPrijs,
       createActiviteitPlanning.planid,
-      createActiviteitPlanning.actid,
-      createActiviteitPlanning.actdate,
-      createActiviteitPlanning.actprijs,
-      createActiviteitPlanning.actcapaciteit,
     );
-    this.activiteitenPlanService.updateActiviteitPlanning(planning);
+    this.activiteitenPlanService.updateActiviteitPlanning(
+      planning,
+      activiteitid,
+    );
   }
 
   @Delete(':planningsId')

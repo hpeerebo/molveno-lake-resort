@@ -12,12 +12,11 @@ import { ManagementportalComponent } from "./managementportal.component";
 import { ReserveringenComponent } from "./components/restaurant/reserveringen/reserveringen.component";
 import { ActiviteitReserveringenComponent } from "./components/activiteiten/activiteit-reserveringen/activiteit-reserveringen.component";
 import { KamerreserveringComponent } from "./components/kamers/kamerreserveringen/kamerreservering.component";
-import { GerechtenDetailsComponent } from './components/restaurant/gerechten-details/gerechten-details.component';
+import { GerechtenDetailsComponent } from "./components/restaurant/gerechten-details/gerechten-details.component";
 import { ActiviteitenPlanningComponent } from "./components/activiteiten/activiteiten-planning/activiteiten-planning.component";
 import {KamerreserveringdetailsComponent} from "./components/kamers/kamerreserveringdetails/kamerreserveringdetails.component";
 import { AuthGuard } from '../frontend/guard/auth.guard';
 import { SignupComponent } from '../shared/components/form-signup/signup.component';
-
 
 const routes: Routes = [
   {

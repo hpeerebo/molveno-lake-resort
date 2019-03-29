@@ -1,60 +1,57 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { ActiviteitRes } from "../models/activiteit-res";
+import { ActiviteitReservering } from "../models/activiteit-reservering";
 import { map } from "rxjs/operators";
+import { CreateActiviteitReservering } from "../models/create-activiteit-reservering";
+import { IActiviteitPlanning } from "./activiteiten-planning.service";
 
 @Injectable({
   providedIn: "root"
 })
 export class ActiviteitenResService {
-  public readonly api: string =
-    "http://localhost:4200/api/activiteiten/reserveringen/";
+  public readonly api: string = "http://localhost:4200/api/activiteiten/reserveringen/";
 
   constructor(private http: HttpClient) {}
 
-  private static activiteitResToActiviteitResMapper(
-    reservering: IActiviteitres[]
-  ): ActiviteitRes[] {
-    return reservering.map(
-      ActiviteitenResService.activiteitResToActiviteitMapper
-    );
+  private static activiteitResToActiviteitResMapper(reservering: IActiviteitReservering[]): ActiviteitReservering[] {
+    return reservering;
   }
 
-  private static activiteitResToActiviteitMapper(
-    reservering: IActiviteitres
-  ): ActiviteitRes {
-    return new ActiviteitRes(
-      reservering.id,
-      reservering.naamActiviteit,
-      reservering.datum,
+  private static activiteitResToActiviteitMapper(reservering: IActiviteitReservering): ActiviteitReservering {
+    return new ActiviteitReservering(
       reservering.emailGast,
-      reservering.aantalPersonen
+      reservering.phoneGast,
+      reservering.aantalPersonen,
+      reservering.planning,
+      reservering.resid
     );
   }
 
-  getAllActiviteitenRes(): Observable<ActiviteitRes[]> {
-    return this.http
-      .get<IActiviteitres[]>(this.api)
-      .pipe(map(ActiviteitenResService.activiteitResToActiviteitResMapper));
+  getAllActiviteitenRes(): Observable<ActiviteitReservering[]> {
+    return this.http.get<IActiviteitReservering[]>(this.api).pipe(map(ActiviteitenResService.activiteitResToActiviteitResMapper));
   }
 
-  saveActiviteitRes(reservering: ActiviteitRes) {
-    /*return*/ this.http
-      .post<IActiviteitres[]>(this.api /*+ "savereservering"*/, reservering)
-      .subscribe();
-    // location.reload();
+  saveActiviteitRes(reservering: CreateActiviteitReservering, planningId: number) {
+    // console.log("saveActiviteitRes", reservering);
+    this.http.post<IActiviteitReservering[]>(this.api + planningId, reservering).subscribe();
+    location.reload();
   }
 
-  deleteActiviteitRes(reservering: ActiviteitRes) {
-    this.http.delete<IActiviteitres[]>(this.api + reservering.id).subscribe();
-    // location.reload();
+  updateReservering(reservering: ActiviteitReservering): void {
+    this.http.put<IActiviteitReservering[]>(this.api, reservering).subscribe();
+    location.reload();
+  }
+
+  deleteActiviteitRes(reserveringId: number) {
+    this.http.delete<IActiviteitReservering[]>(this.api + reserveringId).subscribe();
+    location.reload();
   }
 }
-interface IActiviteitres {
-  id: number;
-  naamActiviteit: string;
-  datum: string;
+interface IActiviteitReservering {
   emailGast: string;
+  phoneGast: string;
   aantalPersonen: number;
+  planning: IActiviteitPlanning;
+  resid: number;
 }

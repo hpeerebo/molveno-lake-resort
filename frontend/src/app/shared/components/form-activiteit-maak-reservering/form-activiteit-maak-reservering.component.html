@@ -1,0 +1,94 @@
+<div class="modal-header">
+    <h4
+        class="modal-title"
+        id="modal-basic-title"
+    >
+        Reserveren activiteit
+    </h4>
+    <button
+        type="button"
+        class="close"
+        aria-label="Close"
+        (click)="activeModal.dismiss('cancel')"
+    >
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="activiteitMaakResForm">
+        <div class="form-group">
+            <label>Activiteit</label>
+            <input
+                disabled="true"
+                type="string"
+                class="form-control"
+                formControlName="actNaam"
+                ngbAutofocus
+            >
+        </div>
+        <div class="form-group">
+            <label>Datum</label>
+            <input
+                disabled="true"
+                type="string"
+                class="form-control"
+                formControlName="actDate"
+            >
+        </div>
+        <div class="form-group">
+            <label>E-mail gast</label>
+            <input
+                type="string"
+                class="form-control"
+                formControlName="emailGast"
+                [class.is-invalid]="activiteitMaakResForm.controls.emailGast?.invalid && activiteitMaakResForm.controls.emailGast?.touched"
+            >
+            <small
+            class="text-danger d-none"
+            [class.d-block]="activiteitMaakResForm.controls.emailGast?.invalid && activiteitMaakResForm.controls.emailGast?.touched"
+            >
+                Email adres is verplicht
+            </small>
+        </div>
+        <div class="form-group">
+            <label>Telefoonnummer gast</label>
+            <input
+                type="string"
+                class="form-control"
+                formControlName="phoneGast"
+                [class.is-invalid]="activiteitMaakResForm.controls.phoneGast?.invalid && activiteitMaakResForm.controls.phoneGast?.touched"
+            >
+            <small
+            class="text-danger d-none"
+            [class.d-block]="activiteitMaakResForm.controls.phoneGast?.invalid && activiteitMaakResForm.controls.phoneGast?.touched"
+            >
+                Telefoonnummer is verplicht
+            </small>
+        </div>
+        <div class="form-group">
+            <label>Aantal personen</label>
+            <input
+                type="number"
+                class="form-control"
+                formControlName="aantalPersonen"
+                [class.is-invalid]="activiteitMaakResForm.controls.aantalPersonen?.invalid && activiteitMaakResForm.controls.aantalPersonen?.touched"
+            >
+            <small
+            class="text-danger d-none"
+            [class.d-block]="activiteitMaakResForm.controls.aantalPersonen?.invalid && activiteitMaakResForm.controls.aantalPersonen?.touched"
+            >
+                Aantal personen is verplicht
+            </small>
+        </div>
+    </form>
+    <div class="modal-footer">
+        <button
+            type="button"
+            class="btn btn-success"
+            (click)="submitForm()"
+            [disabled]="activiteitMaakResForm.invalid"
+        >
+            Save
+        </button>
+    </div>
+</div>

@@ -1,10 +1,11 @@
 import { Component, OnInit } from "@angular/core";
-import { ActiviteitRes } from "src/app/models/activiteit-res";
+import { ActiviteitReservering } from "src/app/models/activiteit-reservering";
 import { Observable } from "rxjs";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { ActiviteitenResService } from "src/app/services/activiteiten-res.service";
 import { FormActiviteitResComponent } from "src/app/shared/components/form-activiteit-res/form-activiteit-res.component";
 import { ModalConfirmComponent } from "src/app/shared/components/modal-confirm/modal-confirm.component";
+import { ActiviteitenPlanningService } from "src/app/services/activiteiten-planning.service";
+import { ActiviteitenResService } from "src/app/services/activiteiten-res.service";
 
 @Component({
   selector: "app-activiteit-reserveringen",
@@ -12,40 +13,65 @@ import { ModalConfirmComponent } from "src/app/shared/components/modal-confirm/m
   styleUrls: ["./activiteit-reserveringen.component.scss"]
 })
 export class ActiviteitReserveringenComponent {
-  public reserveringen: Observable<
-    ActiviteitRes[]
+  public reserveringen$: Observable<
+    ActiviteitReservering[]
   > = this.activiteitenResService.getAllActiviteitenRes();
+
+  public field: string = "";
+  public show: string = "";
+
 
   constructor(
     private activiteitenResService: ActiviteitenResService,
     private modalService: NgbModal
   ) {}
 
-  openFormActiviteitResModal(reserveringen?: ActiviteitRes) {
+  public clickColumnHandler(event: string): string {
+    this.field = event;
+    return this.field;
+  }
+
+  openFormUpdateActiviteitRes(reservering: ActiviteitReservering) {
+    console.log('UpdateRes Reservering', reservering)
     const modal = this.modalService.open(FormActiviteitResComponent);
-
-    if (reserveringen) {
-      modal.componentInstance.reserveringen = reserveringen;
-    }
-
+    modal.componentInstance.reservering = reservering;
     modal.result
       .then(result => {
-        this.activiteitenResService.saveActiviteitRes(result);
+        console.log('UpdateRes Result', result)
+        this.activiteitenResService.updateReservering(result);
       })
+
       .catch(error => {
         console.log(error);
       });
   }
 
-  verwijderActiviteitRes(reservering: ActiviteitRes) {
+  // openFormActiviteitResModal(
+  //   planningId: number,
+  //   reservering?: ActiviteitReservering
+  // ) {
+  //   const modal = this.modalService.open(FormActiviteitResComponent);
+  //   if (reservering) {
+  //     modal.componentInstance.reservering = reservering;
+  //   }
+
+  //   modal.result
+  //     .then(result => {
+  //       console.log("Result", result);
+  //       this.activiteitenResService.updateReservering(result);
+  //     })
+  //     .catch(error => {
+  //       console.log(error);
+  //     });
+  // }
+
+  openFormDeleteActiviteitReservering(reserveringId: number) {
     this.modalService
       .open(ModalConfirmComponent)
       .result.then(result => {
         if (result === "yes") {
-          console.log(reservering);
-          this.activiteitenResService.deleteActiviteitRes(reservering);
-        }
-      })
+          this.activiteitenResService.deleteActiviteitRes(reserveringId);
+      }})
       .catch(error => {
         console.log(error);
       });

@@ -1,51 +1,47 @@
 <div class="d-flex justify-content-end mt-2">
-    <button
-        class="btn btn-primary mt-2"
-        (click)="openFormActiviteitModal()"
-    >
-        Toevoegen nieuwe activiteit
-    </button>
+  <button class="btn btn-primary mt-2" (click)="openFormSaveActiviteit()">
+    Toevoegen nieuwe activiteit
+  </button>
 </div>
 
-
-
+<!-- <form>
+  <div class="form-group form-inline">
+      Zoek activiteit <input class="form-control ml-2" type="text" [formControl]="filter"/>
+  </div>
+</form> -->
 
 <div class="table-responsive mt-2">
-    <table class="table table-striped table-sm">
-        <thead>
-            <tr>
-                <th>Naam</th>
-                <th>Beschrijving</th>
-                <th>Datum</th>
-                <th>Capaciteit</th>
-                <th>Prijs</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let activiteit of (activiteiten | async)">
-                <td>{{ activiteit.naam }}</td>
-                <td>{{ activiteit.beschrijving }}</td>
-                <td>{{ activiteit.datum }}</td>
-                <td>{{ activiteit.capaciteit }}</td>
-                <td>
-                    {{ activiteit.prijs | currency: "EUR" }}
-                </td>
-                <td class="text-align: right">
-                    <i
-                        class="fas fa-edit mr-2"
-                        placement="top"
-                        ngbTooltip="Wijzigen"
-                        (click)="openEditFormActiviteitModal(activiteit)"
-                    ></i>
-                    <i
-                        class="fas fa-trash-alt mr-2"
-                        placement="top"
-                        ngbTooltip="Verwijderen"
-                        (click)="verwijderActiviteit(activiteit)"
-                    ></i>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+  <table class="table table-striped table-sm">
+    <thead>
+      <tr>
+        <th></th>
+        <th class="handCursor" (click)="clickColumnHandler('naam')">Naam<i class="fa fa-fw fa-sort"></i></th>
+        <th class="handCursor" (click)="clickColumnHandler('beschrijving')">Beschrijving<i class="fa fa-fw fa-sort"></i></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let activiteit of (activiteiten$ | async | activiteitFilter: show | sortgrid: field)">
+        <!-- <tr *ngFor="let activiteit of (activiteiten$ | activiteitFilter: show | sortgrid:field) | async; index as i "> -->
+        <!-- <th scope="row">{{ i + 1 }}</th> -->
+        <td>
+          <img src="assets/img/thumb_{{ activiteit.thumb }}" style="width:75px; height:auto; background:#777; color:#777;" />
+        </td>
+        <td>{{ activiteit.naam }}</td>
+        <td>{{ activiteit.beschrijving }}</td>
+        <!-- <td><ngb-highlight [result]="activiteit.naam | number" [term]="filter.value"></ngb-highlight></td> -->
+        <!-- <td><ngb-highlight [result]="activiteit.beschrijving | number" [term]="filter.value"></ngb-highlight></td> -->
+        <td class="text-align: right">
+          <i class="far fa-calendar-alt mr-2" placement="top" ngbTooltip="Maak planning" (click)="openCreatePlanning(activiteit)"></i>
+          <i class="fas fa-edit mr-2" placement="top" ngbTooltip="Wijzigen" (click)="openFormUpdateActiviteit(activiteit)"></i>
+          <i
+            class="fas fa-trash-alt mr-2"
+            placement="top"
+            ngbTooltip="Verwijderen"
+            (click)="openFormDeleteActiviteit(activiteit.actid)"
+          ></i>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>

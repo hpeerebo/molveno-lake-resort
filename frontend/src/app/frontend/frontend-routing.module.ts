@@ -12,9 +12,9 @@ import { FeaturetteComponent } from './shared/components/featurette/featurette.c
 import { RoundedCircleComponent } from './shared/components/rounded-circle/rounded-circle.component';
 import { KamerreserveringenService } from '../services/kamerreserveringen.service';
 import { GastKamerReserveringComponent } from './shared/components/gast-kamerreservering/gast-kamerreservering.component';
-import { AuthGuard } from './guard/auth.guard';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtTokenInterceptor } from './interceptors/jwt-token-interceptor.service';
+import { ActiviteitenPlanningReserverenComponent } from './components/activiteiten/activiteiten-planning-reserveren/activiteiten-planning-reserveren.component';
 
 const routes: Routes = [
   {
@@ -31,6 +31,8 @@ const routes: Routes = [
       { path: 'rounded-circle', component: RoundedCircleComponent },
       { path: 'kamerreserveringsservice', component: KamerreserveringenService},
       { path: 'gast-kamerreservering', component: GastKamerReserveringComponent},
+      { path: 'activiteiten-planning-reserveren', component: ActiviteitenPlanningReserverenComponent},
+
     ]
   },
 

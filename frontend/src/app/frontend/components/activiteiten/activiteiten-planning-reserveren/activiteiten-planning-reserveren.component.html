@@ -1,0 +1,43 @@
+<div class="alert alert-warning">
+  <span class="closebtn">&times;</span>
+  <strong>Let op!</strong> Als de gekozen activiteit hieronder niet zichtbaar is dan is hier helaas nog geen planning voor beschikbaar. Excuses voor het
+  ongemak.
+</div>
+
+<div class="table-responsive mt-2">
+  <table class="table table-striped table-sm">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Activiteit</th>
+        <th>Datum</th>
+        <th>Prijs</th>
+        <th>Capaciteit</th>
+        <th>Aanmelden</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let activiteitplanning of (activiteitenPlanningen | async)">
+        <td>
+          <img src="assets/img/thumb_{{ activiteitplanning.activiteit.thumb }}" />
+        </td>
+        <td>
+          {{ activiteitplanning.activiteit.naam }}
+        </td>
+        <td>{{ activiteitplanning.actDate }}</td>
+        <td>
+          {{ activiteitplanning.actPrijs | currency: "EUR" }}
+        </td>
+        <td>{{ activiteitplanning.actCapaciteit }}</td>
+        <td class="text-align: right">
+          <i
+            class="fas fa-pen-alt mr-2"
+            placement="top"
+            ngbTooltip="Reserveren"
+            (click)="openCreateReserveringModal(activiteitplanning)"
+          ></i>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -10,12 +10,12 @@ import {RoomService} from './services/rooms.service';
 import { SortGridService } from './shared/services/sort-grid.service';
 import {DateFunctions} from "./shared/services/date-functions";
 import {CalculationFunctions} from "./shared/services/calculation-functions";
+import { FormActiviteitMaakReserveringComponent } from './shared/components/form-activiteit-maak-reservering/form-activiteit-maak-reservering.component';
+import { FormActiviteitMaakPlanningComponent } from './shared/components/form-activiteit-maak-planning/form-activiteit-maak-planning.component';
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [AppComponent, FormActiviteitMaakReserveringComponent, FormActiviteitMaakPlanningComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -24,6 +24,7 @@ import {CalculationFunctions} from "./shared/services/calculation-functions";
     FrontendModule,
     ManagementportalModule,
     HttpClientModule,
+
   ],
   providers: [RoomService, SortGridService, DateFunctions, CalculationFunctions],
   bootstrap: [AppComponent]

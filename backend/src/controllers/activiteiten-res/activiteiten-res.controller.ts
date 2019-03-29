@@ -12,13 +12,14 @@ import { CreateActiviteitResDto } from 'src/dto/create-activiteit-res-dto';
 import { ActiviteitResEntity } from 'src/entities/activiteit-res-entity';
 import { ActiviteitRes } from 'src/models/activiteit-res';
 import { ApiUseTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { UpdateActiviteitResDto } from 'src/dto/update-activiteit-res-dto';
 
 @Controller('activiteiten/reserveringen')
 @ApiUseTags('activiteiten')
 export class ActiviteitenResController {
   constructor(private readonly activiteitenResService: ActiviteitResService) {}
 
-  @Post('')
+  @Post(':planningid')
   @ApiOperation({ title: 'Maak een nieuwe reservering aan' })
   @ApiResponse({
     status: 201,
@@ -30,17 +31,16 @@ export class ActiviteitenResController {
   })
   public saveReservering(
     @Body() createReservering: CreateActiviteitResDto,
-  ): void {
+    @Param('planningid') planningid: number,
+  ) {
     const reservering: ActiviteitResEntity = new ActiviteitResEntity(
-      createReservering.id,
-      createReservering.naamActiviteit,
-      createReservering.datum,
       createReservering.emailGast,
+      createReservering.phoneGast,
       createReservering.aantalPersonen,
     );
-
-    return this.activiteitenResService.saveReservering(reservering);
+    return this.activiteitenResService.saveReservering(reservering, planningid);
   }
+
   @Get('')
   @ApiOperation({ title: 'Maak een lijst van reserveringen' })
   getReservering(): Promise<ActiviteitRes[]> {
@@ -54,14 +54,13 @@ export class ActiviteitenResController {
     description: 'De reservering is succesvol bijgewerkt',
   })
   public updateReservering(
-    @Body() createResActiviteit: CreateActiviteitResDto,
+    @Body() createResActiviteit: UpdateActiviteitResDto,
   ): void {
     const reservering: ActiviteitResEntity = new ActiviteitResEntity(
-      createResActiviteit.id,
-      createResActiviteit.naamActiviteit,
-      createResActiviteit.datum,
       createResActiviteit.emailGast,
+      createResActiviteit.phoneGast,
       createResActiviteit.aantalPersonen,
+      createResActiviteit.resid,
     );
     this.activiteitenResService.updateReservering(reservering);
   }

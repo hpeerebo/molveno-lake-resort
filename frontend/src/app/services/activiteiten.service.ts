@@ -3,6 +3,7 @@ import { Observable } from "rxjs";
 import { Activiteit } from "../models/activiteit";
 import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
+import { CreateActiviteit } from "../models/create-activiteit";
 
 @Injectable({
   providedIn: "root"
@@ -12,58 +13,38 @@ export class ActiviteitenService {
 
   constructor(private http: HttpClient) {}
 
-  private static activiteitenResponseToActiviteitMapper(
-    activiteitenResponse: IActiviteit[]
-  ): Activiteit[] {
-    // console.log(activiteitenResponse);
-    return activiteitenResponse.map(
-      ActiviteitenService.activiteitToActiviteitMapper
-    );
-  }
-
-  private static activiteitToActiviteitMapper(
-    activiteit: IActiviteit
-  ): Activiteit {
-    return new Activiteit(
-      activiteit.id,
-      activiteit.naam,
-      activiteit.beschrijving,
-      activiteit.datum,
-      activiteit.capaciteit,
-      activiteit.prijs,
-      activiteit.thumb
-    );
-  }
-
   getAllActiviteiten(): Observable<Activiteit[]> {
-    return this.http
-      .get<IActiviteit[]>(this.api)
-      .pipe(map(ActiviteitenService.activiteitenResponseToActiviteitMapper));
+    return this.http.get<IActiviteit[]>(this.api).pipe(map(ActiviteitenService.activiteitenResponseToActiviteitMapper));
   }
 
-  saveActiviteit(activiteit: Activiteit): void {
+  saveActiviteit(activiteit: CreateActiviteit): void {
     this.http.post<IActiviteit[]>(this.api, activiteit).subscribe();
-    // console.log(activiteit);
-    // location.reload();
+    // console.log("saveActiviteit", activiteit);
+    location.reload();
   }
 
   updateActiviteit(activiteit: Activiteit): void {
-    this.http.post<IActiviteit[]>(this.api, activiteit).subscribe();
-    // location.reload();
+    this.http.put<IActiviteit[]>(this.api, activiteit).subscribe();
+    location.reload();
   }
 
-  deleteActiviteit(activiteit: Activiteit): void {
-    this.http.delete<IActiviteit[]>(this.api + activiteit.id).subscribe();
-    // location.reload();
+  deleteActiviteit(activiteitId: number): void {
+    this.http.delete<IActiviteit[]>(this.api + activiteitId).subscribe();
+    location.reload();
+  }
+
+  private static activiteitenResponseToActiviteitMapper(activiteitenResponse: IActiviteit[]): Activiteit[] {
+    return activiteitenResponse.map(ActiviteitenService.activiteitToActiviteitMapper);
+  }
+
+  private static activiteitToActiviteitMapper(activiteit: IActiviteit): Activiteit {
+    return new Activiteit(activiteit.actid, activiteit.naam, activiteit.beschrijving, activiteit.thumb);
   }
 }
 
-interface IActiviteit {
-  id: number;
+export interface IActiviteit {
+  actid: number;
   naam: string;
   beschrijving: string;
-  datum: Date;
-  capaciteit: number;
-  prijs: number;
   thumb: string;
 }

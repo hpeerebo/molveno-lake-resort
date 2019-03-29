@@ -1,30 +1,41 @@
-<div class="d-flex justify-content-end mt-2">
-<button class="btn btn-primary mt-2" (click)="openFormActiviteitResModal()">Nieuwe Reservering maken</button>
-</div>
-
+<br>
+<br>
 <div class="table-responsive mt-2">
-  <table class="table table-striped table-sm">
-    <thead>
-      <tr>
-        <th>Activiteit</th>
-        <th>Datum</th>
-        <th>Emailadres gast</th>
-        <th>Aantal Personen</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let reservering of (reserveringen | async)">
-        <td>{{reservering.naamActiviteit}}</td>
-        <td>{{reservering.datum}}</td>
-        <td>{{reservering.emailGast}}</td>
-        <td>{{reservering.aantalPersonen}}</td>
-        <td class="text-right">
-          <i class="fas fa-edit mr-2" placement="top" ngbTooltip="Wijzigen" (click)="openFormActiviteitResModal(reservering)"></i>
-          <i class="fas fa-trash-alt mr-2" placement="top" ngbTooltip="Verwijderen" (click)="verwijderActiviteitRes(reservering)"></i>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+    <table class="table table-striped table-sm">
+        <thead>
+            <tr>
+                <th class="handCursor" (click)="clickColumnHandler('planning.activiteit.naam')">Activiteit<i class="fa fa-fw fa-sort"></i></th>
+                <th class="handCursor" (click)="clickColumnHandler('planning.actdate')">Datum<i class="fa fa-fw fa-sort"></i></th>
+                <th class="handCursor" (click)="clickColumnHandler('emailGast')">Contactgegevens gast<i class="fa fa-fw fa-sort"></i></th>
+                <th class="handCursor" (click)="clickColumnHandler('aantalPersonen')">Aantal Personen<i class="fa fa-fw fa-sort"></i></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let reservering of (reserveringen$ | async | activiteitReserveringenFilter: show | sortgrid:field)">
+                <td>
+                    {{reservering.planning.activiteit.naam }}
+                </td>
+                <td>{{reservering.planning.actdate}}</td>
+                <td>
+                    {{reservering.emailGast}}/{{reservering.phoneGast}}
+                </td>
+                <td>{{reservering.aantalPersonen}}</td>
+                <td class="text-right">
+                    <i
+                        class="fas fa-edit mr-2"
+                        placement="top"
+                        ngbTooltip="Wijzigen"
+                        (click)="openFormUpdateActiviteitRes(reservering)"
+                    ></i>
+                    <i
+                        class="fas fa-trash-alt mr-2"
+                        placement="top"
+                        ngbTooltip="Verwijderen"
+                        (click)="openFormDeleteActiviteitReservering(reservering.resid)"
+                    ></i>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>
-
