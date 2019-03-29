@@ -14,12 +14,11 @@ export class KamerreserveringdetailsComponent implements OnInit {
   private reserveringsnummer: null | string = "";
   reseveringsId = this.getReseveringBasedOnId();
 
-  constructor(private route: ActivatedRoute,
-              private formkamerreseveringdetails: FormKamerreseveringDetailsComponent,) {
+  constructor(private route: ActivatedRoute) {
   };
 
   ngOnInit() {
-    this.formkamerreseveringdetails.ngOnInit();
+
   }
 
   getReseveringBasedOnId(): string {

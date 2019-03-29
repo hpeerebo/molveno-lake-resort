@@ -1,19 +1,21 @@
-import {AfterViewInit, Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {KamerReserveringDetailsFormGroup} from "./kamerreserveringdetailsormgroup";
 import {KamerreserveringenService} from "../../../../../services/kamerreserveringen.service";
 import {DateFunctions} from "../../../../../shared/services/date-functions";
 import {tap} from "rxjs/operators";
 import {KamerReservering} from "../../../../../models/kamerreservering";
-import {BehaviorSubject, Observable} from "rxjs";
+import {Observable} from "rxjs";
 import {Router} from "@angular/router";
 import {CalculationFunctions} from "../../../../../shared/services/calculation-functions";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-form-kamerresevering-details',
   templateUrl: './form-kamerresevering-details.component.html',
   styleUrls: ['./form-kamerresevering-details.component.scss']
 })
-export class FormKamerreseveringDetailsComponent implements OnInit, OnDestroy, AfterViewInit{
+
+export class FormKamerreseveringDetailsComponent implements OnInit, OnDestroy{
 
   @Input() reseveringsId: string | undefined;
 
@@ -22,7 +24,7 @@ export class FormKamerreseveringDetailsComponent implements OnInit, OnDestroy, A
   public incheckenToegestaan: boolean = false;
   public kamerreserveringdetailsormgroup = new KamerReserveringDetailsFormGroup();
 
-  private storagePrice: number[] = [];
+  private storagePrice: number = 0;
   private numberOfDays: number = 0;
   private totalPrice: number = 0;
   private datumvan: string = '';
@@ -37,12 +39,20 @@ export class FormKamerreseveringDetailsComponent implements OnInit, OnDestroy, A
   constructor(private kamerreserveringenservice: KamerreserveringenService,
               private dateservice: DateFunctions,
               private router: Router,
-              private calculationfunctions: CalculationFunctions) {
+              private calculationfunctions: CalculationFunctions,
+              private modalService: NgbModal) {
   };
 
   ngOnInit() {
-    if (this.reseveringsId){
-      this.kamerreserveringen$ = this.kamerreserveringenservice.getKamerReseveringById(true, this.reseveringsId);
+    console.log("ngOnInit");
+    this.reseveringsId && this.reseveringInzien(this.reseveringsId);
+  }
+
+  reseveringInzien(reseveringsId: string) {
+    console.log("Inzien Resevering: " + reseveringsId);
+    if (reseveringsId){
+      //console.log(this)
+      this.kamerreserveringen$ = this.kamerreserveringenservice.getKamerReseveringById(true, reseveringsId);
       this.kamerreserveringen$.pipe(
         tap(booking => {
           if (booking) {
@@ -58,12 +68,7 @@ export class FormKamerreseveringDetailsComponent implements OnInit, OnDestroy, A
               this.uitchecken = true;
             }
 
-            booking.forEach(prijs => {
-              this.storagePrice = this.calculationfunctions.addToStorage(prijs.prijs * this.numberOfDays);
-            });
-
-            this.totalPrice = parseInt(this.calculationfunctions.sumAll(this.storagePrice));
-
+            // this.totalPrice = parseInt(this.calculationfunctions.sumAll(this.storagePrice));
             this.kamerreserveringdetailsormgroup.setValue({
               voornaam: booking[0].voornaam,
               achternaam: booking[0].achternaam,
@@ -96,74 +101,53 @@ export class FormKamerreseveringDetailsComponent implements OnInit, OnDestroy, A
         this.showSpinnerOnLoad = true;
       })
     }
-  }
-
-  ngAfterViewInit () {
 
   }
 
-  async openDetailsForm(reserveringsnummer: string) {
-    this.uitcheckdatum = reserveringsnummer;
-
-  }
-
-  updateTotalPrice(korting: number) {
-
-  }
-
-  saveChangesToBooking() {
-    // this.booking$.pipe(
-    //   tap(booking => {
-    //     if (booking) {
-    //
-    //       if (this.incheckenToegestaan && this.inchecken) {
-    //         this.incheckdatum = this.todayDate;
-    //       } else {
-    //         this.incheckdatum = '';
-    //       }
-    //
-    //       if (this.incheckenToegestaan && this.uitchecken) {
-    //         this.uitcheckdatum = this.todayDate;
-    //       } else {
-    //         this.uitcheckdatum = '';
-    //       }
-    //
-    //       booking.forEach(kamer => {
-    //         this.kamerreserveringenservice.updateReservering(new KamerReservering(
-    //           kamer.id,
-    //           this.kamerreserveringdetailsormgroup.value.voornaam,
-    //           this.kamerreserveringdetailsormgroup.value.achternaam,
-    //           this.kamerreserveringdetailsormgroup.value.telefoonnummer,
-    //           this.kamerreserveringdetailsormgroup.value.emailadres,
-    //           this.kamerreserveringdetailsormgroup.value.identiteitsid,
-    //           this.kamerreserveringdetailsormgroup.value.postcode,
-    //           this.kamerreserveringdetailsormgroup.value.straat,
-    //           this.kamerreserveringdetailsormgroup.value.huisnummer,
-    //           this.kamerreserveringdetailsormgroup.value.woonplaats,
-    //           this.kamerreserveringdetailsormgroup.value.land,
-    //           kamer.datumvan,
-    //           kamer.datumtot,
-    //           kamer.kamernaam,
-    //           this.incheckdatum,
-    //           this.uitcheckdatum,
-    //           kamer.personen,
-    //           kamer.prijs,
-    //           this.kamerreserveringdetailsormgroup.value.reserveringsnummer,
-    //           this.kamerreserveringdetailsormgroup.value.korting
-    //         ));
-    //       });
-    //     }
-    //   })
-    // ).subscribe();
-    // this.router.navigateByUrl('managementportal/kamerreserveringen');
-  }
-
-  ngOnDestroy(): void {
+  resetInitialValues(){
+    console.log("resetInitialValues");
     this.kamerreserveringen$ = new Observable<KamerReservering[] | undefined>(undefined);
+    this.numberOfDays = 0;
+    this.totalPrice = 0;
+    this.datumvan = '';
+    this.datumtot = '';
+    this.inchecken = false;
+    this.incheckdatum = '';
+    this.uitcheckdatum = '';
+    this.uitchecken = false;
+    this.showSpinnerOnLoad = false;
+    this.incheckenToegestaan = false;
     this.kamerreserveringdetailsormgroup.reset();
     this.router.navigateByUrl('managementportal/kamerreserveringen');
+
   }
+  ngOnDestroy(): void {
+    console.log("ngOnDestroy");
+
+  }
+
+
+  private saveChangesToBooking() {
+    console.log("Save Booking" );
+
+    this.router.navigateByUrl('managementportal/kamerreserveringen');
+  }
+
+  private updateTotalPrice(korting: number) {
+    console.log("Total Price");
+    return this.reseveringsId;
+  }
+
+  private bookingId(): any{
+    return this.reseveringsId;
+  }
+
+  private booking(): Observable<KamerReservering[] | undefined> {
+    return this.kamerreserveringenservice.getKamerReseveringById(true, this.bookingId());
+  }
+
   async delay(ms: number) {
+    console.log("Delay");
     await new Promise(resolve => setTimeout(() => resolve(), ms));
   }
 

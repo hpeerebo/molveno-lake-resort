@@ -25,4 +25,8 @@ export class CalculationFunctions {
     return this.storage = [...this.storage, result];
   }
 
+  public clearStorage(){
+   this.storage.length = 0;
+  }
+
 }

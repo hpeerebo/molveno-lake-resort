@@ -1,9 +1,9 @@
- <!--<pre>{{kamerreserveringen$ | async | json}}</pre>-->
+<!--<pre>{{kamerreserveringen$ | async | json}}</pre>-->
 <br/>
 <div  *ngIf="showSpinnerOnLoad; else showSpinner;">
   <div class="row">
     <div class="col-10 d-flex text-sm-center">
-      <button type="button" class="btn btn-outline-primary btn-sm" (click)="ngOnDestroy()">
+      <button type="button" class="btn btn-outline-primary btn-sm" (click)="resetInitialValues()">
         Terug naar het overzicht
       </button>
       <button type="button" class="btn btn-outline-primary btn-sm" (click)="openBookingPrintingForm()">
@@ -177,9 +177,11 @@
                   </div>
                 </div>
                 <div class="form-group col-sm-5">
-                  <div *ngIf="uitchecken">
-                    <div>op: {{kamerreserveringdetailsormgroup.value.uitchecken ||todayDate}}</div>
-
+                  <div *ngIf="incheckenToegestaan">
+                    <div *ngIf="uitchecken">
+                      <br/>
+                      <div>op: {{ kamerreserveringdetailsormgroup.value.uitchecken || todayDate}}</div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -281,6 +283,7 @@
                   <div *ngFor="let boeking of (kamerreserveringen$ | async);" class="row">
                     <div class="col-8">{{boeking.kamernaam}}</div>
                     <div class="col-2">{{boeking.prijs | currency: "EUR" }}</div>
+                    <div class="col-2"></div>
                   </div>
                   <hr class="bg-dark">
 
@@ -288,7 +291,7 @@
                     <div class="col-8 text-danger">Totale prijs voor
                       ({{numberOfDays}} nacht(en))
                     </div>
-                    <div class="col-2 text-danger">{{updateTotalPrice(kamerreserveringdetailsormgroup.value.korting) | currency: "EUR" }} </div>
+                    <div class="col-2 text-danger">{{storagePrice | currency: "EUR" }} </div>
                   </div>
 
                   <hr class="bg-dark">

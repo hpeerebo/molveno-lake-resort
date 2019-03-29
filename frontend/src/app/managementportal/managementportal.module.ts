@@ -75,7 +75,7 @@ import { FormKamerreseveringDetailsComponent } from './components/kamers/kamers-
     FormKamerreseveringDetailsComponent
   ],
   imports: [CommonModule, ManagementportalRoutingModule, NgbModule, FormsModule, ReactiveFormsModule, ApplicationPipesModule, PDFExportModule],
-  entryComponents: [FormTafelComponent, FormTafelreserveringComponent, FormGerechtComponent, FormIngredientComponent, FormActiviteitComponent,  FormActiviteitResComponent, FormActiviteitPlanningComponent, ModalConfirmComponent, FormKamerreserveringComponent, KamerreserveringdetailsComponent, FormKamersbeschikbaarComponent, FormPrintKamerreseveringComponent, FormEmailKamerreseveringComponent, SignupComponent, FormDownloadKamerreseveringComponent, KamerModalConfirmComponent],
+  entryComponents: [FormTafelComponent, FormTafelreserveringComponent, FormGerechtComponent, FormIngredientComponent, FormActiviteitComponent,  FormActiviteitResComponent, FormActiviteitPlanningComponent, ModalConfirmComponent, FormKamerreserveringComponent, KamerreserveringdetailsComponent, FormKamersbeschikbaarComponent, FormPrintKamerreseveringComponent, FormEmailKamerreseveringComponent, SignupComponent, FormDownloadKamerreseveringComponent, KamerModalConfirmComponent, FormKamerreseveringDetailsComponent],
   providers: [FormKamerreseveringDetailsComponent],
 
 })
