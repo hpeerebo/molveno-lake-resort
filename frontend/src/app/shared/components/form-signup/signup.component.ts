@@ -3,6 +3,9 @@ import { FormGroup, FormControl, Validators, ValidatorFn, AbstractControl } from
 import { UsersService } from 'src/app/frontend/shared/services/users.service';
 import { ICreateUser } from '../../../../../../shared/interfaces/create-user.interface';
 import { Router } from '@angular/router';
+import { tap, catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-signup',
@@ -26,10 +29,24 @@ export class SignupComponent implements OnInit {
 	}
 
 	public onSubmit(): void {
-    this.userService.saveUser(SignupComponent.createUser(this.signUpForm)).subscribe();
-    this.router.navigate(['login']);
+    //this.userService.saveUser(SignupComponent.createUser(this.signUpForm)).subscribe();
+    this.userService.saveUser(SignupComponent.createUser(this.signUpForm))
+    .pipe(
+      tap(() => this.router.navigate(['login'])),
+    catchError((httpErrorResponse: HttpErrorResponse) => {
+      switch (httpErrorResponse.status) {
+        case 500:
+          alert("Server Error. Neem contact met de beheerder op 0612345678");
+          break;
+        case 409:
+          alert("Gebruiker bestaat al")
+          break;
+      }
+      return of(httpErrorResponse)
+    })
+    ).subscribe()
 
-	}
+}
 
 	public static createUser(signUpForm: FormGroup): ICreateUser {
 		return {

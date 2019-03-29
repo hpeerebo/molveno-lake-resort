@@ -61,6 +61,4 @@ export class KamerreserveringController {
     public deleteKamer(@Param('id') kamerId: number): void {
         this.kamerreserveringservice.deleteKamerReservering(kamerId);
     }
-
-
 }

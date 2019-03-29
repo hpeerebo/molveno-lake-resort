@@ -36,6 +36,7 @@ import { FormPrintKamerreseveringComponent } from './components/kamers/kamers-fo
 import { FormEmailKamerreseveringComponent } from './components/kamers/kamers-form/form-email-kamerresevering/form-email-kamerresevering.component';
 import { FormDownloadKamerreseveringComponent } from './components/kamers/kamers-form/form-download-kamerresevering/form-download-kamerresevering.component';
 import {PDFExportModule} from "@progress/kendo-angular-pdf-export";
+import { KamerModalConfirmComponent } from './components/kamers/kamers-form/kamer-modal-confirm/kamer-modal-confirm.component';
 
 
 @NgModule({
@@ -70,10 +71,11 @@ import {PDFExportModule} from "@progress/kendo-angular-pdf-export";
     SignupComponent,
     FormPrintKamerreseveringComponent,
     FormEmailKamerreseveringComponent,
-    FormDownloadKamerreseveringComponent
+    FormDownloadKamerreseveringComponent,
+    KamerModalConfirmComponent
   ],
   imports: [CommonModule, ManagementportalRoutingModule, NgbModule, FormsModule, ReactiveFormsModule, ApplicationPipesModule, PDFExportModule],
-  entryComponents: [FormTafelComponent, FormTafelreserveringComponent, FormGerechtComponent, FormIngredientComponent, FormActiviteitComponent,  FormActiviteitResComponent, FormActiviteitPlanningComponent, ModalConfirmComponent, FormKamerreserveringComponent, KamerreserveringdetailsComponent, FormKamersbeschikbaarComponent, FormPrintKamerreseveringComponent, FormEmailKamerreseveringComponent, SignupComponent, FormDownloadKamerreseveringComponent]
+  entryComponents: [FormTafelComponent, FormTafelreserveringComponent, FormGerechtComponent, FormIngredientComponent, FormActiviteitComponent,  FormActiviteitResComponent, FormActiviteitPlanningComponent, ModalConfirmComponent, FormKamerreserveringComponent, KamerreserveringdetailsComponent, FormKamersbeschikbaarComponent, FormPrintKamerreseveringComponent, FormEmailKamerreseveringComponent, SignupComponent, FormDownloadKamerreseveringComponent, KamerModalConfirmComponent]
 
 })
 export class ManagementportalModule {

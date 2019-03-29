@@ -21,10 +21,7 @@ export class AuthService {
 			.pipe(
 				tap(data => {
           localStorage.setItem("token", data.token),
-          this.router.navigate(['managementportal/home'])
-        },
-        error =>{
-          alert('de gebruikersnaam of wachtwoord is niet correct')
+          //this.router.navigate(['managementportal/home'])
         }),
 				take(1)
 			);
