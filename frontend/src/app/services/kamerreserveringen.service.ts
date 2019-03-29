@@ -84,7 +84,6 @@ export class KamerreserveringenService {
   }
 
   updateReservering(kamerreservering: KamerReservering) {
-    console.log('save is accessed');
     this.http.put(`${KamerreserveringenService.api}/kamerresevering`, kamerreservering)
       .pipe(
         take(1),
