@@ -15,9 +15,9 @@ export class FormActiviteitPlanningComponent implements OnInit {
 
   public activiteitenPlanningForm = this.formBuilder.group({
     actNaam: [undefined],
-    actdate: ["", Validators.required],
-    actprijs: [0, [Validators.required, Validators.min(1)]],
-    actcapaciteit: [0, [Validators.required, Validators.min(1)]],
+    actDate: ["", Validators.required],
+    actPrijs: [0, [Validators.required, Validators.min(1)]],
+    actCapaciteit: [0, [Validators.required, Validators.min(1)]],
     planid: [0, Validators.required],
   });
 
@@ -27,19 +27,19 @@ export class FormActiviteitPlanningComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log('result', this.activiteitenPlanning);
+    // console.log('result', this.activiteitenPlanning);
     if (this.activiteitenPlanning) {
       this.activiteitenPlanningForm.controls.actNaam.setValue(
         this.activiteitenPlanning.activiteit.naam
       );
-      this.activiteitenPlanningForm.controls.actdate.setValue(
-        this.activiteitenPlanning.actdate
+      this.activiteitenPlanningForm.controls.actCapaciteit.setValue(
+        this.activiteitenPlanning.actCapaciteit
       );
-      this.activiteitenPlanningForm.controls.actprijs.setValue(
-        this.activiteitenPlanning.actprijs
+      this.activiteitenPlanningForm.controls.actDate.setValue(
+        this.activiteitenPlanning.actDate
       );
-      this.activiteitenPlanningForm.controls.actcapaciteit.setValue(
-        this.activiteitenPlanning.actcapaciteit
+      this.activiteitenPlanningForm.controls.actPrijs.setValue(
+        this.activiteitenPlanning.actPrijs
       );
       this.activiteitenPlanningForm.controls.planid.setValue(
         this.activiteitenPlanning.planid
@@ -50,13 +50,13 @@ export class FormActiviteitPlanningComponent implements OnInit {
   submitForm() {
     this.activeModal.close(this.activiteitenPlanningForm.value);
   }
-  get actdate() {
-    return this.activiteitenPlanningForm.get("actdate");
+  get actDate() {
+    return this.activiteitenPlanningForm.get("actDate");
   }
-  get actprijs() {
-    return this.activiteitenPlanningForm.get("actprijs");
+  get actPrijs() {
+    return this.activiteitenPlanningForm.get("actPrijs");
   }
-  get actcapaciteit() {
-    return this.activiteitenPlanningForm.get("actcapaciteit");
+  get actCapaciteit() {
+    return this.activiteitenPlanningForm.get("actCapaciteit");
   }
 }

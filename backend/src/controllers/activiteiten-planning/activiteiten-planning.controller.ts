@@ -35,14 +35,15 @@ export class ActiviteitenPlanningController {
     @Body() createActiviteitPlanning: CreateActiviteitPlanningDto,
     @Param('activiteitid') actId: number,
   ) {
-    const activiteitplanning: ActiviteitPlanningEntity = new ActiviteitPlanningEntity(
-      createActiviteitPlanning.actdate,
-      createActiviteitPlanning.actprijs,
-      createActiviteitPlanning.actcapaciteit,
+    const activiteitenMaakPlanning: ActiviteitPlanningEntity = new ActiviteitPlanningEntity(
+      createActiviteitPlanning.actCapaciteit,
+      createActiviteitPlanning.actDate,
+      createActiviteitPlanning.actPrijs,
+ 
     );
-
+    console.log("activiteitenMaakPlanning", activiteitenMaakPlanning);
     return this.activiteitenPlanService.saveActiviteitPlanning(
-      activiteitplanning,
+      activiteitenMaakPlanning,
       actId,
     );
   }
@@ -64,9 +65,9 @@ export class ActiviteitenPlanningController {
     @Param('activiteitid') activiteitid: number,
   ): void {
     const planning: ActiviteitPlanningEntity = new ActiviteitPlanningEntity(
-      createActiviteitPlanning.actdate,
-      createActiviteitPlanning.actprijs,
-      createActiviteitPlanning.actcapaciteit,
+      createActiviteitPlanning.actCapaciteit,
+      createActiviteitPlanning.actDate,
+      createActiviteitPlanning.actPrijs,
       createActiviteitPlanning.planid,
     );
     this.activiteitenPlanService.updateActiviteitPlanning(

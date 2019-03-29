@@ -3,17 +3,17 @@ import { IsNumber, IsString } from 'class-validator';
 
 export class UpdateActiviteitPlanningDto {
 
+  @IsNumber()
+  @ApiModelProperty()
+  public readonly actCapaciteit: number;
+  
   @IsString()
   @ApiModelProperty()
-  public readonly actdate: string;
+  public readonly actDate: string;
 
   @IsNumber()
   @ApiModelProperty()
-  public readonly actprijs: number;
-
-  @IsNumber()
-  @ApiModelProperty()
-  public readonly actcapaciteit: number;
+  public readonly actPrijs: number;
 
   @IsNumber()
   @ApiModelProperty()

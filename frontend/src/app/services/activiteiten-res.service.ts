@@ -33,7 +33,7 @@ export class ActiviteitenResService {
   }
 
   saveActiviteitRes(reservering: CreateActiviteitReservering, planningId: number) {
-    console.log("saveActiviteitRes", reservering);
+    // console.log("saveActiviteitRes", reservering);
     this.http.post<IActiviteitReservering[]>(this.api + planningId, reservering).subscribe();
     location.reload();
   }

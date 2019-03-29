@@ -2,9 +2,9 @@ import {Activiteit} from './activiteit';
 
 export class CreateActiviteitenPlanning {
   constructor(
-    public actcapaciteit: number,
-    public actdate: string,
-    public actprijs: number,
+    public actCapaciteit: number,
+    public actDate: string,
+    public actPrijs: number,
     public activiteit: Activiteit
 
   ) {}

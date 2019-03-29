@@ -46,7 +46,7 @@ export class ManagementPortalActiviteitenComponent {
 
     modal.result
       .then(result => {
-        console.log(result);
+        console.log("result", result);
         this.ActiviteitenPlanningService.saveActiviteitPlanning(result, activiteitenMaakPlanning.actid);
       })
       .catch(error => {

@@ -1,7 +1,8 @@
-<p>
-  LET OP! Als de gekozen activiteit hieronder niet zichtbaar is dan is hier helaas nog geen planning voor beschikbaar. Excuses voor het
+<div class="alert alert-warning">
+  <span class="closebtn">&times;</span>
+  <strong>Let op!</strong> Als de gekozen activiteit hieronder niet zichtbaar is dan is hier helaas nog geen planning voor beschikbaar. Excuses voor het
   ongemak.
-</p>
+</div>
 
 <div class="table-responsive mt-2">
   <table class="table table-striped table-sm">
@@ -23,11 +24,11 @@
         <td>
           {{ activiteitplanning.activiteit.naam }}
         </td>
-        <td>{{ activiteitplanning.actdate }}</td>
+        <td>{{ activiteitplanning.actDate }}</td>
         <td>
-          {{ activiteitplanning.actprijs | currency: "EUR" }}
+          {{ activiteitplanning.actPrijs | currency: "EUR" }}
         </td>
-        <td>{{ activiteitplanning.actcapaciteit }}</td>
+        <td>{{ activiteitplanning.actCapaciteit }}</td>
         <td class="text-align: right">
           <i
             class="fas fa-pen-alt mr-2"

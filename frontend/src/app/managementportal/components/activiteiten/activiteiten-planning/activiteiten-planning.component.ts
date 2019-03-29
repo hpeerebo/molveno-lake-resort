@@ -7,8 +7,6 @@ import { ActiviteitenPlanningService } from "src/app/services/activiteiten-plann
 import { FormActiviteitPlanningComponent } from "src/app/shared/components/form-activiteitplanning/form-activiteitplanning.component";
 import { FormActiviteitMaakReserveringComponent } from "src/app/shared/components/form-activiteit-maak-reservering/form-activiteit-maak-reservering.component";
 import { ActiviteitenResService } from "src/app/services/activiteiten-res.service";
-import { CreateActiviteitenPlanning } from "src/app/models/create-activiteit-planning";
-import { FormActiviteitMaakPlanningComponent } from 'src/app/shared/components/form-activiteit-maak-planning/form-activiteit-maak-planning.component';
 
 @Component({
   selector: "app-activiteiten-planning",
@@ -47,7 +45,7 @@ export class ActiviteitenPlanningComponent {
   }
 
   openFormUpdatePlanning(activiteitenPlanning: ActiviteitenPlanning) {
-    console.log('test', activiteitenPlanning)
+    // console.log('test', activiteitenPlanning)
     const modal = this.modalService.open(FormActiviteitPlanningComponent);
     modal.componentInstance.activiteitenPlanning = activiteitenPlanning;
     modal.result

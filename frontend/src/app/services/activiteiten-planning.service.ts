@@ -24,22 +24,22 @@ export class ActiviteitenPlanningService {
       );
   }
 
-  saveActiviteitPlanning(planning: CreateActiviteitenPlanning, actId: number) {
-    console.log("saveActiviteitPlanning", planning);
-    this.http.post<IActiviteitPlanning[]>(this.api + actId, planning).subscribe();
-    // location.reload();
+  saveActiviteitPlanning(activiteitenMaakPlanning: CreateActiviteitenPlanning, actId: number) {
+    // console.log("saveActiviteitPlanning", activiteitenMaakPlanning);
+    this.http.post<IActiviteitPlanning[]>(this.api + actId, activiteitenMaakPlanning).subscribe();
+    location.reload();
   }
 
   updateActiviteitPlanning(planning: ActiviteitenPlanning): void {
     this.http.put<IActiviteitPlanning[]>(this.api, planning).subscribe();
-    // location.reload();
+    location.reload();
   }
 
   deleteActiviteitPlanning(planid: number): void {
     this.http
       .delete<IActiviteitPlanning[]>(this.api + planid)
       .subscribe();
-    // location.reload();
+    location.reload();
   }
 
   private static activiteitenplanResponseToActiviteitplanMapper(
@@ -53,19 +53,20 @@ export class ActiviteitenPlanningService {
   ): ActiviteitenPlanning {
     return new ActiviteitenPlanning(
       activiteitplanning.planid,
-      activiteitplanning.actdate,
-      activiteitplanning.actcapaciteit,
-      activiteitplanning.actprijs,
+      activiteitplanning.actCapaciteit,
+      activiteitplanning.actDate,
+      activiteitplanning.actPrijs,
       activiteitplanning.activiteit
-    );
+
+      );
   }
 }
 
 export interface IActiviteitPlanning {
   planid: number;
-  actcapaciteit: number;
-  actdate: string;
-  actprijs: number;
+  actCapaciteit: number;
+  actDate: string;
+  actPrijs: number;
   activiteit: IActiviteit;
-}
 
+}

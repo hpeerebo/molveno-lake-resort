@@ -35,7 +35,7 @@ export class FormActiviteitResComponent implements OnInit {
         this.reservering.planning.activiteit.naam
       );
       this.activiteitResForm.controls.actDate.setValue(
-        this.reservering.planning.actdate
+        this.reservering.planning.actDate
       );
       this.activiteitResForm.controls.emailGast.setValue(
         this.reservering.emailGast

@@ -26,7 +26,7 @@ export class ActiviteitenPlanningReserverenComponent implements OnInit {
 
     modal.result
       .then(result => {
-        console.log(result);
+        // console.log(result);
         this.activiteitenResService.saveActiviteitRes(result, activiteitenPlanning.planid);
       })
       .catch(error => {

@@ -37,9 +37,9 @@ export class ActiviteitPlanningService {
     this.activiteitenPlanningRepository.update(
       { planid: planning.planid },
       {
-        actdate: planning.actdate,
-        actprijs: planning.actprijs,
-        actcapaciteit: planning.actcapaciteit,
+        actCapaciteit: planning.actCapaciteit,
+        actDate: planning.actDate,
+        actPrijs: planning.actPrijs,
       },
     );
   }
