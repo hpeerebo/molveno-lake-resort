@@ -6,15 +6,15 @@
   <table class="table table-sm table-hover">
     <thead>
       <tr>
-        <th class="handCursor" (click)="clickColumnHandler('naam')">Naam</th>
-        <th class="handCursor" (click)="clickColumnHandler('type')">Type</th>
-        <th class="handCursor" (click)="clickColumnHandler('subtype')">SubType</th>
-        <th class="handCursor" (click)="clickColumnHandler('prijs')">Prijs</th>
+        <th class="handCursor" (click)="columnSortClickHandler('naam')">Naam</th>
+        <th class="handCursor" (click)="columnSortClickHandler('type')">Type</th>
+        <th class="handCursor" (click)="columnSortClickHandler('subtype')">SubType</th>
+        <th class="handCursor" (click)="columnSortClickHandler('prijs')">Prijs</th>
         <th></th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let gerecht of (gerechten$ | async | sortgrid:field)">
+      <tr *ngFor="let gerecht of (gerechten$ | async | sortgrid:columnTitle)">
         <td><span class="handCursor" [routerLink]="[gerecht.id]">{{gerecht.naam}}</span></td>
         <td>{{gerecht.type}}</td>
         <td>{{gerecht.subtype}}</td>

@@ -78,4 +78,8 @@ export class UpdateKamerreserveringDto {
   @ApiModelProperty()
   public readonly reserveringsnummer: string;
 
+  //@IsNumber()
+  @ApiModelProperty()
+  public readonly korting: number;
+
 }

@@ -14,10 +14,10 @@ import { FormTafelreserveringComponent } from 'src/app/shared/components/form-ta
 export class ReserveringenComponent implements OnInit {
   public reserveringen$: Observable<Tafelreservering[]> = this.tafelreserveringenService.data$;
 
-  field: string = "aanvangstijd";
-  public clickColumnHandler(event: string): string {
-    this.field = event;
-    return console.log(this.field), this.field;
+  columnTitle: string = "aanvangstijd";
+  public columnSortClickHandler(event: 'aanvangstijd' | 'personen' | 'naam' | 'telefoon'): string {
+    this.columnTitle = event;
+    return this.columnTitle;
   }
 
   constructor(
@@ -25,36 +25,38 @@ export class ReserveringenComponent implements OnInit {
     private modalService: NgbModal,
   ) { }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  public handleNewReservationButtonClick() {
+    this.openFormTafelreserveringModal();
   }
 
-  openFormTafelreserveringModal(tafelreservering?: Tafelreservering) {
+  public handleModifyReservationButtonClick(reservering: Tafelreservering) {
+    this.openFormTafelreserveringModal(reservering);
+  }
+
+  public handleDeleteReservationButtonClick(reservering: Tafelreservering) {
+    this.verwijderReservering(reservering);
+  }
+
+  private async openFormTafelreserveringModal(tafelreservering?: Tafelreservering) {
     const modal = this.modalService.open(FormTafelreserveringComponent);
 
     if (tafelreservering) {
       modal.componentInstance.tafelreservering = tafelreservering;
     }
 
-    modal.result
-      .then(result => {
-        if (result.id) this.tafelreserveringenService.updateTafelreservering(result);
-        else this.tafelreserveringenService.addNewReservering(result);
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    try {
+      const result = await modal.result
+      if (result.id) this.tafelreserveringenService.updateTafelreservering(result);
+      else this.tafelreserveringenService.addNewReservering(result);
+    } catch (message) { }
   }
 
-  verwijderReservering(reservering: Tafelreservering) {
-    this.modalService
-      .open(ModalConfirmComponent)
-      .result.then(result => {
-        if (result === 'yes') {
-          this.tafelreserveringenService.deleteReservering(reservering);
-        }
-      })
-      .catch(error => {
-        console.log(error);
-      });
+  private async verwijderReservering(reservering: Tafelreservering) {
+    try {
+      const result = await this.modalService.open(ModalConfirmComponent).result;
+      if (result === 'yes') this.tafelreserveringenService.deleteReservering(reservering);
+    } catch (message) { }
   }
 }

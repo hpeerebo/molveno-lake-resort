@@ -75,6 +75,11 @@ export class CreateKamerreserveringDto {
   @ApiModelProperty()
   public readonly reserveringsnummer: string;
 
+  //@IsNumber()
+  @ApiModelProperty()
+  public readonly korting: number;
+
+
   kamerReserveringEntity() {
     return new KamerReserveringEntity(
         this.voornaam,
@@ -95,6 +100,7 @@ export class CreateKamerreserveringDto {
         this.personen,
         this.prijs,
         this.reserveringsnummer,
+        this.korting,
     );
   }
 }
