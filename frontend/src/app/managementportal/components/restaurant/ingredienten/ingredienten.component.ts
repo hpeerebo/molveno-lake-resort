@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IngredientenService } from 'src/app/services/ingredienten.service';
 import { Observable } from 'rxjs';
 import { Ingredient } from 'src/app/models/ingredient';
@@ -11,48 +11,50 @@ import { ModalConfirmComponent } from 'src/app/shared/components/modal-confirm/m
   templateUrl: './ingredienten.component.html',
   styleUrls: ['./ingredienten.component.scss']
 })
-export class ManagementPortalIngredientenComponent {
+export class ManagementPortalIngredientenComponent implements OnInit {
 
-  field: string = "naam";
-  public clickColumnHandler(event: string): string {
-    this.field = event;
-    return console.log(this.field), this.field;
+  columnTitle: string = "naam";
+  public columnSortClickHandler(event: 'naam' | 'eenheid' | 'prijs'): string {
+    this.columnTitle = event;
+    return this.columnTitle;
   }
 
   public ingredienten$: Observable<Ingredient[]> = this.ingredientenService.data$;
 
-  constructor(private ingredientenService: IngredientenService, private modalService: NgbModal) {}
+  constructor(private ingredientenService: IngredientenService, private modalService: NgbModal) { }
 
-  openFormIngredientModal(ingredient?: Ingredient) {
+  ngOnInit() { }
+
+  public handleNewIngredientButtonClick() {
+    this.openFormIngredientModal();
+  }
+
+  public handleModifyIngredientButtonClick(ingredient: Ingredient) {
+    this.openFormIngredientModal(ingredient);
+  }
+
+  public handleDeleteIngredientButtonClick(ingredient: Ingredient) {
+    this.verwijderIngredient(ingredient);
+  }
+
+  private async openFormIngredientModal(ingredient?: Ingredient) {
     const modal = this.modalService.open(FormIngredientComponent);
 
     if (ingredient) {
       modal.componentInstance.ingredient = ingredient;
     }
 
-    modal.result
-      .then(result => {
-        if (result.id) {
-          this.ingredientenService.updateIngredient(result);
-        } else {
-          this.ingredientenService.addNewIngredient(result);
-        }
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    try {
+      const result = await modal.result;
+      if (result.id) this.ingredientenService.updateIngredient(result);
+      else this.ingredientenService.addNewIngredient(result);
+    } catch (message) { }
   }
 
-  verwijderIngredient(ingredient: Ingredient) {
-    this.modalService
-      .open(ModalConfirmComponent)
-      .result.then(result => {
-        if (result === 'yes') {
-          this.ingredientenService.deleteIngredient(ingredient);
-        }
-      })
-      .catch(error => {
-        console.log(error);
-      });
+  private async verwijderIngredient(ingredient: Ingredient) {
+    try {
+      const result = await this.modalService.open(ModalConfirmComponent).result;
+      if (result === 'yes') this.ingredientenService.deleteIngredient(ingredient);
+    } catch (message) { }
   }
 }

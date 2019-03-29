@@ -68,8 +68,8 @@
     </thead>
     <tbody>
       <tr *ngFor="let gerecht of (filteredGerechten$ | async | sortgrid:'prijs')">
-        <td>{{gerecht.naam}}</td>
-        <td>{{gerecht.prijs | currency: 'EUR'}}</td>
+        <td class="col-8">{{gerecht.naam}}</td>
+        <td class="col-4">{{gerecht.prijs | currency: 'EUR'}}</td>
       </tr>
     </tbody>
   </table>

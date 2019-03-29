@@ -43,7 +43,6 @@ export class FormTafelreserveringComponent implements OnInit, OnDestroy {
   // Begin code Maurice
   private static timeValidator(): ValidatorFn {
     return (control: AbstractControl) => {
-      console.log(control.value);
       if (control.value.hour > 20 || control.value.hour < 13) {
         return {
           message: "keuken is gesloten"

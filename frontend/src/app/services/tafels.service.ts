@@ -14,7 +14,7 @@ export class TafelsService {
   public readonly data$: Observable<Tafel[]> = this.dataStore.asObservable();
 
   constructor(private http: HttpClient) {
-    this.getAllTafels();
+    this.allTafels();
   }
 
   private static tafelsResponseToTafelMapper(tafelsResponse: ITafelsResponse): Tafel[] {
@@ -25,7 +25,7 @@ export class TafelsService {
     return new Tafel(tafel.kenmerk, tafel.personen, tafel.id);
   }
 
-  getAllTafels(): void {
+  public allTafels(): void {
     this.http
       .get<ITafelsResponse>(this.api)
       .pipe(
@@ -36,32 +36,32 @@ export class TafelsService {
       .subscribe();
   }
 
-  addNewTafel(tafel: Tafel): void {
+  public addNewTafel(tafel: Tafel): void {
     this.http
       .post(this.api, tafel)
       .pipe(
         take(1),
-        tap(() => this.getAllTafels())
+        tap(() => this.allTafels())
       )
       .subscribe();
   }
 
-  updateTafel(tafel: Tafel): void {
+  public updateTafel(tafel: Tafel): void {
     this.http
       .put(`${this.api}/${tafel.id}`, tafel)
       .pipe(
         take(1),
-        tap(() => this.getAllTafels())
+        tap(() => this.allTafels())
       )
       .subscribe();
   }
 
-  deleteTafel(tafel: Tafel): void {
+  public deleteTafel(tafel: Tafel): void {
     this.http
       .delete(`${this.api}/${tafel.id}`)
       .pipe(
         take(1),
-        tap(() => this.getAllTafels())
+        tap(() => this.allTafels())
       )
       .subscribe();
   }
