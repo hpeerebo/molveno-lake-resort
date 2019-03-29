@@ -59,29 +59,29 @@ export class RoomService {
   }
 
   saveRoom(room: Kamer){
-    this.http.post(`${RoomService.api}`, room)
+    return this.http.post(`${RoomService.api}`, room)
     .pipe(
       take(1),
       tap(() => this.getRoom(true))
-    ).subscribe()
+    )
     //location.reload();
   }
   updateRoom(room: Kamer){
-    this.http.put(`${RoomService.api}/kamernaam`, room)
+    return this.http.put(`${RoomService.api}/kamernaam`, room)
     .pipe(
       take(1),
       tap(() => this.getRoom(true))
-    ).subscribe()
+    )
 
     //location.reload();
   }
   deleteRoom(room: Kamer){
     //this.http.delete("/api/kamers/", {params:{kamernaam: room.kamerNaam}}).subscribe();
-    this.http.delete(`${RoomService.api}/${room.kamerNaam}`)
+   return this.http.delete(`${RoomService.api}/${room.kamerNaam}`)
     .pipe(
       take(1),
       tap(() => this.getRoom(true))
-    ).subscribe()
+    )
 
   }
 }
