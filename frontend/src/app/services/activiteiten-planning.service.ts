@@ -24,13 +24,14 @@ export class ActiviteitenPlanningService {
       );
   }
 
-  saveActiviteitPlanning(planning: CreateActiviteitenPlanning): void {
-    this.http.post<IActiviteitPlanning[]>(this.api, planning).subscribe();
+  saveActiviteitPlanning(activiteitenMaakPlanning: CreateActiviteitenPlanning, actId: number) {
+    // console.log("saveActiviteitPlanning", activiteitenMaakPlanning);
+    this.http.post<IActiviteitPlanning[]>(this.api + actId, activiteitenMaakPlanning).subscribe();
     location.reload();
   }
 
   updateActiviteitPlanning(planning: ActiviteitenPlanning): void {
-    this.http.post<IActiviteitPlanning[]>(this.api, planning).subscribe();
+    this.http.put<IActiviteitPlanning[]>(this.api, planning).subscribe();
     location.reload();
   }
 
@@ -52,18 +53,20 @@ export class ActiviteitenPlanningService {
   ): ActiviteitenPlanning {
     return new ActiviteitenPlanning(
       activiteitplanning.planid,
-      activiteitplanning.actdate,
-      activiteitplanning.actprijs,
-      activiteitplanning.actcapaciteit,
+      activiteitplanning.actCapaciteit,
+      activiteitplanning.actDate,
+      activiteitplanning.actPrijs,
       activiteitplanning.activiteit
-    );
+
+      );
   }
 }
 
 export interface IActiviteitPlanning {
   planid: number;
-  actdate: string;
-  actprijs: number;
-  actcapaciteit: number;
+  actCapaciteit: number;
+  actDate: string;
+  actPrijs: number;
   activiteit: IActiviteit;
+
 }

@@ -12,6 +12,7 @@ import { CreateActiviteitResDto } from 'src/dto/create-activiteit-res-dto';
 import { ActiviteitResEntity } from 'src/entities/activiteit-res-entity';
 import { ActiviteitRes } from 'src/models/activiteit-res';
 import { ApiUseTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { UpdateActiviteitResDto } from 'src/dto/update-activiteit-res-dto';
 
 @Controller('activiteiten/reserveringen')
 @ApiUseTags('activiteiten')
@@ -53,15 +54,15 @@ export class ActiviteitenResController {
     description: 'De reservering is succesvol bijgewerkt',
   })
   public updateReservering(
-    @Body() createResActiviteit: CreateActiviteitResDto,
-    @Param('reserveringid') reserveringid: number,
+    @Body() createResActiviteit: UpdateActiviteitResDto,
   ): void {
     const reservering: ActiviteitResEntity = new ActiviteitResEntity(
       createResActiviteit.emailGast,
       createResActiviteit.phoneGast,
       createResActiviteit.aantalPersonen,
+      createResActiviteit.resid,
     );
-    this.activiteitenResService.updateReservering(reservering, reserveringid);
+    this.activiteitenResService.updateReservering(reservering);
   }
 
   @Delete(':reserveringId')

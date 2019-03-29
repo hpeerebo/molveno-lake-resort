@@ -23,9 +23,11 @@ export class ActiviteitResEntity {
     emailGast: string,
     phoneGast: string,
     aantalPersonen: number,
+    resid?: number,
   ) {
     this.emailGast = emailGast;
     this.phoneGast = phoneGast;
     this.aantalPersonen = aantalPersonen;
+    this.resid = resid
   }
 }

@@ -1,0 +1,81 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">
+      Maak een planning van een activiteit
+    </h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('cancel')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="activiteitenMaakPlanningForm">
+      <div class="form-group">
+        <label>Activiteit</label>
+        <input
+          disabled="true"
+          type="string"
+          class="form-control"
+          formControlName="actNaam"
+          [class.is-invalid]="activiteitenMaakPlanningForm.controls.actNaam?.invalid && activiteitenMaakPlanningForm.controls.actNaam?.touched"
+        />
+        <small
+          class="text-danger d-none"
+          [class.d-block]="activiteitenMaakPlanningForm.controls.actNaam?.invalid && activiteitenMaakPlanningForm.controls.actNaam?.touched"
+        >
+        Activiteit is verplicht
+        </small>    </div>
+      <div class="form-group">
+        <label for="inputDateFrom">Datum activiteit</label>
+        <input
+          type="date"
+          class="form-control"
+          formControlName="actDate"
+          [class.is-invalid]="activiteitenMaakPlanningForm.controls.actDate?.invalid && activiteitenMaakPlanningForm.controls.actDate?.touched"
+        />
+        <small
+          class="text-danger d-none"
+          [class.d-block]="activiteitenMaakPlanningForm.controls.actDate?.invalid && activiteitenMaakPlanningForm.controls.actDate?.touched"
+        >
+          Datum is verplicht
+        </small>
+      </div>
+      <div class="form-group">
+        <label>Prijs</label>
+        <input
+          type="number"
+          class="form-control"
+          formControlName="actPrijs"
+          [class.is-invalid]="activiteitenMaakPlanningForm.controls.actPrijs?.invalid && activiteitenMaakPlanningForm.controls.actPrijs?.touched"
+        />
+        <small
+          class="text-danger d-none"
+          [class.d-block]="activiteitenMaakPlanningForm.controls.actPrijs?.invalid && activiteitenMaakPlanningForm.controls.actPrijs?.touched"
+        >
+          Prijs is verplicht
+        </small>
+      </div>
+      <div class="form-group">
+        <label>Capaciteit</label>
+        <input
+          type="number"
+          class="form-control"
+          formControlName="actCapaciteit"
+          [class.is-invalid]="
+            activiteitenMaakPlanningForm.controls.actCapaciteit?.invalid && activiteitenMaakPlanningForm.controls.actCapaciteit?.touched
+          "
+        />
+        <small
+          class="text-danger d-none"
+          [class.d-block]="
+            activiteitenMaakPlanningForm.controls.actCapaciteit?.invalid && activiteitenMaakPlanningForm.controls.actCapaciteit?.touched
+          "
+        >
+          Capaciteit is verplicht
+        </small>
+      </div>
+    </form>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-success" (click)="submitForm()" [disabled]="activiteitenMaakPlanningForm.invalid">
+        Save
+      </button>
+    </div>
+  </div>

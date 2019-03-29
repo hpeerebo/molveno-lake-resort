@@ -10,17 +10,16 @@ import { Activiteit } from "src/app/models/activiteit";
   styleUrls: ["./form-activiteitplanning.component.scss"]
 })
 export class FormActiviteitPlanningComponent implements OnInit {
-  @Input() activiteitenplanning: ActiviteitenPlanning | undefined = undefined;
+  @Input() activiteitenPlanning: ActiviteitenPlanning | undefined = undefined;
+  @Input() activiteiten: Activiteit | undefined = undefined;
 
   public activiteitenPlanningForm = this.formBuilder.group({
+    actNaam: [undefined],
+    actDate: ["", Validators.required],
+    actPrijs: [0, [Validators.required, Validators.min(1)]],
+    actCapaciteit: [0, [Validators.required, Validators.min(1)]],
     planid: [0, Validators.required],
-    // actid: [0, Validators.required],
-    actdate: ["", Validators.required],
-    actprijs: [0, [Validators.required, Validators.min(1)]],
-    actcapaciteit: [0, [Validators.required, Validators.min(1)]]
   });
-
-  @Input() activiteiten: Activiteit | undefined = undefined;
 
   constructor(
     public activeModal: NgbActiveModal,
@@ -28,30 +27,36 @@ export class FormActiviteitPlanningComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    if (this.activiteitenplanning) {
-      this.activiteitenPlanningForm.setValue({
-        planid: this.activiteitenplanning.planid,
-        // actid: this.activiteitenplanning.actid,
-        actdate: this.activiteitenplanning.actdate,
-        actprijs: this.activiteitenplanning.actprijs,
-        actcapaciteit: this.activiteitenplanning.actcapaciteit
-      });
+    // console.log('result', this.activiteitenPlanning);
+    if (this.activiteitenPlanning) {
+      this.activiteitenPlanningForm.controls.actNaam.setValue(
+        this.activiteitenPlanning.activiteit.naam
+      );
+      this.activiteitenPlanningForm.controls.actCapaciteit.setValue(
+        this.activiteitenPlanning.actCapaciteit
+      );
+      this.activiteitenPlanningForm.controls.actDate.setValue(
+        this.activiteitenPlanning.actDate
+      );
+      this.activiteitenPlanningForm.controls.actPrijs.setValue(
+        this.activiteitenPlanning.actPrijs
+      );
+      this.activiteitenPlanningForm.controls.planid.setValue(
+        this.activiteitenPlanning.planid
+      );
     }
   }
 
   submitForm() {
     this.activeModal.close(this.activiteitenPlanningForm.value);
   }
-  // get actid() {
-  //   return this.activiteitenPlanningForm.get("actid");
-  // }
-  get actdate() {
-    return this.activiteitenPlanningForm.get("actdate");
+  get actDate() {
+    return this.activiteitenPlanningForm.get("actDate");
   }
-  get actprijs() {
-    return this.activiteitenPlanningForm.get("actprijs");
+  get actPrijs() {
+    return this.activiteitenPlanningForm.get("actPrijs");
   }
-  get actcapaciteit() {
-    return this.activiteitenPlanningForm.get("actcapaciteit");
+  get actCapaciteit() {
+    return this.activiteitenPlanningForm.get("actCapaciteit");
   }
 }

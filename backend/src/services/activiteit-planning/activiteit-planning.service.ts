@@ -23,9 +23,9 @@ export class ActiviteitPlanningService {
 
   public async saveActiviteitPlanning(
     activiteitplanning: ActiviteitPlanningEntity,
-    activiteitId: number,
+    actId: number,
   ): Promise<void> {
-    const activiteit = await this.activiteitRepository.findOne(activiteitId);
+    const activiteit = await this.activiteitRepository.findOne(actId);
     activiteitplanning.activiteit = activiteit;
     this.activiteitenPlanningRepository.save([activiteitplanning]);
   }
@@ -37,9 +37,9 @@ export class ActiviteitPlanningService {
     this.activiteitenPlanningRepository.update(
       { planid: planning.planid },
       {
-        actdate: planning.actdate,
-        actprijs: planning.actprijs,
-        actcapaciteit: planning.actcapaciteit,
+        actCapaciteit: planning.actCapaciteit,
+        actDate: planning.actDate,
+        actPrijs: planning.actPrijs,
       },
     );
   }

@@ -29,7 +29,7 @@ export class FormActiviteitMaakReserveringComponent implements OnInit {
   ngOnInit() {
     if (this.planning) {
       this.activiteitMaakResForm.controls.actDate.setValue(
-        this.planning.actdate
+        this.planning.actDate
       );
       this.activiteitMaakResForm.controls.actNaam.setValue(
         this.planning.activiteit.naam

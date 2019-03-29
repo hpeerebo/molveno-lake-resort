@@ -18,6 +18,7 @@ export class FormActiviteitResComponent implements OnInit {
     aantalPersonen: [1, [Validators.required, Validators.min(1)]],
     actNaam: [undefined],
     actDate: [undefined],
+    resid: [undefined],
   });
 
 
@@ -30,11 +31,11 @@ export class FormActiviteitResComponent implements OnInit {
   ngOnInit() {
     console.log(this.reservering)
     if (this.reservering) {
-      this.activiteitResForm.controls.actDate.setValue(
-        this.reservering.planning.actdate
-      );
       this.activiteitResForm.controls.actNaam.setValue(
         this.reservering.planning.activiteit.naam
+      );
+      this.activiteitResForm.controls.actDate.setValue(
+        this.reservering.planning.actDate
       );
       this.activiteitResForm.controls.emailGast.setValue(
         this.reservering.emailGast
@@ -45,23 +46,27 @@ export class FormActiviteitResComponent implements OnInit {
       this.activiteitResForm.controls.aantalPersonen.setValue(
         this.reservering.aantalPersonen
       );
+      this.activiteitResForm.controls.resid.setValue(
+        this.reservering.resid
+      );
     }
   }
+
 
   submitForm() {
     console.log("submitForm", this.activiteitResForm.value);
     this.activeModal.close(this.activiteitResForm.value);
   }
 
-  get naam() {
+  get emailGast() {
     return this.activiteitResForm.get("emailGast");
   }
 
-  get beschrijving() {
+  get phoneGast() {
     return this.activiteitResForm.get("phoneGast");
   }
 
-  get thumb() {
+  get aantalPersonen() {
     return this.activiteitResForm.get("aantalPersonen");
   }
 }
