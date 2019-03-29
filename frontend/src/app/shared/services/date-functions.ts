@@ -38,4 +38,12 @@ export class DateFunctions {
     today = (`${yyyy}${mm}${dd}${hh}${min}${ss}`);
     return today;
   }
+
+  calculateNumberofDays(datumvan: string, datumtot: string) {
+    let numberOfDays = (new Date(datumtot).getTime() - new Date(datumvan).getTime()) / (1000 * 60 * 60 * 24);
+    if (numberOfDays === 0) {
+      numberOfDays = 1;
+    }
+    return numberOfDays;
+  }
 }

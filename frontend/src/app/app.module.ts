@@ -9,6 +9,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {RoomService} from './services/rooms.service';
 import { SortGridService } from './shared/services/sort-grid.service';
 import {DateFunctions} from "./shared/services/date-functions";
+import {CalculationFunctions} from "./shared/services/calculation-functions";
 import { FormActiviteitMaakReserveringComponent } from './shared/components/form-activiteit-maak-reservering/form-activiteit-maak-reservering.component';
 import { FormActiviteitMaakPlanningComponent } from './shared/components/form-activiteit-maak-planning/form-activiteit-maak-planning.component';
 
@@ -25,7 +26,7 @@ import { FormActiviteitMaakPlanningComponent } from './shared/components/form-ac
     HttpClientModule,
 
   ],
-  providers: [RoomService, SortGridService, DateFunctions],
+  providers: [RoomService, SortGridService, DateFunctions, CalculationFunctions],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

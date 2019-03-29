@@ -30,6 +30,7 @@ import { FormEmailKamerreseveringComponent } from './components/kamers/kamers-fo
 import { FormDownloadKamerreseveringComponent } from './components/kamers/kamers-form/form-download-kamerresevering/form-download-kamerresevering.component';
 import {PDFExportModule} from "@progress/kendo-angular-pdf-export";
 import { KamerModalConfirmComponent } from './components/kamers/kamers-form/kamer-modal-confirm/kamer-modal-confirm.component';
+import { FormKamerreseveringDetailsComponent } from './components/kamers/kamers-form/form-kamerresevering-details/form-kamerresevering-details.component';
 import { ActiviteitReserveringenPipe } from "../shared/pipes/activiteit-reserveringen.pipe";
 import { ActiviteitenPipe } from "../shared/pipes/activiteiten.pipe";
 import { ActiviteitPlanningPipe } from "../shared/pipes/activiteit-planning.pipe";
@@ -77,10 +78,13 @@ import { FormActiviteitMaakPlanningComponent } from '../shared/components/form-a
     FormPrintKamerreseveringComponent,
     FormEmailKamerreseveringComponent,
     FormDownloadKamerreseveringComponent,
-    KamerModalConfirmComponent
+    KamerModalConfirmComponent,
+    FormKamerreseveringDetailsComponent
   ],
   imports: [CommonModule, ManagementportalRoutingModule, NgbModule, FormsModule, ReactiveFormsModule, ApplicationPipesModule, PDFExportModule],
-  entryComponents: [FormActiviteitMaakReserveringComponent, FormActiviteitMaakPlanningComponent,FormTafelComponent, FormTafelreserveringComponent, FormGerechtComponent, FormIngredientComponent, FormActiviteitComponent,  FormActiviteitResComponent, FormActiviteitPlanningComponent, ModalConfirmComponent, FormKamerreserveringComponent, KamerreserveringdetailsComponent, FormKamersbeschikbaarComponent, FormPrintKamerreseveringComponent, FormEmailKamerreseveringComponent, SignupComponent, FormDownloadKamerreseveringComponent, KamerModalConfirmComponent,]
+  providers: [FormKamerreseveringDetailsComponent],
+  entryComponents: [FormActiviteitMaakReserveringComponent, FormActiviteitMaakPlanningComponent,FormTafelComponent, FormTafelreserveringComponent, FormGerechtComponent, FormIngredientComponent, FormActiviteitComponent,  FormActiviteitResComponent, FormActiviteitPlanningComponent, ModalConfirmComponent, FormKamerreserveringComponent, KamerreserveringdetailsComponent, FormKamersbeschikbaarComponent, FormPrintKamerreseveringComponent, FormEmailKamerreseveringComponent, SignupComponent, FormDownloadKamerreseveringComponent, KamerModalConfirmComponent,FormKamerreseveringDetailsComponent]
+
 
 })
 export class ManagementportalModule {}

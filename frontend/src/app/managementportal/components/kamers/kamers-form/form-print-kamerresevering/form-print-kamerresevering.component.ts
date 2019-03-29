@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import {tap} from "rxjs/operators";
+import {KamerReserveringDetailsFormGroup} from "../form-kamerresevering-details/kamerreserveringdetailsormgroup";
+import {DateFunctions} from "../../../../../shared/services/date-functions";
+import {Observable} from "rxjs";
+import {KamerReservering} from "../../../../../models/kamerreservering";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-form-print-kamerresevering',
@@ -6,15 +12,64 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./form-print-kamerresevering.component.scss']
 })
 export class FormPrintKamerreseveringComponent implements OnInit {
+  public booking$ = new Observable<KamerReservering[] | undefined>(undefined);
   private printContents: any;
   private popupWin: any;
+  private storagePrice: number[] = [];
+  private numberOfDays: number = 0;
+  private totalPrice: number = 0;
+  private datumvan: string = '';
+  private datumtot: string = '';
+  private inchecken: boolean = false;
+  private incheckdatum: string = '';
+  private uitcheckdatum: string = '';
+  private uitchecken: boolean = false;
+  private todayDate: string = this.dateservice.getCurrentDate();
+  private showSpinnerOnLoad: boolean = false;
 
-  constructor() { }
+  public showthistext: string = 'Dit is een test';
+  public kamerreserveringdetailsormgroup = new KamerReserveringDetailsFormGroup();
+
+  constructor( private dateservice: DateFunctions, private modalService: NgbModal,) { }
 
   ngOnInit() {
+    const modalPrintBooking = this.modalService.open(FormPrintKamerreseveringComponent, {
+      size: "lg",
+      ariaLabelledBy: "modal-basic-title"
+    });
+    modalPrintBooking.componentInstance.action = "edit";
 
+    this.booking$.pipe(
+      tap(booking => {
+        modalPrintBooking.componentInstance.numberOfDays = this.numberOfDays;
+        modalPrintBooking.componentInstance.totalPrice = this.totalPrice;
+        modalPrintBooking.componentInstance.todayDate = this.todayDate;
+        modalPrintBooking.componentInstance.voornaam = this.kamerreserveringdetailsormgroup.value.voornaam;
+        modalPrintBooking.componentInstance.achternaam = this.kamerreserveringdetailsormgroup.value.achternaam;
+        modalPrintBooking.componentInstance.telefoonnummer = this.kamerreserveringdetailsormgroup.value.telefoonnummer;
+        modalPrintBooking.componentInstance.emailadres = this.kamerreserveringdetailsormgroup.value.emailadres;
+        modalPrintBooking.componentInstance.identiteitsid = this.kamerreserveringdetailsormgroup.value.identiteitsid;
+        modalPrintBooking.componentInstance.postcode = this.kamerreserveringdetailsormgroup.value.postcode;
+        modalPrintBooking.componentInstance.straat = this.kamerreserveringdetailsormgroup.value.straat;
+        modalPrintBooking.componentInstance.huisnummer = this.kamerreserveringdetailsormgroup.value.huisnummer;
+        modalPrintBooking.componentInstance.woonplaats = this.kamerreserveringdetailsormgroup.value.woonplaats;
+        modalPrintBooking.componentInstance.land = this.kamerreserveringdetailsormgroup.value.land;
+        modalPrintBooking.componentInstance.inchecken = this.kamerreserveringdetailsormgroup.value.inchecken || this.incheckdatum;
+        modalPrintBooking.componentInstance.uitchecken = this.kamerreserveringdetailsormgroup.value.uitchecken || this.uitcheckdatum;
+        modalPrintBooking.componentInstance.reserveringsnummer = this.kamerreserveringdetailsormgroup.value.reserveringsnummer;
+        modalPrintBooking.componentInstance.korting = this.kamerreserveringdetailsormgroup.value.korting;
+        modalPrintBooking.componentInstance.datumvan = this.datumvan;
+        modalPrintBooking.componentInstance.datumtot = this.datumtot;
+        modalPrintBooking.componentInstance.kamers = booking;
+      })
+    ).subscribe();
 
   }
+
+  openBookingPrintingForm() {
+
+  }
+
   print(): void {
 
     // @ts-ignore

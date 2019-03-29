@@ -75,6 +75,7 @@ export class KamerreserveringenService {
   }
 
   saveKamerReservering(kamerreservering: KamerReservering) {
+
     this.http.post(`${KamerreserveringenService.api}`, kamerreservering)
       .pipe(
         take(1),
