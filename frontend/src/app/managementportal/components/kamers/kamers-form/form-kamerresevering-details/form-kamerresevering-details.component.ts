@@ -34,7 +34,7 @@ export class FormKamerreseveringDetailsComponent implements OnInit, OnDestroy{
   private uitcheckdatum: string = '';
   private uitchecken: boolean = false;
   private todayDate: string = this.dateservice.getCurrentDate();
-  private showSpinnerOnLoad: boolean = true;
+  private showSpinnerOnLoad: boolean = false;
 
   constructor(private kamerreserveringenservice: KamerreserveringenService,
               private dateservice: DateFunctions,
@@ -44,14 +44,11 @@ export class FormKamerreseveringDetailsComponent implements OnInit, OnDestroy{
   };
 
   ngOnInit() {
-    console.log("ngOnInit");
     this.reseveringsId && this.reseveringInzien(this.reseveringsId);
   }
 
   reseveringInzien(reseveringsId: string) {
-    console.log("Inzien Resevering: " + reseveringsId);
     if (reseveringsId){
-      //console.log(this)
       this.kamerreserveringen$ = this.kamerreserveringenservice.getKamerReseveringById(true, reseveringsId);
       this.kamerreserveringen$.pipe(
         tap(booking => {
@@ -105,7 +102,6 @@ export class FormKamerreseveringDetailsComponent implements OnInit, OnDestroy{
   }
 
   resetInitialValues(){
-    console.log("resetInitialValues");
     this.kamerreserveringen$ = new Observable<KamerReservering[] | undefined>(undefined);
     this.numberOfDays = 0;
     this.totalPrice = 0;
@@ -122,33 +118,59 @@ export class FormKamerreseveringDetailsComponent implements OnInit, OnDestroy{
 
   }
   ngOnDestroy(): void {
-    console.log("ngOnDestroy");
 
   }
 
-
   private saveChangesToBooking() {
-    console.log("Save Booking" );
+    this.kamerreserveringen$.pipe(
+      tap(booking => {
+        if (booking) {
+          if (this.inchecken) {
+            this.incheckdatum = this.todayDate;
+          } else {
+            this.incheckdatum = '';
+          }
+          if (this.uitchecken) {
+            this.uitcheckdatum = this.todayDate;
+          } else {
+            this.uitcheckdatum = '';
+          }
 
+          booking.forEach(kamer => {
+            this.kamerreserveringenservice.updateReservering(new KamerReservering(
+              kamer.id,
+              this.kamerreserveringdetailsormgroup.value.voornaam,
+              this.kamerreserveringdetailsormgroup.value.achternaam,
+              this.kamerreserveringdetailsormgroup.value.telefoonnummer,
+              this.kamerreserveringdetailsormgroup.value.emailadres,
+              this.kamerreserveringdetailsormgroup.value.identiteitsid,
+              this.kamerreserveringdetailsormgroup.value.postcode,
+              this.kamerreserveringdetailsormgroup.value.straat,
+              this.kamerreserveringdetailsormgroup.value.huisnummer,
+              this.kamerreserveringdetailsormgroup.value.woonplaats,
+              this.kamerreserveringdetailsormgroup.value.land,
+              kamer.datumvan,
+              kamer.datumtot,
+              kamer.kamernaam,
+              this.incheckdatum,
+              this.uitcheckdatum,
+              kamer.personen,
+              kamer.prijs,
+              this.kamerreserveringdetailsormgroup.value.reserveringsnummer,
+              this.kamerreserveringdetailsormgroup.value.korting
+            ));
+          });
+        }
+      })
+    ).subscribe().unsubscribe();
     this.router.navigateByUrl('managementportal/kamerreserveringen');
   }
 
   private updateTotalPrice(korting: number) {
-    console.log("Total Price");
-    return this.reseveringsId;
-  }
-
-  private bookingId(): any{
-    return this.reseveringsId;
-  }
-
-  private booking(): Observable<KamerReservering[] | undefined> {
-    return this.kamerreserveringenservice.getKamerReseveringById(true, this.bookingId());
+      return this.reseveringsId;
   }
 
   async delay(ms: number) {
-    console.log("Delay");
     await new Promise(resolve => setTimeout(() => resolve(), ms));
   }
-
 }
